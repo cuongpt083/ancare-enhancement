@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "skills": {
+    "sp-chat-agent": {
+      "source": "/Users/cuongpt/Workspaces/smart-pole-skill/skills",
+      "sourceType": "local",
+      "computedHash": "bd57c81ce87e5e5edea5acc29a7536c5956a390eb9c529eefc25867b8ae59dcd"
+    },
+    "sp-instructor-agent": {
+      "source": "/Users/cuongpt/Workspaces/smart-pole-skill/skills",
+      "sourceType": "local",
+      "computedHash": "9bb416a739584d88a5ac632548c0c5a2713579e0393ec9920287de37b42cfce6"
+    }
+  }
+}
