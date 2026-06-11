@@ -1,3 +1,6 @@
+# ancare-enhancement
+Enhancement ideas for An Care
+
 # Tầm nhìn
 
 AnCare Digital User Experience Platform định vị là một nền tảng trải nghiệm người dùng số về chăm sóc sức khỏe chủ động cho hàng triệu người Việt Nam. AnCare DXP sẽ trở thành một nền tảng chăm sóc khách hàng xuất sắc phục vụ cho các khách hàng quan tâm đến sức khỏe, có mong muốn phát triển bản thân, tìm kiếm cơ hội kinh doanh trong lĩnh vực chăm sóc sức khỏe chủ động.
@@ -49,3 +52,4 @@ AnCare DXP mang lại 4 giá trị cốt lõi cho người dùng:
    Là một Khách hàng tiềm năng, tôi quan tâm tới việc có thể dễ dàng tìm kiếm, truy cập các nội dung giới thiệu về sản phẩm của Herbalife, về giải pháp sức khỏe, vóc dáng của Herbalife, về cơ hội kinh doanh của Herbalife, về các câu chuyện thành công của các Khách hàng và Huấn luyện viên của Herbalife. 
 
    Là một Huấn luyện viên, tôi quan tâm tới việc có thể dễ dàng tìm kiếm các chủ đề đào tạo cơ bản, đào tạo chuyên sâu trong lĩnh vực kinh doanh bán hàng trực tiếp và chăm sóc sức khỏe chủ động, kèm theo điều kiện, lộ trình đào tạo, tài liệu tham khảo để tôi có mục tiêu phát triển bản thân phù hợp.
+   
