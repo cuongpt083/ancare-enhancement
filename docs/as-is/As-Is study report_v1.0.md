@@ -1,6 +1,7 @@
 # **TÀI LIỆU KHẢO SÁT VÀ CHUẨN HÓA THIẾT KẾ HỆ THỐNG ỨNG DỤNG AN-CARE**
 
-**Phiên bản:** v1.1 — *(bổ sung lớp Stakeholder/Persona, Pain Point Register, ranh giới phạm vi As-Is và các giả định cần xác nhận, từ buổi brainstorm hiện trạng).*
+**Phiên bản:** v1.2 — *(SỬA QUAN TRỌNG: app khách hàng và CRM/onboarding của HLV ĐÃ TỒN TẠI — đính chính giả định sai ở v1.1 rằng "app chưa có giao diện khách hàng". Hợp nhất 2 tài liệu khảo sát chuyên sâu: `As-Is-study-report-appendix-v1.0.md` (CRM & onboarding cho HLV) và `As-Is-study-report-Customer-module-v1.0.md` (app Khách hàng 4 tab)).*
+> **Lưu ý đọc:** Mục 4bis, và cập nhật ở các mục 5–8, phản ánh hiện trạng đã xác minh từ màn hình thực tế. Hai file phụ lục nói trên là một phần không tách rời của báo cáo As-Is này.
 **Đối tượng sử dụng tài liệu:** Business Analyst (BA), Đội ngũ Phát triển Phần mềm.  
 **Mục tiêu:** Chuẩn hóa hiện trạng cấu trúc thông tin, kiến trúc chức năng và hành trình người dùng (User Journey) của ứng dụng AN-Care phục vụ vai trò Huấn luyện viên dinh dưỡng (Health Coach) và Nhà vận hành nhóm dinh dưỡng.
 
@@ -74,31 +75,54 @@ BA cần lưu ý 3 luồng hành trình cốt lõi của Huấn luyện viên kh
 3. Chọn một hồ sơ khách hàng cụ thể để xem chi tiết tiến độ. Rà soát bảng chỉ số cơ thể Tanita cập nhật mới nhất để đánh giá hiệu quả chuyển hóa sinh học.  
 4. Truy cập mục **Lộ trình 30 ngày chi tiết** để kiểm soát việc tuân thủ thực đơn (Meal Plan), hướng dẫn khách hàng cách sử dụng đúng các sản phẩm Herbalife đi kèm theo từng khung giờ và theo dõi biểu đồ xu hướng cân nặng để điều chỉnh kịp thời.
 
-## **5\. STAKEHOLDER & PERSONA (BỔ SUNG v1.1)**
+## **4bis. HIỆN TRẠNG ĐÃ XÁC MINH — CRM/HLV & APP KHÁCH HÀNG (BỔ SUNG v1.2)**
+
+Khảo sát chuyên sâu cho thấy nhiều năng lực **đã tồn tại trong app**, không phải "chưa có" như v1.1 từng giả định. Tóm tắt (chi tiết xem 2 file phụ lục):
+
+**A. CRM & Onboarding phía HLV (file appendix):**
+- Thu thập dữ liệu đầu vào: hồ sơ định danh + nhập chỉ số Tanita **hỗ trợ nhập tay hoặc quét ảnh/OCR**.
+- Phân tích & khuyến nghị tự động: khớp dữ liệu Tanita với chuẩn WHO/Asian-Pacific, sinh bản tư vấn đánh giá từng chỉ số (xanh/đỏ) + khối lượng mỡ/cơ cần điều chỉnh.
+- **Cấp tài khoản khách hàng:** HLV chủ động tạo tài khoản KH qua **Email + mật khẩu mặc định**, gắn gói dịch vụ.
+- Journey builder: tham số hóa lộ trình 30 ngày (cân nặng mục tiêu, delta calo, số bữa) + auto-generate thực đơn.
+- Action menu: chỉnh sửa, đặt lại mật khẩu, xóa tài khoản, **xuất báo cáo theo dải ngày tùy chỉnh**.
+
+**B. App Khách hàng — đã tồn tại, 4 tab (file customer-module):**
+- **Trang chủ:** dashboard mục tiêu, % hoàn thành, **streak**, đồng bộ chỉ số Tanita, **checklist thực đơn hôm nay (tick + chụp ảnh)**, nhật ký nước/ngủ/vận động, báo cáo "hôm nay nổi bật" + gợi ý tự động của Coach.
+- **Lộ trình:** tiến độ ngày/tuần, KPI ngày, phân tích dữ liệu hôm trước.
+- **Chat:** cộng đồng + **DM 1-1 với HLV phụ trách** (text, ảnh).
+- **Hồ sơ:** thông tin định danh, trạng thái gói dịch vụ, truy cập báo cáo & lịch sử lộ trình.
+- **Business rule:** gói dịch vụ hết hạn → **chặn check-in/log dữ liệu** cho tới khi gia hạn.
+
+> **Hệ quả:** các điểm đau C1 (tự theo dõi tại nhà), một phần C2 (nhắc/checklist), và P4 (kênh giao tiếp HLV–khách) **phần lớn đã được app hiện tại đáp ứng**. Mục 5–8 dưới đây được hiệu chỉnh theo hiện trạng đã xác minh.
+
+## **5\. STAKEHOLDER & PERSONA (cập nhật v1.2)**
 
 Khảo sát hiện trạng xác định **3 nhóm người dùng (persona) riêng biệt** trong hệ sinh thái Nutrition Club, thay vì một persona "Huấn luyện viên" duy nhất như mô hình v1.0:
 
 | Persona | Vai trò & nhu cầu cốt lõi | Hiện trạng tiếp cận hệ thống |
 | :---- | :---- | :---- |
-| **Nhà Sáng lập (Founder)** | Người kinh doanh sở hữu club. Cần nắm tình hình kinh doanh (doanh thu, lợi nhuận), chân dung khách hàng, hiệu quả chăm sóc, sức khỏe tồn kho, và kênh kết nối/chăm sóc khách hàng mọi lúc (sinh nhật, ngày lễ). | App hiện chưa có phân hệ Quản lý kinh doanh / Kho / CRM marketing chuyên biệt cho góc nhìn này. |
-| **Nhà vận hành / Huấn luyện viên (Health Coach)** | Trực tiếp vận hành club, tư vấn, theo dõi và đồng hành cùng khách hàng. Là persona đã được mô tả ở mục 2–4. | **Đã xác nhận:** "Nhà vận hành" chính là persona HLV mô tả trong tài liệu này; sử dụng app HLV hiện tại (5 tab). |
-| **Khách hàng (Member / Khách vãng lai)** | Thành viên trải nghiệm lộ trình, hoặc khách vãng lai được thành viên mời đến. Cần tự theo dõi kết quả, nhận nhắc nhở, và chia sẻ hành trình. | **Đã xác nhận:** app hiện **chưa có giao diện dành cho khách hàng**; khách theo dõi qua **sổ giấy để lại tại club**. |
+| **Nhà Sáng lập (Founder)** | Người kinh doanh sở hữu club. Cần nắm tình hình kinh doanh (doanh thu, lợi nhuận), chân dung khách hàng, hiệu quả chăm sóc, sức khỏe tồn kho, và kênh kết nối/chăm sóc khách hàng mọi lúc (sinh nhật, ngày lễ). | App hiện **chưa có** phân hệ Quản lý kinh doanh / Kho / CRM marketing chuyên biệt cho góc nhìn này. |
+| **Nhà vận hành / Huấn luyện viên (Health Coach)** | Trực tiếp vận hành club, tư vấn, theo dõi và đồng hành cùng khách hàng. | **Đã xác nhận:** sử dụng app HLV (5 tab) + CRM/onboarding đầy đủ (tạo tài khoản KH, OCR Tanita, journey builder, báo cáo tùy chỉnh — xem 4bis.A). |
+| **Khách hàng (Member / Khách vãng lai)** | Thành viên trải nghiệm lộ trình, hoặc khách vãng lai được thành viên mời đến. | **Đã xác nhận (đính chính):** app khách hàng **ĐÃ TỒN TẠI** (4 tab — xem 4bis.B). Khách đăng nhập bằng tài khoản do HLV cấp; tự log bữa ăn/nước/ngủ, xem tiến độ, chat với HLV. *Khách vãng lai (chưa có gói) hiện chưa có luồng riêng trong app.* |
 
 ## **6\. PAIN POINT REGISTER (HIỆN TRẠNG NGHIỆP VỤ — BỔ SUNG v1.1)**
 
 Tổng hợp các điểm đau hiện hữu, phân theo persona. Phần lớn đang được xử lý **thủ công (sổ sách, trí nhớ, công cụ ngoài app)** — đây là ranh giới As-Is để đối chiếu khi phân tích GAP.
 
+> **Lưu ý hiệu chỉnh v1.2:** nhãn trạng thái mỗi pain point: **[CÒN]** = vẫn đúng/chưa giải; **[ĐÃ GIẢI]** = app hiện tại đã đáp ứng; **[GIẢI MỘT PHẦN]** = có nhưng chưa đủ.
+
 **A. Nhà vận hành / Huấn luyện viên**
-- P1 — *Bán lẻ khách vãng lai:* khi đông khách, không nhớ đã bán cho ai, bao nhiêu → khó cân đối thu/chi cuối ngày.
-- P2 — *Kiểm kho cuối ngày:* không nắm được lượng đã xuất kho của bản thân và của đồng vận hành.
-- P3 — *Theo dõi hành trình dài hạn:* hành trình trải nghiệm sản phẩm/dịch vụ Herbalife của khách phải ghi chép thủ công vào sổ.
-- P4 — *Đồng hành khi khách ở nhà:* không có công cụ nhắc nhở; phụ thuộc vào sự tự giác của khách với gợi ý bữa ăn.
-- P5 — *Chia sẻ kết quả của khách:* hiện chỉ chụp ảnh sổ theo dõi — kém cảm xúc, không có đồ thị/insight, không thể hiện được hành trình.
+- P1 — **[CÒN]** *Bán lẻ khách vãng lai:* khi đông khách, không nhớ đã bán cho ai, bao nhiêu → khó cân đối thu/chi cuối ngày. *(App chưa có POS.)*
+- P2 — **[CÒN]** *Kiểm kho cuối ngày:* không nắm lượng đã xuất kho của bản thân và đồng vận hành. *(App chưa có quản lý kho.)*
+- P3 — **[ĐÃ GIẢI]** *Theo dõi hành trình dài hạn:* nay đã có hồ sơ số, lộ trình 30 ngày, lịch sử log và báo cáo tùy chỉnh thay cho sổ giấy.
+- P4 — **[GIẢI MỘT PHẦN]** *Đồng hành khi khách ở nhà:* đã có chat 1-1, checklist thực đơn, gợi ý của Coach trong app; **còn thiếu nhắc nhở chủ động (push reminder theo khung giờ)**.
+- P5 — **[GIẢI MỘT PHẦN]** *Chia sẻ kết quả của khách:* app đã có đồ thị/insight tiến độ; **còn thiếu khả năng xuất bản chia sẻ giàu cảm xúc ra mạng xã hội**.
 
 **B. Khách hàng**
-- C1 — *Mất dữ liệu khi rời club:* chỉ số sức khỏe, nhật ký, gợi ý bữa ăn nằm trong sổ để lại club → không mang về nhà, không tự theo dõi được.
-- C2 — *Tự quản lý lời dặn:* phải tự ghi chép, tự đặt báo thức cho các việc cần thực hiện.
-- C3 — *Chia sẻ MXH:* không có cách thuận tiện để biên soạn và chia sẻ hành trình tích cực cho bạn bè.
+- C1 — **[ĐÃ GIẢI]** *Tự theo dõi tại nhà:* app khách hàng đã cho phép tự log bữa ăn/nước/ngủ/ảnh, xem chỉ số & tiến độ — dữ liệu không còn kẹt trong sổ giấy.
+- C2 — **[GIẢI MỘT PHẦN]** *Lời dặn & nhắc nhở:* đã có checklist thực đơn và nhật ký; **còn thiếu nhắc nhở/báo thức tự động theo khung giờ** (khách vẫn phải tự nhớ mở app).
+- C3 — **[CÒN]** *Chia sẻ MXH:* chưa có cách thuận tiện để biên soạn & chia sẻ hành trình ra mạng xã hội.
+- C4 — **[CÒN]** *Gián đoạn khi hết gói:* business rule chặn check-in/log khi gói hết hạn → trải nghiệm bị ngắt, có thể gây bỏ cuộc nếu gia hạn chậm.
 
 **C. Nhà Sáng lập**
 - F1 — *Thiếu bức tranh kinh doanh:* doanh thu, lợi nhuận, lời/lỗ chưa được hệ thống hóa.
@@ -106,21 +130,26 @@ Tổng hợp các điểm đau hiện hữu, phân theo persona. Phần lớn đ
 - F3 — *Thiếu giám sát tồn kho.*
 - F4 — *Thiếu kênh kết nối/chăm sóc khách hàng từ xa* (dịp sinh nhật, lễ…).
 
-## **7\. RANH GIỚI PHẠM VI HIỆN TẠI (NHỮNG GÌ APP CHƯA HỖ TRỢ — BỔ SUNG v1.1)**
+## **7\. RANH GIỚI PHẠM VI HIỆN TẠI (NHỮNG GÌ APP CHƯA HỖ TRỢ — cập nhật v1.2)**
 
-Để GAP analysis không nhầm lẫn giữa "lỗi tính năng" và "chưa có tính năng", các năng lực sau hiện **chưa nằm trong app** (đang xử lý ngoài hệ thống):
-- Bán lẻ POS cho khách vãng lai và đối soát thu/chi cuối ngày.
-- Quản lý kho và phân tách xuất kho theo từng người vận hành.
-- Giao diện/ứng dụng phía Khách hàng để tự theo dõi chỉ số, nhật ký, nhắc nhở.
-- Tính năng chia sẻ kết quả ra mạng xã hội (đồ thị/insight hành trình).
-- Phân hệ quản lý kinh doanh & báo cáo lời/lỗ cho Nhà sáng lập.
-- CRM marketing chủ động (nhắc sinh nhật, ngày lễ).
+Sau khi xác minh, các năng lực **thực sự chưa nằm trong app** (đây mới là khoảng trống GAP đáng tin):
+- **Bán lẻ POS** cho khách vãng lai và đối soát thu/chi cuối ngày.
+- **Quản lý kho** và phân tách xuất kho theo từng người vận hành.
+- **Phân hệ quản lý kinh doanh & báo cáo lời/lỗ** cho Nhà sáng lập (dashboard quản trị, đa club).
+- **CRM marketing chủ động** (nhắc sinh nhật, ngày lễ, chiến dịch chăm sóc).
+- **Nhắc nhở chủ động (push reminder theo khung giờ)** cho khách hàng.
+- **Xuất bản & chia sẻ hành trình ra mạng xã hội** (infographic giàu cảm xúc).
+- **Luồng riêng cho khách vãng lai** (chưa có gói) trong app.
 
-## **8\. CÁC ĐIỂM ĐÃ XÁC NHẬN & HẠN CHẾ DỮ LIỆU**
+> **Đính chính:** "Giao diện khách hàng" và "tự theo dõi tại nhà" **KHÔNG còn** là khoảng trống — đã tồn tại (xem 4bis.B).
+
+## **8\. CÁC ĐIỂM ĐÃ XÁC NHẬN & HẠN CHẾ DỮ LIỆU (cập nhật v1.2)**
 
 **Đã xác nhận (chốt As-Is):**
-1. **Giao diện khách hàng:** App hiện **chưa có** phần dành cho khách hàng; khách theo dõi hoàn toàn qua sổ giấy để lại tại club.
-2. **Mapping vai trò:** "Nhà vận hành" **chính là** persona HLV (Health Coach) được mô tả trong tài liệu — không phải vai trò có quyền/màn hình riêng.
+1. **Giao diện khách hàng:** App khách hàng **ĐÃ TỒN TẠI** (4 tab; tự log, tiến độ, chat với HLV). *Đính chính giả định sai ở v1.1.* Khách đăng nhập bằng tài khoản Email/mật khẩu do HLV cấp.
+2. **CRM/HLV:** HLV đã có đầy đủ onboarding (cấp tài khoản, OCR Tanita, journey builder, báo cáo tùy chỉnh).
+3. **Mapping vai trò:** "Nhà vận hành" **chính là** persona HLV.
+4. **Khách vãng lai:** chưa có luồng riêng trong app (gắn với khoảng trống POS).
 
 **Hạn chế dữ liệu (lưu ý cho GAP & đo lường To-be):**
-3. **Chưa có số liệu baseline định lượng** (tỷ lệ KH check-in, tỷ lệ chuyển đổi lead→KH, tỷ lệ At-risk, thời gian xử lý một ca, quy mô HLV/khách thử nghiệm). Phân tích GAP và đánh giá hiệu quả To-be ở giai đoạn này sẽ dựa trên **đánh giá định tính** (pain point, UX) thay vì so sánh số đo gốc; khuyến nghị thiết lập đo lường khi triển khai.
+5. **Chưa có số liệu baseline định lượng** (tỷ lệ check-in, chuyển đổi lead→KH, At-risk, thời gian xử lý/ca, quy mô HLV/khách). GAP & đánh giá To-be giai đoạn này dựa trên **đánh giá định tính**; khuyến nghị thiết lập đo lường khi triển khai.
