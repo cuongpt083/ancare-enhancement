@@ -24,10 +24,10 @@ Loại GAP: **[MỚI]** chưa có, xây mới · **[NÂNG CẤP]** đã có mộ
 | CJ1 | Tự theo dõi sức khỏe/dinh dưỡng/thói quen | Đã có (log, tiến độ, streak) | Giữ & tinh chỉnh | [ĐÃ CÓ] | — | — |
 | CJ2 | Chat 1-1 HLV + cộng đồng | Đã có | Giữ | [ĐÃ CÓ] | — | — |
 | CJ3 | Nhắc nhở chủ động (push theo khung giờ) | Chưa có push chủ động | Nhắc bữa ăn/nước/thói quen | [MỚI] | M | 1 |
-| CJ4 | Tạo & chia sẻ câu chuyện thành công ra MXH | Có đồ thị nội bộ; chưa chia sẻ | Sinh nội dung giàu cảm xúc, 1 chạm share | [MỚI] | M | 1 |
+| CJ4 | Tạo & chia sẻ câu chuyện thành công ra MXH | Có đồ thị nội bộ; chưa chia sẻ | Sinh nội dung giàu cảm xúc, 1 chạm share (kênh thu hút của bánh đà CJ6) | [MỚI] | M | 1 |
 | CJ5 | Kho nội dung kiến thức cho khách tiềm năng | Chưa có | Nội dung sinh động, cô đọng | [MỚI] | M | 2 |
-| CJ6 | Kết nối khách tiềm năng ↔ HLV phù hợp (matching) | Chưa có (HLV tự tạo lead) | Cơ chế gợi ý/ghép HLV | [MỚI] | L | 3 |
-| CJ7 | Vòng lặp giới thiệu (referral) | Chưa có | Mời bạn bè/người thân, theo dõi giới thiệu | [MỚI] | M | 3 |
+| CJ6 | **Động cơ thu hút bằng nội dung + Content-Attribution Matching** (hợp nhất CJ4/CJ7) | Chưa có (HLV tự tạo lead) | HLV sáng tạo/chia sẻ nội dung kèm mã giới thiệu → khách tương tác tự gắn về HLV (matching chính); thuật toán chỉ fallback cho lead mồ côi | [MỚI] | L | 2-3 |
+| CJ7 | Vòng lặp giới thiệu (referral) — *thuộc bánh đà CJ6* | Chưa có | Mã giới thiệu/deep-link, attribution, theo dõi nguồn; quyền chọn/đổi HLV; chống poaching & gian lận | [MỚI] | M | 2-3 |
 | CJ8 | Buổi sinh hoạt HOM (thông tin & tham gia) | Chưa có trong app | Lịch HOM, chủ đề, đăng ký | [MỚI] | M | 3 |
 | CJ9 | Gián đoạn khi hết gói (rủi ro bỏ cuộc - C4) | Chặn cứng check-in | Trải nghiệm gia hạn mềm hơn | [NÂNG CẤP] | S | 1 |
 
@@ -116,7 +116,8 @@ Hai hạng mục công sức Cao (L) — hạ tầng micro-course (TR1), matchin
 
 - **MVP-1 (Nền tảng PSM + Lan tỏa & Gắn kết & phễu):** **PS1, PS2** + CJ3, CJ4, CJ9, BJ2, PF1, PF3 + AC1, AC5, AC8 — dựng xương sống PSM/GNV + tận dụng dữ liệu sẵn có.
 - **MVP-2 (Học tập, Nội dung, AI chuyển đổi, quản lý theo bước):** **PS3** + TR1–TR6, CJ5, BJ3, BJ6, SD2 + AC2, AC3, AC7 — đào tạo ánh xạ quy trình + pipeline 12 bước + AI chân dung/copilot.
-- **MVP-3 (Phễu lạnh, Matching, Cá nhân hóa, Nhân bản & Sự nghiệp):** CJ6, CJ7, CJ8, BJ4, BJ5, BJ7, SD1, SD3, SD4, SD5 + AC4, AC6 — phức tạp nhất (chatbot, matching, recommender, coaching tuyến dưới, lộ trình thăng tiến).
+- **MVP-2 (bổ sung):** CJ6/CJ7 lớp attribution (mã giới thiệu + phân tích nội dung) — bánh đà thu hút bằng nội dung khởi động sớm.
+- **MVP-3 (Phễu lạnh, Matching fallback, Cá nhân hóa, Nhân bản & Sự nghiệp):** CJ8, BJ4, BJ5, BJ7, SD1, SD3, SD4, SD5 + AC4, matching fallback lead mồ côi (AC8c) — phức tạp nhất (chatbot, recommender, coaching tuyến dưới, lộ trình thăng tiến).
 
 ---
 

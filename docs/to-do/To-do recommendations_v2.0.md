@@ -91,10 +91,24 @@
 - **DoD:** Quiz tạo lead có chân dung; chatbot sàng lọc & đặt được lịch; tuân thủ quy định nội dung sức khỏe.
 - **Phụ thuộc:** TD-AC2, TD-AC4.
 
-### TD-AC8 — Matching KHTN ↔ HLV/BMO *(AC6, MVP-3)*
-- **Hành động:** Gợi ý HLV (khu vực/chuyên môn DMO/tải khách) & mô hình BMO hợp đặc điểm khách; khách ở xa tìm nhà vận hành gần (plug-in).
-- **DoD:** Lead được ghép HLV/BMO phù hợp; có luồng plug-in cho khách ở xa.
-- **Phụ thuộc:** TD-AC4.
+### TD-AC8 — Content-Attribution Matching (mô hình lai) *(AC6 + hợp nhất CJ4/CJ7)*
+
+> Matching CHÍNH = gắn lead theo công sức thu hút bằng nội dung; thuật toán chỉ là fallback. Triển khai theo 2 lớp.
+
+**TD-AC8a — Mã giới thiệu & attribution theo nội dung** *(MVP-2)*
+- **Hành động:** Mỗi HLV có mã giới thiệu/deep-link; gắn vào nội dung HLV sáng tạo/chỉnh sửa & chia sẻ; khách tương tác/đăng ký qua nội dung → tự gắn (attribution) về HLV. Quy tắc: hành động ý nghĩa đầu tiên; khách có quyền chọn/đổi HLV; chống "poaching" khách đã có HLV; chống gian lận tương tác ảo.
+- **DoD:** Lead vào qua nội dung của HLV được gắn đúng HLV; khách đổi được HLV; có log lý do gắn (minh bạch); phát hiện bất thường cơ bản.
+- **Phụ thuộc:** TD-AC1, TD-1.3 (chia sẻ nội dung), TD-2.4 (kho nội dung).
+
+**TD-AC8b — Phân tích hiệu quả nội dung cho HLV** *(MVP-2/3)*
+- **Hành động:** Dashboard "nội dung nào của tôi đang hút khách" (lượt xem/tương tác/lead/chuyển đổi theo từng nội dung); AI gợi ý nên làm nội dung gì cho phân khúc nào.
+- **DoD:** HLV xem được hiệu quả từng nội dung; nhận gợi ý nội dung tiếp theo.
+- **Phụ thuộc:** TD-AC8a.
+
+**TD-AC8c — Matching thuật toán fallback (lead mồ côi)** *(MVP-3)*
+- **Hành động:** Lead inbound không có người giới thiệu → pool chung → phân phối công bằng theo khu vực/chuyên môn DMO/tải khách; khách ở xa tìm nhà vận hành gần (plug-in).
+- **DoD:** Lead mồ côi được phân phối công bằng; có luồng plug-in cho khách ở xa.
+- **Phụ thuộc:** TD-AC8a, TD-AC4.
 
 ---
 
@@ -248,7 +262,8 @@ MVP-2:  TD-2.1 → {TD-2.2, TD-2.3, TD-2.4} → {TD-2.5, TD-2.6}
         TD-AC5-P1 → TD-AC5-P2 ; TD-AC9 ; TD-AC6
 MVP-3:  TD-2.6 → TD-3.1 → TD-3.2 ; TD-1.1 → TD-3.3 ;
         {TD-2.1,TD-2.4,TD-1.6} → TD-3.4 ; TD-2.1 → TD-3.5 ; TD-3.6 (độc lập)
-        TD-PS1 → {TD-3.7, TD-3.8} ; TD-AC7 ; TD-AC8 ; TD-AC5-P3
+        TD-PS1 → {TD-3.7, TD-3.8} ; TD-AC7 ; TD-AC5-P3
+        {TD-AC1,TD-1.3,TD-2.4} → TD-AC8a → {TD-AC8b, TD-AC8c}  (TD-AC8a/b ở MVP-2; TD-AC8c ở MVP-3)
 Sau MVP-3:  TD-AC5-P4 (cần lịch sử chuyển đổi đủ lớn)
 ```
 
