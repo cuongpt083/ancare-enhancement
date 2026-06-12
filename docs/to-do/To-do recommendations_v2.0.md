@@ -7,9 +7,100 @@
 
 ---
 
-## 1. MVP-1 — LAN TỎA & GẮN KẾT
+## 0a. NỀN TẢNG — LA BÀN QUY TRÌNH 12 BƯỚC (PROCESS STATE MODEL)
 
-> Mục tiêu: tạo giá trị engagement nhanh trên nền dữ liệu/tính năng đã có.
+> Đặc tả: `docs/to-be/Process-State-Model_La-ban-12-buoc_v1.0.md`. Xương sống nối 4 module; ưu tiên dựng sớm.
+
+### TD-PS1 — Process State Model (số hóa SĐD) *(PS1, MVP-1, nền tảng)*
+- **Hành động:** Mô hình tiến trình 2 nhánh (Khách hàng 1→6, TV kinh doanh 6→12); mỗi người dùng có bước hiện tại + việc kế tiếp; API cho các module truy vấn/điều khiển.
+- **DoD:** Xác định đúng bước của người dùng; trả về next action; các module đọc được trạng thái.
+- **Phụ thuộc:** — (làm sớm).
+
+### TD-PS2 — GNV (giấy nhắc việc) số hóa + cadence *(PS2, MVP-1)*
+- **Hành động:** Danh sách việc/nhắc hằng ngày gắn bước hiện tại; theo dõi mức hoàn thành; thúc tần suất.
+- **DoD:** Người dùng nhận GNV hằng ngày theo bước; có thống kê hoàn thành.
+- **Phụ thuộc:** TD-PS1.
+
+### TD-PS3 — Definition of Done theo bước *(PS3, MVP-2)*
+- **Hành động:** Mã hóa tiêu chí hoàn thành mỗi bước (kiến thức %, đưa người đến 2/1, trải nghiệm…), trừ PPV/đơn hàng (VNHUB); kiểm tra & mở khóa bước sau.
+- **DoD:** Bước chỉ "hoàn thành" khi đạt DoD; mở khóa bước kế tiếp theo đúng trình tự.
+- **Phụ thuộc:** TD-PS1, (Module Đào tạo TD-2.1 cho ngưỡng kiến thức).
+
+---
+
+## 0. TRỌNG TÂM — TIỂU MÔ-ĐUN THU HÚT & CHUYỂN ĐỔI (AI), HỖ TRỢ BƯỚC 1 → ĐẦU BƯỚC 2
+
+> Đặc tả: `docs/to-be/Module_Thu-hut-Chuyen-doi_AI-assisted_v1.0.md`. Đây là nhóm nhiệm vụ giúp AnCare thành công cụ đắc lực thực thi quy trình ở Bước 1–2. Các hạng mục được rải vào MVP theo độ ưu tiên/phụ thuộc.
+
+### TD-AC1 — DSKHTN số hóa *(AC1, MVP-1)*
+- **Hành động:** Danh sách KH tiềm năng số; import danh bạ/MXH; chống trùng; trạng thái phễu (Mới→Làm ấm→Đã mời→Nhận lời→Đến 2/1→Trải nghiệm).
+- **DoD:** Tạo/nhập lead, chuyển trạng thái; không mất/không trùng lead; lọc theo nguồn nóng/ấm/lạnh.
+- **Phụ thuộc:** —.
+
+### TD-AC2 — La bàn quy trình + nhắc tần suất + đo phễu *(AC8, MVP-1)*
+- **Hành động:** Hiển thị lead/khách đang ở chặng nào của Bước 1–2, việc cần làm tiếp; nhắc nhịp hành động; đo phễu kết nối→mời→nhận lời→đến 2/1→trải nghiệm.
+- **DoD:** Mỗi lead có "vị trí + việc tiếp theo"; có nhắc cadence; dashboard phễu cập nhật.
+- **Phụ thuộc:** TD-AC1.
+
+### TD-AC3 — Đặt lịch & chuẩn bị cuộc gặp 2/1 *(AC5, MVP-1/2)*
+- **Hành động:** Booking 2/1 (offline/Zoom); nhắc 3 bên (khách/TV/TAB); tự tổng hợp hồ sơ lead gửi TAB trước buổi gặp; ghi nhận kết quả.
+- **DoD:** Đặt & nhắc được lịch; TAB nhận hồ sơ lead trước gặp; kết quả cập nhật vào phễu.
+- **Phụ thuộc:** TD-AC1.
+
+### TD-AC4 — Chấm điểm & ưu tiên lead (rule-based) *(AC2 — P1)*
+- **Hành động:** Gắn thẻ phân khúc + pain point (chọn tay/quy tắc đơn giản); lead score = phù hợp × ấm theo quy tắc; danh sách "hôm nay nên tiếp cận ai".
+- **DoD:** Mỗi lead có thẻ + điểm ưu tiên; danh sách ưu tiên hằng ngày. *(Chưa cần ML.)*
+- **Phụ thuộc:** TD-AC1.
+
+### TD-AC5 — Engine cá nhân hóa làm ấm & mời (phân tầng P1→P4)
+
+> Bóc tách theo độ trưởng thành dữ liệu: P1–P2 chạy ngay (không cần ML); P3–P4 bật khi tích lũy đủ dữ liệu hành vi/chuyển đổi. DISC là *một thẻ phụ*, không phải trung tâm.
+
+**TD-AC5-P1 — Thư viện kịch bản thông minh** *(AC3 — P1, MVP-2)*
+- **Hành động:** Thư viện tin làm ấm/khơi gợi/lời mời, gắn thẻ theo DISC + **giai đoạn sẵn sàng thay đổi (Stage-of-Change)**; LLM chỉ *viết lại cho mượt/đúng tông*; HLV chọn & sửa; giữ "lập trường" kết nối (không pitch).
+- **DoD:** HLV chọn được kịch bản theo thẻ; LLM cá nhân hóa tông giọng; tuân thủ quy tắc nội dung.
+- **Phụ thuộc:** TD-AC1, (kho nội dung TD-2.4).
+
+**TD-AC5-P2 — Copilot theo Phỏng vấn tạo động lực (MI)** *(AC3 — P2, MVP-2)*
+- **Hành động:** LLM sinh gợi ý hội thoại theo tinh thần MI (hỏi mở, khẳng định, phản chiếu, gợi "lời nói thay đổi"), điều kiện theo giai đoạn sẵn sàng (set tay hoặc suy luận đơn giản).
+- **DoD:** Gợi ý bám MI & đúng giai đoạn; được HLV đánh giá hữu ích; không mang tính thao túng.
+- **Phụ thuộc:** TD-AC5-P1.
+
+**TD-AC5-P3 — Chân dung động + khớp nội dung ngữ nghĩa** *(AC2/AC3 nâng cao — P3, MVP-3)*
+- **Hành động:** Suy luận phong cách/giai đoạn từ hành vi (tự cập nhật); **RAG/embedding** lấy "câu chuyện/nội dung giống bạn"; look-alike từ khách đã chuyển đổi.
+- **DoD:** Chân dung tự cập nhật theo hành vi; nội dung gợi ý khớp ngữ nghĩa pain point.
+- **Phụ thuộc:** TD-AC5-P2, dữ liệu hành vi tích lũy (TD-AC2 đo phễu), kho nội dung TD-2.4.
+
+**TD-AC5-P4 — Lớp tối ưu hóa (uplift + Next-Best-Action)** *(AC2 nâng cao — P4, sau MVP-3)*
+- **Hành động:** Nâng lead scoring → **uplift/persuadable**; **Next-Best-Action bằng contextual bandit** tự tối ưu nội dung–thời điểm–kênh theo kết quả.
+- **DoD:** Hệ thống ưu tiên nhóm "lay chuyển được"; bandit cải thiện tỷ lệ theo thời gian (A/B đo được).
+- **Phụ thuộc:** TD-AC5-P3, **lịch sử chuyển đổi đủ lớn**.
+
+### TD-AC9 — AI nhập vai luyện tập cho người mới *(song song, MVP-2)*
+- **Hành động:** "Khách ảo" do AI đóng theo từng chân dung/giai đoạn để người mới tập làm ấm/mời; phản hồi & chấm điểm theo MI; ghép vào Module Đào tạo.
+- **DoD:** Người mới tập được hội thoại với ≥3 kiểu khách ảo; nhận phản hồi cải thiện.
+- **Phụ thuộc:** TD-AC5-P1 (thư viện kịch bản), (Module Đào tạo TD-2.1).
+
+### TD-AC6 — Số hóa buổi trải nghiệm đầu (đầu Bước 2) *(AC7, MVP-2)*
+- **Hành động:** Hồ sơ liền mạch lead→trải nghiệm (không nhập lại); checklist đón tiếp theo 10 vai trò BMO; OCR Tanita + AI gợi ý chế độ cá nhân hóa (nâng cấp).
+- **DoD:** Khách mới được tạo từ lead không nhập lại; hoàn tất checklist buổi đầu; có gợi ý chế độ.
+- **Phụ thuộc:** TD-AC1.
+
+### TD-AC7 — Phễu thị trường lạnh + chatbot *(AC4, MVP-3)*
+- **Hành động:** Landing/quiz sức khỏe thu lead + tự lập chân dung; chatbot AI sàng lọc, trả lời cơ bản, đặt lịch; luôn chuyển tư vấn sâu sang HLV/2/1.
+- **DoD:** Quiz tạo lead có chân dung; chatbot sàng lọc & đặt được lịch; tuân thủ quy định nội dung sức khỏe.
+- **Phụ thuộc:** TD-AC2, TD-AC4.
+
+### TD-AC8 — Matching KHTN ↔ HLV/BMO *(AC6, MVP-3)*
+- **Hành động:** Gợi ý HLV (khu vực/chuyên môn DMO/tải khách) & mô hình BMO hợp đặc điểm khách; khách ở xa tìm nhà vận hành gần (plug-in).
+- **DoD:** Lead được ghép HLV/BMO phù hợp; có luồng plug-in cho khách ở xa.
+- **Phụ thuộc:** TD-AC4.
+
+---
+
+## 1. MVP-1 — LAN TỎA & GẮN KẾT (+ NỀN TẢNG PHỄU)
+
+> Mục tiêu: tạo giá trị engagement nhanh trên nền dữ liệu/tính năng đã có; dựng xương sống thu hút/chuyển đổi (TD-AC1, TD-AC2, TD-AC3).
 
 ### TD-1.1 — Hạ tầng thông báo đẩy *(PF1, nền tảng)*
 - **Hành động:** Tích hợp push (FCM/APNs); cấu hình loại thông báo, lịch gửi, opt-in/out.
@@ -77,6 +168,16 @@
 - **DoD:** Khách tiềm năng truy cập được luồng phễu mà không cần tài khoản đầy đủ.
 - **Phụ thuộc:** TD-2.4.
 
+### TD-2.8b — Pipeline 12 bước cấp quản lý *(BJ6)*
+- **Hành động:** Cho HLV/bảo trợ xem toàn bộ khách & tuyến dưới đang ở bước nào (gắn PSM), ai cần hành động gì hôm nay.
+- **DoD:** Danh sách khách/tuyến dưới theo bước; gợi ý hành động ưu tiên.
+- **Phụ thuộc:** TD-PS1.
+
+### TD-2.9 — Ánh xạ micro-course với giáo trình quy trình + cổng kiến thức *(TR5, TR6)*
+- **Hành động:** Tạo các khóa khớp giáo trình (21 talking points, Khai mở, HLCB1/2, BMO, Cầm tay chỉ việc); playlist "đọc/xem/nghe" theo bước; ngưỡng 70/80/90% làm cổng (gắn DoD TD-PS3).
+- **DoD:** Hoàn thành khóa + đạt ngưỡng → mở khóa bước kế; playlist hiển thị đúng bước.
+- **Phụ thuộc:** TD-2.1, TD-PS3.
+
 > **Lưu ý phạm vi:** AnCare KHÔNG tích hợp kỹ thuật với VNHUB/các app Herbalife (không SSO, không đồng bộ dữ liệu). AnCare là ứng dụng độc lập, chỉ bổ trợ về phạm vi (không làm POS/kho/quản trị kinh doanh).
 
 ---
@@ -115,22 +216,47 @@
 - **DoD:** HLV vận hành được đặc thù trải nghiệm club; không lấn sang nghiệp vụ kinh doanh của VNHUB.
 - **Phụ thuộc:** —.
 
+### TD-3.7 — Coaching tuyến dưới (duplication) *(BJ7)*
+- **Hành động:** Khung Tell–Show–Try–Do; theo dõi tiến độ TV mới qua Bước 6–12 (phần phi tài chính); nhắc bảo trợ đồng hành.
+- **DoD:** Bảo trợ xem & hỗ trợ được tiến độ từng TV tuyến dưới theo bước.
+- **Phụ thuộc:** TD-PS1.
+
+### TD-3.8 — Lộ trình thăng tiến tới GSV + kỹ năng lãnh đạo *(SD4, SD5)*
+- **Hành động:** Trực quan hóa lộ trình tới Giám sát viên (mở khóa theo mốc, gắn PSM nhánh 6–12); khóa kỹ năng lãnh đạo/bảo trợ.
+- **DoD:** HLV thấy lộ trình thăng tiến & điều kiện; truy cập khóa lãnh đạo phù hợp vị trí.
+- **Phụ thuộc:** TD-PS1, TD-2.1.
+
 ---
 
 ## 4. SƠ ĐỒ THỨ TỰ (TÓM TẮT)
 
 ```
-MVP-1:  TD-1.1 → {TD-1.2, TD-1.4} ; TD-1.3 ; TD-1.5 ; {TD-1.2,TD-1.3} → TD-1.6
+Nền tảng (PSM):  TD-PS1 → TD-PS2 ; {TD-PS1, TD-2.1} → TD-PS3
+Thu hút & Chuyển đổi (AC):
+        TD-AC1 → {TD-AC2, TD-AC3, TD-AC4, TD-AC6}
+        TD-AC4 → {TD-AC8} ; {TD-AC2,TD-AC4} → TD-AC7
+        Engine cá nhân hóa (theo độ trưởng thành dữ liệu):
+          TD-AC5-P1 → TD-AC5-P2 → TD-AC5-P3 → TD-AC5-P4
+          (P1 cần kho nội dung TD-2.4 ; P3 cần dữ liệu hành vi ; P4 cần lịch sử chuyển đổi)
+          TD-AC5-P1 → TD-AC9 (nhập vai luyện tập)
+
+MVP-1:  TD-PS1 → TD-PS2
+        TD-1.1 → {TD-1.2, TD-1.4} ; TD-1.3 ; TD-1.5 ; {TD-1.2,TD-1.3} → TD-1.6
+        TD-AC1 → {TD-AC2, TD-AC3, TD-AC4}
 MVP-2:  TD-2.1 → {TD-2.2, TD-2.3, TD-2.4} → {TD-2.5, TD-2.6}
+        {TD-PS1,TD-2.1} → TD-PS3 → TD-2.9 ; TD-PS1 → TD-2.8b
+        TD-AC5-P1 → TD-AC5-P2 ; TD-AC9 ; TD-AC6
 MVP-3:  TD-2.6 → TD-3.1 → TD-3.2 ; TD-1.1 → TD-3.3 ;
         {TD-2.1,TD-2.4,TD-1.6} → TD-3.4 ; TD-2.1 → TD-3.5 ; TD-3.6 (độc lập)
+        TD-PS1 → {TD-3.7, TD-3.8} ; TD-AC7 ; TD-AC8 ; TD-AC5-P3
+Sau MVP-3:  TD-AC5-P4 (cần lịch sử chuyển đổi đủ lớn)
 ```
 
 ---
 
 ## 5. KHUYẾN NGHỊ TRIỂN KHAI
 
-1. **Khởi động MVP-1 trước:** tận dụng dữ liệu/tính năng đã có (tracking, chat, đồ thị) để tạo giá trị lan tỏa & chăm sóc nhanh, chi phí thấp.
+1. **Dựng nền tảng PSM (TD-PS1) sớm nhất:** đây là xương sống mọi module cắm vào; làm cùng nhóm MVP-1 lan tỏa/gắn kết để tận dụng dữ liệu/tính năng đã có (tracking, chat, đồ thị).
 2. **AnCare độc lập, không tích hợp Herbalife:** không đầu tư SSO/đồng bộ dữ liệu; tự quản lý tài khoản & dữ liệu người dùng.
 3. **Đảm bảo nguồn nội dung trước khi xây LMS:** Module Đào tạo vô nghĩa nếu thiếu nội dung chất lượng — chuẩn bị quy trình sản xuất & kiểm duyệt song song TD-2.1.
 4. **PoC cho hạng mục công sức cao:** micro-course (TD-2.1), matching (TD-3.1), recommender (TD-3.4).

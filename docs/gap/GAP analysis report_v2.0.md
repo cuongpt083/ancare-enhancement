@@ -31,6 +31,33 @@ Loại GAP: **[MỚI]** chưa có, xây mới · **[NÂNG CẤP]** đã có mộ
 | CJ8 | Buổi sinh hoạt HOM (thông tin & tham gia) | Chưa có trong app | Lịch HOM, chủ đề, đăng ký | [MỚI] | M | 3 |
 | CJ9 | Gián đoạn khi hết gói (rủi ro bỏ cuộc - C4) | Chặn cứng check-in | Trải nghiệm gia hạn mềm hơn | [NÂNG CẤP] | S | 1 |
 
+### 2.0. Nền tảng — La bàn Quy trình 12 bước (Process State Model)
+
+> Đặc tả: `docs/to-be/Process-State-Model_La-ban-12-buoc_v1.0.md`. Là xương sống nối 4 module; nên ưu tiên dựng sớm.
+
+| # | Hạng mục | As-Is | To-be | Loại | CS | MVP |
+| :-- | :-- | :-- | :-- | :-- | :-: | :-: |
+| PS1 | Process State Model (số hóa SĐD, 2 nhánh, DoD theo bước) | Chưa có (sổ tay) | Mô hình tiến trình điều khiển 4 module | [NỀN TẢNG] | L | 1 |
+| PS2 | GNV (giấy nhắc việc) số hóa + cadence | Chưa có | Task/nhắc việc hằng ngày gắn bước | [MỚI] | M | 1 |
+| PS3 | Definition of Done theo bước (trừ PPV/đơn hàng) | Chưa có | Kiểm tra tiêu chí hoàn thành mỗi bước | [MỚI] | M | 2 |
+
+### 2.1bis. Tiểu mô-đun Thu hút & Chuyển đổi (AI) — Bước 1 → đầu Bước 2
+
+> Đặc tả: `docs/to-be/Module_Thu-hut-Chuyen-doi_AI-assisted_v1.0.md`. Toàn bộ nhóm này hiện **chưa có** trong app (As-Is chỉ có luồng HLV tự tạo lead thủ công).
+
+| # | Hạng mục | As-Is | To-be | Loại | CS | MVP |
+| :-- | :-- | :-- | :-- | :-- | :-: | :-: |
+| AC1 | DSKHTN số hóa (phễu 3 bước, trạng thái lead) | Thủ công/sổ tay | Danh sách số, import, trạng thái phễu | [MỚI] | M | 1 |
+| AC2 | Chấm điểm & ưu tiên lead | Chưa có | Phân khúc + pain point + ưu tiên (P1 rule-based → P4 uplift) | [MỚI] | L | 2→sau MVP-3 |
+| AC3 | Engine cá nhân hóa làm ấm & mời | Chưa có | Phân tầng P1 thư viện kịch bản → P2 MI copilot → P3 chân dung động+RAG → P4 NBA/bandit | [MỚI] | L | 2→sau MVP-3 |
+
+> **Engine cá nhân hóa AC2/AC3 bóc tầng theo độ trưởng thành dữ liệu (chi tiết ở To-do TD-AC5-P1..P4):** P1 thư viện kịch bản (DISC + Stage-of-Change + LLM viết lại, không cần ML) → P2 copilot theo Phỏng vấn tạo động lực (MI) → P3 chân dung động + RAG khớp nội dung (cần dữ liệu hành vi) → P4 uplift + Next-Best-Action bandit (cần lịch sử chuyển đổi). DISC chỉ là thẻ phụ. Bổ sung AC9: AI nhập vai luyện tập cho người mới (song song, MVP-2).
+| AC4 | Phễu thị trường lạnh + chatbot sàng lọc | Chưa có | Landing/quiz + chatbot đặt lịch | [MỚI] | L | 3 |
+| AC5 | Đặt lịch & chuẩn bị cuộc gặp 2/1 | Chưa có | Booking + nhắc 3 bên + hồ sơ lead cho TAB | [MỚI] | M | 1-2 |
+| AC6 | Matching KHTN ↔ HLV/BMO (kể cả khách ở xa) | Chưa có | Gợi ý HLV/BMO phù hợp, plug-in nhà vận hành gần | [MỚI] | L | 3 |
+| AC7 | Checklist buổi trải nghiệm đầu (10 vai trò BMO) | Một phần (CRM HLV) | Số hóa đón tiếp + hồ sơ liền mạch lead→trải nghiệm | [NÂNG CẤP] | M | 2 |
+| AC8 | La bàn quy trình + nhắc tần suất + đo phễu | Chưa có | Vị trí trên Bước 1-2, việc tiếp theo, cadence, phễu metrics | [MỚI] | M | 1 |
+
 ### 2.2. Module Hành trình kinh doanh (HLV)
 
 | # | Hạng mục | As-Is | To-be | Loại | CS | MVP |
@@ -39,7 +66,9 @@ Loại GAP: **[MỚI]** chưa có, xây mới · **[NÂNG CẤP]** đã có mộ
 | BJ2 | Chăm sóc theo dịp đặc biệt + động viên | Chưa có | Nhắc sinh nhật/kỷ niệm/lễ, gợi ý lời động viên | [MỚI] | M | 1 |
 | BJ3 | Chia sẻ nội dung sản phẩm/giải pháp/cơ hội KD (prospecting) | Chưa có | Bộ nội dung & công cụ chia sẻ | [MỚI] | M | 2 |
 | BJ4 | Định hướng phát triển kỹ năng & lộ trình thăng tiến | Chưa có | Liên kết Module Đào tạo/PT bản thân | [MỚI] | M | 2-3 |
-| BJ5 | Công cụ vận hành DMO đa mô hình (bổ trợ VNHUB) | Một phần (app HLV cơ bản) | Mở rộng theo mô hình club | [NÂNG CẤP] | M | 3 |
+| BJ5 | Công cụ vận hành DMO đa mô hình | Một phần (app HLV cơ bản) | Mở rộng theo mô hình club (không làm POS/kho/quản trị) | [NÂNG CẤP] | M | 3 |
+| BJ6 | Pipeline 12 bước cấp quản lý (khách + tuyến dưới) | Chưa có | Xem vị trí & hành động cần làm theo PSM | [MỚI] | M | 2 |
+| BJ7 | Coaching tuyến dưới (Tell-Show-Try-Do, theo dõi Bước 6-12) | Chưa có | Khung huấn luyện & theo dõi nhân bản | [MỚI] | M | 3 |
 
 ### 2.3. Module Đào tạo
 
@@ -49,6 +78,8 @@ Loại GAP: **[MỚI]** chưa có, xây mới · **[NÂNG CẤP]** đã có mộ
 | TR2 | Nội dung chuyên sâu theo nhóm KH đặc thù | Chưa có | Khóa cho béo phì/tiểu đường/thai sản… | [MỚI] | M | 2 |
 | TR3 | Thư viện KH: video tập, công thức, chuyên gia, câu chuyện | Chưa có | Thư viện nội dung đa dạng | [MỚI] | M | 2 |
 | TR4 | Gamification học tập (thi đua, bảng xếp hạng) | Streak có sẵn ở tracking; chưa có cho học tập | Thi đua/tranh tài/điểm/huy hiệu | [MỚI] | M | 2 |
+| TR5 | Ánh xạ micro-course 1:1 giáo trình quy trình + ngưỡng 70/80/90% làm cổng | Chưa có | Khai mở/HLCB1-2/BMO/Cầm tay chỉ việc/21 talking points; gate theo PSM | [MỚI] | M | 2 |
+| TR6 | Playlist "đọc/xem/nghe" theo bước + hỗ trợ Tell-Show-Try-Do | Chưa có | Lộ trình học có ngữ cảnh + video/checklist Bước 8-11 | [MỚI] | M | 2-3 |
 
 ### 2.4. Module Phát triển bản thân
 
@@ -57,6 +88,8 @@ Loại GAP: **[MỚI]** chưa có, xây mới · **[NÂNG CẤP]** đã có mộ
 | SD1 | Gợi ý thông minh cá nhân hóa nội dung/khóa học | Chưa có | Recommender theo dữ liệu & hành vi | [MỚI] | L | 3 |
 | SD2 | Nội dung giới thiệu sản phẩm/cơ hội KD cho khách tiềm năng | Chưa có | Trang/luồng phễu cho tiềm năng | [MỚI] | M | 2 |
 | SD3 | Lộ trình đào tạo có điều kiện cho HLV | Chưa có | Learning path + điều kiện + tài liệu | [MỚI] | M | 3 |
+| SD4 | Lộ trình thăng tiến tới Giám sát viên (mở khóa theo mốc) | Chưa có | Trực quan hóa kế hoạch trả thưởng, gắn PSM Bước 6-12 | [MỚI] | M | 3 |
+| SD5 | Khóa kỹ năng lãnh đạo/bảo trợ | Chưa có | Đào tạo dẫn tuyến dưới | [MỚI] | M | 3 |
 
 ### 2.5. Nền tảng & xuyên suốt
 
@@ -71,17 +104,19 @@ Loại GAP: **[MỚI]** chưa có, xây mới · **[NÂNG CẤP]** đã có mộ
 
 ## 3. KHOẢNG CÁCH TRỌNG TÂM (NHẬN ĐỊNH)
 
-Khoảng cách lớn nhất **không** còn ở vận hành mà ở **bốn trục trải nghiệm mới**: (1) **lan tỏa/virality** (CJ4, CJ7), (2) **đào tạo/nội dung** (TR1–TR4, CJ5, TR3), (3) **phễu & kết nối** (CJ6, SD2), (4) **cá nhân hóa** (SD1). Các trục này chính là phần "lấp khoảng trống" mà tầm nhìn AnCare đặt ra so với app Herbalife hiện hữu.
+Khoảng cách lớn nhất **không** còn ở vận hành mà ở **năm trục trải nghiệm mới**: (1) **thu hút & chuyển đổi có AI hỗ trợ** (AC1–AC8 — trọng tâm cho Bước 1–2), (2) **lan tỏa/virality** (CJ4, CJ7), (3) **đào tạo/nội dung** (TR1–TR4, CJ5), (4) **phễu & kết nối** (CJ6, SD2), (5) **cá nhân hóa** (SD1). Các trục này chính là phần "lấp khoảng trống" mà tầm nhìn AnCare đặt ra so với app Herbalife hiện hữu.
 
 Hai hạng mục công sức Cao (L) — hạ tầng micro-course (TR1), matching (CJ6) và recommender (SD1) — là các "viên gạch nền" cần PoC/đánh giá kỹ.
+
+**Xương sống nối tất cả:** **Process State Model (PS1)** số hóa Sơ đồ dẫn (SĐD) là nền điều khiển cả 4 module — AC (Bước 1-2), Module 2/3/4 (Bước 3-12) đều cắm vào PSM. Cùng GNV (PS2) và DSKHTN (AC1) tạo đủ bộ 3 công cụ KD. Nên ưu tiên dựng khung PSM sớm (MVP-1).
 
 ---
 
 ## 4. PHÂN BỐ THEO MVP
 
-- **MVP-1 (Lan tỏa & Gắn kết):** CJ3, CJ4, CJ9, BJ2, PF1, PF3 — tận dụng dữ liệu sẵn có, tạo giá trị engagement nhanh.
-- **MVP-2 (Học tập & Nội dung):** TR1–TR4, CJ5, BJ3, SD2 — nặng về nền tảng đào tạo.
-- **MVP-3 (Phễu & Cá nhân hóa):** CJ6, CJ7, CJ8, BJ4, BJ5, SD1, SD3 — phức tạp nhất (matching, recommender).
+- **MVP-1 (Nền tảng PSM + Lan tỏa & Gắn kết & phễu):** **PS1, PS2** + CJ3, CJ4, CJ9, BJ2, PF1, PF3 + AC1, AC5, AC8 — dựng xương sống PSM/GNV + tận dụng dữ liệu sẵn có.
+- **MVP-2 (Học tập, Nội dung, AI chuyển đổi, quản lý theo bước):** **PS3** + TR1–TR6, CJ5, BJ3, BJ6, SD2 + AC2, AC3, AC7 — đào tạo ánh xạ quy trình + pipeline 12 bước + AI chân dung/copilot.
+- **MVP-3 (Phễu lạnh, Matching, Cá nhân hóa, Nhân bản & Sự nghiệp):** CJ6, CJ7, CJ8, BJ4, BJ5, BJ7, SD1, SD3, SD4, SD5 + AC4, AC6 — phức tạp nhất (chatbot, matching, recommender, coaching tuyến dưới, lộ trình thăng tiến).
 
 ---
 

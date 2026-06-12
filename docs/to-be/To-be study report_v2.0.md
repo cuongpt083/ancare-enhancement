@@ -38,7 +38,13 @@ Trọng tâm trải nghiệm chuyển từ "quản lý vận hành" sang **gắn
 
 Ký hiệu: **[ĐÃ CÓ]** tái sử dụng từ app hiện tại · **[NÂNG CẤP]** mở rộng cái đã có · **[MỚI]** xây mới.
 
+### 3.0. Năng lực nền tảng — La bàn Quy trình 12 bước (Process State Model)
+
+> **Xương sống xuyên suốt 4 module.** Đặc tả: `docs/to-be/Process-State-Model_La-ban-12-buoc_v1.0.md`. PSM số hóa **Sơ đồ dẫn (SĐD)** — một trong 3 công cụ KD cốt lõi — và là viên gạch khóa kết nối toàn hệ thống. Với mỗi người dùng, PSM xác định **bước hiện tại** (nhánh Khách hàng 1→6, nhánh Thành viên KD 6→12) rồi điều khiển: việc cần làm tiếp theo, nội dung/khóa học đề xuất (Module 3/4), hành động chăm sóc của HLV (Module 2), và kiểm tra Definition of Done của bước (= "tiêu chí hoàn thành xuất sắc" trong tài liệu, trừ điểm PPV/đơn hàng thuộc VNHUB). Cùng với PSM là số hóa **GNV (giấy nhắc việc)** và **DSKHTN** (đã có ở tiểu mô-đun AC) → đủ bộ 3 công cụ KD.
+
 ### 3.1. Module Hành trình khách hàng (Customer Journey)
+
+> **Tiểu mô-đun trọng tâm — Thu hút & Chuyển đổi (AI-assisted), hỗ trợ Bước 1 → đầu Bước 2 của Quy trình 12 bước.** Đặc tả chi tiết: `docs/to-be/Module_Thu-hut-Chuyen-doi_AI-assisted_v1.0.md`. Gồm: DSKHTN số hóa, AI lập chân dung & chấm điểm lead, AI Copilot làm ấm & mời, phễu thị trường lạnh + chatbot, đặt lịch & chuẩn bị cuộc gặp 2/1, matching KH↔HLV/BMO, checklist buổi trải nghiệm đầu, và La bàn quy trình + nhắc tần suất. Mục tiêu: gỡ nút thắt khi scale và rào cản người mới, giữ đúng vai trò con người (người mới chỉ kết nối) và tuân thủ quy định.
 
 Bao trọn phễu tiềm năng → thành viên → người lan tỏa:
 
@@ -57,6 +63,9 @@ Bao trọn phễu tiềm năng → thành viên → người lan tỏa:
 - **[MỚI]** **Chia sẻ nội dung sản phẩm/giải pháp/cơ hội kinh doanh** cho khách tiềm năng & người thân (công cụ prospecting).
 - **[MỚI]** Định hướng **phát triển kỹ năng & lộ trình thăng tiến** trong kế hoạch trả thưởng Herbalife (liên kết Module Đào tạo & Phát triển bản thân).
 - **[NÂNG CẤP]** Công cụ **vận hành Nhóm dinh dưỡng theo nhiều mô hình DMO** (chuyên sâu, vận động, Spa…) — tập trung trải nghiệm tại club, không làm nghiệp vụ kinh doanh (POS/kho/quản trị) vốn thuộc VNHUB.
+- **[MỚI]** **Pipeline 12 bước cấp quản lý:** xem toàn bộ khách & tuyến dưới đang ở bước nào, ai cần hành động gì hôm nay (gắn PSM).
+- **[MỚI]** **Số hóa GNV (giấy nhắc việc)** + **SĐD** (= PSM) → đủ bộ 3 công cụ KD dùng hằng ngày.
+- **[MỚI]** **Coaching tuyến dưới (duplication):** khung Tell–Show–Try–Do + theo dõi tiến độ TV mới qua Bước 6–12 (phần phi tài chính).
 
 ### 3.3. Module Đào tạo (Training)
 
@@ -64,12 +73,16 @@ Bao trọn phễu tiềm năng → thành viên → người lan tỏa:
 - **[MỚI]** Nội dung chuyên sâu theo **nhóm khách hàng đặc thù** (thừa/thiếu cân, thể thao, béo phì, tiểu đường, tim mạch, người cao tuổi, bà mẹ mang thai & sau sinh…).
 - **[MỚI]** Thư viện cho khách hàng: bài viết, **video hướng dẫn tập luyện, công thức nấu ăn lành mạnh**, lời khuyên chuyên gia, câu chuyện thành công.
 - **[MỚI]** **Gamification học tập:** thi đua, tranh tài, bảng xếp hạng để tạo hứng thú.
+- **[MỚI]** **Ánh xạ micro-course 1:1 với giáo trình quy trình:** 21 talking points, Lớp Khai mở, HLCB1, HLCB2, Định hướng BMO, Cầm tay chỉ việc, kỹ năng riêng theo BMO; ngưỡng kiến thức 70/80/90% làm điều kiện hoàn thành bước (gắn PSM).
+- **[MỚI]** **Playlist "nên đọc/xem/nghe" theo từng bước** + hỗ trợ Tell–Show–Try–Do (video + checklist) cho Bước 8–11.
 
 ### 3.4. Module Phát triển bản thân (Self-development)
 
 - **[MỚI]** **Gợi ý thông minh cá nhân hóa** nội dung/khóa học/chương trình theo dữ liệu sức khỏe, thói quen, mục tiêu, sở thích, hành vi sử dụng.
 - **[MỚI]** Nội dung giới thiệu sản phẩm/giải pháp/cơ hội kinh doanh Herbalife cho **khách tiềm năng** (phễu).
 - **[MỚI]** Với HLV: **lộ trình đào tạo có điều kiện/tài liệu tham khảo** cho mục tiêu phát triển bản thân trong bán hàng trực tiếp & chăm sóc sức khỏe chủ động.
+- **[MỚI]** **Lộ trình thăng tiến tới Giám sát viên** (kế hoạch trả thưởng) trực quan, có điều kiện mở khóa từng mốc (gắn PSM nhánh Bước 6–12).
+- **[MỚI]** Khóa **kỹ năng lãnh đạo/bảo trợ** để dẫn tuyến dưới; gợi ý "việc/khóa tiếp theo" theo vị trí trên la bàn.
 
 ---
 
