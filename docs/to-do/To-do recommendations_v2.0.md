@@ -9,7 +9,7 @@
 
 ## 0a. NỀN TẢNG — LA BÀN QUY TRÌNH 12 BƯỚC (PROCESS STATE MODEL)
 
-> Đặc tả: `docs/to-be/Process-State-Model_La-ban-12-buoc_v1.0.md`. Xương sống nối 4 module; ưu tiên dựng sớm.
+> Đặc tả: `docs/to-be/To-be study report_v2.1 (consolidated).md (Phần II)`. Xương sống nối 4 module; ưu tiên dựng sớm.
 
 ### TD-PS1 — Process State Model (số hóa SĐD) *(PS1, MVP-1, nền tảng)*
 - **Hành động:** Mô hình tiến trình 2 nhánh (Khách hàng 1→6, TV kinh doanh 6→12); mỗi người dùng có bước hiện tại + việc kế tiếp; API cho các module truy vấn/điều khiển.
@@ -30,7 +30,7 @@
 
 ## 0. TRỌNG TÂM — TIỂU MÔ-ĐUN THU HÚT & CHUYỂN ĐỔI (AI), HỖ TRỢ BƯỚC 1 → ĐẦU BƯỚC 2
 
-> Đặc tả: `docs/to-be/Module_Thu-hut-Chuyen-doi_AI-assisted_v1.0.md`. Đây là nhóm nhiệm vụ giúp AnCare thành công cụ đắc lực thực thi quy trình ở Bước 1–2. Các hạng mục được rải vào MVP theo độ ưu tiên/phụ thuộc.
+> Đặc tả: `docs/to-be/To-be study report_v2.1 (consolidated).md (Phần III)`. Đây là nhóm nhiệm vụ giúp AnCare thành công cụ đắc lực thực thi quy trình ở Bước 1–2. Các hạng mục được rải vào MVP theo độ ưu tiên/phụ thuộc.
 
 ### TD-AC1 — DSKHTN số hóa *(AC1, MVP-1)*
 - **Hành động:** Danh sách KH tiềm năng số; import danh bạ/MXH; chống trùng; trạng thái phễu (Mới→Làm ấm→Đã mời→Nhận lời→Đến 2/1→Trải nghiệm).

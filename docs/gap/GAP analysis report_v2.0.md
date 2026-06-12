@@ -1,7 +1,7 @@
 # **PHÂN TÍCH KHOẢNG CÁCH (GAP) — ANCARE DXP**
 
 **Phiên bản:** v2.0 — *Đối chiếu theo định hướng DXP. Thay thế GAP v1.0.*
-**Cơ sở:** As-Is v1.2 (`docs/as-is/`, gồm 2 phụ lục) ↔ To-be v2.0 (`docs/to-be/To-be study report_v2.0.md`).
+**Cơ sở:** As-Is v1.2 (`docs/as-is/`, gồm 2 phụ lục) ↔ To-be v2.0 (`docs/to-be/To-be study report_v2.1 (consolidated).md`).
 
 > **Khác biệt cốt lõi với v1.0:** loại bỏ toàn bộ GAP về POS/kho/quản trị kinh doanh (chuyển cho VNHUB). Nhiều năng lực phía khách hàng đã được app hiện tại đáp ứng, nên khoảng trống thật co lại và **dịch trọng tâm sang nội dung, đào tạo, lan tỏa, cá nhân hóa, kết nối phễu**.
 
@@ -33,7 +33,7 @@ Loại GAP: **[MỚI]** chưa có, xây mới · **[NÂNG CẤP]** đã có mộ
 
 ### 2.0. Nền tảng — La bàn Quy trình 12 bước (Process State Model)
 
-> Đặc tả: `docs/to-be/Process-State-Model_La-ban-12-buoc_v1.0.md`. Là xương sống nối 4 module; nên ưu tiên dựng sớm.
+> Đặc tả: `docs/to-be/To-be study report_v2.1 (consolidated).md (Phần II)`. Là xương sống nối 4 module; nên ưu tiên dựng sớm.
 
 | # | Hạng mục | As-Is | To-be | Loại | CS | MVP |
 | :-- | :-- | :-- | :-- | :-- | :-: | :-: |
@@ -43,7 +43,7 @@ Loại GAP: **[MỚI]** chưa có, xây mới · **[NÂNG CẤP]** đã có mộ
 
 ### 2.1bis. Tiểu mô-đun Thu hút & Chuyển đổi (AI) — Bước 1 → đầu Bước 2
 
-> Đặc tả: `docs/to-be/Module_Thu-hut-Chuyen-doi_AI-assisted_v1.0.md`. Toàn bộ nhóm này hiện **chưa có** trong app (As-Is chỉ có luồng HLV tự tạo lead thủ công).
+> Đặc tả: `docs/to-be/To-be study report_v2.1 (consolidated).md (Phần III)`. Toàn bộ nhóm này hiện **chưa có** trong app (As-Is chỉ có luồng HLV tự tạo lead thủ công).
 
 | # | Hạng mục | As-Is | To-be | Loại | CS | MVP |
 | :-- | :-- | :-- | :-- | :-- | :-: | :-: |
