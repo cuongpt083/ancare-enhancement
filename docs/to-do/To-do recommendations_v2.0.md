@@ -112,9 +112,70 @@
 
 ---
 
-## 1. MVP-1 — LAN TỎA & GẮN KẾT (+ NỀN TẢNG PHỄU)
+## 0b. BỔ SUNG TỪ REVIEW (2026-06-14) — ƯU TIÊN PO
 
-> Mục tiêu: tạo giá trị engagement nhanh trên nền dữ liệu/tính năng đã có; dựng xương sống thu hút/chuyển đổi (TD-AC1, TD-AC2, TD-AC3).
+> Nguồn: `docs/reviews/20260614-01.md` (Đức, Mi), `20260614-02.md` (PO). **DMO = Daily Method of Operations** (mô hình KD nhóm dinh dưỡng). PO ưu tiên trải nghiệm tư vấn/sức khỏe (Lớp 1–2) trong MVP-1.
+
+### TD-RV1 — Kịch bản tư vấn nhanh 15 phút *(RV1, MVP-1)*
+- **Hành động:** Đo/quét chỉ số cơ thể nhanh + DISC nhanh → bản tư vấn tức thì + gợi ý gói chương trình phù hợp nhu cầu & tài chính.
+- **DoD:** Hoàn tất một ca tư vấn trong ~15 phút; xuất bản tư vấn + ≥1 gợi ý gói.
+- **Phụ thuộc:** (tái dùng OCR Tanita đã có).
+
+### TD-RV2 — Cá nhân hóa theo thể trạng/bệnh lý nền *(RV2, MVP-1/2)*
+- **Hành động:** AI phân tích chỉ số hằng ngày, khuyến nghị riêng theo bệnh nền (thận/phổi/tiểu đường…); **nội dung do chuyên gia/bác sĩ xác thực**; disclaimer; ca phức tạp điều hướng người thật.
+- **DoD:** Khách có bệnh nền nhận khuyến nghị riêng đã qua xác thực; có disclaimer & đường dẫn tới HLV/bác sĩ.
+- **Phụ thuộc:** kho nội dung verified; ràng buộc an toàn R16.
+
+### TD-RV3 — Thực đơn + nhật ký + AI nhận diện ảnh bữa ăn *(RV3, MVP-1/2)*
+- **Hành động:** Số hóa thực đơn trực quan; khách chụp ảnh món ăn → AI nhận diện/chấm điểm/theo dõi → cơ sở thiết kế thực đơn ngày sau.
+- **DoD:** Chụp ảnh ra nhận diện + điểm; thực đơn ngày sau điều chỉnh theo log.
+- **Phụ thuộc:** —.
+
+### TD-RV4 — AnCare Health Score (tính năng "chữ ký") *(RV4, MVP-1)*
+- **Hành động:** Tính điểm 1–100 theo ngày/tuần/tháng từ chỉ số & hành vi; ngưỡng phân loại; khuyến khích chia sẻ khi điểm cao (nối Content-Attribution).
+- **DoD:** Hiển thị Health Score cập nhật; phân ngưỡng; nút chia sẻ khi đạt mốc.
+- **Phụ thuộc:** dữ liệu tracking (đã có).
+
+### TD-RV5 — AI trả lời tức thì theo Skill Script + handoff *(RV5+RV6, MVP-1)*
+- **Hành động:** AI phản hồi khách tức thì dựa Skill Script do HLV cấu hình; sau khoảng (vd 10–15 phút) điều hướng kết nối HLV/bác sĩ; **kiểm duyệt phạm vi & log câu trả lời**.
+- **DoD:** Phản hồi gần như tức thì; có handoff người thật; câu trả lời nằm trong phạm vi cho phép.
+- **Phụ thuộc:** —. *(Giải quyết phàn nàn "AI chậm".)*
+
+### TD-RV6 — Feedback Loop + SRS + tài liệu HLV *(RV12, MVP-1)*
+- **Hành động:** Tài liệu hướng dẫn chuẩn hóa cho HLV (kèm SRS); kênh ghi nhận lỗi/góp ý (Jira/Sheets) cập nhật real-time.
+- **DoD:** HLV gửi được góp ý/lỗi; đội kỹ thuật theo dõi & xử lý theo luồng.
+- **Phụ thuộc:** —.
+
+### TD-RV7 — Điểm danh/check-in *(RV7, MVP-2)*
+- **Hành động:** Ghi nhận điểm danh tham gia (tại club/buổi học).
+- **DoD:** Có lịch sử điểm danh theo người/buổi.
+- **Phụ thuộc:** —.
+
+### TD-RV8 — Tích hợp wearable/health apps *(RV8, MVP-2/3)*
+- **Hành động:** Import dữ liệu từ Garmin/Coros/Apple Health; chuẩn hóa & đồng bộ; xử lý quyền riêng tư.
+- **DoD:** Khách kết nối & import được dữ liệu sức khỏe; hiển thị trên timeline.
+- **Phụ thuộc:** —.
+
+### TD-RV9 — Tích hợp Google Calendar *(RV9, MVP-2)*
+- **Hành động:** Đồng bộ lịch hẹn 2/1 với Google Calendar; nhắc giờ; tránh trùng. Bổ sung cho TD-AC3.
+- **DoD:** Lịch 2/1 đồng bộ 2 chiều; nhắc trước giờ; cảnh báo trùng.
+- **Phụ thuộc:** TD-AC3.
+
+### TD-RV10 — "Chăm sóc chéo" cộng đồng *(RV11, MVP-2)*
+- **Hành động:** HLV cùng hệ thống cổ vũ/chúc mừng (thả tim, thông báo) khách của nhau khi có kết quả tốt.
+- **DoD:** HLV tương tác chéo được; khách nhận lời chúc mừng từ cộng đồng.
+- **Phụ thuộc:** —.
+
+### TD-RV11 — UGC reward (khách làm KOL/KOC) *(RV10, MVP-3)*
+- **Hành động:** Điểm thưởng theo nội dung khách tạo & mức tương tác trên MXH; đổi quà trong hệ sinh thái.
+- **DoD:** Tạo/chia sẻ nội dung sinh điểm; đổi được quà; điểm theo tương tác.
+- **Phụ thuộc:** TD-AC8a (attribution), TD-1.3 (chia sẻ).
+
+---
+
+## 1. MVP-1 — TƯ VẤN & TRẢI NGHIỆM SỨC KHỎE (LÕI PO) + nền mỏng PSM
+
+> **Cập nhật ưu tiên (PO):** MVP-1 dồn vào tư vấn & trải nghiệm sức khỏe hằng ngày: **TD-RV1, TD-RV3, TD-RV4, TD-RV5, TD-RV2, TD-RV6** + nhắc nhở (TD-1.2), Health Score chia sẻ (TD-1.3 hỗ trợ), PSM/GNV nền mỏng (TD-PS1, TD-PS2), la bàn (TD-AC2) + đo lường (TD-1.6). Phễu thu hút & đào tạo chuyển sang MVP-2. *(Các mục TD-1.x dưới đây vẫn thuộc nhóm lan tỏa/gắn kết, nay rải MVP-1/2 theo ưu tiên mới.)*
 
 ### TD-1.1 — Hạ tầng thông báo đẩy *(PF1, nền tảng)*
 - **Hành động:** Tích hợp push (FCM/APNs); cấu hình loại thông báo, lịch gửi, opt-in/out.
