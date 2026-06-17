@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tạo KH tiềm năng mới — Prototype</title>
+<link rel="stylesheet" href="tabler-icons.min.css">
+<style>
+  :root {
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f6f7f9;
+    --color-background-app: #eef0f3;
+    --color-text-primary: #1a1d21;
+    --color-text-secondary: #6b7280;
+    --color-border-secondary: #d1d5db;
+    --color-border-tertiary: #e5e7eb;
+    --color-accent: #2f6f4f;
+    --color-accent-soft: #e7f1ec;
+    --border-radius-md: 10px;
+    --border-radius-lg: 14px;
+  }
+  * { box-sizing: border-box; }
+  body, html { margin: 0; padding: 0; font-family: var(--font-sans); background: var(--color-background-app); color: var(--color-text-primary); }
+  .container { width: 100%; max-width: 460px; margin: 0 auto; padding: 0 0 96px; }
+
+  /* App bar */
+  .appbar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 8px;
+    background: var(--color-background-primary); padding: 0.9rem 1rem; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .appbar .ti { font-size: 22px; color: var(--color-text-primary); }
+  .appbar h1 { font-size: 16px; font-weight: 600; margin: 0; flex: 1; }
+  .appbar .step { font-size: 12px; color: var(--color-text-secondary); }
+
+  /* Card */
+  .card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg); margin: 1rem; overflow: hidden; }
+  .card-head { display: flex; align-items: center; gap: 10px; padding: 0.9rem 1rem; background: var(--color-background-secondary);
+    border-bottom: 0.5px solid var(--color-border-tertiary); cursor: pointer; }
+  .card-head .ti.lead-ic { font-size: 18px; color: var(--color-accent); }
+  .card-head .htitle { flex: 1; }
+  .card-head h2 { font-size: 14px; font-weight: 600; margin: 0; }
+  .card-head .csub { font-size: 11px; color: var(--color-text-secondary); margin-top: 1px; }
+  .card-head .card-chev { color: var(--color-text-secondary); font-size: 18px; transition: transform .2s; }
+  .card.open .card-head { border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .card:not(.open) .card-head { border-bottom: none; }
+  .card.open .card-chev { transform: rotate(180deg); }
+  .card-body { padding: 0.5rem 1rem 1rem; display: none; }
+  .card.open .card-body { display: block; }
+  .done-dot { width: 18px; height: 18px; border-radius: 50%; background: var(--color-accent); color:#fff;
+    display: none; align-items: center; justify-content: center; font-size: 11px; }
+  .done-dot .ti { font-size: 12px; }
+
+  /* Group (collapsible) */
+  .group { border-top: 0.5px solid var(--color-border-tertiary); }
+  .group:first-child { border-top: none; }
+  .group-head { display: flex; align-items: center; gap: 8px; padding: 0.85rem 0; cursor: pointer; }
+  .group-head .badge { font-size: 10px; font-weight: 600; color: var(--color-accent); background: var(--color-accent-soft);
+    padding: 2px 7px; border-radius: 20px; }
+  .group-head h3 { font-size: 13px; font-weight: 600; margin: 0; flex: 1; }
+  .group-head .chev { color: var(--color-text-secondary); font-size: 16px; transition: transform .2s; }
+  .group.open .chev { transform: rotate(180deg); }
+  .group-body { display: none; padding-bottom: 0.6rem; }
+  .group.open .group-body { display: block; }
+
+  /* Field */
+  .field { margin-bottom: 0.9rem; }
+  .field label { display: block; font-size: 12.5px; color: var(--color-text-primary); font-weight: 500; margin-bottom: 0.35rem; }
+  .field label .req { color: #b42318; }
+  .field .hint { font-size: 11px; color: var(--color-text-secondary); margin-top: 0.25rem; line-height: 1.4; }
+  input[type=text], input[type=tel], input[type=email], input[type=date], select, textarea {
+    width: 100%; padding: 0.6rem 0.7rem; font-size: 13.5px; font-family: inherit;
+    border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md);
+    background: var(--color-background-primary); color: var(--color-text-primary); }
+  textarea { resize: vertical; min-height: 56px; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--color-accent); }
+
+  /* Chips (single & multi) */
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { font-size: 12.5px; padding: 0.45rem 0.7rem; border: 0.5px solid var(--color-border-secondary);
+    border-radius: 20px; background: var(--color-background-primary); color: var(--color-text-primary); cursor: pointer; user-select: none;
+    transition: all .15s; }
+  .chip.active { background: var(--color-accent-soft); border-color: var(--color-accent); color: var(--color-accent); font-weight: 600; }
+  .chip .ti { font-size: 13px; vertical-align: -1px; }
+
+  /* DISC signal hint */
+  .signal { font-size: 10.5px; color: var(--color-text-secondary); font-style: italic; margin-top: 4px; }
+
+  /* Toggle */
+  .toggle-row { display: flex; align-items: center; gap: 10px; padding: 0.4rem 0; }
+  .toggle-row span { flex: 1; font-size: 12.5px; }
+  .switch { position: relative; width: 42px; height: 24px; flex: none; }
+  .switch input { opacity: 0; width: 0; height: 0; }
+  .slider-sw { position: absolute; inset: 0; background: var(--color-border-secondary); border-radius: 24px; transition: .2s; }
+  .slider-sw:before { content: ""; position: absolute; height: 18px; width: 18px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: .2s; }
+  .switch input:checked + .slider-sw { background: var(--color-accent); }
+  .switch input:checked + .slider-sw:before { transform: translateX(18px); }
+
+  /* Slider readiness */
+  .range-row { display: flex; align-items: center; gap: 10px; }
+  input[type=range] { flex: 1; accent-color: var(--color-accent); }
+  .range-val { font-weight: 700; color: var(--color-accent); width: 28px; text-align: center; }
+
+  /* AI suggestion */
+  .ai-box { margin: 1rem; padding: 1rem; border: 0.5px dashed var(--color-accent); border-radius: var(--border-radius-lg);
+    background: var(--color-accent-soft); }
+  .ai-box h3 { font-size: 13px; margin: 0 0 0.5rem; color: var(--color-accent); display: flex; align-items: center; gap: 6px; }
+  .ai-box .muted { font-size: 11.5px; color: var(--color-text-secondary); }
+  .ai-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0.5rem 0; }
+  .ai-tag { font-size: 11.5px; background: #fff; border: 0.5px solid var(--color-accent); border-radius: 6px; padding: 3px 8px; }
+  .ai-tag b { color: var(--color-accent); }
+
+  /* Footer actions */
+  .actions { position: fixed; bottom: 0; left: 0; right: 0; max-width: 460px; margin: 0 auto;
+    display: flex; gap: 10px; padding: 0.8rem 1rem; background: var(--color-background-primary);
+    border-top: 0.5px solid var(--color-border-tertiary); }
+  .btn { flex: 1; padding: 0.8rem; font-size: 14px; font-weight: 600; border-radius: var(--border-radius-md); cursor: pointer; border: none; }
+  .btn-secondary { background: var(--color-background-secondary); color: var(--color-text-primary); border: 0.5px solid var(--color-border-secondary); }
+  .btn-primary { background: var(--color-accent); color: #fff; }
+  .btn .ti { vertical-align: -2px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="appbar">
+    <i class="ti ti-arrow-left"></i>
+    <h1>Tạo KH tiềm năng mới</h1>
+    <span class="step">Bước 1/2</span>
+  </div>
+
+  <!-- CARD 1: Thông tin cơ bản -->
+  <div class="card open">
+    <div class="card-head" onclick="tgCard(this)">
+      <i class="ti ti-user lead-ic"></i>
+      <div class="htitle"><h2>Thông tin cơ bản</h2><div class="csub">Bắt buộc · chỉ cần Họ tên để tạo nhanh</div></div>
+      <i class="ti ti-chevron-down card-chev"></i>
+    </div>
+    <div class="card-body">
+      <div class="field">
+        <label>Họ tên <span class="req">*</span></label>
+        <input type="text" placeholder="Nguyễn Thị Lan">
+      </div>
+      <div class="field">
+        <label>Số điện thoại</label>
+        <input type="tel" placeholder="09xx xxx xxx">
+      </div>
+      <div class="field">
+        <label>Ngày sinh</label>
+        <input type="date">
+      </div>
+      <div class="field">
+        <label>Giới tính</label>
+        <div class="chips" data-single>
+          <span class="chip">Nam</span><span class="chip">Nữ</span><span class="chip">Khác</span>
+        </div>
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input type="email" placeholder="ten@email.com">
+      </div>
+      <div class="field">
+        <label>Mã giới thiệu</label>
+        <input type="text" placeholder="(nếu có)">
+      </div>
+      <div class="toggle-row">
+        <span>Đồng ý chia sẻ dữ liệu cho AI phân tích<div class="hint">Bắt buộc bật để AI gợi ý DISC & cách tư vấn (Apple 5.1.1(i)).</div></span>
+        <label class="switch"><input type="checkbox" id="consent" checked><span class="slider-sw"></span></label>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 2: Chân dung khách hàng (mặc định gập) -->
+  <div class="card">
+    <div class="card-head" onclick="tgCard(this)">
+      <i class="ti ti-id-badge-2 lead-ic"></i>
+      <div class="htitle"><h2>Chân dung khách hàng</h2><div class="csub">Tùy chọn · bổ sung dần khi làm ấm</div></div>
+      <span class="done-dot"><i class="ti ti-check"></i></span>
+      <i class="ti ti-chevron-down card-chev"></i>
+    </div>
+    <div class="card-body">
+
+      <!-- Nhóm 0 -->
+      <div class="group open">
+        <div class="group-head" onclick="tg(this)"><span class="badge">Nguồn</span><h3>Nguồn & phân công</h3><i class="ti ti-chevron-down chev"></i></div>
+        <div class="group-body">
+          <div class="field"><label>Nguồn lead</label>
+            <div class="chips" data-single><span class="chip"><i class="ti ti-flame"></i> Nóng</span><span class="chip">Ấm</span><span class="chip">Lạnh</span></div>
+          </div>
+          <div class="field"><label>Kênh tiếp cận</label>
+            <div class="chips"><span class="chip">Zalo</span><span class="chip">Facebook</span><span class="chip">TikTok</span><span class="chip">Gặp trực tiếp</span><span class="chip">Giới thiệu</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nhóm 1: Aim -->
+      <div class="group open">
+        <div class="group-head" onclick="tg(this)"><span class="badge">Aim ★</span><h3>Mục tiêu & nỗi đau</h3><i class="ti ti-chevron-down chev"></i></div>
+        <div class="group-body">
+          <div class="field"><label>Mục tiêu sức khỏe trội</label>
+            <div class="chips" data-single><span class="chip">Giảm cân</span><span class="chip">Tăng cơ</span><span class="chip">Đường huyết</span><span class="chip">Năng lượng</span><span class="chip">Tiêu hóa</span><span class="chip">Đẹp da</span></div>
+          </div>
+          <div class="field"><label>Q1 · Điều gì khiến anh/chị bắt đầu quan tâm lúc này?</label>
+            <textarea placeholder="VD: sau sinh tăng cân, mệt, mặc đồ không vừa…"></textarea></div>
+          <div class="field"><label>Q3 · Vấn đề sức khỏe làm phiền nhất?</label>
+            <div class="chips"><span class="chip">Mệt mỏi</span><span class="chip">Mặc cảm ngoại hình</span><span class="chip">Mỡ máu</span><span class="chip">Mất ngủ</span><span class="chip">Tiêu hóa</span></div>
+            <input type="text" style="margin-top:6px" placeholder="Khác…"></div>
+          <div class="field"><label>Q2 · 3 tháng tới tốt đẹp thì anh/chị hình dung mình thế nào?</label>
+            <textarea placeholder="Định nghĩa thành công của khách…"></textarea></div>
+          <div class="field"><label>Q4 · Đã từng thử cách nào? Kết quả?</label>
+            <textarea placeholder=""></textarea></div>
+        </div>
+      </div>
+
+      <!-- Nhóm 2 -->
+      <div class="group">
+        <div class="group-head" onclick="tg(this)"><span class="badge">Bối cảnh</span><h3>Bối cảnh & lối sống</h3><i class="ti ti-chevron-down chev"></i></div>
+        <div class="group-body">
+          <div class="field"><label>Độ tuổi</label>
+            <div class="chips" data-single><span class="chip">18–29</span><span class="chip">30–39</span><span class="chip">40–49</span><span class="chip">50+</span></div></div>
+          <div class="field"><label>Nghề nghiệp / Khu vực</label><input type="text" placeholder="VD: Nhân viên văn phòng · HCM"></div>
+          <div class="field"><label>Q7 · Ràng buộc thời gian / gia đình</label><input type="text" placeholder="VD: có con nhỏ, ít thời gian"></div>
+          <div class="field"><label>Q6 · Một ngày thường diễn ra thế nào?</label><textarea placeholder="Giờ giấc, vận động, ăn uống…"></textarea></div>
+        </div>
+      </div>
+
+      <!-- Nhóm 3 -->
+      <div class="group">
+        <div class="group-head" onclick="tg(this)"><span class="badge">Quyết định</span><h3>Yếu tố quyết định & rào cản</h3><i class="ti ti-chevron-down chev"></i></div>
+        <div class="group-body">
+          <div class="field"><label>Q9 · Điều gì quan trọng nhất khi quyết định?</label>
+            <div class="chips"><span class="chip">Kết quả nhanh</span><span class="chip">Bằng chứng khoa học</span><span class="chip">Chi phí</span><span class="chip">Có người đồng hành</span></div>
+            <div class="signal">Tín hiệu DISC: kết quả nhanh→D · khoa học→C · đồng hành→S/I</div></div>
+          <div class="field"><label>Q10 · Điều gì còn khiến anh/chị băn khoăn?</label>
+            <div class="chips"><span class="chip">Không có thời gian</span><span class="chip">Từng thất bại</span><span class="chip">Sợ "đa cấp"</span><span class="chip">Cần hỏi người thân</span></div></div>
+          <div class="field"><label>Q12 · Tự quyết hay cần trao đổi với ai?</label>
+            <div class="chips" data-single><span class="chip">Tự quyết</span><span class="chip">Hỏi vợ/chồng</span><span class="chip">Hỏi con</span><span class="chip">Khác</span></div></div>
+        </div>
+      </div>
+
+      <!-- Nhóm 4: DISC -->
+      <div class="group">
+        <div class="group-head" onclick="tg(this)"><span class="badge">DISC</span><h3>Tín hiệu tính cách <span style="font-weight:400;color:var(--color-text-secondary)">(tùy chọn)</span></h3><i class="ti ti-chevron-down chev"></i></div>
+        <div class="group-body">
+          <div class="field"><label>Q13 · Thích trình bày…</label>
+            <div class="chips" data-single><span class="chip">Ngắn gọn trọng tâm</span><span class="chip">Chi tiết đầy đủ</span></div>
+            <div class="signal">ngắn gọn→D · chi tiết→C</div></div>
+          <div class="field"><label>Q14 · Hứng thú với…</label>
+            <div class="chips" data-single><span class="chip">Câu chuyện người thật</span><span class="chip">Số liệu khoa học</span></div>
+            <div class="signal">câu chuyện→I · số liệu→C</div></div>
+          <div class="field"><label>Q15 · Thích…</label>
+            <div class="chips" data-single><span class="chip">Bắt đầu ngay</span><span class="chip">Chuẩn bị kỹ rồi làm</span></div>
+            <div class="signal">ngay→D/I · kỹ→S/C</div></div>
+          <div class="field"><label>Q16 · Khi thay đổi…</label>
+            <div class="chips" data-single><span class="chip">Làm nhanh</span><span class="chip">Cần thời gian làm quen</span></div>
+            <div class="signal">nhanh→D · cần thời gian→S</div></div>
+        </div>
+      </div>
+
+      <!-- Nhóm 5: Stage -->
+      <div class="group">
+        <div class="group-head" onclick="tg(this)"><span class="badge">Stage</span><h3>Giai đoạn sẵn sàng</h3><i class="ti ti-chevron-down chev"></i></div>
+        <div class="group-body">
+          <div class="field"><label>Q17 · Đang ở giai đoạn nào?</label>
+            <div class="chips" data-single><span class="chip">Chưa nghĩ tới</span><span class="chip">Đang cân nhắc</span><span class="chip">Muốn bắt đầu sớm</span><span class="chip">Đã đang làm</span></div></div>
+          <div class="field"><label>Q5 · Mức sẵn sàng thay đổi (0–10)</label>
+            <div class="range-row"><input type="range" min="0" max="10" value="7" oninput="document.getElementById('rv').textContent=this.value"><span class="range-val" id="rv">7</span></div>
+            <input type="text" style="margin-top:6px" placeholder="…vì sao không thấp hơn? (câu nói thay đổi)"></div>
+          <div class="field"><label>Q18 · Muốn bắt đầu khi nào?</label>
+            <div class="chips" data-single><span class="chip">Ngay</span><span class="chip">Tuần này</span><span class="chip">Trong tháng</span><span class="chip">Chưa rõ</span></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- AI suggestion -->
+  <div class="ai-box" id="aibox">
+    <h3><i class="ti ti-sparkles"></i> Gợi ý của AI</h3>
+    <div class="ai-tags">
+      <span class="ai-tag">DISC dự đoán: <b>I/S</b></span>
+      <span class="ai-tag">Giai đoạn: <b>Đang cân nhắc</b></span>
+      <span class="ai-tag">Cách tiếp cận: <b>kể chuyện + trấn an, đồng hành</b></span>
+    </div>
+    <div class="muted">Căn cứ: Q9, Q13, Q14, Q5. HLV xác nhận hoặc chỉnh trước khi lưu. (Chỉ hiện khi đã bật consent AI.)</div>
+  </div>
+</div>
+
+<div class="actions">
+  <button class="btn btn-secondary"><i class="ti ti-check"></i> Hoàn tất</button>
+  <button class="btn btn-primary">Tiếp tục <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<script>
+  function tg(h){ h.parentElement.classList.toggle('open'); }
+  // Card accordion: mở 1 card thì gập card kia (tùy chọn — giữ tập trung)
+  function tgCard(head){
+    var card = head.parentElement;
+    var willOpen = !card.classList.contains('open');
+    document.querySelectorAll('.card').forEach(c=>c.classList.remove('open'));
+    if(willOpen) card.classList.add('open');
+  }
+  // Hiện dấu ✓ trên Card Chân dung khi đã có ít nhất 1 lựa chọn/nhập liệu
+  function refreshDone(){
+    var card = document.querySelectorAll('.card')[1];
+    var hasChip = card.querySelector('.chip.active');
+    var hasText = Array.from(card.querySelectorAll('input[type=text],textarea')).some(e=>e.value.trim());
+    card.querySelector('.done-dot').style.display = (hasChip||hasText) ? 'flex' : 'none';
+  }
+  document.querySelectorAll('.card')[1].addEventListener('input', refreshDone);
+  // chip selection (single vs multi)
+  document.querySelectorAll('.chips').forEach(function(box){
+    var single = box.hasAttribute('data-single');
+    box.querySelectorAll('.chip').forEach(function(chip){
+      chip.addEventListener('click', function(){
+        if(single){ box.querySelectorAll('.chip').forEach(c=>c.classList.remove('active')); chip.classList.add('active'); }
+        else { chip.classList.toggle('active'); }
+        if(typeof refreshDone==='function') refreshDone();
+      });
+    });
+  });
+  // consent controls AI box visibility
+  var consent = document.getElementById('consent'), aibox = document.getElementById('aibox');
+  function syncAI(){ aibox.style.display = consent.checked ? 'block' : 'none'; }
+  consent.addEventListener('change', syncAI); syncAI();
+</script>
+</body>
+</html>
