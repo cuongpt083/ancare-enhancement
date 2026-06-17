@@ -227,11 +227,4 @@ Sau khi hoàn tất việc tạo Tài khoản KH, hệ thống thực hiện tí
 
 ### 2. Chăm sóc Khách hàng (KH của tôi)
 
-
-
-## B. Workflow dành cho Khách hàng
-
-**Mục tiêu**: Tối ưu hóa trải nghiệm khách hàng trong quá trình sử dụng app, từ sử dụng tính năng, đến tương tác với HLV và cộng đồng.
-
-### 1. Check-in hàng ngày
-
+Giữ nguyên như hiện tại.
