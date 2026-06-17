@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thiết lập mục tiêu — Prototype</title>
+<link rel="stylesheet" href="tabler-icons.min.css">
+<style>
+  :root {
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f6f7f9;
+    --color-background-app: #eef0f3;
+    --color-text-primary: #1a1d21;
+    --color-text-secondary: #6b7280;
+    --color-border-secondary: #d1d5db;
+    --color-border-tertiary: #e5e7eb;
+    --color-accent: #2f6f4f;
+    --color-accent-soft: #e7f1ec;
+    --border-radius-md: 10px;
+    --border-radius-lg: 14px;
+  }
+  * { box-sizing: border-box; }
+  body, html { margin: 0; padding: 0; font-family: var(--font-sans); background: var(--color-background-app); color: var(--color-text-primary); }
+  .container { width: 100%; max-width: 460px; margin: 0 auto; padding: 0 0 92px; }
+
+  .appbar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 8px;
+    background: var(--color-background-primary); padding: 0.9rem 1rem; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .appbar .ti { font-size: 22px; }
+  .appbar h1 { font-size: 16px; font-weight: 600; margin: 0; flex: 1; }
+
+  .card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg); margin: 1rem; overflow: hidden; }
+  .card-title { font-size: 14px; font-weight: 600; padding: 0.9rem 1rem 0.5rem; display: flex; align-items: center; gap: 8px; }
+  .card-title .ti { color: var(--color-accent); font-size: 18px; }
+  .card-body { padding: 0 1rem 0.8rem; }
+
+  /* Goal row */
+  .goal { border-top: 0.5px solid var(--color-border-tertiary); padding: 0.8rem 0; }
+  .goal:first-child { border-top: none; }
+  .goal-head { display: flex; align-items: center; gap: 8px; margin-bottom: 0.5rem; }
+  .goal-head .pri { width: 22px; height: 22px; border-radius: 6px; border: 1px solid var(--color-border-secondary); background:#fff;
+    display:flex; align-items:center; justify-content:center; cursor: pointer; color: var(--color-text-secondary); font-size: 12px; }
+  .goal-head .pri.on { background: var(--color-accent); border-color: var(--color-accent); color:#fff; }
+  .goal-head .gname { flex: 1; font-size: 13.5px; font-weight: 600; }
+  .goal-head .gtarget { font-size: 12px; color: var(--color-accent); font-weight: 600; }
+  .goal .qlabel { font-size: 11.5px; color: var(--color-text-secondary); margin-bottom: 0.35rem; }
+  .tf { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tf .chip { font-size: 12.5px; padding: 0.4rem 0.7rem; border: 0.5px solid var(--color-border-secondary); border-radius: 20px;
+    background:#fff; cursor: pointer; }
+  .tf .chip.active { background: var(--color-accent-soft); border-color: var(--color-accent); color: var(--color-accent); font-weight: 600; }
+
+  .field { padding: 0.65rem 0 0; }
+  .field label { display:block; font-size: 12.5px; font-weight: 500; margin-bottom: 0.3rem; }
+  textarea, input[type=text] { width: 100%; padding: 0.55rem 0.65rem; font-size: 13.5px; font-family: inherit;
+    border: 1px solid var(--color-border-secondary); border-radius: var(--border-radius-md); }
+  textarea { resize: vertical; min-height: 50px; }
+  textarea:focus, input:focus { outline: none; border-color: var(--color-accent); }
+  .chips { display:flex; flex-wrap: wrap; gap: 6px; }
+  .chips .chip { font-size: 12.5px; padding: 0.4rem 0.7rem; border: 0.5px solid var(--color-border-secondary); border-radius: 20px; background:#fff; cursor:pointer; }
+  .chips .chip.active { background: var(--color-accent-soft); border-color: var(--color-accent); color: var(--color-accent); font-weight: 600; }
+
+  .calc-btn { width: calc(100% - 2rem); margin: 0.3rem 1rem 0.5rem; padding: 0.85rem; font-size: 14px; font-weight: 700;
+    border: none; border-radius: var(--border-radius-md); background: var(--color-accent); color:#fff; cursor: pointer;
+    display:flex; align-items:center; justify-content:center; gap: 8px; }
+
+  /* Result */
+  .result { display: none; }
+  .result.show { display: block; }
+  .res-card { background: var(--color-background-primary); border: 0.5px solid var(--color-accent);
+    border-radius: var(--border-radius-lg); margin: 1rem; overflow: hidden; }
+  .res-head { background: var(--color-accent); color:#fff; padding: 0.9rem 1rem; font-size: 15px; font-weight: 700; display:flex; align-items:center; gap:8px; }
+  .res-body { padding: 1rem; }
+  .res-sec { margin-bottom: 1rem; }
+  .res-sec:last-child { margin-bottom: 0; }
+  .res-sec h4 { font-size: 12.5px; font-weight: 700; margin: 0 0 0.5rem; display:flex; align-items:center; gap:6px; color: var(--color-accent); }
+  .achieve { display:flex; align-items:center; gap: 12px; }
+  .ring { --p:75; width: 64px; height: 64px; border-radius: 50%; flex:none;
+    background: conic-gradient(var(--color-accent) calc(var(--p)*1%), var(--color-border-tertiary) 0);
+    display:flex; align-items:center; justify-content:center; }
+  .ring span { width: 48px; height: 48px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; font-size: 15px; font-weight:700; color: var(--color-accent); }
+  .achieve .atxt { font-size: 12.5px; color: var(--color-text-secondary); line-height: 1.5; }
+  .warn { font-size: 11.5px; color: #854f0b; background: #fdf6e3; border: 0.5px solid #e8d59a; border-radius: 8px; padding: 0.5rem 0.6rem; margin-top: 0.5rem; }
+  .ok { font-size: 11.5px; color: var(--color-accent); background: var(--color-accent-soft); border: 0.5px solid var(--color-accent); border-radius: 8px; padding: 0.5rem 0.6rem; margin-top: 0.5rem; display:none; }
+  .adjust { margin-top: 0.7rem; padding: 0.7rem 0.75rem; border: 0.5px dashed var(--color-border-secondary); border-radius: var(--border-radius-md); }
+  .adjust .alabel { font-size: 12.5px; margin-bottom: 0.4rem; }
+  .adjust .alabel b { color: var(--color-accent); }
+  .adjust .muted { color: var(--color-text-secondary); font-weight: 400; font-size: 11px; }
+  .stepper { display:flex; align-items:center; justify-content:center; gap: 14px; margin: 0.4rem 0 0.5rem; }
+  .stepper button { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--color-accent); background:#fff;
+    color: var(--color-accent); font-size: 22px; font-weight: 700; line-height: 1; cursor: pointer; }
+  .stepper button:active { background: var(--color-accent-soft); }
+  .stepval { min-width: 84px; text-align:center; font-size: 22px; font-weight: 800; color: var(--color-accent); }
+  .stepval small { font-size: 12px; font-weight: 600; color: var(--color-text-secondary); }
+  .adjust input[type=range] { width: 100%; accent-color: var(--color-accent); }
+  .adjust .caphint { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+  .snap { width: 100%; margin-top: 0.55rem; padding: 0.55rem; font-size: 12.5px; font-weight: 600; cursor: pointer;
+    border: 0.5px solid var(--color-accent); background:#fff; color: var(--color-accent); border-radius: var(--border-radius-md);
+    display:flex; align-items:center; justify-content:center; gap:6px; }
+  .benefit { list-style:none; padding:0; margin:0; }
+  .benefit li { font-size: 12.5px; color: var(--color-text-primary); padding: 0.3rem 0 0.3rem 22px; position: relative; line-height: 1.45; }
+  .benefit li .ti { position:absolute; left:0; top:4px; color: var(--color-accent); font-size: 14px; }
+  .pnote { font-size: 11px; color: var(--color-text-secondary); margin-top: 0.5rem; line-height: 1.45; }
+  .muted { color: var(--color-text-secondary); font-weight: 400; font-size: 11px; }
+
+  /* Package selector */
+  .pkg-list { display: flex; flex-direction: column; gap: 8px; }
+  .pkg-opt { display: flex; align-items: center; gap: 10px; padding: 0.7rem 0.8rem; border: 1px solid var(--color-border-secondary);
+    border-radius: var(--border-radius-md); cursor: pointer; background:#fff; }
+  .pkg-opt .ti { font-size: 20px; color: var(--color-border-secondary); }
+  .pkg-opt.sel { border-color: var(--color-accent); background: var(--color-accent-soft); }
+  .pkg-opt.sel .ti { color: var(--color-accent); }
+  .pkg-opt .po-name { font-size: 14px; font-weight: 600; }
+  .pkg-opt .rec { font-size: 10px; font-weight: 700; color: #fff; background: var(--color-accent); border-radius: 10px; padding: 1px 7px; margin-left: 4px; vertical-align: 1px; }
+  .sublabel { font-size: 12px; font-weight: 600; margin-bottom: 0.4rem; }
+  .dur-list { display: flex; gap: 8px; }
+  .dur-opt { flex: 1; text-align: center; padding: 0.6rem 0.4rem; border: 1px solid var(--color-border-secondary); border-radius: var(--border-radius-md);
+    font-size: 13px; font-weight: 600; cursor: pointer; background:#fff; }
+  .dur-opt.sel { border-color: var(--color-accent); background: var(--color-accent-soft); color: var(--color-accent); }
+  .dur-opt .rec { display:block; font-size: 9px; font-weight: 700; color: var(--color-accent); margin-top: 2px; }
+  .dur-opt.sel .rec { color: var(--color-accent); }
+  .route-info { margin-top: 0.6rem; padding: 0.55rem 0.7rem; background: var(--color-background-secondary); border-radius: 8px;
+    font-size: 11.5px; color: var(--color-text-primary); line-height: 1.5; }
+  .route-info .ti { color: var(--color-accent); vertical-align: -1px; }
+
+  /* Goal feasibility rows */
+  .goalrow { padding: 0.7rem 0; border-top: 0.5px solid var(--color-border-tertiary); }
+  .goalrow:first-child { border-top: none; }
+  .grtop { display:flex; align-items:center; justify-content:space-between; margin-bottom: 0.4rem; }
+  .grname { font-size: 13.5px; font-weight: 600; }
+  .mealtag { font-size: 9.5px; font-weight: 700; color: var(--color-accent); background: var(--color-accent-soft); border:0.5px solid var(--color-accent); border-radius: 5px; padding: 1px 5px; margin-left: 4px; white-space: nowrap; }
+  .mealtag .ti { font-size: 11px; vertical-align: -1px; }
+  .grpct { font-size: 15px; font-weight: 800; }
+  .grpct.good { color: var(--color-accent); }
+  .grpct.warn2 { color: #854f0b; }
+  .grbar { height: 7px; border-radius: 5px; background: var(--color-border-tertiary); overflow: hidden; }
+  .grbar i { display:block; height: 100%; background: var(--color-accent); border-radius: 5px; transition: width .25s; }
+  .grfix { display:flex; align-items:center; gap: 8px; margin-top: 0.5rem; font-size: 12.5px; flex-wrap: wrap; }
+  .grfix .gflabel { color: var(--color-text-secondary); }
+  .grfix button { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--color-accent); background:#fff; color: var(--color-accent); font-size: 16px; font-weight: 700; line-height: 1; cursor: pointer; }
+  .grfix b { min-width: 30px; text-align: center; }
+  .grfix .cap { font-size: 11px; margin-left: auto; }
+  .grfix .cap.ok2 { color: var(--color-accent); }
+  .grfix .cap.link { color: #854f0b; text-decoration: underline; cursor: pointer; }
+
+  /* Meal input note */
+  .mealnote { margin: 0.2rem 0 1rem; padding: 0.7rem 0.8rem; background: var(--color-accent-soft);
+    border-left: 3px solid var(--color-accent); border-radius: 8px; font-size: 12px; color: var(--color-text-primary); line-height: 1.5; }
+  .mealnote .ti { color: var(--color-accent); }
+
+  .actions { position: fixed; bottom: 0; left: 0; right: 0; max-width: 460px; margin: 0 auto;
+    display: flex; gap: 10px; padding: 0.8rem 1rem; background: var(--color-background-primary); border-top: 0.5px solid var(--color-border-tertiary); }
+  .btn { flex: 1; padding: 0.9rem; font-size: 14.5px; font-weight: 700; border-radius: var(--border-radius-md); cursor: pointer; }
+  .btn-secondary { background: var(--color-background-secondary); color: var(--color-text-primary); border: 0.5px solid var(--color-border-secondary); }
+  .btn-primary { background: var(--color-accent); color: #fff; border: none; }
+  .btn:disabled { opacity: .5; cursor: not-allowed; }
+  .btn .ti { vertical-align: -2px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="appbar"><i class="ti ti-arrow-left"></i><h1>Thiết lập mục tiêu</h1></div>
+
+  <!-- Mục tiêu cần cải thiện + thời hạn -->
+  <div class="card">
+    <div class="card-title"><i class="ti ti-target"></i> Mục tiêu cần cải thiện</div>
+    <div class="card-body">
+      <div class="goal">
+        <div class="goal-head"><span class="pri" title="Ưu tiên" onclick="tgPri(this)"><i class="ti ti-star"></i></span><span class="gname">Giảm cân</span><span class="gtarget">60 → 55 kg</span></div>
+        <div class="qlabel">Bao giờ bạn muốn có kết quả?</div>
+        <div class="tf" data-goal="weight"><span class="chip">10 ngày</span><span class="chip">30 ngày</span><span class="chip">60 ngày</span><span class="chip">90 ngày</span></div>
+      </div>
+      <div class="goal">
+        <div class="goal-head"><span class="pri" title="Ưu tiên" onclick="tgPri(this)"><i class="ti ti-star"></i></span><span class="gname">Giảm mỡ nội tạng</span><span class="gtarget">8 → 4 điểm</span></div>
+        <div class="qlabel">Bao giờ bạn muốn có kết quả?</div>
+        <div class="tf"><span class="chip">30 ngày</span><span class="chip">90 ngày</span><span class="chip">6 tháng</span></div>
+      </div>
+      <div class="goal">
+        <div class="goal-head"><span class="pri" title="Ưu tiên" onclick="tgPri(this)"><i class="ti ti-star"></i></span><span class="gname">Cải thiện tuổi sinh học</span><span class="gtarget">50 → 38 tuổi</span></div>
+        <div class="qlabel">Bao giờ bạn muốn có kết quả?</div>
+        <div class="tf"><span class="chip">90 ngày</span><span class="chip">6 tháng</span><span class="chip">Dài hạn</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Thói quen hiện tại -->
+  <div class="card">
+    <div class="card-title"><i class="ti ti-clock-hour-4"></i> Thói quen hiện tại</div>
+    <div class="card-body">
+      <div class="field"><label>Ăn uống</label>
+        <div class="chips"><span class="chip">Ăn ngoài nhiều</span><span class="chip">Bỏ bữa sáng</span><span class="chip">Hay ăn khuya</span><span class="chip">Nhiều đồ ngọt</span></div></div>
+      <div class="field"><label>Vận động</label>
+        <div class="chips"><span class="chip">Ít vận động</span><span class="chip">Đi bộ</span><span class="chip">Gym 1–2 buổi/tuần</span><span class="chip">Đều đặn</span></div></div>
+      <div class="field"><label>Giấc ngủ</label>
+        <div class="chips"><span class="chip">&lt; 6 giờ</span><span class="chip">6–7 giờ</span><span class="chip">Ngủ muộn</span><span class="chip">Khó ngủ</span></div></div>
+    </div>
+  </div>
+
+  <!-- Vấn đề / bệnh lý -->
+  <div class="card">
+    <div class="card-title"><i class="ti ti-stethoscope"></i> Vấn đề / bệnh lý đang gặp</div>
+    <div class="card-body">
+      <div class="field">
+        <div class="chips"><span class="chip">Mỡ máu</span><span class="chip">Huyết áp</span><span class="chip">Dạ dày</span><span class="chip">Tiểu đường</span><span class="chip">Dị ứng</span><span class="chip">Không có</span></div>
+        <textarea style="margin-top:6px" placeholder="Ghi chú thêm (tiền sử, lưu ý sức khỏe)…"></textarea>
+        <div style="font-size:10.5px;color:var(--color-text-secondary);margin-top:4px">Chỉ ghi nhận để cá nhân hóa & lưu ý — không phải chẩn đoán y tế.</div>
+      </div>
+    </div>
+  </div>
+
+  <button class="calc-btn" onclick="calc()"><i class="ti ti-route"></i> Tính lộ trình trải nghiệm</button>
+
+  <!-- KẾT QUẢ: Lộ trình trải nghiệm -->
+  <div class="result" id="result">
+    <div class="res-card">
+      <div class="res-head"><i class="ti ti-sparkles"></i> Lộ trình trải nghiệm đề xuất</div>
+      <div class="res-body">
+        <!-- 1. Gói: Tên gói (sản phẩm) + Thời gian (đòn bẩy chính) -->
+        <div class="res-sec">
+          <h4><i class="ti ti-package"></i> Gói giải pháp đề xuất</h4>
+          <div class="sublabel">Tên gói <span class="muted">(sản phẩm hỗ trợ được hưởng)</span></div>
+          <div class="pkg-list" id="pkgList"></div>
+          <div class="sublabel" style="margin-top:0.7rem">Thời gian <span class="muted">(thời gian mua — mặc định 3 tháng để có kết quả tốt nhất)</span></div>
+          <div class="dur-list" id="durList"></div>
+          <div class="route-info" id="routeInfo"></div>
+          <div class="pnote">Đổi Thời gian → hệ thống tính lại % thành công cho tất cả mục tiêu. Chi tiết & giá gói do HLV chia sẻ trực tiếp.</div>
+        </div>
+
+        <!-- 2. Mục tiêu & mức đạt được theo gói (đòn bẩy phụ: tinh chỉnh từng mục tiêu) -->
+        <div class="res-sec">
+          <h4><i class="ti ti-flag-check"></i> Mục tiêu & mức đạt được <span class="muted" id="pkgRef"></span></h4>
+          <div id="goalList"></div>
+        </div>
+
+        <!-- 3. Đầu vào cho gợi ý bữa ăn -->
+        <div class="mealnote" id="mealNote"></div>
+
+        <!-- 4. Lợi ích -->
+        <div class="res-sec">
+          <h4><i class="ti ti-gift"></i> Lợi ích khi tham gia chương trình</h4>
+          <ul class="benefit">
+            <li><i class="ti ti-check"></i> Thực đơn & lộ trình cá nhân hóa theo chỉ số Tanita.</li>
+            <li><i class="ti ti-check"></i> HLV đồng hành, nhắc việc & đánh giá tiến độ hằng ngày.</li>
+            <li><i class="ti ti-check"></i> Cộng đồng động lực + check-in theo dõi thay đổi.</li>
+            <li><i class="ti ti-check"></i> Báo cáo sức khỏe định kỳ, điều chỉnh kịp thời.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="actions">
+  <button class="btn btn-secondary"><i class="ti ti-check"></i> Hoàn tất</button>
+  <button class="btn btn-primary" id="ctaAcc" disabled>Tạo tài khoản KH <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<script>
+  // chips multi
+  document.querySelectorAll('.chips').forEach(function(box){
+    box.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>c.classList.toggle('active')));
+  });
+  // timeframe single per goal
+  document.querySelectorAll('.tf').forEach(function(box){
+    box.querySelectorAll('.chip').forEach(function(c){
+      c.addEventListener('click',function(){ box.querySelectorAll('.chip').forEach(x=>x.classList.remove('active')); c.classList.add('active'); });
+    });
+  });
+  function tgPri(el){ el.classList.toggle('on'); }
+
+  // ===== Dữ liệu demo (thực tế lấy từ Tanita + business-rules packaged-service-advice) =====
+  // gap = khoảng cách tới mục tiêu; rate = tốc độ thay đổi an toàn / tuần; step = bước tinh chỉnh
+  var GOALS = [
+    { key:'weight',   label:'Giảm cân',                 gap:5,  rate:0.7,  unit:'kg',    step:0.5, isWeight:true },
+    { key:'visceral', label:'Giảm mỡ nội tạng',         gap:4,  rate:0.35, unit:'điểm',  step:0.5 },
+    { key:'metaage',  label:'Cải thiện tuổi sinh học',  gap:12, rate:0.6,  unit:'tuổi',  step:1   },
+    { key:'bmi',      label:'Đưa BMI về chuẩn',         gap:1.1,rate:0.18, unit:'kg/m²', step:0.1 }
+  ];
+  GOALS.forEach(function(g){ g.target = g.gap; }); // mặc định = mục tiêu đầy đủ
+
+  // Tên gói = sản phẩm hỗ trợ (độc lập với thời gian). 'rec' = gói đề xuất.
+  var PRODUCT_PACKAGES = [
+    { name:'Gói Khởi đầu' },
+    { name:'Gói Tăng cường', rec:true },
+    { name:'Gói Toàn diện' }
+  ];
+  var DURATIONS = [ {m:1}, {m:2}, {m:3} ]; // tháng; 3 tháng = tốt nhất (mặc định)
+  var selectedPkg = 'Gói Tăng cường';
+  var selectedMonths = 3, recommendedMonths = 3;
+  var routeDays = 90; // số ngày lộ trình — suy từ mục tiêu KH chọn
+
+  function calc(){
+    // Thời hạn mong muốn (từ Card mục tiêu) → số ngày lộ trình + gợi ý thời gian
+    var box=document.querySelector('.tf[data-goal="weight"] .chip.active');
+    var d = box ? parseInt(box.textContent) : 90;
+    if(isNaN(d)) d=90;
+    routeDays = d;                                   // lộ trình theo mục tiêu đã chọn
+    recommendedMonths = 3;                            // mặc định 3 tháng để có kết quả tốt nhất
+    selectedMonths = recommendedMonths;
+    selectedPkg = (PRODUCT_PACKAGES.find(p=>p.rec)||PRODUCT_PACKAGES[0]).name;
+    GOALS.forEach(function(g){ g.target=g.gap; });   // reset mục tiêu
+    renderAll();
+    document.getElementById('result').classList.add('show');
+    document.getElementById('ctaAcc').disabled=false;
+    document.getElementById('result').scrollIntoView({behavior:'smooth'});
+  }
+
+  function selectPkg(name){ selectedPkg=name; renderAll(); }
+  function selectDuration(m){ selectedMonths=m; renderAll(); }
+  function curDays(){ return selectedMonths*30; }
+
+  // Tinh chỉnh mục tiêu (đòn bẩy phụ)
+  function stepGoal(key, dir){
+    var g=GOALS.find(x=>x.key===key);
+    var v = g.target + dir*g.step;
+    v = Math.min(g.gap, Math.max(g.step, +v.toFixed(2)));
+    g.target = v;
+    renderAll();
+  }
+  // Đặt 1 mục tiêu về mức khả thi 100%
+  function snapGoal(key){
+    var g=GOALS.find(x=>x.key===key);
+    var cap=g.rate*(curDays()/7);
+    g.target = Math.max(g.step, +Math.min(g.gap, cap).toFixed(2));
+    renderAll();
+  }
+
+  function renderAll(){
+    // 1a. Tên gói (sản phẩm)
+    var pl=document.getElementById('pkgList'); pl.innerHTML='';
+    PRODUCT_PACKAGES.forEach(function(p){
+      var sel = p.name===selectedPkg;
+      var el=document.createElement('div');
+      el.className='pkg-opt'+(sel?' sel':'');
+      el.onclick=function(){ selectPkg(p.name); };
+      el.innerHTML='<i class="ti ti-'+(sel?'circle-check-filled':'circle')+'"></i>'+
+        '<div class="po-name">'+p.name+(p.rec?' <span class="rec">Đề xuất</span>':'')+'</div>';
+      pl.appendChild(el);
+    });
+    // 1b. Thời gian (tháng)
+    var dl=document.getElementById('durList'); dl.innerHTML='';
+    DURATIONS.forEach(function(d){
+      var sel=d.m===selectedMonths, best=d.m===3;
+      var el=document.createElement('div');
+      el.className='dur-opt'+(sel?' sel':'');
+      el.onclick=function(){ selectDuration(d.m); };
+      el.innerHTML=d.m+' tháng'+(best?' <span class="rec">Tốt nhất</span>':'');
+      dl.appendChild(el);
+    });
+    // 1c. Số ngày lộ trình (theo mục tiêu đã chọn)
+    document.getElementById('routeInfo').innerHTML=
+      '<i class="ti ti-route"></i> Lộ trình <b>'+routeDays+' ngày</b> theo mục tiêu bạn chọn · thời gian gói: <b>'+selectedMonths+' tháng ('+curDays()+' ngày)</b>';
+    document.getElementById('pkgRef').textContent='(theo '+selectedMonths+' tháng)';
+
+    // 2. Danh sách mục tiêu + % theo thời gian gói đang chọn
+    var gl=document.getElementById('goalList'); gl.innerHTML='';
+    GOALS.forEach(function(g){
+      var cap=g.rate*(curDays()/7);
+      var achievable=Math.min(g.target,cap);
+      var pct=Math.round(achievable/g.target*100);
+      var feasible=pct>=100;
+      var row=document.createElement('div'); row.className='goalrow';
+      row.innerHTML =
+        '<div class="grtop"><span class="grname">'+g.label+
+          (g.isWeight?' <span class="mealtag"><i class="ti ti-tools-kitchen-2"></i> gợi ý bữa ăn</span>':'')+
+          '</span><span class="grpct '+(feasible?'good':'warn2')+'">'+pct+'%</span></div>'+
+        '<div class="grbar"><i style="width:'+pct+'%"></i></div>'+
+        '<div class="grfix">'+
+          '<span class="gflabel">Mục tiêu:</span>'+
+          '<button type="button" onclick="stepGoal(\''+g.key+'\',-1)">−</button>'+
+          '<b>'+fmt(g.target)+'</b> <small>'+g.unit+'</small>'+
+          '<button type="button" onclick="stepGoal(\''+g.key+'\',1)">+</button>'+
+          (feasible? '<span class="cap ok2">khả thi 100%</span>'
+                   : '<a class="cap link" onclick="snapGoal(\''+g.key+'\')">đặt về khả thi ('+fmt(cap)+' '+g.unit+')</a>')+
+        '</div>';
+      gl.appendChild(row);
+    });
+
+    // 3. Đầu vào gợi ý bữa ăn
+    var w=GOALS.find(x=>x.key==='weight');
+    document.getElementById('mealNote').innerHTML=
+      '<i class="ti ti-tools-kitchen-2"></i> Mục tiêu cân nặng sau điều chỉnh: <b>giảm '+fmt(w.target)+' kg</b> trong '+selectedMonths+' tháng — đây là <b>đầu vào</b> để tính & gợi ý bữa ăn (số Calo/ngày, số bữa/ngày).';
+  }
+  function fmt(n){ return (Math.round(n*10)/10).toString(); }
+</script>
+</body>
+</html>
