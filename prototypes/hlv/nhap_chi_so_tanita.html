@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nhập chỉ số Tanita — Prototype</title>
+<link rel="stylesheet" href="tabler-icons.min.css">
+<style>
+  :root {
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f6f7f9;
+    --color-background-app: #eef0f3;
+    --color-text-primary: #1a1d21;
+    --color-text-secondary: #6b7280;
+    --color-border-secondary: #d1d5db;
+    --color-border-tertiary: #e5e7eb;
+    --color-accent: #2f6f4f;
+    --color-accent-soft: #e7f1ec;
+    --border-radius-md: 10px;
+    --border-radius-lg: 14px;
+  }
+  * { box-sizing: border-box; }
+  body, html { margin: 0; padding: 0; font-family: var(--font-sans); background: var(--color-background-app); color: var(--color-text-primary); }
+  .container { width: 100%; max-width: 460px; margin: 0 auto; padding: 0 0 92px; }
+
+  .appbar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 8px;
+    background: var(--color-background-primary); padding: 0.9rem 1rem; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .appbar .ti { font-size: 22px; }
+  .appbar h1 { font-size: 16px; font-weight: 600; margin: 0; flex: 1; }
+  .appbar .step { font-size: 12px; color: var(--color-text-secondary); }
+
+  .intro { font-size: 12.5px; color: var(--color-text-secondary); padding: 0.9rem 1rem 0; line-height: 1.5; }
+
+  /* OCR action */
+  .ocr { display: flex; gap: 10px; padding: 0.8rem 1rem; }
+  .ocr button { flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px;
+    padding: 0.8rem; font-size: 14px; font-weight: 600; border-radius: var(--border-radius-md); cursor: pointer; }
+  .ocr .primary { background: var(--color-accent); color: #fff; border: none; }
+  .ocr .ghost { background: var(--color-background-primary); color: var(--color-accent); border: 1px solid var(--color-accent); }
+  .ocr-hint { font-size: 11px; color: var(--color-text-secondary); padding: 0 1rem 0.4rem; display: flex; gap: 6px; align-items: flex-start; }
+  .ocr-hint .ti { color: var(--color-accent); font-size: 14px; }
+
+  /* OCR status banner */
+  .ocr-status { display: none; align-items: center; gap: 8px; margin: 0 1rem 0.4rem; padding: 0.6rem 0.75rem;
+    background: var(--color-accent-soft); border: 0.5px solid var(--color-accent); border-radius: var(--border-radius-md);
+    font-size: 12px; color: var(--color-accent); }
+  .ocr-status.show { display: flex; }
+  .ocr-status .ti { font-size: 16px; }
+
+  /* Group */
+  .group { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg); margin: 0.7rem 1rem; overflow: hidden; }
+  .group-title { font-size: 12px; font-weight: 600; color: var(--color-text-secondary); text-transform: uppercase;
+    letter-spacing: .3px; padding: 0.7rem 0.9rem 0.4rem; }
+
+  /* Field row */
+  .frow { display: flex; align-items: center; gap: 10px; padding: 0.6rem 0.9rem; border-top: 0.5px solid var(--color-border-tertiary); }
+  .frow:first-of-type { border-top: none; }
+  .flabel { flex: 1; font-size: 13.5px; }
+  .flabel .unit { color: var(--color-text-secondary); font-weight: 400; font-size: 12px; }
+  .flabel .info { color: var(--color-text-secondary); font-size: 11px; cursor: help; vertical-align: 1px; }
+  .finput { position: relative; width: 132px; flex: none; }
+  .finput input { width: 100%; padding: 0.55rem 2.1rem 0.55rem 0.65rem; font-size: 14px; font-family: inherit; text-align: right;
+    border: 1px solid var(--color-border-secondary); border-radius: var(--border-radius-md); background: var(--color-background-primary); }
+  .finput input:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-soft); }
+  .finput .suffix { position: absolute; right: 0.6rem; top: 50%; transform: translateY(-50%); font-size: 11.5px; color: var(--color-text-secondary); pointer-events: none; }
+  /* auto-filled by OCR */
+  .frow.autofilled input { border-color: var(--color-accent); background: var(--color-accent-soft); }
+  .frow .auto-tag { display: none; }
+  .frow.autofilled .auto-tag { display: inline-flex; align-items: center; gap: 2px; font-size: 9.5px; color: var(--color-accent);
+    background: #fff; border: 0.5px solid var(--color-accent); border-radius: 5px; padding: 1px 4px; margin-left: 6px; }
+  .frow.required .flabel:after { content: " *"; color: #b42318; }
+  .from-profile { display: inline-flex; align-items: center; gap: 2px; font-size: 9.5px; color: var(--color-text-secondary);
+    background: var(--color-background-secondary); border: 0.5px solid var(--color-border-secondary); border-radius: 5px; padding: 1px 5px; margin-left: 6px; }
+  .from-profile .ti { font-size: 11px; }
+  .finput input[readonly] { background: var(--color-background-secondary); color: var(--color-text-secondary); border-style: dashed; }
+
+  /* BMI auto card */
+  .bmi { display: flex; align-items: center; gap: 10px; padding: 0.6rem 0.9rem; border-top: 0.5px solid var(--color-border-tertiary); background: var(--color-background-secondary); }
+  .bmi .flabel { font-weight: 600; }
+  .bmi .val { font-size: 16px; font-weight: 700; color: var(--color-accent); }
+  .bmi .val small { font-size: 11px; color: var(--color-text-secondary); font-weight: 500; }
+
+  .actions { position: fixed; bottom: 0; left: 0; right: 0; max-width: 460px; margin: 0 auto;
+    display: flex; align-items: center; gap: 12px; padding: 0.8rem 1rem; background: var(--color-background-primary);
+    border-top: 0.5px solid var(--color-border-tertiary); }
+  .back { width: 44px; height: 44px; flex: none; border-radius: 50%; border: 1px solid var(--color-border-secondary);
+    background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .back .ti { font-size: 20px; color: var(--color-accent); }
+  .cta { flex: 1; padding: 0.85rem; font-size: 15px; font-weight: 700; border-radius: var(--border-radius-md); border: none; cursor: pointer;
+    background: var(--color-accent); color: #fff; }
+  .cta:disabled { background: var(--color-border-secondary); color: #fff; cursor: not-allowed; }
+  .cta-note { font-size: 11px; color: #b42318; padding: 0 1rem; position: fixed; bottom: 70px; left: 0; right: 0; max-width: 460px; margin: 0 auto; text-align: center; display: none; }
+  .cta-note.show { display: block; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="appbar">
+    <i class="ti ti-arrow-left"></i>
+    <h1>Nhập chỉ số Tanita</h1>
+    <span class="step">Bước 2/2</span>
+  </div>
+
+  <div class="intro">Nhập tay hoặc <b>chụp/chọn ảnh</b> trang kết quả cân Tanita — hệ thống tự nhận diện và điền các chỉ số, HLV kiểm tra lại.</div>
+
+  <div class="ocr">
+    <button class="primary" onclick="runOCR()"><i class="ti ti-camera"></i> Chụp ảnh</button>
+    <button class="ghost" onclick="runOCR()"><i class="ti ti-photo"></i> Chọn ảnh</button>
+  </div>
+  <div class="ocr-hint"><i class="ti ti-info-circle"></i><span>Ô được AI tự điền sẽ tô xanh kèm nhãn “AI” — hãy đối chiếu với phiếu cân trước khi tạo bản tư vấn.</span></div>
+  <div class="ocr-status" id="ocrStatus"><i class="ti ti-circle-check"></i> Đã nhận diện 9 chỉ số từ ảnh. Vui lòng kiểm tra lại.</div>
+
+  <!-- Nhóm cơ bản -->
+  <div class="group">
+    <div class="group-title">Cơ bản</div>
+    <div class="frow required" data-key="weight">
+      <div class="flabel">Cân nặng <span class="auto-tag"><i class="ti ti-sparkles"></i>AI</span></div>
+      <div class="finput"><input type="number" inputmode="decimal" placeholder="55.5" oninput="recalc()"><span class="suffix">kg</span></div>
+    </div>
+    <div class="frow" data-key="height">
+      <div class="flabel">Chiều cao <span class="from-profile"><i class="ti ti-user"></i> từ hồ sơ</span></div>
+      <div class="finput"><input type="number" value="160" readonly><span class="suffix">cm</span></div>
+    </div>
+    <div class="bmi">
+      <div class="flabel">BMI <span class="unit">(tự tính)</span></div>
+      <div class="val" id="bmiVal">— <small id="bmiCat"></small></div>
+    </div>
+  </div>
+
+  <!-- Nhóm thành phần cơ thể -->
+  <div class="group">
+    <div class="group-title">Thành phần cơ thể</div>
+    <div class="frow" data-key="fat">
+      <div class="flabel">Tỷ lệ mỡ <span class="auto-tag"><i class="ti ti-sparkles"></i>AI</span></div>
+      <div class="finput"><input type="number" inputmode="decimal" placeholder="22.5"><span class="suffix">%</span></div>
+    </div>
+    <div class="frow" data-key="muscle">
+      <div class="flabel">Khối lượng cơ <span class="auto-tag"><i class="ti ti-sparkles"></i>AI</span></div>
+      <div class="finput"><input type="number" inputmode="decimal" placeholder="38.0"><span class="suffix">kg</span></div>
+    </div>
+    <div class="frow" data-key="water">
+      <div class="flabel">Tỷ lệ nước <span class="auto-tag"><i class="ti ti-sparkles"></i>AI</span></div>
+      <div class="finput"><input type="number" inputmode="decimal" placeholder="55.0"><span class="suffix">%</span></div>
+    </div>
+    <div class="frow" data-key="bone">
+      <div class="flabel">Khối lượng xương <span class="auto-tag"><i class="ti ti-sparkles"></i>AI</span></div>
+      <div class="finput"><input type="number" inputmode="decimal" placeholder="2.4"><span class="suffix">kg</span></div>
+    </div>
+    <div class="frow" data-key="visceral">
+      <div class="flabel">Mỡ nội tạng <span class="info" title="Mức 1–12: bình thường; ≥13: cao">ⓘ</span> <span class="auto-tag"><i class="ti ti-sparkles"></i>AI</span></div>
+      <div class="finput"><input type="number" inputmode="numeric" placeholder="4"><span class="suffix">mức</span></div>
+    </div>
+  </div>
+
+  <!-- Nhóm chỉ số khác -->
+  <div class="group">
+    <div class="group-title">Chỉ số khác</div>
+    <div class="frow" data-key="physique">
+      <div class="flabel">Vóc dáng <span class="info" title="Physique rating 1–9 của Tanita">ⓘ</span> <span class="auto-tag"><i class="ti ti-sparkles"></i>AI</span></div>
+      <div class="finput"><input type="number" inputmode="numeric" placeholder="5"><span class="suffix">1–9</span></div>
+    </div>
+    <div class="frow" data-key="metaage">
+      <div class="flabel">Tuổi sinh học <span class="auto-tag"><i class="ti ti-sparkles"></i>AI</span></div>
+      <div class="finput"><input type="number" inputmode="numeric" placeholder="28"><span class="suffix">tuổi</span></div>
+    </div>
+    <div class="frow" data-key="bmr">
+      <div class="flabel">Năng lượng nghỉ ngơi <span class="auto-tag"><i class="ti ti-sparkles"></i>AI</span></div>
+      <div class="finput"><input type="number" inputmode="numeric" placeholder="1450"><span class="suffix">kcal</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-note" id="ctaNote">Cần nhập đầy đủ tất cả chỉ số Tanita để tạo bản tư vấn.</div>
+<div class="actions">
+  <button class="back" title="Quay lại"><i class="ti ti-arrow-left"></i></button>
+  <button class="cta" id="cta" disabled>Tạo bản Tư Vấn</button>
+</div>
+
+<script>
+  function val(key){ var el=document.querySelector('[data-key="'+key+'"] input'); return el? parseFloat(el.value):NaN; }
+  // Tất cả chỉ số Tanita HLV phải nhập (chiều cao lấy từ hồ sơ, không tính)
+  var TANITA_KEYS=['weight','fat','muscle','water','bone','visceral','physique','metaage','bmr'];
+  function recalc(){
+    var w=val('weight'), h=val('height');
+    var bmiEl=document.getElementById('bmiVal');
+    var cta=document.getElementById('cta'), note=document.getElementById('ctaNote');
+    // BMI tự tính từ chiều cao (hồ sơ) + cân nặng
+    if(w>0 && h>0){
+      var bmi = w/Math.pow(h/100,2);
+      var cat = bmi<18.5?'Thiếu cân': bmi<23?'Bình thường': bmi<25?'Thừa cân':'Béo phì';
+      bmiEl.innerHTML = bmi.toFixed(1)+' <small>'+cat+'</small>';
+    } else { bmiEl.innerHTML='— '; }
+    // CTA chỉ bật khi ĐỦ TẤT CẢ chỉ số Tanita
+    var missing = TANITA_KEYS.filter(function(k){ return !(val(k)>=0); });
+    if(missing.length===0){ cta.disabled=false; note.classList.remove('show'); }
+    else { cta.disabled=true; }
+  }
+  // recalc khi nhập bất kỳ ô Tanita nào
+  document.querySelectorAll('.group input:not([readonly])').forEach(function(i){ i.addEventListener('input', recalc); });
+  document.getElementById('cta').addEventListener('mouseenter',function(){
+    if(this.disabled) document.getElementById('ctaNote').classList.add('show');
+  });
+  // Demo OCR: tô xanh + nhãn AI + điền giá trị mẫu
+  function runOCR(){
+    var demo={weight:'55.5',height:'160',fat:'22.5',muscle:'38.0',water:'55.0',bone:'2.4',visceral:'4',physique:'5',metaage:'28',bmr:'1450'};
+    Object.keys(demo).forEach(function(k){
+      var row=document.querySelector('[data-key="'+k+'"]');
+      if(row){ row.querySelector('input').value=demo[k]; row.classList.add('autofilled'); }
+    });
+    document.getElementById('ocrStatus').classList.add('show');
+    recalc();
+  }
+</script>
+</body>
+</html>

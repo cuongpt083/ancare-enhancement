@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bản tư vấn — Prototype</title>
+<link rel="stylesheet" href="tabler-icons.min.css">
+<style>
+  :root {
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f6f7f9;
+    --color-background-app: #eef0f3;
+    --color-text-primary: #1a1d21;
+    --color-text-secondary: #6b7280;
+    --color-border-secondary: #d1d5db;
+    --color-border-tertiary: #e5e7eb;
+    --color-accent: #2f6f4f;
+    --color-accent-soft: #e7f1ec;
+    --border-radius-md: 10px;
+    --border-radius-lg: 14px;
+  }
+  * { box-sizing: border-box; }
+  body, html { margin: 0; padding: 0; font-family: var(--font-sans); background: var(--color-background-app); color: var(--color-text-primary); }
+  .container { width: 100%; max-width: 460px; margin: 0 auto; padding: 0 0 92px; }
+
+  /* Patient header */
+  .phead { background: var(--color-background-primary); padding: 1rem; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .phead h1 { font-size: 18px; font-weight: 700; margin: 0 0 2px; }
+  .phead .meta { font-size: 13px; color: var(--color-text-secondary); }
+  .phead .phone { font-size: 12.5px; color: var(--color-text-secondary); margin-top: 2px; }
+
+  /* Card */
+  .card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg); margin: 1rem; overflow: hidden; }
+  .card-title { font-size: 14px; font-weight: 600; padding: 0.9rem 1rem 0.6rem; display: flex; align-items: center; gap: 8px; }
+  .card-title .ti { color: var(--color-accent); font-size: 18px; }
+
+  /* Severity dot */
+  .sev { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+  .sev.red { background: #b42318; } .sev.yellow { background: #b8860b; } .sev.green { background: var(--color-accent); }
+
+  /* Improvement list (Card 1) */
+  .imp-row { display: flex; align-items: center; gap: 10px; padding: 0.8rem 1rem; border-top: 0.5px solid var(--color-border-tertiary); cursor: pointer; }
+  .imp-row .name { flex: 1; font-size: 14px; font-weight: 500; }
+  .imp-row .val { font-size: 14px; font-weight: 600; }
+  .imp-row .val.red { color: #b42318; } .imp-row .val.yellow { color: #854f0b; }
+  .imp-row .chev { color: var(--color-text-secondary); font-size: 16px; transition: transform .2s; }
+  .imp.open .imp-row .chev { transform: rotate(180deg); }
+  .imp-detail { display: none; padding: 0.2rem 1rem 1rem; background: var(--color-background-secondary); }
+  .imp.open .imp-detail { display: block; }
+  .imp-detail h5 { font-size: 12.5px; font-weight: 600; margin: 0.9rem 0 0.4rem; display: flex; align-items: center; gap: 6px; }
+  .imp-detail h5 .ti { font-size: 14px; }
+  .imp-detail h5.now { color: var(--color-accent); }
+  .imp-detail h5.risk { color: #b42318; }
+  .imp-detail ul { margin: 0; padding-left: 18px; }
+  .imp-detail li { font-size: 12.5px; color: var(--color-text-secondary); line-height: 1.55; margin-bottom: 3px; }
+
+  /* Detailed table (Card 2) */
+  .drow { display: grid; grid-template-columns: 1.2fr 0.7fr 1.4fr; gap: 8px; padding: 0.8rem 1rem; border-top: 0.5px solid var(--color-border-tertiary); }
+  .drow .dn { font-size: 13.5px; font-weight: 600; }
+  .drow .who { font-size: 10.5px; color: var(--color-text-secondary); line-height: 1.4; margin-top: 3px; display: block; }
+  .drow .dv { font-size: 15px; font-weight: 700; }
+  .drow .dv.red { color: #b42318; } .drow .dv.yellow { color: #854f0b; } .drow .dv.green { color: var(--color-accent); }
+  .drow .da { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; }
+  .hidden-rows { display: none; }
+  .hidden-rows.show { display: contents; }
+  .source { font-size: 10px; color: var(--color-text-secondary); line-height: 1.5; padding: 0.8rem 1rem; border-top: 0.5px solid var(--color-border-tertiary); background: var(--color-background-secondary); }
+  .more-btn { width: calc(100% - 2rem); margin: 0.8rem 1rem; padding: 0.7rem; background: transparent; border: 0.5px solid var(--color-border-secondary);
+    border-radius: var(--border-radius-md); font-size: 13.5px; font-weight: 600; color: var(--color-text-primary); cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 6px; }
+
+  /* sub note */
+  .subnote { margin: 1rem; padding: 0.9rem 1rem; background: var(--color-accent-soft); border-radius: var(--border-radius-lg); }
+  .subnote h3 { font-size: 13px; margin: 0 0 0.3rem; display: flex; align-items: center; gap: 6px; color: var(--color-accent); }
+  .subnote p { font-size: 12px; color: var(--color-text-secondary); margin: 0; line-height: 1.5; }
+
+  .actions { position: fixed; bottom: 0; left: 0; right: 0; max-width: 460px; margin: 0 auto;
+    display: flex; gap: 10px; padding: 0.8rem 1rem; background: var(--color-background-primary); border-top: 0.5px solid var(--color-border-tertiary); }
+  .btn { flex: 1; padding: 0.9rem; font-size: 15px; font-weight: 700; border-radius: var(--border-radius-md); cursor: pointer; }
+  .btn-secondary { background: var(--color-background-secondary); color: var(--color-text-primary); border: 0.5px solid var(--color-border-secondary); }
+  .btn-primary { background: var(--color-accent); color: #fff; border: none; }
+  .btn .ti { vertical-align: -2px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="phead">
+    <h1>KH03</h1>
+    <div class="meta">Nữ · 38 tuổi · cao 1m61</div>
+    <div class="phone">+84 098 911 111</div>
+  </div>
+
+  <!-- CARD 1: Những điểm cần cải thiện -->
+  <div class="card">
+    <div class="card-title"><i class="ti ti-alert-triangle"></i> Những điểm cần cải thiện</div>
+
+    <div class="imp">
+      <div class="imp-row" onclick="tgImp(this)"><span class="sev red"></span><span class="name">Cân nặng</span><span class="val red">60 kg</span><i class="ti ti-chevron-down chev"></i></div>
+      <div class="imp-detail">
+        <h5 class="now"><i class="ti ti-chart-dots"></i> Phân tích hiện trạng</h5>
+        <ul><li>Cao hơn ngưỡng lý tưởng (52–56 kg) khoảng 4 kg.</li><li>Thừa cân nhẹ theo chuẩn châu Á.</li><li>Mục tiêu giảm 4–8 kg trong 3–4 tháng (1–1.5 kg/tuần).</li></ul>
+        <h5 class="risk"><i class="ti ti-heartbeat"></i> Nguy cơ bệnh lý</h5>
+        <ul><li>Tăng nguy cơ tim mạch & huyết áp.</li><li>Nguy cơ tiểu đường type 2.</li><li>Tăng áp lực lên khớp gối.</li></ul>
+      </div>
+    </div>
+
+    <div class="imp">
+      <div class="imp-row" onclick="tgImp(this)"><span class="sev red"></span><span class="name">Mỡ nội tạng</span><span class="val red">8 điểm</span><i class="ti ti-chevron-down chev"></i></div>
+      <div class="imp-detail">
+        <h5 class="now"><i class="ti ti-chart-dots"></i> Phân tích hiện trạng</h5>
+        <ul><li>Mức 8 — thuộc vùng nguy cơ (an toàn ≤ 4), gấp đôi ngưỡng.</li><li>Cần ưu tiên giảm mỡ vùng bụng/nội tạng.</li></ul>
+        <h5 class="risk"><i class="ti ti-heartbeat"></i> Nguy cơ bệnh lý</h5>
+        <ul><li>Gan nhiễm mỡ, kháng insulin.</li><li>Nguy cơ tim mạch & hội chứng chuyển hóa.</li></ul>
+      </div>
+    </div>
+
+    <div class="imp">
+      <div class="imp-row" onclick="tgImp(this)"><span class="sev yellow"></span><span class="name">Chỉ số cân đối</span><span class="val yellow">3 điểm</span><i class="ti ti-chevron-down chev"></i></div>
+      <div class="imp-detail">
+        <h5 class="now"><i class="ti ti-chart-dots"></i> Phân tích hiện trạng</h5>
+        <ul><li>Mỡ cao + cơ cao — khối lượng tốt nhưng tỷ lệ chưa cân đối (chuẩn = 5).</li><li>Trọng tâm: giảm mỡ, giữ cơ.</li></ul>
+        <h5 class="risk"><i class="ti ti-heartbeat"></i> Nguy cơ bệnh lý</h5>
+        <ul><li>Mất cân đối thành phần cơ thể nếu giảm cân sai cách (mất cơ).</li></ul>
+      </div>
+    </div>
+
+    <div class="imp">
+      <div class="imp-row" onclick="tgImp(this)"><span class="sev red"></span><span class="name">Tuổi sinh học</span><span class="val red">50 tuổi</span><i class="ti ti-chevron-down chev"></i></div>
+      <div class="imp-detail">
+        <h5 class="now"><i class="ti ti-chart-dots"></i> Phân tích hiện trạng</h5>
+        <ul><li>Cao hơn tuổi thật 12 năm — lão hóa trao đổi chất sớm.</li><li>Cải thiện được qua chế độ ăn + vận động + giấc ngủ.</li></ul>
+        <h5 class="risk"><i class="ti ti-heartbeat"></i> Nguy cơ bệnh lý</h5>
+        <ul><li>Suy giảm chuyển hóa, giảm khối cơ theo tuổi.</li><li>Lão hóa sớm, giảm sức bền.</li></ul>
+      </div>
+    </div>
+
+    <div class="imp">
+      <div class="imp-row" onclick="tgImp(this)"><span class="sev yellow"></span><span class="name">BMI</span><span class="val yellow">23.1</span><i class="ti ti-chevron-down chev"></i></div>
+      <div class="imp-detail">
+        <h5 class="now"><i class="ti ti-chart-dots"></i> Phân tích hiện trạng</h5>
+        <ul><li>23.1 kg/m² — thừa cân theo chuẩn châu Á (bình thường 18.5–22.9).</li><li>Mục tiêu đưa về &lt; 23.</li></ul>
+        <h5 class="risk"><i class="ti ti-heartbeat"></i> Nguy cơ bệnh lý</h5>
+        <ul><li>Nguy cơ tim mạch & tiểu đường bắt đầu tăng.</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 2: Bảng phân tích chỉ số chi tiết -->
+  <div class="card">
+    <div class="card-title"><i class="ti ti-table"></i> Bảng phân tích chỉ số chi tiết</div>
+
+    <!-- 2 dòng mặc định -->
+    <div class="drow">
+      <div><div class="dn">Cân nặng</div><span class="who">WHO: 52–56 kg (lý tưởng cho nữ cao 161 cm)</span></div>
+      <div class="dv red">60 kg</div>
+      <div class="da">Cao hơn ngưỡng lý tưởng 4.0 kg — thừa cân nhẹ theo chuẩn châu Á.</div>
+    </div>
+    <div class="drow">
+      <div><div class="dn">Mỡ cơ thể</div><span class="who">WHO: Lý tưởng ≤ 21.1% · Tốt ≤ 24.0% · TB ≤ 27.7% · Xấu &gt; 31.5% (nữ)</span></div>
+      <div class="dv green">18 %</div>
+      <div class="da">Tỷ lệ mỡ ở mức lý tưởng theo tuổi. Thấp hơn mức lý tưởng (≤ 21.1%) ~1.9 kg mỡ.</div>
+    </div>
+
+    <!-- dòng ẩn -->
+    <div class="hidden-rows" id="hiddenRows">
+      <div class="drow">
+        <div><div class="dn">Mỡ nội tạng</div><span class="who">WHO: Tốt ≤ 4 · Nguy cơ &gt; 4</span></div>
+        <div class="dv red">8 điểm</div>
+        <div class="da">Mỡ nội tạng ở vùng nguy cơ — cần chủ ý giảm.</div>
+      </div>
+      <div class="drow">
+        <div><div class="dn">Lượng cơ bắp</div><span class="who">WHO: Thấp ≤ 47% · TB 47–70% · Cao ≥ 70% (nữ)</span></div>
+        <div class="dv green">50 kg</div>
+        <div class="da">Lượng cơ 50.0 kg (~83.3%), nằm trong ngưỡng cao, vượt 8.0 kg so với ngưỡng cao.</div>
+      </div>
+      <div class="drow">
+        <div><div class="dn">Chỉ số cân đối</div><span class="who">WHO: 1 béo phì · 2–4 lệch · 5 chuẩn · 6–8 khoẻ/thon · 9 VĐV (lý tưởng 5–9)</span></div>
+        <div class="dv yellow">3 điểm</div>
+        <div class="da">Mỡ cao + cơ cao — khối lượng tốt nhưng cần giảm mỡ.</div>
+      </div>
+      <div class="drow">
+        <div><div class="dn">Năng lượng nghỉ ngơi</div><span class="who">WHO: ~1255 kcal/ngày (± 15%)</span></div>
+        <div class="dv green">1340 kcal/ngày</div>
+        <div class="da">BMR khớp với dự đoán Mifflin–St Jeor.</div>
+      </div>
+      <div class="drow">
+        <div><div class="dn">Tuổi sinh học</div><span class="who">WHO: ≤ 38 (tuổi thật)</span></div>
+        <div class="dv red">50 tuổi</div>
+        <div class="da">Tuổi sinh học cao hơn tuổi thật 12 năm — cần điều chỉnh gấp.</div>
+      </div>
+      <div class="drow">
+        <div><div class="dn">Lượng xương</div><span class="who">WHO: Trung bình ≈ 2.4 kg (theo giới + trọng lượng cơ thể)</span></div>
+        <div class="dv green">3 kg</div>
+        <div class="da">Lượng xương 3.0 kg quanh mức trung bình (2.4 kg).</div>
+      </div>
+      <div class="drow">
+        <div><div class="dn">Nước</div><span class="who">WHO: 50–55% (nữ)</span></div>
+        <div class="dv green">50 %</div>
+        <div class="da">Tỷ lệ nước trong mức khỏe mạnh.</div>
+      </div>
+      <div class="drow">
+        <div><div class="dn">BMI</div><span class="who">WHO: 18.5–22.9 (bình thường, chuẩn châu Á)</span></div>
+        <div class="dv yellow">23.1 kg/m²</div>
+        <div class="da">Thừa cân (châu Á) — nguy cơ tim mạch & tiểu đường bắt đầu tăng.</div>
+      </div>
+      <div class="source">
+        Nguồn: Bảng cân nặng lý tưởng theo chiều cao (per-cm, nam/nữ) + WHO Expert Consultation 2004 (Lancet 363:157-163) — Asian-Pacific action points · Bảng tham chiếu tỷ lệ mỡ theo tuổi + giới (9 dải tuổi) · Bảng phân loại mỡ nội tạng (Tanita / tham chiếu lâm sàng) · Bảng lượng cơ bắp (% cân nặng) theo giới (7 dải tuổi) · Bảng phân loại thể hình theo cơ × mỡ (Tanita) · Mifflin–St Jeor 1990 · Tanita BC-series · Bảng lượng xương trung bình theo giới + trọng lượng cơ thể · WHO Expert Consultation 2004 — Asian-Pacific action points.
+      </div>
+    </div>
+
+    <button class="more-btn" onclick="tgMore()"><span id="moreTxt">Xem thêm</span><i class="ti ti-chevron-down" id="moreIc"></i></button>
+  </div>
+
+  <div class="subnote">
+    <h3><i class="ti ti-notes"></i> Bài phân tích chi tiết các chỉ số</h3>
+    <p>Hệ thống sẽ đưa ra bài tư vấn dành riêng cho bạn dựa trên bảng phân tích chỉ số ở trên.</p>
+  </div>
+
+  <div class="subnote" style="background:#fff;border:0.5px dashed var(--color-border-secondary)">
+    <h3 style="color:var(--color-text-primary)"><i class="ti ti-help-circle"></i> KH có quyết định trải nghiệm giải pháp không?</h3>
+    <p><b>Có</b> → bấm “Tiếp tục” để sang màn Thiết lập mục tiêu. &nbsp;<b>Chưa</b> → bấm “Hoàn tất”, hệ thống đề xuất hành động kế tiếp theo DISC.</p>
+  </div>
+</div>
+
+<div class="actions">
+  <button class="btn btn-secondary"><i class="ti ti-check"></i> Hoàn tất</button>
+  <button class="btn btn-primary">Tiếp tục <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<script>
+  function tgImp(row){ row.parentElement.classList.toggle('open'); }
+  function tgMore(){
+    var hr=document.getElementById('hiddenRows'), t=document.getElementById('moreTxt'), ic=document.getElementById('moreIc');
+    hr.classList.toggle('show');
+    var on=hr.classList.contains('show');
+    t.textContent = on ? 'Thu gọn' : 'Xem thêm';
+    ic.className = on ? 'ti ti-chevron-up' : 'ti ti-chevron-down';
+  }
+</script>
+</body>
+</html>
