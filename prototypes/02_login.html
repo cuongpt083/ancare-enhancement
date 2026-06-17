@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AnCare — Đăng nhập</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand: #1C4232;
+      --brand-mid: #2D6A4F;
+      --brand-light: #4CAF88;
+      --accent: #52B788;
+      --bg: #F5F8F6;
+      --surface: #FFFFFF;
+      --surface-2: #EDF4EF;
+      --border: #DCE8DF;
+      --text: #111827;
+      --text-2: #5A7061;
+      --text-muted: #9CA3AF;
+      --error: #DC2626;
+      --success: #16A34A;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #1A1A2E;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    /* ---- Phone frame ---- */
+    .phone {
+      width: 390px;
+      min-height: 844px;
+      border-radius: 44px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.25), 0 0 0 11px #1C1C1E;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+    }
+
+    /* ---- Dynamic Island ---- */
+    .dynamic-island {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 34px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 20;
+    }
+
+    /* ---- Header gradient area ---- */
+    .header {
+      background: linear-gradient(160deg, #1C4232 0%, #2D6A4F 100%);
+      padding: 0 28px 40px;
+      min-height: 220px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Subtle decorative arcs in header */
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 40px solid rgba(255,255,255,0.04);
+      pointer-events: none;
+    }
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      left: -40px;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 30px solid rgba(255,255,255,0.04);
+      pointer-events: none;
+    }
+
+    /* ---- Status bar (white) ---- */
+    .status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0 0;
+      position: relative;
+      z-index: 10;
+    }
+    .status-time {
+      font-size: 15px;
+      font-weight: 600;
+      color: #FFFFFF;
+      letter-spacing: -0.3px;
+    }
+    .status-icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #FFFFFF;
+    }
+
+    /* ---- Header logo + text ---- */
+    .header-inner {
+      margin-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+      z-index: 2;
+    }
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .header-logo-mark {
+      width: 30px;
+      height: 30px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .header-logo-text {
+      font-family: 'Lora', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.2px;
+    }
+    .header-title {
+      font-family: 'Lora', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1.2;
+    }
+    .header-subtitle {
+      font-size: 14px;
+      color: rgba(255,255,255,0.65);
+      font-weight: 400;
+    }
+
+    /* ---- Form card ---- */
+    .form-card {
+      background: var(--surface);
+      border-radius: 24px 24px 0 0;
+      margin-top: -20px;
+      flex: 1;
+      padding: 28px 24px 40px;
+      position: relative;
+      z-index: 5;
+      overflow-y: auto;
+    }
+
+    .form-title {
+      font-family: 'Lora', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+
+    /* ---- Form fields ---- */
+    .form-group {
+      margin-bottom: 16px;
+    }
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-2);
+      margin-bottom: 7px;
+      letter-spacing: 0.1px;
+    }
+    .input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .input-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      display: flex;
+      pointer-events: none;
+    }
+    .input-wrap input {
+      width: 100%;
+      height: 52px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 0 44px 0 44px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: var(--text);
+      background: var(--bg);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      appearance: none;
+    }
+    .input-wrap input::placeholder {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .input-wrap input:focus {
+      border-color: var(--accent);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(82,183,136,0.12);
+    }
+    .input-action {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-muted);
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+    }
+    .input-action:hover { color: var(--text-2); }
+
+    /* ---- Remember + forgot row ---- */
+    .remember-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 8px 0 24px;
+    }
+    .remember-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .remember-label input[type="checkbox"] {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid var(--border);
+      border-radius: 5px;
+      background: var(--bg);
+      cursor: pointer;
+      position: relative;
+      flex-shrink: 0;
+      transition: all 0.15s;
+    }
+    .remember-label input[type="checkbox"]:checked {
+      background: var(--brand);
+      border-color: var(--brand);
+    }
+    .remember-label input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 5px;
+      width: 5px;
+      height: 9px;
+      border: 2px solid white;
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg);
+    }
+    .remember-text {
+      font-size: 13px;
+      color: var(--text-2);
+      font-weight: 500;
+    }
+    .forgot-link {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--brand-mid);
+      text-decoration: none;
+    }
+    .forgot-link:hover { color: var(--brand); text-decoration: underline; }
+
+    /* ---- Submit button ---- */
+    .btn-primary {
+      display: block;
+      width: 100%;
+      height: 52px;
+      background: var(--brand);
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      border: none;
+      border-radius: 9999px;
+      cursor: pointer;
+      text-align: center;
+      line-height: 52px;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(28,66,50,0.35);
+      transition: background 0.15s, transform 0.1s;
+      letter-spacing: 0.2px;
+    }
+    .btn-primary:hover { background: var(--brand-mid); }
+    .btn-primary:active { transform: scale(0.98); }
+
+    /* ---- Divider ---- */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 20px 0;
+    }
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .divider-text {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    /* ---- Google button ---- */
+    .btn-outline {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      height: 52px;
+      background: var(--surface);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      border: 1.5px solid var(--border);
+      border-radius: 9999px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .btn-outline:hover {
+      border-color: var(--text-muted);
+      background: var(--bg);
+    }
+
+    /* Google G SVG */
+    .google-g {
+      flex-shrink: 0;
+    }
+
+    /* ---- Register link ---- */
+    .register-row {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    .register-row a {
+      color: var(--brand-mid);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .register-row a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <div class="phone">
+
+    <!-- Dynamic Island -->
+    <div class="dynamic-island"></div>
+
+    <!-- Header gradient -->
+    <div class="header">
+
+      <!-- Status bar -->
+      <div class="status-bar">
+        <span class="status-time">9:41</span>
+        <div class="status-icons">
+          <svg width="17" height="12" viewBox="0 0 17 12" fill="none">
+            <rect x="0" y="8" width="3" height="4" rx="0.5" fill="white"/>
+            <rect x="4.5" y="5.5" width="3" height="6.5" rx="0.5" fill="white"/>
+            <rect x="9" y="2.5" width="3" height="9.5" rx="0.5" fill="white"/>
+            <rect x="13.5" y="0" width="3" height="12" rx="0.5" fill="white"/>
+          </svg>
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+            <path d="M8 9.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" fill="white"/>
+            <path d="M4.93 7.43A4.49 4.49 0 0 1 8 6.2a4.49 4.49 0 0 1 3.07 1.23" stroke="white" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+            <path d="M2.27 4.77A7.98 7.98 0 0 1 8 2.5a7.98 7.98 0 0 1 5.73 2.27" stroke="white" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+            <path d="M0 2.2A11.47 11.47 0 0 1 8 0a11.47 11.47 0 0 1 8 2.2" stroke="white" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+          </svg>
+          <svg width="25" height="12" viewBox="0 0 25 12" fill="none">
+            <rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="white" stroke-opacity="0.35"/>
+            <rect x="2" y="2" width="16" height="8" rx="2" fill="white"/>
+            <path d="M23 4v4a2 2 0 0 0 0-4z" fill="white" fill-opacity="0.4"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Logo + heading -->
+      <div class="header-inner">
+        <div class="header-logo">
+          <div class="header-logo-mark">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22C6.5 22 2 17.5 2 12c0-3 1.5-5.8 3.8-7.5"/>
+              <path d="M12 22c5.5 0 10-4.5 10-10 0-3-1.5-5.8-3.8-7.5"/>
+              <path d="M12 3c0 5.5-3 9.5-3 14"/>
+              <path d="M12 3c0 5.5 3 9.5 3 14"/>
+            </svg>
+          </div>
+          <span class="header-logo-text">AnCare</span>
+        </div>
+        <h2 class="header-title">Chào mừng<br>trở lại</h2>
+        <p class="header-subtitle">Đăng nhập để tiếp tục hành trình</p>
+      </div>
+
+    </div>
+
+    <!-- Form card -->
+    <div class="form-card">
+      <h3 class="form-title">Đăng nhập</h3>
+
+      <form onsubmit="return false;">
+
+        <!-- Phone / Email -->
+        <div class="form-group">
+          <label for="phone-email">Số điện thoại / Email</label>
+          <div class="input-wrap">
+            <span class="input-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.72 12 19.79 19.79 0 0 1 1.65 3.38 2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 5.49 5.49l.96-.96a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 15.41v1.51z"/>
+              </svg>
+            </span>
+            <input
+              type="text"
+              id="phone-email"
+              name="phone-email"
+              placeholder="Nhập số điện thoại hoặc email"
+              autocomplete="username"
+            />
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password">Mật khẩu</label>
+          <div class="input-wrap">
+            <span class="input-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </span>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Nhập mật khẩu"
+              autocomplete="current-password"
+            />
+            <button
+              type="button"
+              class="input-action"
+              aria-label="Hiển thị / ẩn mật khẩu"
+              onclick="togglePassword()"
+              id="eye-btn"
+            >
+              <!-- Eye icon (visible by default, meaning password is hidden) -->
+              <svg id="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+              <svg id="eye-off-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                <line x1="1" y1="1" x2="23" y2="23"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Remember me + forgot -->
+        <div class="remember-row">
+          <label class="remember-label">
+            <input type="checkbox" id="remember" name="remember" />
+            <span class="remember-text">Ghi nhớ đăng nhập</span>
+          </label>
+          <a href="#" class="forgot-link">Quên mật khẩu?</a>
+        </div>
+
+        <!-- Login button -->
+        <a href="03_dashboard.html" class="btn-primary">Đăng nhập</a>
+
+        <!-- Divider -->
+        <div class="divider">
+          <span class="divider-line"></span>
+          <span class="divider-text">hoặc</span>
+          <span class="divider-line"></span>
+        </div>
+
+        <!-- Google button -->
+        <button type="button" class="btn-outline">
+          <!-- Google G SVG -->
+          <svg class="google-g" width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6-6C34.6 5.4 29.6 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21c10.5 0 20-7.6 20-21 0-1.3-.2-2.7-.5-4z" fill="#FFC107"/>
+            <path d="M6.3 14.7l7 5.1C15.1 16.1 19.2 13 24 13c3.1 0 5.9 1.1 8.1 2.9l6-6C34.6 5.4 29.6 3 24 3 16.3 3 9.6 7.8 6.3 14.7z" fill="#FF3D00"/>
+            <path d="M24 45c5.5 0 10.5-2 14.3-5.4l-6.6-5.6C29.7 35.9 27 37 24 37c-6 0-10.7-4-11.8-9.4l-7 5.4C8.5 40.8 15.7 45 24 45z" fill="#4CAF50"/>
+            <path d="M44.5 20H24v8.5h11.8c-.6 2.2-1.9 4.1-3.7 5.5l6.6 5.6C43 35.4 45 30 45 24c0-1.3-.2-2.7-.5-4z" fill="#1976D2"/>
+          </svg>
+          Đăng nhập với Google
+        </button>
+
+      </form>
+
+      <!-- Register link -->
+      <p class="register-row">
+        Chưa có tài khoản? <a href="#">Đăng ký ngay</a>
+      </p>
+    </div>
+
+  </div>
+
+  <script>
+    function togglePassword() {
+      var input = document.getElementById('password');
+      var eyeIcon = document.getElementById('eye-icon');
+      var eyeOffIcon = document.getElementById('eye-off-icon');
+      if (input.type === 'password') {
+        input.type = 'text';
+        eyeIcon.style.display = 'none';
+        eyeOffIcon.style.display = 'block';
+      } else {
+        input.type = 'password';
+        eyeIcon.style.display = 'block';
+        eyeOffIcon.style.display = 'none';
+      }
+    }
+  </script>
+
+</body>
+</html>

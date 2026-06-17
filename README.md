@@ -1,5 +1,6 @@
 # ancare-enhancement
-Enhancement ideas for An Care
+
+Phân tích & thiết kế nâng cấp **AnCare DXP** — nền tảng trải nghiệm số chăm sóc sức khỏe chủ động, đồng hành với quy trình kinh doanh 12 bước của Nutrition Club (Herbalife). Tài liệu chi tiết nằm trong `docs/` (xem [Cấu trúc tài liệu](#cấu-trúc-tài-liệu) ở cuối).
 
 # Tầm nhìn
 
@@ -52,4 +53,39 @@ AnCare DXP mang lại 4 giá trị cốt lõi cho người dùng:
    Là một Khách hàng tiềm năng, tôi quan tâm tới việc có thể dễ dàng tìm kiếm, truy cập các nội dung giới thiệu về sản phẩm của Herbalife, về giải pháp sức khỏe, vóc dáng của Herbalife, về cơ hội kinh doanh của Herbalife, về các câu chuyện thành công của các Khách hàng và Huấn luyện viên của Herbalife. 
 
    Là một Huấn luyện viên, tôi quan tâm tới việc có thể dễ dàng tìm kiếm các chủ đề đào tạo cơ bản, đào tạo chuyên sâu trong lĩnh vực kinh doanh bán hàng trực tiếp và chăm sóc sức khỏe chủ động, kèm theo điều kiện, lộ trình đào tạo, tài liệu tham khảo để tôi có mục tiêu phát triển bản thân phù hợp.
-   
+
+# Định hướng thiết kế chính (cập nhật từ quá trình phân tích)
+
+Từ tầm nhìn trên, quá trình phân tích As-Is → To-be → GAP → To-do đã chốt các định hướng thiết kế sau:
+
+1. **Bám sát Quy trình 12 bước kinh doanh.** AnCare được thiết kế như **công cụ đắc lực thực thi quy trình 12 bước** (tài liệu gốc: `docs/references/01.Quy-trinh-12-buoc-kinh-doanh.md`) — từ thu hút khách tiềm năng (Bước 1–2) đến nhân bản thành Giám sát viên vận hành club (Bước 6–12).
+
+2. **La bàn Quy trình (Process State Model) — xương sống.** Số hóa "Sơ đồ dẫn (SĐD)", xác định mỗi người đang ở bước nào và điều khiển cả 4 module: việc cần làm tiếp theo, nội dung/khóa học đề xuất, hành động chăm sóc, và tiêu chí hoàn thành mỗi bước. Cùng GNV (giấy nhắc việc) và DSKHTN tạo đủ bộ **3 công cụ KD số hóa**.
+
+3. **Trọng tâm Bước 1–2: Trợ lý phát triển khách hàng (AI-assisted).** Gỡ nút thắt khi quy mô tăng và rào cản người mới — DSKHTN số, chấm điểm lead, copilot làm ấm/mời, phễu + chatbot, đặt lịch 2/1, số hóa buổi trải nghiệm đầu. Engine cá nhân hóa triển khai **phân tầng theo độ trưởng thành dữ liệu** (P1 thư viện kịch bản + Stage-of-Change → P2 Phỏng vấn tạo động lực → P3 chân dung động + RAG → P4 uplift/Next-Best-Action). AI **hỗ trợ, không thay** vai trò con người.
+
+4. **Kết nối khách ↔ HLV theo công sức (Content-Attribution Matching).** HLV sáng tạo/chia sẻ nội dung kèm mã giới thiệu → khách tương tác **tự gắn về HLV** (cơ chế chính, tạo động lực); thuật toán chỉ phân phối lead "mồ côi". Hợp nhất chia sẻ câu chuyện thành công + vòng lặp giới thiệu + matching thành một bánh đà; khách luôn được quyền chọn/đổi HLV.
+
+5. **Độc lập, không trùng lặp Herbalife apps.** AnCare **không tích hợp kỹ thuật** với VNHUB/Learning/SHOP/Pro2col, và **không làm** POS bán lẻ, quản lý kho, dashboard quản trị kinh doanh (thuộc VNHUB) — chỉ bổ trợ về phạm vi.
+
+6. **Số hóa MLM tập trung có rủi ro đặc thù.** Đã rà soát 15 rủi ro (quyền sở hữu lead, tranh chấp tuyến, "cắt cầu", pháp lý đa cấp & quảng cáo sức khỏe, riêng tư dữ liệu, tự động hóa xói mòn quan hệ, adoption…). Nguyên tắc giảm thiểu: **trao quyền không thâu tóm; AI hỗ trợ không thay người & không thao túng; tuân thủ là ràng buộc thiết kế; minh bạch & quyền người dùng; cấu hình được; thắng nhỏ tạo niềm tin trước khi mở rộng**.
+
+## Lộ trình MVP (tóm tắt)
+
+- **MVP-1 — Nền tảng PSM + Lan tỏa & Gắn kết:** dựng La bàn quy trình/GNV; chia sẻ câu chuyện thành công, nhắc nhở chủ động, chăm sóc theo dịp; nền tảng phễu (DSKHTN số, đặt lịch 2/1).
+- **MVP-2 — Học tập, Nội dung & AI hỗ trợ chuyển đổi:** Module Đào tạo micro-course + gamification; copilot làm ấm/mời (P1–P2); attribution nội dung; pipeline 12 bước.
+- **MVP-3 — Phễu lạnh, Matching fallback, Cá nhân hóa, Nhân bản & Sự nghiệp:** chatbot, recommender, HOM, coaching tuyến dưới, lộ trình thăng tiến.
+- **Sau MVP-3:** lớp tối ưu AI (uplift + Next-Best-Action) khi đủ dữ liệu.
+
+## Cấu trúc tài liệu
+
+| Thư mục | Nội dung |
+| :-- | :-- |
+| `docs/as-is/` | Khảo sát hiện trạng (As-Is v1.2) + 2 phụ lục (CRM/HLV, app Khách hàng). |
+| `docs/to-be/` | **`To-be study report_v2.1 (consolidated).md`** — bản hợp nhất: Phần I tổng thể · Phần II La bàn 12 bước (PSM) · Phần III Thu hút & Chuyển đổi (AI) · Phần IV Rà soát rủi ro. |
+| `docs/gap/` | Phân tích khoảng cách (GAP v2.0). |
+| `docs/to-do/` | Khuyến nghị hành động theo MVP (To-do v2.0). |
+| `docs/references/` | Tài liệu gốc Quy trình 12 bước kinh doanh. |
+
+> *Các bản v1.0 (To-be/GAP/To-do) và nghiên cứu khả thi v1.0 theo định hướng cũ (vận hành club) được giữ để tham khảo, đã lỗi thời so với định hướng DXP hiện tại.*
+

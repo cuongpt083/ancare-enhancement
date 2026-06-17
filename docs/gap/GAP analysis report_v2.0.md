@@ -102,6 +102,25 @@ Loại GAP: **[MỚI]** chưa có, xây mới · **[NÂNG CẤP]** đã có mộ
 
 ---
 
+### 2.6. Bổ sung từ review (2026-06-14) — test người dùng & định hướng PO
+
+> Nguồn: `docs/reviews/20260614-01.md` (Đức, Mi), `20260614-02.md` (PO). *DMO = Daily Method of Operations (mô hình KD nhóm dinh dưỡng), không phải Digital Marketing Organization.*
+
+| # | Hạng mục | As-Is | To-be | Loại | CS | MVP |
+| :-- | :-- | :-- | :-- | :-- | :-: | :-: |
+| RV1 | Kịch bản tư vấn nhanh 15 phút (+ gợi ý gói theo nhu cầu/tài chính) | Có nhập Tanita + bản tư vấn rời | Flow lõi: đo nhanh + DISC nhanh → tư vấn + gợi ý gói | [NÂNG CẤP] | M | 1 |
+| RV2 | Cá nhân hóa theo thể trạng/bệnh lý nền | Gợi ý chung | AI khuyến nghị riêng (thận/phổi/tiểu đường…) | [MỚI] | L | 1-2 |
+| RV3 | Thực đơn + nhật ký + AI nhận diện ảnh bữa ăn | Có tick + chụp ảnh (chưa AI) | AI nhận diện, chấm điểm, thiết kế thực đơn ngày sau | [MỚI] | L | 1-2 |
+| RV4 | AnCare Health Score (tính năng "chữ ký") | Chưa có | Điểm 1–100 ngày/tuần/tháng, ngưỡng, khuyến khích chia sẻ | [MỚI] | M | 1 |
+| RV5 | AI trả lời tức thì theo Skill Script → handoff HLV/bác sĩ | Chat có sẵn; AI chậm, không scripted | Phản hồi tức thì có kịch bản + điều hướng người thật | [MỚI] | L | 1 |
+| RV6 | Kiểm duyệt/quản trị chất lượng câu trả lời AI | Chưa có | Giới hạn phạm vi + rà soát + log | [MỚI] | M | 1-2 |
+| RV7 | Điểm danh/check-in tham gia | Chưa rõ | Ghi nhận điểm danh | [MỚI] | S | 2 |
+| RV8 | Tích hợp wearable/health apps (Garmin/Coros/Apple Health) | Chưa có | Import dữ liệu sức khỏe | [MỚI] | M | 2-3 |
+| RV9 | Tích hợp Google Calendar cho lịch 2/1 | Chưa có | Đồng bộ/nhắc/tránh trùng (bổ sung AC5) | [MỚI] | S | 2 |
+| RV10 | UGC reward — khách làm KOL/KOC | Chưa có | Điểm thưởng theo nội dung & tương tác, đổi quà | [MỚI] | M | 3 |
+| RV11 | "Chăm sóc chéo" cộng đồng (HLV cổ vũ khách của nhau) | Chưa có | Tương tác chúc mừng/thả tim chéo | [MỚI] | S | 2 |
+| RV12 | Feedback Loop + SRS + tài liệu chuẩn hóa HLV | Chưa có | Kênh ghi nhận lỗi/góp ý real-time | [MỚI] | S | 1 |
+
 ## 3. KHOẢNG CÁCH TRỌNG TÂM (NHẬN ĐỊNH)
 
 Khoảng cách lớn nhất **không** còn ở vận hành mà ở **năm trục trải nghiệm mới**: (1) **thu hút & chuyển đổi có AI hỗ trợ** (AC1–AC8 — trọng tâm cho Bước 1–2), (2) **lan tỏa/virality** (CJ4, CJ7), (3) **đào tạo/nội dung** (TR1–TR4, CJ5), (4) **phễu & kết nối** (CJ6, SD2), (5) **cá nhân hóa** (SD1). Các trục này chính là phần "lấp khoảng trống" mà tầm nhìn AnCare đặt ra so với app Herbalife hiện hữu.
@@ -114,10 +133,11 @@ Hai hạng mục công sức Cao (L) — hạ tầng micro-course (TR1), matchin
 
 ## 4. PHÂN BỐ THEO MVP
 
-- **MVP-1 (Nền tảng PSM + Lan tỏa & Gắn kết & phễu):** **PS1, PS2** + CJ3, CJ4, CJ9, BJ2, PF1, PF3 + AC1, AC5, AC8 — dựng xương sống PSM/GNV + tận dụng dữ liệu sẵn có.
-- **MVP-2 (Học tập, Nội dung, AI chuyển đổi, quản lý theo bước):** **PS3** + TR1–TR6, CJ5, BJ3, BJ6, SD2 + AC2, AC3, AC7 — đào tạo ánh xạ quy trình + pipeline 12 bước + AI chân dung/copilot.
-- **MVP-2 (bổ sung):** CJ6/CJ7 lớp attribution (mã giới thiệu + phân tích nội dung) — bánh đà thu hút bằng nội dung khởi động sớm.
-- **MVP-3 (Phễu lạnh, Matching fallback, Cá nhân hóa, Nhân bản & Sự nghiệp):** CJ8, BJ4, BJ5, BJ7, SD1, SD3, SD4, SD5 + AC4, matching fallback lead mồ côi (AC8c) — phức tạp nhất (chatbot, recommender, coaching tuyến dưới, lộ trình thăng tiến).
+> **Đã đảo ưu tiên theo PO (2026-06-14):** MVP-1 dồn vào **tư vấn & trải nghiệm sức khỏe (Lớp 1–2)**; phễu/đào tạo lùi về MVP-2. PSM giữ vai trò nền mỏng từ MVP-1.
+
+- **MVP-1 (Tư vấn & Trải nghiệm sức khỏe — lõi PO):** **RV1** (tư vấn 15p), **RV3** (thực đơn + AI ảnh bữa ăn), **RV4** (Health Score), **RV5** (AI scripted + handoff), **RV2** (cá nhân hóa bệnh nền — phần an toàn), **RV12** (feedback loop) + CJ3 (nhắc nhở), CJ9, PF1, PF3 + **PS1, PS2** (nền mỏng) + AC8 (la bàn) + đo lường. *(RV6 kiểm duyệt AI đi kèm RV5.)*
+- **MVP-2 (Học tập, Nội dung & Thu hút):** **PS3** + TR1–TR6 (micro-course 21 Talk + Quiz), CJ5, BJ3, BJ6, SD2 + AC1, AC2, AC3, AC5, AC7 + CJ4/CJ6/CJ7 (Content-Attribution) + BJ2 (chăm sóc dịp) + RV7 (điểm danh), RV9 (Calendar), RV11 (chăm sóc chéo), RV8 (wearable).
+- **MVP-3 (Phễu lạnh, Matching fallback, Cá nhân hóa, Nhân bản & Sự nghiệp):** CJ8, BJ4, BJ5, BJ7, SD1, SD3, SD4, SD5 + AC4, AC8c + **RV10** (UGC reward) — phức tạp nhất.
 
 ---
 

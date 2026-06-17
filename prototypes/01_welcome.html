@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AnCare — Chào mừng</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand: #1C4232;
+      --brand-mid: #2D6A4F;
+      --brand-light: #4CAF88;
+      --accent: #52B788;
+      --bg: #F5F8F6;
+      --surface: #FFFFFF;
+      --surface-2: #EDF4EF;
+      --border: #DCE8DF;
+      --text: #111827;
+      --text-2: #5A7061;
+      --text-muted: #9CA3AF;
+      --error: #DC2626;
+      --success: #16A34A;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #1A1A2E;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    /* ---- Phone frame ---- */
+    .phone {
+      width: 390px;
+      min-height: 844px;
+      border-radius: 44px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.25), 0 0 0 11px #1C1C1E;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(160deg, #1C4232 0%, #0D2419 60%, #081A10 100%);
+    }
+
+    /* ---- Status bar ---- */
+    .status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 28px 0;
+      position: relative;
+      z-index: 10;
+    }
+    .status-time {
+      font-size: 15px;
+      font-weight: 600;
+      color: #FFFFFF;
+      letter-spacing: -0.3px;
+    }
+    .status-icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #FFFFFF;
+    }
+
+    /* ---- Dynamic island pill ---- */
+    .dynamic-island {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 34px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 20;
+    }
+
+    /* ---- Decorative SVG layer ---- */
+    .decor-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 440px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ---- Main content ---- */
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 5;
+      padding-top: 80px;
+    }
+
+    /* ---- Logo mark ---- */
+    .logo-wrap {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    .logo-circle {
+      width: 80px;
+      height: 80px;
+      background: #FFFFFF;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.2);
+    }
+    .app-name {
+      font-family: 'Lora', serif;
+      font-size: 40px;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: -0.5px;
+    }
+    .app-subtitle {
+      font-size: 15px;
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      max-width: 280px;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    /* ---- Feature pills ---- */
+    .feature-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 32px;
+    }
+    .feature-pill {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.85);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .feature-pill svg {
+      width: 12px;
+      height: 12px;
+      color: var(--accent);
+    }
+
+    /* ---- Bottom section ---- */
+    .bottom {
+      padding: 0 24px 44px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+      z-index: 5;
+    }
+
+    /* Soft glow behind bottom */
+    .bottom::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: -40px;
+      right: -40px;
+      height: 240px;
+      background: radial-gradient(ellipse at center bottom, rgba(28,66,50,0.6) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .btn-primary {
+      display: block;
+      width: 100%;
+      height: 56px;
+      background: #FFFFFF;
+      color: var(--brand);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      border-radius: 9999px;
+      cursor: pointer;
+      text-align: center;
+      line-height: 56px;
+      text-decoration: none;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+      position: relative;
+      z-index: 1;
+      transition: opacity 0.15s;
+    }
+    .btn-primary:hover { opacity: 0.93; }
+    .btn-primary:active { opacity: 0.85; }
+
+    .login-link {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      position: relative;
+      z-index: 1;
+    }
+    .login-link span {
+      color: rgba(255,255,255,0.9);
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .login-link:hover span { color: #fff; }
+
+    /* ---- Dot indicators ---- */
+    .dots {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+    }
+    .dot.active {
+      width: 20px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.9);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="phone">
+
+    <!-- Dynamic Island -->
+    <div class="dynamic-island"></div>
+
+    <!-- Status bar -->
+    <div class="status-bar">
+      <span class="status-time">9:41</span>
+      <div class="status-icons">
+        <!-- Signal -->
+        <svg width="17" height="12" viewBox="0 0 17 12" fill="none">
+          <rect x="0" y="8" width="3" height="4" rx="0.5" fill="white"/>
+          <rect x="4.5" y="5.5" width="3" height="6.5" rx="0.5" fill="white"/>
+          <rect x="9" y="2.5" width="3" height="9.5" rx="0.5" fill="white"/>
+          <rect x="13.5" y="0" width="3" height="12" rx="0.5" fill="white"/>
+        </svg>
+        <!-- WiFi -->
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+          <path d="M8 9.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" fill="white"/>
+          <path d="M4.93 7.43A4.49 4.49 0 0 1 8 6.2a4.49 4.49 0 0 1 3.07 1.23" stroke="white" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+          <path d="M2.27 4.77A7.98 7.98 0 0 1 8 2.5a7.98 7.98 0 0 1 5.73 2.27" stroke="white" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+          <path d="M0 2.2A11.47 11.47 0 0 1 8 0a11.47 11.47 0 0 1 8 2.2" stroke="white" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+        </svg>
+        <!-- Battery -->
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="none">
+          <rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="white" stroke-opacity="0.35"/>
+          <rect x="2" y="2" width="16" height="8" rx="2" fill="white"/>
+          <path d="M23 4v4a2 2 0 0 0 0-4z" fill="white" fill-opacity="0.4"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Decorative SVG -->
+    <svg class="decor-layer" viewBox="0 0 390 440" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <!-- Large arc leaf -->
+      <path d="M-60 320 Q 80 -60 390 60" stroke="rgba(255,255,255,0.06)" stroke-width="80" fill="none"/>
+      <!-- Stems -->
+      <path d="M195 380 Q 200 200 260 80" stroke="rgba(255,255,255,0.05)" stroke-width="2" fill="none"/>
+      <path d="M195 380 Q 170 200 100 90" stroke="rgba(255,255,255,0.05)" stroke-width="2" fill="none"/>
+      <!-- Left leaf -->
+      <path d="M195 280 Q 130 220 110 150 Q 155 190 195 240" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" fill="rgba(255,255,255,0.03)"/>
+      <!-- Right leaf -->
+      <path d="M195 260 Q 255 200 275 130 Q 230 175 195 220" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" fill="rgba(255,255,255,0.03)"/>
+      <!-- Small circles -->
+      <circle cx="300" cy="80" r="40" stroke="rgba(255,255,255,0.04)" stroke-width="1" fill="none"/>
+      <circle cx="300" cy="80" r="65" stroke="rgba(255,255,255,0.03)" stroke-width="1" fill="none"/>
+      <circle cx="80" cy="350" r="30" stroke="rgba(255,255,255,0.04)" stroke-width="1" fill="none"/>
+      <!-- Dots scatter -->
+      <circle cx="320" cy="160" r="2.5" fill="rgba(255,255,255,0.12)"/>
+      <circle cx="60" cy="200" r="2" fill="rgba(255,255,255,0.1)"/>
+      <circle cx="350" cy="300" r="1.5" fill="rgba(255,255,255,0.08)"/>
+      <circle cx="40" cy="100" r="3" fill="rgba(255,255,255,0.07)"/>
+      <!-- Glow blob -->
+      <ellipse cx="195" cy="180" rx="120" ry="80" fill="rgba(82,183,136,0.06)"/>
+    </svg>
+
+    <!-- Main content -->
+    <div class="content">
+      <div class="logo-wrap">
+
+        <!-- Logo circle -->
+        <div class="logo-circle">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+            <!-- Leaf shape -->
+            <path d="M22 36 C 22 36 8 28 8 18 C 8 10 14 6 22 6 C 30 6 36 10 36 18 C 36 28 22 36 22 36Z" fill="#1C4232" opacity="0.15"/>
+            <path d="M22 34 C 22 34 10 27 10 18 C 10 11 15.5 7.5 22 7.5 C 28.5 7.5 34 11 34 18 C 34 27 22 34 22 34Z" stroke="#1C4232" stroke-width="1.5" fill="none"/>
+            <!-- Center vein -->
+            <path d="M22 34 L 22 10" stroke="#1C4232" stroke-width="1.5" stroke-linecap="round"/>
+            <!-- Side veins -->
+            <path d="M22 22 Q 28 20 32 17" stroke="#1C4232" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+            <path d="M22 26 Q 15 23 12 20" stroke="#1C4232" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+            <path d="M22 18 Q 26 16 29 14" stroke="#1C4232" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+          </svg>
+        </div>
+
+        <h1 class="app-name">AnCare</h1>
+        <p class="app-subtitle">Hành trình chăm sóc sức khỏe của bạn bắt đầu từ đây</p>
+
+        <!-- Feature pills -->
+        <div class="feature-row">
+          <div class="feature-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+            </svg>
+            Theo dõi dinh dưỡng
+          </div>
+          <div class="feature-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            Quản lý nhóm
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Bottom section -->
+    <div class="bottom">
+      <div class="dots">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <a href="02_login.html" class="btn-primary">Bắt đầu ngay</a>
+      <a href="02_login.html" class="login-link">Đã có tài khoản? <span>Đăng nhập</span></a>
+    </div>
+
+  </div>
+
+</body>
+</html>

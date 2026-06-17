@@ -1,0 +1,556 @@
+<style>
+  * { box-sizing: border-box; }
+  body, html { margin: 0; padding: 0; font-family: var(--font-sans); }
+  
+  .container { width: 100%; max-width: 440px; margin: 0 auto; padding: 0; }
+  
+  .section-header {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    padding: 1rem 1rem 0.75rem;
+    margin: 1.5rem 0 0.75rem;
+  }
+  
+  .table-wrapper {
+    padding: 0 1rem;
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    background: var(--color-background-primary);
+    overflow: hidden;
+  }
+  
+  .table-header {
+    display: grid;
+    grid-template-columns: 1fr 0.8fr 0.8fr 48px;
+    gap: 0;
+    padding: 0.75rem 0;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+    background: var(--color-background-secondary);
+  }
+  
+  .table-header > div {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    padding: 0.5rem;
+    text-align: center;
+  }
+  
+  .table-header > div:first-child {
+    text-align: left;
+  }
+  
+  .table-row {
+    display: grid;
+    grid-template-columns: 1fr 0.8fr 0.8fr 48px;
+    gap: 0;
+    padding: 0.75rem 0;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+    align-items: center;
+  }
+  
+  .table-row:last-child {
+    border-bottom: none;
+  }
+  
+  .table-cell {
+    padding: 0.5rem;
+    font-size: 13px;
+    text-align: center;
+  }
+  
+  .table-cell:first-child {
+    text-align: left;
+    color: var(--color-text-primary);
+    font-weight: 500;
+  }
+  
+  .value-cell {
+    color: var(--color-text-primary);
+  }
+  
+  .value-cell.severity-red {
+    color: #A32D2D;
+    font-weight: 500;
+  }
+  
+  .value-cell.severity-yellow {
+    color: #854F0B;
+    font-weight: 500;
+  }
+  
+  .value-cell.severity-green {
+    color: #27500A;
+    font-weight: 500;
+  }
+  
+  .dropdown-btn {
+    background: transparent;
+    border: none;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    font-size: 16px;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    transition: all 0.2s;
+  }
+  
+  .dropdown-btn:active {
+    transform: scale(0.95);
+  }
+  
+  .dropdown-content {
+    display: none;
+    grid-column: 1 / -1;
+    padding: 1rem;
+    background: var(--color-background-secondary);
+    border-top: 0.5px solid var(--color-border-tertiary);
+  }
+  
+  .dropdown-content.active {
+    display: grid;
+  }
+  
+  .dropdown-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+  }
+  
+  .dropdown-header h4 {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+  
+  .close-btn {
+    background: transparent;
+    border: none;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    font-size: 18px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  
+  .close-btn:active {
+    transform: scale(0.9);
+  }
+  
+  .analysis-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  
+  .analysis-section h5 {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    margin: 0 0 0.75rem 0;
+  }
+  
+  .bullet-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .bullet-list li {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin-bottom: 0.5rem;
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.5;
+  }
+  
+  .bullet-list li:before {
+    content: "•";
+    position: absolute;
+    left: 4px;
+    color: var(--color-text-secondary);
+  }
+  
+  .data-table-wrapper {
+    padding: 0 1rem;
+    margin: 1.5rem 0;
+  }
+  
+  .expand-btn {
+    background: transparent;
+    border: 0.5px solid var(--color-border-secondary);
+    color: var(--color-text-primary);
+    padding: 0.75rem 1rem;
+    border-radius: var(--border-radius-md);
+    font-size: 14px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 0.75rem;
+    transition: all 0.2s;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .expand-btn:active {
+    transform: scale(0.98);
+    background: var(--color-background-secondary);
+  }
+  
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 1rem;
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+  }
+  
+  .data-table thead {
+    background: var(--color-background-secondary);
+  }
+  
+  .data-table th {
+    text-align: left;
+    padding: 0.75rem;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+  }
+  
+  .data-table td {
+    padding: 0.75rem;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+    color: var(--color-text-primary);
+  }
+  
+  .data-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+  
+  .hidden-rows {
+    display: none;
+  }
+  
+  .hidden-rows.show {
+    display: table-row-group;
+  }
+</style>
+
+<div class="container">
+  <div class="section-header">Bảng tổng hợp cần cải thiện</div>
+  
+  <div class="table-wrapper">
+    <div class="table-header">
+      <div>Chỉ số</div>
+      <div>Hiện tại</div>
+      <div>Mục tiêu</div>
+      <div></div>
+    </div>
+    
+    <!-- Row 1: Cân nặng -->
+    <div class="table-row">
+      <div class="table-cell">Cân nặng</div>
+      <div class="table-cell value-cell severity-red">60 kg</div>
+      <div class="table-cell value-cell severity-red">55 kg</div>
+      <button class="dropdown-btn" onclick="toggleDropdown(event, 0)" title="Xem chi tiết">
+        <i class="ti ti-chevron-down"></i>
+      </button>
+    </div>
+    <div class="dropdown-content" id="dropdown-0">
+      <div class="dropdown-header">
+        <h4>Chi tiết phân tích</h4>
+        <button class="close-btn" onclick="closeDropdown(0)" title="Đóng">
+          <i class="ti ti-x"></i>
+        </button>
+      </div>
+      <div class="analysis-grid">
+        <div class="analysis-section">
+          <h5>Phân tích trọng điểm</h5>
+          <ul class="bullet-list">
+            <li>Cân nặng hiện tại cao hơn mục tiêu 5 kg</li>
+            <li>Cần giảm cân trong 3-4 tháng</li>
+            <li>Tỷ lệ giảm an toàn: 1-1.5 kg/tuần</li>
+            <li>Liên quan đến lối sống và chế độ ăn</li>
+          </ul>
+        </div>
+        <div class="analysis-section">
+          <h5>Nguy cơ bệnh lý liên quan</h5>
+          <ul class="bullet-list">
+            <li>Tăng nguy cơ béo phì (cao)</li>
+            <li>Tăng nguy cơ tiểu đường loại 2</li>
+            <li>Tăng áp lực lên khớp gối</li>
+            <li>Cần tư vấn chế độ ăn chuyên sâu</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Row 2: Mô mỡ thể -->
+    <div class="table-row">
+      <div class="table-cell">Mô mỡ thể</div>
+      <div class="table-cell value-cell severity-green">14 %</div>
+      <div class="table-cell value-cell severity-green">12 %</div>
+      <button class="dropdown-btn" onclick="toggleDropdown(event, 1)" title="Xem chi tiết">
+        <i class="ti ti-chevron-down"></i>
+      </button>
+    </div>
+    <div class="dropdown-content" id="dropdown-1">
+      <div class="dropdown-header">
+        <h4>Chi tiết phân tích</h4>
+        <button class="close-btn" onclick="closeDropdown(1)" title="Đóng">
+          <i class="ti ti-x"></i>
+        </button>
+      </div>
+      <div class="analysis-grid">
+        <div class="analysis-section">
+          <h5>Phân tích trọng điểm</h5>
+          <ul class="bullet-list">
+            <li>Tỷ lệ mô mỡ ở mức khá tốt (14%)</li>
+            <li>Chênh lệch với mục tiêu chỉ 2%</li>
+            <li>Khối cơ phát triển tốt</li>
+            <li>Trao đổi chất bình thường</li>
+          </ul>
+        </div>
+        <div class="analysis-section">
+          <h5>Nguy cơ bệnh lý liên quan</h5>
+          <ul class="bullet-list">
+            <li>Nguy cơ thấp (tốt)</li>
+            <li>Không có dấu hiệu suy dinh dưỡng</li>
+            <li>Cân bằng mô cơ - mô mỡ lành mạnh</li>
+            <li>Duy trì chế độ hiện tại</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Row 3: Hóm lượng -->
+    <div class="table-row">
+      <div class="table-cell">Hóm lượng</div>
+      <div class="table-cell value-cell severity-yellow">52 cm</div>
+      <div class="table-cell value-cell severity-yellow">48 cm</div>
+      <button class="dropdown-btn" onclick="toggleDropdown(event, 2)" title="Xem chi tiết">
+        <i class="ti ti-chevron-down"></i>
+      </button>
+    </div>
+    <div class="dropdown-content" id="dropdown-2">
+      <div class="dropdown-header">
+        <h4>Chi tiết phân tích</h4>
+        <button class="close-btn" onclick="closeDropdown(2)" title="Đóng">
+          <i class="ti ti-x"></i>
+        </button>
+      </div>
+      <div class="analysis-grid">
+        <div class="analysis-section">
+          <h5>Phân tích trọng điểm</h5>
+          <ul class="bullet-list">
+            <li>Hóm lượng cao hơn mục tiêu 4 cm</li>
+            <li>Chênh lệch 7.7% (trung bình)</li>
+            <li>Tích tụ mỡ quanh eo tăng</li>
+            <li>Cần tập luyện cardio thường xuyên</li>
+          </ul>
+        </div>
+        <div class="analysis-section">
+          <h5>Nguy cơ bệnh lý liên quan</h5>
+          <ul class="bullet-list">
+            <li>Nguy cơ tim mạch (trung bình)</li>
+            <li>Nguy cơ huyết áp cao (trung bình)</li>
+            <li>Tích tụ mỡ nội tạng (cảnh báo)</li>
+            <li>Tư vấn tập luyện 150 phút/tuần</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Row 4: Chi số cần đổi -->
+    <div class="table-row">
+      <div class="table-cell">Chi số cần đổi</div>
+      <div class="table-cell value-cell severity-red">24.0</div>
+      <div class="table-cell value-cell severity-red">21.5</div>
+      <button class="dropdown-btn" onclick="toggleDropdown(event, 3)" title="Xem chi tiết">
+        <i class="ti ti-chevron-down"></i>
+      </button>
+    </div>
+    <div class="dropdown-content" id="dropdown-3">
+      <div class="dropdown-header">
+        <h4>Chi tiết phân tích</h4>
+        <button class="close-btn" onclick="closeDropdown(3)" title="Đóng">
+          <i class="ti ti-x"></i>
+        </button>
+      </div>
+      <div class="analysis-grid">
+        <div class="analysis-section">
+          <h5>Phân tích trọng điểm</h5>
+          <ul class="bullet-list">
+            <li>BMI hiện tại 24.0 kg/m² (sắp thừa cân)</li>
+            <li>Mục tiêu 21.5 kg/m² (chuẩn)</li>
+            <li>Chênh lệch 10.4% (nghiêm trọng)</li>
+            <li>Cần hành động ngay lập tức</li>
+          </ul>
+        </div>
+        <div class="analysis-section">
+          <h5>Nguy cơ bệnh lý liên quan</h5>
+          <ul class="bullet-list">
+            <li>Nguy cơ thừa cân/béo phì (cao)</li>
+            <li>Tiền tiểu đường (cảnh báo)</li>
+            <li>Tim mạch (nguy cơ tăng)</li>
+            <li>Ưu tiên giảm cân trong 4 tháng</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Row 5: Tuổi sinh học -->
+    <div class="table-row">
+      <div class="table-cell">Tuổi sinh học</div>
+      <div class="table-cell value-cell severity-green">32 tuổi</div>
+      <div class="table-cell value-cell severity-green">28 tuổi</div>
+      <button class="dropdown-btn" onclick="toggleDropdown(event, 4)" title="Xem chi tiết">
+        <i class="ti ti-chevron-down"></i>
+      </button>
+    </div>
+    <div class="dropdown-content" id="dropdown-4">
+      <div class="dropdown-header">
+        <h4>Chi tiết phân tích</h4>
+        <button class="close-btn" onclick="closeDropdown(4)" title="Đóng">
+          <i class="ti ti-x"></i>
+        </button>
+      </div>
+      <div class="analysis-grid">
+        <div class="analysis-section">
+          <h5>Phân tích trọng điểm</h5>
+          <ul class="bullet-list">
+            <li>Tuổi sinh học cao hơn tuổi thực</li>
+            <li>Chênh lệch 4 năm (lão hóa sớm)</li>
+            <li>Do lối sống và stress</li>
+            <li>Cải thiện được qua chế độ sống</li>
+          </ul>
+        </div>
+        <div class="analysis-section">
+          <h5>Nguy cơ bệnh lý liên quan</h5>
+          <ul class="bullet-list">
+            <li>Nguy cơ lão hóa sớm (cao)</li>
+            <li>Suy yếu cơ bắp tăng</li>
+            <li>Giảm linh hoạt, sức bật</li>
+            <li>Cần tập luyện sức mạnh 2x/tuần</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="data-table-wrapper">
+    <div class="section-header" style="padding: 0; margin: 0 0 0.75rem 0;">Bảng phân tích chỉ số chi tiết</div>
+    
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Chỉ số</th>
+          <th>Giá trị</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cân nặng</td>
+          <td>60.0 kg</td>
+        </tr>
+        <tr>
+          <td>Chiều cao</td>
+          <td>1.70 m</td>
+        </tr>
+        <tbody class="hidden-rows" id="hidden-rows">
+          <tr>
+            <td>BMI</td>
+            <td>20.8 kg/m²</td>
+          </tr>
+          <tr>
+            <td>Mô mỡ thể</td>
+            <td>14%</td>
+          </tr>
+          <tr>
+            <td>Khối cơ</td>
+            <td>51.6 kg</td>
+          </tr>
+          <tr>
+            <td>Nước cơ thể</td>
+            <td>61%</td>
+          </tr>
+          <tr>
+            <td>Đốt cháy cơ sở</td>
+            <td>1650 kcal/ngày</td>
+          </tr>
+          <tr>
+            <td>Tuổi sinh học</td>
+            <td>32 tuổi</td>
+          </tr>
+        </tbody>
+      </tbody>
+    </table>
+    
+    <button class="expand-btn" onclick="toggleTableExpand()">
+      <span id="expand-text">Mở rộng</span>
+      <i class="ti ti-chevron-down" id="expand-icon"></i>
+    </button>
+  </div>
+</div>
+
+<script>
+  function toggleDropdown(event, index) {
+    const dropdown = document.getElementById(`dropdown-${index}`);
+    const btn = event.currentTarget;
+    const icon = btn.querySelector('i');
+    
+    const isActive = dropdown.classList.contains('active');
+    
+    if (isActive) {
+      dropdown.classList.remove('active');
+      icon.className = 'ti ti-chevron-down';
+    } else {
+      dropdown.classList.add('active');
+      icon.className = 'ti ti-chevron-up';
+    }
+  }
+  
+  function closeDropdown(index) {
+    const dropdown = document.getElementById(`dropdown-${index}`);
+    const btn = document.querySelector(`button[onclick="toggleDropdown(event, ${index})"]`);
+    const icon = btn.querySelector('i');
+    
+    dropdown.classList.remove('active');
+    icon.className = 'ti ti-chevron-down';
+  }
+  
+  function toggleTableExpand() {
+    const hiddenRows = document.getElementById('hidden-rows');
+    const expandText = document.getElementById('expand-text');
+    const expandIcon = document.getElementById('expand-icon');
+    
+    hiddenRows.classList.toggle('show');
+    
+    if (hiddenRows.classList.contains('show')) {
+      expandText.textContent = 'Thu gọn';
+      expandIcon.className = 'ti ti-chevron-up';
+    } else {
+      expandText.textContent = 'Mở rộng';
+      expandIcon.className = 'ti ti-chevron-down';
+    }
+  }
+</script>

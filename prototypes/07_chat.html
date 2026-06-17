@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat – AnCare</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── Design Tokens ── */
+    :root {
+      --brand:       #1C4232;
+      --brand-mid:   #2D6A4F;
+      --brand-light: #4CAF88;
+      --accent:      #52B788;
+      --bg:          #F5F8F6;
+      --surface:     #FFFFFF;
+      --border:      #DCE8DF;
+      --text:        #111827;
+      --text-2:      #5A7061;
+      --text-muted:  #9CA3AF;
+      --error:       #DC2626;
+      --success:     #16A34A;
+      --warning:     #D97706;
+      --info:        #0891B2;
+    }
+
+    /* ── Page Shell ── */
+    body {
+      min-height: 100vh;
+      background: #1A1A2E;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Phone Wrapper ── */
+    .phone {
+      width: 390px;
+      min-height: 844px;
+      border-radius: 44px;
+      overflow: hidden;
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.25),
+        0 0 0 11px #1C1C1E;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* ── Status Bar ── */
+    .status-bar {
+      height: 44px;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      flex-shrink: 0;
+    }
+    .status-time {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+    .status-icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text);
+    }
+
+    /* ── Scrollable Content ── */
+    .scroll-area {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-bottom: 90px; /* nav height */
+      background: var(--bg);
+      -webkit-overflow-scrolling: touch;
+    }
+    .scroll-area::-webkit-scrollbar { display: none; }
+
+    /* ── Header ── */
+    .header {
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .header-title {
+      font-family: 'Lora', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.3px;
+    }
+    .header-action {
+      color: var(--brand);
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    /* ── Search Bar ── */
+    .search-wrap {
+      margin: 12px 16px;
+    }
+    .search-bar {
+      background: var(--surface);
+      border-radius: 100px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+    }
+    .search-bar input {
+      border: none;
+      outline: none;
+      background: transparent;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      flex: 1;
+      min-width: 0;
+    }
+    .search-bar input::placeholder {
+      color: var(--text-muted);
+    }
+
+    /* ── Feature Cards Row ── */
+    .feature-row {
+      display: flex;
+      gap: 12px;
+      margin: 0 16px 16px;
+    }
+    .feature-card {
+      flex: 1;
+      min-width: 0;
+      height: 100px;
+      border-radius: 16px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .feature-card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .feature-card-title {
+      font-family: 'Lora', serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+    }
+    .feature-card-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: rgba(255,255,255,0.8);
+    }
+    .feature-card-sub2 {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: rgba(255,255,255,0.6);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .online-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #4CAF88;
+      flex-shrink: 0;
+    }
+    .card-community {
+      background: linear-gradient(135deg, #1C4232, #2D6A4F);
+    }
+    .card-ai {
+      background: linear-gradient(135deg, #1A1A2E, #2D1B69);
+    }
+    .badge-new {
+      background: #52B788;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
+      line-height: 1.4;
+    }
+
+    /* ── Section Header ── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px 8px;
+    }
+    .section-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .section-link {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--brand);
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    /* ── DM List ── */
+    .dm-list {
+      background: var(--surface);
+    }
+    .dm-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 20px;
+      border-bottom: 1px solid #F3F4F6;
+      cursor: pointer;
+      gap: 0;
+      transition: background 0.12s;
+    }
+    .dm-item:last-child { border-bottom: none; }
+    .dm-item:active { background: #F9FAFB; }
+
+    /* Avatar */
+    .dm-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+      letter-spacing: 0.3px;
+    }
+
+    /* Middle */
+    .dm-info {
+      flex: 1;
+      min-width: 0;
+      margin-left: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .dm-info-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .dm-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .dm-name.unread { font-weight: 700; }
+    .dm-name.read   { font-weight: 500; }
+    .dm-time {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+    .dm-preview {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .dm-preview.unread { color: var(--text); font-weight: 500; }
+    .dm-preview.read   { color: var(--text-muted); }
+
+    /* Badge */
+    .dm-badge {
+      min-width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--brand);
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 4px;
+      flex-shrink: 0;
+      margin-left: 8px;
+    }
+
+    /* ── Bottom Nav ── */
+    .bottom-nav {
+      position: sticky;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: calc(70px + 20px);
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-around;
+      padding-top: 10px;
+      padding-bottom: 20px;
+      flex-shrink: 0;
+      z-index: 100;
+    }
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      cursor: pointer;
+      text-decoration: none;
+      flex: 1;
+    }
+    .nav-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      line-height: 1;
+    }
+    .nav-item.active .nav-icon,
+    .nav-item.active .nav-label { color: var(--brand); }
+    .nav-item:not(.active) .nav-icon,
+    .nav-item:not(.active) .nav-label { color: var(--text-muted); }
+    .nav-item.active .nav-label { font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<div class="phone">
+
+  <!-- ══ STATUS BAR ══ -->
+  <div class="status-bar">
+    <span class="status-time">9:41</span>
+    <div class="status-icons">
+      <!-- Signal -->
+      <svg width="17" height="12" viewBox="0 0 17 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="8" width="3" height="4" rx="0.5"/>
+        <rect x="4.5" y="5.5" width="3" height="6.5" rx="0.5"/>
+        <rect x="9" y="3" width="3" height="9" rx="0.5"/>
+        <rect x="13.5" y="0" width="3" height="12" rx="0.5"/>
+      </svg>
+      <!-- WiFi -->
+      <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 9.5C8.69 9.5 9.25 10.06 9.25 10.75S8.69 12 8 12s-1.25-.56-1.25-1.25S7.31 9.5 8 9.5z" fill="currentColor"/>
+        <path d="M1 4.5a9.9 9.9 0 0 1 14 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M3.5 7a6.4 6.4 0 0 1 9 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M5.9 9.3a3 3 0 0 1 4.2 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <!-- Battery -->
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0.5" y="0.5" width="21" height="11" rx="2.5" stroke="currentColor" stroke-opacity="0.35"/>
+        <rect x="1.5" y="1.5" width="17" height="9" rx="1.5" fill="currentColor"/>
+        <path d="M23 4v4a2 2 0 0 0 0-4z" fill="currentColor" fill-opacity="0.4"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ══ SCROLLABLE CONTENT ══ -->
+  <div class="scroll-area">
+
+    <!-- ── Header ── -->
+    <div class="header">
+      <span class="header-title">Tin nhắn</span>
+      <div class="header-action">
+        <!-- Compose / Edit icon -->
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- ── Search Bar ── -->
+    <div class="search-wrap">
+      <div class="search-bar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+             stroke="#9CA3AF" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="text" placeholder="Tìm tin nhắn..." />
+      </div>
+    </div>
+
+    <!-- ── Feature Cards Row ── -->
+    <div class="feature-row">
+
+      <!-- Card 1: Cộng đồng -->
+      <div class="feature-card card-community">
+        <div class="feature-card-top">
+          <!-- Users / Group icon -->
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+               stroke="#fff" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          <!-- Arrow Right icon -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+               stroke="rgba(255,255,255,0.7)" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </div>
+        <div class="feature-card-body">
+          <div class="feature-card-title">Cộng đồng</div>
+          <div class="feature-card-sub">Club HCM - Q7</div>
+          <div class="feature-card-sub2">
+            <span class="online-dot"></span>
+            32 thành viên online
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Trợ lý AI -->
+      <div class="feature-card card-ai">
+        <div class="feature-card-top">
+          <!-- Sparkles / Bot icon -->
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+               stroke="#fff" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6L12 2z"/>
+          </svg>
+          <span class="badge-new">Mới</span>
+        </div>
+        <div class="feature-card-body">
+          <div class="feature-card-title">Trợ lý AI</div>
+          <div class="feature-card-sub">AnCare AI</div>
+          <div class="feature-card-sub2">Dinh dưỡng &amp; sức khỏe</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── Section Header ── -->
+    <div class="section-header">
+      <span class="section-label">Tin nhắn riêng</span>
+      <a class="section-link" href="#">Yêu cầu (2)</a>
+    </div>
+
+    <!-- ── DM List ── -->
+    <div class="dm-list">
+
+      <!-- DM a: Minh Châu — unread (3) -->
+      <div class="dm-item">
+        <div class="dm-avatar" style="background:#0D9488;">MC</div>
+        <div class="dm-info">
+          <div class="dm-info-top">
+            <span class="dm-name unread">Minh Châu</span>
+            <span class="dm-time">2 phút</span>
+          </div>
+          <div class="dm-preview unread">Dạ em sẽ đo vào sáng mai ạ 🙏</div>
+        </div>
+        <div class="dm-badge">3</div>
+      </div>
+
+      <!-- DM b: Thu Hà — read -->
+      <div class="dm-item">
+        <div class="dm-avatar" style="background:#7C3AED;">TH</div>
+        <div class="dm-info">
+          <div class="dm-info-top">
+            <span class="dm-name read">Thu Hà</span>
+            <span class="dm-time">1 giờ</span>
+          </div>
+          <div class="dm-preview read">Chị ơi cho em hỏi về thực đơn...</div>
+        </div>
+      </div>
+
+      <!-- DM c: Bảo Long — unread (1) -->
+      <div class="dm-item">
+        <div class="dm-avatar" style="background:#EA580C;">BL</div>
+        <div class="dm-info">
+          <div class="dm-info-top">
+            <span class="dm-name unread">Bảo Long</span>
+            <span class="dm-time">3 giờ</span>
+          </div>
+          <div class="dm-preview unread">Em quên uống F1 hôm nay mất rồi</div>
+        </div>
+        <div class="dm-badge">1</div>
+      </div>
+
+      <!-- DM d: Ngọc Linh — read -->
+      <div class="dm-item">
+        <div class="dm-avatar" style="background:#2563EB;">NL</div>
+        <div class="dm-info">
+          <div class="dm-info-top">
+            <span class="dm-name read">Ngọc Linh</span>
+            <span class="dm-time">Hôm qua</span>
+          </div>
+          <div class="dm-preview read">Cảm ơn chị nhiều ạ!</div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /dm-list -->
+
+  </div>
+  <!-- /scroll-area -->
+
+  <!-- ══ BOTTOM NAV ══ -->
+  <nav class="bottom-nav">
+
+    <!-- 1. Trang Chủ -->
+    <a class="nav-item" href="03_dashboard.html">
+      <div class="nav-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/>
+          <polyline points="9 21 9 12 15 12 15 21"/>
+        </svg>
+      </div>
+      <span class="nav-label">Trang Chủ</span>
+    </a>
+
+    <!-- 2. Team -->
+    <a class="nav-item" href="05_team.html">
+      <div class="nav-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+      </div>
+      <span class="nav-label">Team</span>
+    </a>
+
+    <!-- 3. Chat — ACTIVE -->
+    <a class="nav-item active" href="07_chat.html">
+      <div class="nav-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="3" width="20" height="14" rx="2"/>
+          <polyline points="8 21 12 17 16 21"/>
+        </svg>
+      </div>
+      <span class="nav-label">Chat</span>
+    </a>
+
+    <!-- 4. HLV -->
+    <a class="nav-item" href="10_hlv.html">
+      <div class="nav-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/>
+          <rect x="9" y="3" width="6" height="4" rx="1"/>
+          <line x1="9" y1="12" x2="15" y2="12"/>
+          <line x1="9" y1="16" x2="13" y2="16"/>
+        </svg>
+      </div>
+      <span class="nav-label">HLV</span>
+    </a>
+
+    <!-- 5. Hồ Sơ -->
+    <a class="nav-item" href="12_profile.html">
+      <div class="nav-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <circle cx="12" cy="9" r="3"/>
+          <path d="M6.17 18.83a6 6 0 0 1 11.66 0"/>
+        </svg>
+      </div>
+      <span class="nav-label">Hồ Sơ</span>
+    </a>
+
+  </nav>
+
+</div><!-- /phone -->
+
+</body>
+</html>
