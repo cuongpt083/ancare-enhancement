@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sức khỏe tổng thể — Prototype</title>
+<link rel="stylesheet" href="tabler-icons.min.css">
+<style>
+  :root {
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --bg-primary:#fff; --bg-secondary:#f4f6f8; --bg-app:#eaeef2;
+    --text:#1a1d21; --text2:#6b7280; --border:#e5e7eb; --border2:#d1d5db;
+    --accent:#2f9e6e;
+    --s3:#22c55e; --s2:#f59e0b; --s1:#fb923c; --idle:#cdd4db;   /* điểm 3/2/1/chờ */
+    --than:#16a34a; --tam:#8b5cf6; --tri:#f97316;
+    --water:#2ba6e0;
+    --r:12px;
+  }
+  *{box-sizing:border-box;}
+  body,html{margin:0;padding:0;font-family:var(--font-sans);background:var(--bg-app);color:var(--text);}
+  .container{width:100%;max-width:460px;margin:0 auto;padding:0 0 70px;}
+  .navbar{position:fixed;bottom:0;left:0;right:0;max-width:460px;margin:0 auto;display:flex;background:var(--bg-primary);border-top:.5px solid var(--border);z-index:40;}
+  .navbar a{flex:1;text-align:center;padding:.5rem 0;color:var(--text2);text-decoration:none;font-size:10px;}
+  .navbar a .ti{font-size:20px;display:block;} .navbar a.active{color:var(--accent);font-weight:700;}
+
+  .appbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:8px;background:var(--bg-primary);padding:.9rem 1rem;border-bottom:.5px solid var(--border);}
+  .appbar .ti{font-size:22px;}
+  .appbar h1{font-size:16px;font-weight:700;margin:0;flex:1;}
+
+  /* Week */
+  .week{display:flex;justify-content:space-between;padding:.6rem 1rem;background:var(--bg-primary);border-bottom:.5px solid var(--border);}
+  .day{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;}
+  .day .lbl{font-size:11px;color:var(--text2);}
+  .day.active .lbl{color:var(--accent);font-weight:700;}
+  .day .mini{width:18px;height:18px;border-radius:50%;border:2px solid var(--idle);}
+  .day.active .mini{border-color:var(--accent);background:var(--accent);}
+
+  /* Hero: clock + summary */
+  .hero{display:flex;align-items:center;gap:10px;padding:.8rem 1rem .4rem;}
+  .clock-wrap{flex:none;}
+  .summary{flex:1;}
+  .summary .score{font-size:30px;font-weight:800;color:var(--accent);line-height:1;}
+  .summary .score small{font-size:12px;font-weight:600;color:var(--text2);}
+  .summary .subline{font-size:11.5px;color:var(--text2);margin-top:3px;}
+  .mini-stats{display:flex;gap:6px;margin-top:.6rem;}
+  .mini-stats .ms{flex:1;background:var(--bg-secondary);border-radius:9px;padding:.4rem;text-align:center;}
+  .mini-stats .ms .v{font-size:13px;font-weight:700;}
+  .mini-stats .ms .k{font-size:9px;color:var(--text2);}
+
+  /* Legend */
+  .legend{display:flex;flex-wrap:wrap;gap:8px 12px;padding:.2rem 1rem .6rem;}
+  .lg{display:flex;align-items:center;gap:5px;font-size:10.5px;color:var(--text2);}
+  .dot{width:9px;height:9px;border-radius:50%;}
+
+  /* Water card (recurring) */
+  .water{margin:.5rem 1rem;background:linear-gradient(135deg,#e7f6fd,#d3edfb);border:1px solid #bfe3f7;border-radius:var(--r);padding:.8rem;}
+  .water .wtop{display:flex;align-items:center;gap:10px;}
+  .water .wic{width:36px;height:36px;border-radius:10px;background:var(--water);display:flex;align-items:center;justify-content:center;}
+  .water .wic .ti{color:#fff;font-size:20px;}
+  .water .wt{flex:1;}
+  .water .wt .ttl{font-size:14px;font-weight:700;}
+  .water .wt .sub{font-size:11.5px;color:#0a6fa0;}
+  .water .add{border:none;background:var(--water);color:#fff;font-weight:700;font-size:13px;border-radius:20px;padding:.5rem .9rem;cursor:pointer;display:flex;align-items:center;gap:5px;}
+  .cups{display:flex;flex-wrap:wrap;gap:6px;margin-top:.7rem;}
+  .cup{width:24px;height:30px;border-radius:4px 4px 7px 7px;border:1.5px solid var(--water);position:relative;overflow:hidden;background:#fff;}
+  .cup.full{background:var(--water);}
+  .cup .ti{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;}
+
+  /* Zones */
+  .zone-head{display:flex;align-items:center;gap:8px;padding:.7rem 1rem .3rem;font-size:13px;font-weight:700;}
+  .zone-head .cnt{color:var(--text2);font-weight:600;font-size:12px;}
+  .zone-head .pts{margin-left:auto;font-size:12px;font-weight:700;color:var(--accent);}
+  .zone-done{background:linear-gradient(180deg,#effaf3,#eafaef00);border-radius:var(--r);margin:0 .6rem;padding:.2rem 0 .4rem;}
+
+  /* Cards */
+  .card{display:flex;align-items:center;gap:11px;background:var(--bg-primary);margin:6px 1rem;padding:.7rem .8rem;border:.5px solid var(--border);border-left-width:4px;border-radius:var(--r);}
+  .card .ic{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex:none;font-size:20px;}
+  .card .mid{flex:1;min-width:0;}
+  .card .ttl{font-size:13.5px;font-weight:600;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+  .card .pill{font-size:9px;font-weight:700;color:#fff;border-radius:4px;padding:1px 5px;}
+  .card .sub{font-size:11px;color:var(--text2);margin-top:2px;}
+  .card .act{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--border2);background:#fff;flex:none;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+  .card .act .ti{font-size:18px;color:var(--text2);}
+
+  /* Done card — nổi bật, to hơn */
+  .card.done{margin:7px .7rem;padding:.85rem .9rem;background:#fff;border-color:#bdebcb;border-left-color:var(--s3);box-shadow:0 1px 4px rgba(34,197,94,.12);}
+  .card.done.s2{border-left-color:var(--s2);} .card.done.s1{border-left-color:var(--s1);}
+  .card.done .act{background:var(--s3);border-color:var(--s3);}
+  .card.done.s2 .act{background:var(--s2);border-color:var(--s2);} .card.done.s1 .act{background:var(--s1);border-color:var(--s1);}
+  .card.done .act .ti{color:#fff;}
+  .card .ptbadge{font-size:10px;font-weight:800;color:#fff;border-radius:10px;padding:1px 7px;}
+  /* Waiting card — gọn, mờ hơn */
+  .card.wait{opacity:.92;}
+  .partial{font-size:10.5px;color:var(--text2);text-decoration:underline;cursor:pointer;margin-top:3px;display:inline-block;}
+  .share{color:var(--tam);cursor:pointer;font-weight:600;} .share .ti{font-size:12px;vertical-align:-1px;}
+
+  /* Bottom sheet */
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;z-index:50;}
+  .overlay.show{display:block;}
+  .sheet{position:fixed;left:0;right:0;bottom:0;max-width:460px;margin:0 auto;background:var(--bg-primary);border-radius:18px 18px 0 0;z-index:51;transform:translateY(100%);transition:transform .25s;padding:1rem 1rem 1.4rem;}
+  .sheet.show{transform:translateY(0);}
+  .sheet .grip{width:40px;height:4px;background:var(--border2);border-radius:4px;margin:0 auto .8rem;}
+  .sheet h3{font-size:15px;margin:0 0 .7rem;display:flex;align-items:center;gap:8px;}
+  .ph-row{display:flex;gap:10px;margin-bottom:.8rem;}
+  .ph-row button{flex:1;padding:.7rem;font-size:13px;font-weight:600;border-radius:var(--r);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;}
+  .ph-row .primary{background:var(--accent);color:#fff;border:none;}
+  .ph-row .ghost{background:#fff;color:var(--accent);border:1px solid var(--accent);}
+  .ainote{font-size:11px;color:#0a6fa0;background:#e7f6fd;border:.5px solid #bfe3f7;border-radius:8px;padding:.45rem .6rem;margin-bottom:.6rem;display:none;}
+  .fhead{display:grid;grid-template-columns:1.3fr .8fr .5fr .55fr 24px;gap:6px;font-size:10px;color:var(--text2);text-transform:uppercase;letter-spacing:.3px;padding:0 2px .3rem;}
+  .frow{display:grid;grid-template-columns:1.3fr .8fr .5fr .55fr 24px;gap:6px;align-items:center;padding:.4rem 0;border-top:.5px solid var(--border);}
+  .frow.empty{display:block;color:var(--text2);font-size:12.5px;text-align:center;padding:.7rem 0;border-top:none;}
+  .frow .fnamewrap{position:relative;}
+  .frow .fname{width:100%;padding:.45rem .5rem;font-size:12.5px;border:1px solid var(--border2);border-radius:8px;font-family:inherit;}
+  .frow .funit{width:100%;padding:.45rem .3rem;font-size:12px;border:1px solid var(--border2);border-radius:8px;font-family:inherit;background:#fff;}
+  .frow .fqty{width:100%;padding:.45rem .25rem;font-size:12.5px;border:1px solid var(--border2);border-radius:8px;text-align:center;font-family:inherit;}
+  .frow .fcal{font-size:12.5px;font-weight:700;color:var(--accent);text-align:right;}
+  .frow .del{color:var(--s1);cursor:pointer;font-size:16px;text-align:center;}
+  .frow .aitag{position:absolute;top:-6px;right:-2px;font-size:8px;font-weight:800;color:#fff;background:#2ba6e0;border-radius:5px;padding:0 4px;}
+  .addrow{width:100%;margin:.5rem 0;padding:.6rem;font-size:12.5px;font-weight:600;color:var(--accent);background:#e7f4ee;border:1px dashed var(--accent);border-radius:var(--r);cursor:pointer;}
+  .tally{background:var(--bg-secondary);border-radius:var(--r);padding:.6rem .8rem;font-size:12.5px;display:flex;justify-content:space-between;}
+  .tally b{color:var(--accent);}
+  .sheet .save{width:100%;margin-top:.9rem;padding:.85rem;font-size:14.5px;font-weight:700;border:none;border-radius:var(--r);background:var(--accent);color:#fff;cursor:pointer;}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="appbar"><i class="ti ti-arrow-left" style="cursor:pointer" onclick="location.href='trang_chu.html'"></i><h1>Sức khỏe tổng thể</h1><i class="ti ti-dots"></i></div>
+
+  <div class="week" id="week"></div>
+
+  <!-- Hero: đồng hồ nhỏ + tổng kết điểm -->
+  <div class="hero">
+    <div class="clock-wrap"><svg id="clock" viewBox="0 0 320 320" width="150" height="150"></svg></div>
+    <div class="summary">
+      <div class="score" id="scoreNum">0 <small>điểm hôm nay</small></div>
+      <div class="subline" id="subline">Hoàn thành đúng lịch để ghi điểm cao nhất</div>
+      <div class="mini-stats">
+        <div class="ms"><div class="v" style="color:var(--accent)">1.250</div><div class="k">Calo in</div></div>
+        <div class="ms"><div class="v">380</div><div class="k">Calo out</div></div>
+        <div class="ms"><div class="v" id="waterStat">0/8</div><div class="k">Cốc nước</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span class="lg"><span class="dot" style="background:var(--s3)"></span>3đ đúng lịch</span>
+    <span class="lg"><span class="dot" style="background:var(--s2)"></span>2đ trễ giờ</span>
+    <span class="lg"><span class="dot" style="background:var(--s1)"></span>1đ một phần</span>
+    <span class="lg"><span class="dot" style="background:var(--idle)"></span>0đ chờ</span>
+    <span class="lg"><span class="dot" style="background:var(--than)"></span>Thân</span>
+    <span class="lg"><span class="dot" style="background:var(--tam)"></span>Tâm</span>
+    <span class="lg"><span class="dot" style="background:var(--tri)"></span>Trí</span>
+  </div>
+
+  <!-- Nước: ghi nhận nhiều lần -->
+  <div class="water">
+    <div class="wtop">
+      <div class="wic"><i class="ti ti-droplet"></i></div>
+      <div class="wt"><div class="ttl">Uống nước</div><div class="sub" id="waterSub">0/8 cốc · mỗi cốc ~250ml (mục tiêu 2,0L)</div></div>
+      <button class="add" onclick="addCup()"><i class="ti ti-plus"></i> Cốc nước</button>
+    </div>
+    <div class="cups" id="cups"></div>
+  </div>
+
+  <!-- Vùng ĐÃ thực hiện (nổi bật, to hơn) -->
+  <div class="zone-head"><i class="ti ti-circle-check" style="color:var(--s3)"></i> Đã thực hiện <span class="cnt" id="doneCnt">(0)</span><span class="pts" id="donePts">+0 điểm</span></div>
+  <div class="zone-done" id="doneZone"></div>
+
+  <!-- Vùng CHỜ thực hiện (gọn hơn) -->
+  <div class="zone-head"><i class="ti ti-clock" style="color:var(--text2)"></i> Chờ thực hiện <span class="cnt" id="waitCnt">(0)</span></div>
+  <div id="waitZone"></div>
+</div>
+
+<div class="navbar">
+  <a href="trang_chu.html"><i class="ti ti-home"></i>Trang chủ</a>
+  <a href="suc_khoe_tong_the.html" class="active"><i class="ti ti-heart-handshake"></i>Chăm sóc</a>
+  <a href="chat.html"><i class="ti ti-message-circle"></i>Chat</a>
+  <a href="#"><i class="ti ti-user"></i>Hồ sơ</a>
+</div>
+
+<!-- Bottom sheet bữa ăn -->
+<div class="overlay" id="ov" onclick="closeSheet()"></div>
+<div class="sheet" id="sheet">
+  <div class="grip"></div>
+  <h3><i class="ti ti-tools-kitchen-2"></i> Ghi bữa ăn — <span id="mealName">Ăn trưa</span></h3>
+  <div class="ph-row">
+    <button class="primary" onclick="demoPhoto()"><i class="ti ti-camera"></i> Chụp ảnh (AI)</button>
+    <button class="ghost" onclick="demoPhoto()"><i class="ti ti-photo"></i> Chọn ảnh (AI)</button>
+  </div>
+  <div class="ainote" id="aiNote">📷 AI tự bóc tách tên món + ước lượng đơn vị — bạn có thể sửa lại bên dưới.</div>
+  <div class="fhead"><span>Món ăn</span><span>Đơn vị</span><span>SL</span><span>kcal</span><span></span></div>
+  <div id="foodList"></div>
+  <button class="addrow" onclick="addRow()"><i class="ti ti-plus"></i> Thêm món thủ công</button>
+  <div class="tally"><span>Tạm tính (API)</span><span><b id="mealCal">0</b> kcal · <b id="mealPro">0</b>g đạm</span></div>
+  <button class="save" onclick="saveMeal()">Lưu bữa ăn</button>
+</div>
+
+<script>
+  function css(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim();}
+  // ===== Dữ liệu =====
+  // score: 3/2/1/0 ; done: đã xong? ; pillar; icon (tabler); meal
+  // Số bữa ăn lấy từ màn "Cá nhân hóa thời gian biểu"
+  var MEAL_COUNT=4;
+  var MEAL_DEFS={
+    3:[['Ăn sáng',7,8,true,3],['Ăn trưa',12,13,true,2],['Ăn tối',18.5,19.5,false,0]],
+    4:[['Ăn sáng',7,8,true,3],['Ăn trưa',12,13,true,2],['Bữa phụ chiều',15.5,16,false,0],['Ăn tối',18.5,19.5,false,0]],
+    5:[['Ăn sáng',7,8,true,3],['Bữa phụ sáng',9.5,10,true,3],['Ăn trưa',12,13,true,2],['Bữa phụ chiều',15.5,16,false,0],['Ăn tối',18.5,19.5,false,0]]
+  };
+  var FIXED=[
+    {key:'wake', label:'Thức dậy',        start:5, end:6,   pillar:'than',icon:'sunrise',    done:true, score:3},
+    {key:'detox',label:'Thải độc',        start:6, end:7,   pillar:'than',icon:'leaf',       done:true, score:3},
+    {key:'work1',label:'Làm việc / Học',  start:8, end:11.5,pillar:'tri', icon:'briefcase',  done:true, score:3},
+    {key:'nap',  label:'Ngủ trưa',        start:13,end:13.5,pillar:'than',icon:'bed',        done:true, score:3},
+    {key:'exer', label:'Thể dục',         start:17,end:18,  pillar:'than',icon:'run',        done:false,score:0},
+    {key:'relax',label:'Thư giãn / Thiền',start:20,end:20.5,pillar:'tam', icon:'yoga',       done:false,score:0},
+    {key:'ptbt', label:'PTBT — Phát triển bản thân',start:20.5,end:21.5,pillar:'tri',icon:'book-2',done:false,score:0},
+    {key:'sleep',label:'Ngủ tối',         start:22,end:29,  pillar:'than',icon:'moon-stars', done:false,score:0}
+  ];
+  function buildActs(){
+    var meals=MEAL_DEFS[MEAL_COUNT].map(function(m,i){return {key:'meal'+i,label:m[0],start:m[1],end:m[2],pillar:'than',icon:'soup',meal:true,done:m[3],score:m[4]};});
+    var all=FIXED.concat(meals); all.sort((a,b)=>a.start-b.start); return all;
+  }
+  var ACTS=buildActs();
+  var WATER={cups:6, target:8};
+  var NOW=14.5;
+  var SCOL={3:css('--s3'),2:css('--s2'),1:css('--s1'),0:css('--idle')};
+  var PCOL={than:css('--than'),tam:css('--tam'),tri:css('--tri')};
+
+  // ===== Đồng hồ (nhỏ, gradient sinh động) =====
+  var CX=160,CY=160,RO=146,RI=104,DAYSTART=5;
+  function ang(h){return ((h-DAYSTART+24)%24)/24*360;}
+  function pol(r,a){return [CX+r*Math.sin(a*Math.PI/180), CY-r*Math.cos(a*Math.PI/180)];}
+  function seg(a0,a1,ro,ri,fill){
+    if(a1<=a0)a1+=360; var laf=(a1-a0)>180?1:0;
+    var p1=pol(ro,a0),p2=pol(ro,a1),p3=pol(ri,a1),p4=pol(ri,a0);
+    return '<path d="M'+p1[0].toFixed(1)+' '+p1[1].toFixed(1)+' A'+ro+' '+ro+' 0 '+laf+' 1 '+p2[0].toFixed(1)+' '+p2[1].toFixed(1)+
+      ' L'+p3[0].toFixed(1)+' '+p3[1].toFixed(1)+' A'+ri+' '+ri+' 0 '+laf+' 0 '+p4[0].toFixed(1)+' '+p4[1].toFixed(1)+' Z" fill="'+fill+'"/>';
+  }
+  function lerp(c1,c2,id){return '<linearGradient id="'+id+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="'+c1+'"/><stop offset="1" stop-color="'+c2+'"/></linearGradient>';}
+  function drawClock(){
+    var defs='<defs>'+lerp('#34d27b','#16a34a','g3')+lerp('#fbbf24','#f59e0b','g2')+lerp('#fdba74','#fb923c','g1')+lerp('#eef1f4','#cdd4db','g0')+'</defs>';
+    var svg=defs;
+    svg+=seg(0,359.99,RO,RI,'url(#g0)');
+    ACTS.forEach(function(a){
+      var fill = a.done? (a.score===3?'url(#g3)':a.score===2?'url(#g2)':'url(#g1)') : 'url(#g0)';
+      svg+=seg(ang(a.start),ang(a.end),RO,RI,fill);
+      var e=ang(a.end)<=ang(a.start)?ang(a.end)+360:ang(a.end);
+      var pd=pol((RO+RI)/2,(ang(a.start)+e)/2%360);
+      svg+='<circle cx="'+pd[0].toFixed(1)+'" cy="'+pd[1].toFixed(1)+'" r="3" fill="'+PCOL[a.pillar]+'"/>';
+    });
+    [0,6,12,18].forEach(function(h){var a=ang(h),p1=pol(RO,a),p2=pol(RI,a);
+      svg+='<line x1="'+p1[0].toFixed(1)+'" y1="'+p1[1].toFixed(1)+'" x2="'+p2[0].toFixed(1)+'" y2="'+p2[1].toFixed(1)+'" stroke="#fff" stroke-width="2"/>';});
+    var pn=pol(RO+2,ang(NOW));
+    svg+='<line x1="160" y1="160" x2="'+pn[0].toFixed(1)+'" y2="'+pn[1].toFixed(1)+'" stroke="'+css('--accent')+'" stroke-width="3"/>';
+    svg+='<circle cx="160" cy="160" r="48" fill="#fff"/><circle cx="160" cy="160" r="6" fill="'+css('--accent')+'"/>';
+    document.getElementById('clock').innerHTML=svg;
+  }
+
+  // ===== Tổng kết & render =====
+  function fmt(h){h=h>24?h-24:h;var hh=Math.floor(h),mm=Math.round((h-hh)*60);return (hh<10?'0':'')+hh+':'+(mm<10?'0':'')+mm;}
+  function iconHtml(a,bg){return '<div class="ic" style="background:'+(bg||'#f0f3f6')+';color:'+PCOL[a.pillar]+'"><i class="ti ti-'+a.icon+'"></i></div>';}
+  function pillarName(p){return p==='than'?'Thân':p==='tam'?'Tâm':'Trí';}
+
+  function render(){
+    var done=ACTS.filter(a=>a.done), wait=ACTS.filter(a=>!a.done);
+    var total=done.reduce((s,a)=>s+a.score,0) + (WATER.cups>=WATER.target?3:0);
+    document.getElementById('scoreNum').innerHTML=total+' <small>điểm hôm nay</small>';
+    document.getElementById('doneCnt').textContent='('+done.length+')';
+    document.getElementById('waitCnt').textContent='('+wait.length+')';
+    document.getElementById('donePts').textContent='+'+done.reduce((s,a)=>s+a.score,0)+' điểm';
+    // done zone
+    document.getElementById('doneZone').innerHTML = done.map(function(a){
+      var cls=a.score===2?' s2':a.score===1?' s1':'';
+      return '<div class="card done'+cls+'">'+iconHtml(a,'#eafaef')+
+        '<div class="mid"><div class="ttl">'+a.label+' <span class="pill" style="background:'+PCOL[a.pillar]+'">'+pillarName(a.pillar)+'</span>'+
+          ' <span class="ptbadge" style="background:'+SCOL[a.score]+'">+'+a.score+'đ</span></div>'+
+          '<div class="sub">'+fmt(a.start)+'–'+fmt(a.end)+' · '+(a.score===3?'đúng lịch':a.score===2?'trễ giờ':'một phần')+
+            ' · <span class="share" onclick="shareAct(\''+a.key+'\')"><i class="ti ti-share"></i> chia sẻ</span></div></div>'+
+        '<div class="act" onclick="undo(\''+a.key+'\')"><i class="ti ti-check"></i></div></div>';
+    }).join('') || '<div class="card" style="opacity:.6;justify-content:center;color:var(--text2)">Chưa có hoạt động nào hoàn thành</div>';
+    // wait zone
+    document.getElementById('waitZone').innerHTML = wait.map(function(a){
+      var late = NOW>a.end;
+      return '<div class="card wait">'+iconHtml(a)+
+        '<div class="mid"><div class="ttl">'+a.label+' <span class="pill" style="background:'+PCOL[a.pillar]+'">'+pillarName(a.pillar)+'</span></div>'+
+          '<div class="sub">'+fmt(a.start)+'–'+fmt(a.end)+(late?' · đã trễ':'')+'</div>'+
+          '<span class="partial" onclick="markPartial(\''+a.key+'\')">Hoàn thành một phần</span></div>'+
+        '<div class="act" title="'+(a.meal?'Ghi bữa ăn':'Đánh dấu xong')+'" onclick="'+(a.meal?'openMeal(\''+a.key+'\',\''+a.label+'\')':'tick(\''+a.key+'\')')+'">'+
+          '<i class="ti ti-'+(a.meal?'camera':'check')+'"></i></div></div>';
+    }).join('') || '<div class="card" style="opacity:.6;justify-content:center;color:var(--text2)">Tuyệt vời! Đã xong mọi việc 🎉</div>';
+    document.getElementById('waterStat').textContent=WATER.cups+'/'+WATER.target;
+    drawClock();
+  }
+
+  // ===== Tương tác — mỗi tick là 1 bản ghi nhật ký (điểm) =====
+  function scoreByTime(a){ return NOW>a.end+0.5 ? 2 : 3; } // demo: trễ→2, đúng→3
+  function tick(key){ var a=ACTS.find(x=>x.key===key); a.done=true; a.score=scoreByTime(a); logEntry(a); render(); }
+  function markPartial(key){ var a=ACTS.find(x=>x.key===key); a.done=true; a.score=1; logEntry(a); render(); }
+  function undo(key){ var a=ACTS.find(x=>x.key===key); a.done=false; a.score=0; render(); }
+  function logEntry(a){ /* TODO: ghi nhật ký {key, time:NOW, score} → dùng cho streak/credit */ }
+  function shareAct(key){ var a=ACTS.find(x=>x.key===key); alert('Chia sẻ "'+a.label+'" (ảnh/kết quả) qua Chat tới Khách hàng / Cộng đồng.\n(HLV dùng để làm gương; KH dùng để khoe tiến bộ.)'); }
+
+  // Nước: cộng dồn nhiều lần
+  function addCup(){ if(WATER.cups<WATER.target+4) WATER.cups++; renderCups(); render(); logWater(); }
+  function logWater(){ /* TODO: ghi nhật ký uống nước +250ml */ }
+  function renderCups(){
+    var html='';
+    for(var i=0;i<WATER.target;i++){ html+='<div class="cup'+(i<WATER.cups?' full':'')+'">'+(i<WATER.cups?'<i class="ti ti-droplet-filled"></i>':'')+'</div>'; }
+    document.getElementById('cups').innerHTML=html;
+    document.getElementById('waterSub').textContent=WATER.cups+'/'+WATER.target+' cốc · mỗi cốc ~250ml (mục tiêu 2,0L)';
+  }
+
+  // Week
+  (function(){var d=['CN','T2','T3','T4','T5','T6','T7'],h='';d.forEach((x,i)=>h+='<div class="day'+(i===4?' active':'')+'"><span class="lbl">'+x+'</span><span class="mini"></span></div>');document.getElementById('week').innerHTML=h;})();
+
+  // ===== Bottom sheet bữa ăn: form nhập tay + AI bóc tách ảnh =====
+  var foods=[], curMeal=null;
+  var UNITS=['bát','lạng','cốc','cái','phần','thìa'];
+  // "API" tính calo demo: [kcal, đạm] theo mỗi đơn vị chuẩn
+  var FOODDB={'gà':[165,31],'cá':[120,22],'tôm':[99,24],'thịt':[180,20],'trứng':[78,6],'rau':[35,3],'nấm':[38,3],'cơm':[200,4],'cơm gạo lứt':[215,5],'phở':[350,12],'sữa':[120,8]};
+  function apiCalo(name,unit,qty){
+    var key=(name||'').toLowerCase().trim(), base=FOODDB[key];
+    if(!base){ for(var k in FOODDB){ if(key && key.indexOf(k)>=0){ base=FOODDB[k]; break; } } }
+    if(!base) base=[120,6];
+    var f= unit==='bát'?1.2: unit==='lạng'?1: unit==='cốc'?1: unit==='thìa'?0.2: 1; // hệ số đơn vị (demo)
+    return [Math.round(base[0]*qty*f), Math.round(base[1]*qty*f)];
+  }
+  function openMeal(key,name){ curMeal=key; document.getElementById('mealName').textContent=name; foods=[];
+    document.getElementById('aiNote').style.display='none'; renderFoods();
+    document.getElementById('ov').classList.add('show'); document.getElementById('sheet').classList.add('show'); }
+  function closeSheet(){ document.getElementById('ov').classList.remove('show'); document.getElementById('sheet').classList.remove('show'); }
+  function demoPhoto(){ // giả lập AI bóc tách (có thể sửa)
+    foods=[{name:'Cơm gạo lứt',unit:'bát',qty:1,source:'ai'},{name:'Gà',unit:'lạng',qty:1.5,source:'ai'},{name:'Rau',unit:'phần',qty:1,source:'ai'}];
+    document.getElementById('aiNote').style.display='block'; renderFoods(); }
+  function addRow(){ foods.push({name:'',unit:'bát',qty:1,source:'manual'}); renderFoods(); }
+  function rmFood(i){ foods.splice(i,1); renderFoods(); }
+  function updFood(i,field,val){ foods[i][field]= field==='qty'? parseFloat(val||0): val; renderFoods(); }
+  function renderFoods(){
+    var html='',cal=0,pro=0;
+    foods.forEach(function(f,i){
+      var r=apiCalo(f.name,f.unit,f.qty); cal+=r[0]; pro+=r[1];
+      var opts=UNITS.map(u=>'<option'+(u===f.unit?' selected':'')+'>'+u+'</option>').join('');
+      html+='<div class="frow">'+
+        '<div class="fnamewrap"><input class="fname" value="'+(f.name||'')+'" placeholder="vd: gà, cá, rau" onchange="updFood('+i+',\'name\',this.value)">'+(f.source==='ai'?'<span class="aitag">AI</span>':'')+'</div>'+
+        '<select class="funit" onchange="updFood('+i+',\'unit\',this.value)">'+opts+'</select>'+
+        '<input class="fqty" type="number" step="0.5" min="0" value="'+f.qty+'" onchange="updFood('+i+',\'qty\',this.value)">'+
+        '<span class="fcal">'+r[0]+'</span>'+
+        '<i class="ti ti-trash del" onclick="rmFood('+i+')"></i>'+
+      '</div>';
+    });
+    if(!foods.length) html='<div class="frow empty">Chưa có món — bấm <b>Chụp/Chọn ảnh (AI)</b> hoặc <b>Thêm món thủ công</b>.</div>';
+    document.getElementById('foodList').innerHTML=html;
+    document.getElementById('mealCal').textContent=cal;
+    document.getElementById('mealPro').textContent=pro;
+  }
+  function saveMeal(){ if(curMeal){ var a=ACTS.find(x=>x.key===curMeal); a.done=true; a.score=scoreByTime(a); logEntry(a); } closeSheet(); render(); }
+
+  renderCups(); render();
+</script>
+</body>
+</html>

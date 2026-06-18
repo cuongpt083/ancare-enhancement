@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đồng hồ sinh học — Prototype</title>
+<link rel="stylesheet" href="tabler-icons.min.css">
+<style>
+  :root {
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --bg-primary: #ffffff; --bg-secondary: #f6f7f9; --bg-app: #eef0f3;
+    --text-primary: #1a1d21; --text-secondary: #6b7280;
+    --border: #e5e7eb; --border2: #d1d5db;
+    --accent: #2f6f4f;
+    --good: #2f9e57; --warn: #d99a14; --bad: #c5402f; --idle: #d6dae0;
+    --than: #2f6f4f; --tam: #7b5ea7; --tri: #c2761b;
+    --r-md: 10px; --r-lg: 16px;
+  }
+  * { box-sizing: border-box; }
+  body, html { margin: 0; padding: 0; font-family: var(--font-sans); background: var(--bg-app); color: var(--text-primary); }
+  .container { width: 100%; max-width: 460px; margin: 0 auto; padding: 0 0 40px; }
+
+  .appbar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 8px;
+    background: var(--bg-primary); padding: 0.9rem 1rem; border-bottom: 0.5px solid var(--border); }
+  .appbar .ti { font-size: 22px; }
+  .appbar h1 { font-size: 16px; font-weight: 600; margin: 0; flex: 1; }
+
+  /* Week nav */
+  .week { display: flex; justify-content: space-between; padding: 0.7rem 1rem; background: var(--bg-primary); border-bottom: 0.5px solid var(--border); }
+  .day { display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; }
+  .day .lbl { font-size: 11px; color: var(--text-secondary); }
+  .day.active .lbl { color: var(--accent); font-weight: 700; }
+  .day .mini { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--idle); }
+  .day.active .mini { border-color: var(--accent); background: var(--accent); }
+
+  /* Clock */
+  .clock-wrap { display: flex; justify-content: center; padding: 1rem 0 0.3rem; }
+  .center-pct { font-size: 30px; font-weight: 800; fill: var(--accent); }
+  .center-sub { font-size: 10px; fill: var(--text-secondary); }
+  .seg-label { font-size: 9px; fill: var(--text-secondary); }
+
+  /* Quick stats */
+  .stats { display: flex; gap: 8px; padding: 0.3rem 1rem 0.8rem; }
+  .stat { flex: 1; background: var(--bg-primary); border: 0.5px solid var(--border); border-radius: var(--r-md); padding: 0.55rem; text-align: center; }
+  .stat .v { font-size: 15px; font-weight: 700; }
+  .stat .k { font-size: 10px; color: var(--text-secondary); margin-top: 2px; }
+
+  /* Legend */
+  .legend { display: flex; flex-wrap: wrap; gap: 10px 14px; padding: 0 1rem 0.8rem; }
+  .lg { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-secondary); }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  /* Activity cards */
+  .sec-title { font-size: 13px; font-weight: 600; padding: 0.4rem 1rem; color: var(--text-secondary); }
+  .card { display: flex; align-items: center; gap: 12px; background: var(--bg-primary); margin: 0 1rem 8px; padding: 0.7rem 0.8rem;
+    border: 0.5px solid var(--border); border-left-width: 4px; border-radius: var(--r-md); }
+  .card .ic { width: 34px; height: 34px; border-radius: 9px; background: var(--bg-secondary); display: flex; align-items: center; justify-content: center; flex: none; }
+  .card .ic .ti { font-size: 18px; color: var(--accent); }
+  .card .mid { flex: 1; min-width: 0; }
+  .card .ttl { font-size: 13.5px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+  .card .pill { font-size: 9px; font-weight: 700; color: #fff; border-radius: 4px; padding: 1px 5px; }
+  .card .sub { font-size: 11.5px; color: var(--text-secondary); margin-top: 2px; }
+  .card .act { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--border2); background: #fff; flex: none;
+    display: flex; align-items: center; justify-content: center; cursor: pointer; }
+  .card .act .ti { font-size: 18px; color: var(--accent); }
+  .card .act.done { background: var(--good); border-color: var(--good); }
+  .card .act.done .ti { color: #fff; }
+
+  /* Bottom sheet */
+  .overlay { position: fixed; inset: 0; background: rgba(0,0,0,.35); display: none; z-index: 50; }
+  .overlay.show { display: block; }
+  .sheet { position: fixed; left: 0; right: 0; bottom: 0; max-width: 460px; margin: 0 auto; background: var(--bg-primary);
+    border-radius: 18px 18px 0 0; z-index: 51; transform: translateY(100%); transition: transform .25s; padding: 1rem 1rem 1.4rem; }
+  .sheet.show { transform: translateY(0); }
+  .sheet .grip { width: 40px; height: 4px; background: var(--border2); border-radius: 4px; margin: 0 auto 0.8rem; }
+  .sheet h3 { font-size: 15px; margin: 0 0 0.7rem; display: flex; align-items: center; gap: 8px; }
+  .ph-row { display: flex; gap: 10px; margin-bottom: 0.8rem; }
+  .ph-row button { flex: 1; padding: 0.7rem; font-size: 13px; font-weight: 600; border-radius: var(--r-md); cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 6px; }
+  .ph-row .primary { background: var(--accent); color: #fff; border: none; }
+  .ph-row .ghost { background: #fff; color: var(--accent); border: 1px solid var(--accent); }
+  .food { display: flex; align-items: center; gap: 8px; padding: 0.5rem 0; border-top: 0.5px solid var(--border); font-size: 13px; }
+  .food:first-of-type { border-top: none; }
+  .food .fn { flex: 1; }
+  .food .fc { color: var(--text-secondary); font-size: 12px; }
+  .food .del { color: var(--bad); cursor: pointer; font-size: 16px; }
+  .addfood { display: flex; gap: 8px; margin: 0.6rem 0; }
+  .addfood input { flex: 1; padding: 0.55rem 0.65rem; font-size: 13px; border: 1px solid var(--border2); border-radius: var(--r-md); }
+  .addfood button { width: 42px; border: 1px solid var(--accent); background: var(--accent-soft,#e7f1ec); color: var(--accent); border-radius: var(--r-md); font-size: 20px; cursor: pointer; }
+  .tally { background: var(--bg-secondary); border-radius: var(--r-md); padding: 0.6rem 0.8rem; font-size: 12.5px; display: flex; justify-content: space-between; }
+  .tally b { color: var(--accent); }
+  .sheet .save { width: 100%; margin-top: 0.9rem; padding: 0.85rem; font-size: 14.5px; font-weight: 700; border: none; border-radius: var(--r-md); background: var(--accent); color: #fff; cursor: pointer; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="appbar"><i class="ti ti-arrow-left"></i><h1>Đồng hồ sinh học</h1><i class="ti ti-dots"></i></div>
+
+  <!-- Week nav -->
+  <div class="week" id="week"></div>
+
+  <!-- Clock -->
+  <div class="clock-wrap">
+    <svg id="clock" viewBox="0 0 320 320" width="300" height="300"></svg>
+  </div>
+
+  <!-- Quick stats (tâm đồng hồ tóm tắt) -->
+  <div class="stats">
+    <div class="stat"><div class="v" style="color:var(--accent)">1.250</div><div class="k">Calo in / 1.600</div></div>
+    <div class="stat"><div class="v">380</div><div class="k">Calo out</div></div>
+    <div class="stat"><div class="v">1,4 / 2,0 L</div><div class="k">Nước</div></div>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <span class="lg"><span class="dot" style="background:var(--good)"></span>Tốt</span>
+    <span class="lg"><span class="dot" style="background:var(--warn)"></span>Lưu ý</span>
+    <span class="lg"><span class="dot" style="background:var(--bad)"></span>Cảnh báo</span>
+    <span class="lg"><span class="dot" style="background:var(--idle)"></span>Chưa tới giờ</span>
+    <span class="lg"><span class="dot" style="background:var(--than)"></span>Thân</span>
+    <span class="lg"><span class="dot" style="background:var(--tam)"></span>Tâm</span>
+    <span class="lg"><span class="dot" style="background:var(--tri)"></span>Trí</span>
+  </div>
+
+  <div class="sec-title">Hoạt động hôm nay</div>
+  <div id="cards"></div>
+</div>
+
+<!-- Bottom sheet: Ghi bữa ăn -->
+<div class="overlay" id="ov" onclick="closeSheet()"></div>
+<div class="sheet" id="sheet">
+  <div class="grip"></div>
+  <h3><i class="ti ti-tools-kitchen-2"></i> Ghi bữa ăn — <span id="mealName">Ăn trưa</span></h3>
+  <div class="ph-row">
+    <button class="primary" onclick="demoPhoto()"><i class="ti ti-camera"></i> Chụp ảnh</button>
+    <button class="ghost" onclick="demoPhoto()"><i class="ti ti-photo"></i> Chọn ảnh</button>
+  </div>
+  <div id="foodList"></div>
+  <div class="addfood">
+    <input id="foodInput" type="text" placeholder="Thêm món (vd: Cơm gạo lứt)">
+    <button onclick="addFood()">+</button>
+  </div>
+  <div class="tally"><span>Tạm tính bữa này</span><span><b id="mealCal">0</b> kcal · <b id="mealPro">0</b>g đạm</span></div>
+  <button class="save" onclick="closeSheet()">Lưu bữa ăn</button>
+</div>
+
+<script>
+  // ===== Dữ liệu hoạt động (demo) =====
+  // start/end: giờ 24h; status: good/warn/bad/idle; pillar: than/tam/tri
+  var ACTS = [
+    { key:'wake',   label:'Thức dậy',         start:5,  end:6,    pillar:'than', status:'good', icon:'sunrise',        confirm:'photo' },
+    { key:'detox',  label:'Thải độc / Nước',  start:6,  end:7,    pillar:'than', status:'good', icon:'glass-full',     confirm:'tick' },
+    { key:'bfast',  label:'Ăn sáng',          start:7,  end:8,    pillar:'than', status:'good', icon:'bowl',           confirm:'photo', meal:true },
+    { key:'work1',  label:'Làm việc / Học',   start:8,  end:11.5, pillar:'tri',  status:'good', icon:'briefcase',      confirm:'tick' },
+    { key:'lunch',  label:'Ăn trưa',          start:12, end:13,   pillar:'than', status:'warn', icon:'bowl',           confirm:'photo', meal:true },
+    { key:'nap',    label:'Ngủ trưa',         start:13, end:13.5, pillar:'than', status:'good', icon:'moon',           confirm:'tick' },
+    { key:'exer',   label:'Thể dục',          start:17, end:18,   pillar:'than', status:'idle', icon:'run',            confirm:'photo' },
+    { key:'dinner', label:'Ăn tối',           start:18.5,end:19.5,pillar:'than', status:'idle', icon:'bowl',           confirm:'photo', meal:true },
+    { key:'relax',  label:'Thư giãn / Thiền', start:20, end:20.5, pillar:'tam',  status:'idle', icon:'yoga',           confirm:'tick' },
+    { key:'ptbt',   label:'PTBT — Phát triển bản thân', start:20.5, end:21.5, pillar:'tri', status:'idle', icon:'book', confirm:'photo' },
+    { key:'sleep',  label:'Ngủ tối',          start:22, end:29,   pillar:'than', status:'idle', icon:'zzz',            confirm:'tick' }
+  ];
+  var NOW = 14.5; // giờ hiện tại (demo)
+  var COL = { good:getCss('--good'), warn:getCss('--warn'), bad:getCss('--bad'), idle:getCss('--idle') };
+  var PCOL = { than:getCss('--than'), tam:getCss('--tam'), tri:getCss('--tri') };
+  function getCss(v){ return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+
+  // ===== Vẽ đồng hồ (SVG donut segments) =====
+  var CX=160, CY=160, RO=140, RI=96, DAYSTART=5;
+  function ang(h){ var a=((h-DAYSTART+24)%24)/24*360; return a; }
+  function pol(r,a){ var rad=(a-90)*Math.PI/180 + Math.PI/2; // clockwise from top
+    return [CX + r*Math.sin(a*Math.PI/180), CY - r*Math.cos(a*Math.PI/180)]; }
+  function seg(a0,a1,ro,ri,fill,op){
+    if(a1<=a0) a1+=360;
+    var laf=(a1-a0)>180?1:0;
+    var p1=pol(ro,a0),p2=pol(ro,a1),p3=pol(ri,a1),p4=pol(ri,a0);
+    return '<path d="M'+p1[0].toFixed(1)+' '+p1[1].toFixed(1)+
+      ' A'+ro+' '+ro+' 0 '+laf+' 1 '+p2[0].toFixed(1)+' '+p2[1].toFixed(1)+
+      ' L'+p3[0].toFixed(1)+' '+p3[1].toFixed(1)+
+      ' A'+ri+' '+ri+' 0 '+laf+' 0 '+p4[0].toFixed(1)+' '+p4[1].toFixed(1)+
+      ' Z" fill="'+fill+'" opacity="'+(op||1)+'"/>';
+  }
+  function drawClock(){
+    var svg='';
+    // nền vòng
+    svg+='<circle cx="160" cy="160" r="140" fill="#fff" stroke="'+COL.idle+'" stroke-width="0.5"/>';
+    svg+=seg(0,359.99,RO,RI,COL.idle,0.35);
+    // các múi hoạt động
+    ACTS.forEach(function(a){
+      svg+=seg(ang(a.start),ang(a.end),RO,RI,COL[a.status],1);
+      // chấm trụ cột ở giữa múi
+      var mid=(ang(a.start)+ ((ang(a.end)<=ang(a.start)?ang(a.end)+360:ang(a.end)) ))/2;
+      var pd=pol((RO+RI)/2, mid%360);
+      svg+='<circle cx="'+pd[0].toFixed(1)+'" cy="'+pd[1].toFixed(1)+'" r="3" fill="'+PCOL[a.pillar]+'"/>';
+    });
+    // vạch giờ chính (mỗi 6h)
+    [0,6,12,18].forEach(function(h){
+      var a=ang(h), p1=pol(RO,a),p2=pol(RO-8,a);
+      svg+='<line x1="'+p1[0].toFixed(1)+'" y1="'+p1[1].toFixed(1)+'" x2="'+p2[0].toFixed(1)+'" y2="'+p2[1].toFixed(1)+'" stroke="#fff" stroke-width="2"/>';
+      var pl=pol(RO-20,a);
+      svg+='<text x="'+pl[0].toFixed(1)+'" y="'+(pl[1]+3).toFixed(1)+'" text-anchor="middle" class="seg-label">'+h+'h</text>';
+    });
+    // kim thời gian thực
+    var pn=pol(RO+2, ang(NOW));
+    svg+='<line x1="160" y1="160" x2="'+pn[0].toFixed(1)+'" y2="'+pn[1].toFixed(1)+'" stroke="'+getCss('--accent')+'" stroke-width="2.5"/>';
+    svg+='<circle cx="160" cy="160" r="5" fill="'+getCss('--accent')+'"/>';
+    // tâm: % + phụ
+    svg+='<text x="160" y="150" text-anchor="middle" class="center-pct">62%</text>';
+    svg+='<text x="160" y="168" text-anchor="middle" class="center-sub">hoàn thành hôm nay</text>';
+    svg+='<text x="160" y="184" text-anchor="middle" class="center-sub">'+fmtTime(NOW)+'</text>';
+    document.getElementById('clock').innerHTML=svg;
+  }
+  function fmtTime(h){ var hh=Math.floor(h), mm=Math.round((h-hh)*60); return (hh<10?'0':'')+hh+':'+(mm<10?'0':'')+mm; }
+
+  // ===== Thẻ hoạt động =====
+  function drawCards(){
+    var html='';
+    ACTS.forEach(function(a){
+      var done = a.status==='good';
+      html+='<div class="card" style="border-left-color:'+COL[a.status]+'">'+
+        '<div class="ic"><i class="ti ti-'+iconOf(a.icon)+'"></i></div>'+
+        '<div class="mid"><div class="ttl">'+a.label+
+          ' <span class="pill" style="background:'+PCOL[a.pillar]+'">'+pillarName(a.pillar)+'</span></div>'+
+          '<div class="sub">'+fmtTime(a.start)+(a.end<29?'–'+fmtTime(a.end>24?a.end-24:a.end):'')+' · '+statusName(a.status)+'</div></div>'+
+        '<div class="act'+(done?' done':'')+'" onclick="'+(a.meal?'openMeal(\''+a.label+'\')':'toggleDone(this)')+'">'+
+          '<i class="ti ti-'+(a.confirm==='photo'?'camera':'check')+'"></i></div>'+
+      '</div>';
+    });
+    document.getElementById('cards').innerHTML=html;
+  }
+  function iconOf(n){ var m={sunrise:'sunrise',['glass-full']:'glass-full',bowl:'bowl-spoon',briefcase:'briefcase',moon:'moon',run:'run',yoga:'yoga',book:'book-2',zzz:'zzz'}; return m[n]||'circle'; }
+  function pillarName(p){ return p==='than'?'Thân':p==='tam'?'Tâm':'Trí'; }
+  function statusName(s){ return s==='good'?'Hoàn thành':s==='warn'?'Cần lưu ý':s==='bad'?'Bỏ lỡ':'Chưa tới giờ'; }
+  function toggleDone(el){ el.classList.toggle('done'); }
+
+  // ===== Week nav =====
+  function drawWeek(){
+    var d=['CN','T2','T3','T4','T5','T6','T7'], html='';
+    d.forEach(function(x,i){ html+='<div class="day'+(i===4?' active':'')+'"><span class="lbl">'+x+'</span><span class="mini"></span></div>'; });
+    document.getElementById('week').innerHTML=html;
+  }
+
+  // ===== Bottom sheet bữa ăn =====
+  var foods=[];
+  function openMeal(name){ document.getElementById('mealName').textContent=name; foods=[]; renderFoods();
+    document.getElementById('ov').classList.add('show'); document.getElementById('sheet').classList.add('show'); }
+  function closeSheet(){ document.getElementById('ov').classList.remove('show'); document.getElementById('sheet').classList.remove('show'); }
+  function demoPhoto(){ // giả lập AI nhận diện
+    foods=[{n:'Cơm gạo lứt',c:220,p:5},{n:'Ức gà áp chảo',c:165,p:31},{n:'Rau luộc',c:45,p:3}]; renderFoods();
+  }
+  function addFood(){ var v=document.getElementById('foodInput').value.trim(); if(!v) return;
+    foods.push({n:v,c:120,p:6}); document.getElementById('foodInput').value=''; renderFoods(); }
+  function renderFoods(){
+    var html='', cal=0, pro=0;
+    foods.forEach(function(f,i){ cal+=f.c; pro+=f.p;
+      html+='<div class="food"><span class="fn">'+f.n+'</span><span class="fc">'+f.c+' kcal · '+f.p+'g đạm</span>'+
+        '<i class="ti ti-trash del" onclick="rmFood('+i+')"></i></div>'; });
+    if(!foods.length) html='<div class="food" style="color:var(--text-secondary)">Chưa có món — chụp ảnh hoặc thêm thủ công.</div>';
+    document.getElementById('foodList').innerHTML=html;
+    document.getElementById('mealCal').textContent=cal;
+    document.getElementById('mealPro').textContent=pro;
+  }
+  function rmFood(i){ foods.splice(i,1); renderFoods(); }
+
+  drawWeek(); drawClock(); drawCards();
+</script>
+</body>
+</html>
