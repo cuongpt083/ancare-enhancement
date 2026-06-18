@@ -16,6 +16,11 @@ graph LR
 - Từ Trang chủ có các mục chức năng, nổi bật:
   - **"Cá nhân hóa thời gian biểu"** (hiển thị nhỏ) → màn cấu hình giờ & số bữa (§A.1).
   - **"Chăm sóc bản thân"** → màn **"Sức khỏe tổng thể"** để check-in nhiệm vụ hằng ngày (§A→§D).
+  - **"Gợi ý bữa ăn"** → màn **xem gợi ý bữa ăn hiện tại** (`prototypes/goi_y_bua_an.html`).
+
+### 0.1 Màn "Gợi ý bữa ăn" (phía Khách hàng)
+
+KH xem **thực đơn hiện tại** do HLV tạo: **phiên bản đang hiệu lực** (còn hiệu lực đến ngày nào — mỗi bản 10 ngày), tổng **Calo/ngày**, phân bổ & món gợi ý theo từng bữa. Có nút **"Hỏi HLV về thực đơn này"** → mở màn **Chat** để hỏi đáp về gợi ý bữa ăn hiện tại. (KH chỉ xem; việc tạo/đổi phiên bản do HLV thực hiện — xem `Workflow-HLV.md §3`.)
 
 > 👥 **HLV làm gương:** Chuỗi điều hướng này dành cho **Khách hàng**, nhưng **HLV cũng thực hiện chính các nhiệm vụ này** (qua cùng các màn) để **làm gương**. HLV có thể **chia sẻ** việc đã làm — qua **hình ảnh, chat** — và **gửi cho Khách hàng** (nút "chia sẻ" trên hoạt động đã hoàn thành). Xem thêm `Workflow-HLV.md`.
 

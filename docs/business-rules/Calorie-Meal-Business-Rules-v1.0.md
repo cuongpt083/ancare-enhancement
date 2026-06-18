@@ -435,6 +435,48 @@
 
 ---
 
+### Process 2.1b: Cấu trúc MỘT BỮA theo 3 NHÓM THỰC PHẨM (core gợi ý)
+
+> Mỗi bữa ăn được gợi ý dựa trên **3 nhóm thực phẩm**. Mỗi nhóm hiển thị **lượng Calo mục tiêu** và lấy món gợi ý từ **danh mục món ăn tương ứng**. Riêng **nhóm đạm** còn hiển thị thêm **lượng đạm (protein, g) mục tiêu**.
+
+| Nhóm | Thông tin hiển thị | Nguồn món gợi ý (catalog) |
+|---|---|---|
+| **1. Nhóm đạm (Protein)** | **Calo mục tiêu** + **Đạm (g) mục tiêu** | Danh mục món cung cấp **đạm** (gà, cá, tôm, trứng, đậu, thịt nạc…) |
+| **2. Nhóm xơ (Rau xanh, Vitamin)** | **Calo mục tiêu** | Danh mục món cung cấp **chất xơ & vitamin** (rau luộc, salad, rau hấp…) |
+| **3. Nhóm đường/bột (Carb)** | **Calo mục tiêu** | Danh mục món cung cấp **tinh bột, đường** (cơm, khoai, ngô, yến mạch, trái cây…) |
+
+```
+BỮA ĂN
+ ├─ Nhóm đạm   : target_calo, target_dam(g) → chọn món từ catalog PROTEIN
+ ├─ Nhóm xơ    : target_calo               → chọn món từ catalog FIBER_VITAMIN
+ └─ Nhóm đường/bột : target_calo           → chọn món từ catalog CARB
+Tổng calo bữa = Σ calo 3 nhóm
+```
+
+**Business Rules — phân bổ & chọn món theo nhóm:**
+- Calo mỗi bữa được **chia về 3 nhóm** theo tỉ lệ chuẩn của Nutrition club (đạm ưu tiên đủ mục tiêu protein; phần còn lại chia cho xơ & đường-bột).
+- Mỗi nhóm chọn **1+ món** từ đúng catalog của nhóm; tổng calo các món ≈ calo mục tiêu của nhóm.
+- Nhóm đạm phải đáp ứng **đạm (g) mục tiêu**; nếu thiếu → tăng khẩu phần/đổi món đạm.
+- Áp dụng **Process 2.3** (lọc theo bệnh lý/dị ứng) trên từng món trong cả 3 nhóm.
+
+**Ví dụ thực tế (phiếu Nutrition club — "Con số kỳ diệu 1.700 Cal/ngày"):**
+
+> Tính: **RMR 1390 + AMR 347 + EX 0 = TMR 1737** → Magic Calories ~**1.700 kcal/ngày** (≈1.711 phân bổ qua các bữa).
+
+| Bữa | Nhóm đạm | Nhóm xơ | Nhóm đường/bột |
+|---|---|---|---|
+| **Sáng** | 3 lòng trắng trứng (50) | — | Bữa ăn lành mạnh (110) + 2 thìa vừng đen (100) + sữa đậu nành không đường (60); ½ củ khoai/bắp ngô (100) |
+| **Trưa** | 1 phần thức ăn gà/cá… (400) | ½ bát rau (100) | ½ bát cơm (100) |
+| **Chiều (16h)** | — | — | Bữa ăn lành mạnh (90) + ½ củ khoai/ngô luộc (100) + 1 quả táo/ổi |
+| **Tối** | 1 phần thức ăn gà/cá… (400) | ½ bát rau (100) | ½ bát cơm (100) |
+
+**Lưu ý chế độ (đính kèm phiếu):**
+1. **Hạn chế** thịt đỏ, đồ chiên/xào/rán/nướng.
+2. **Uống nước tối thiểu 0,4 L / 10 kg trọng lượng / ngày** (vd 50 kg → ~2,0 L/ngày).
+3. **Chương trình áp dụng 10 ngày → đo lại → điều chỉnh** (gắn với cơ chế gợi ý bữa ăn **đa phiên bản 10 ngày** — xem `docs/to-be/Workflow-HLV.md §3`).
+
+---
+
 ### Process 2.2: Điều Chỉnh Calo từ 1200 → Target
 
 ```
