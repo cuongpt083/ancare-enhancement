@@ -70,6 +70,37 @@ Từ tầm nhìn trên, quá trình phân tích As-Is → To-be → GAP → To-d
 
 6. **Số hóa MLM tập trung có rủi ro đặc thù.** Đã rà soát 15 rủi ro (quyền sở hữu lead, tranh chấp tuyến, "cắt cầu", pháp lý đa cấp & quảng cáo sức khỏe, riêng tư dữ liệu, tự động hóa xói mòn quan hệ, adoption…). Nguyên tắc giảm thiểu: **trao quyền không thâu tóm; AI hỗ trợ không thay người & không thao túng; tuân thủ là ràng buộc thiết kế; minh bạch & quyền người dùng; cấu hình được; thắng nhỏ tạo niềm tin trước khi mở rộng**.
 
+# Năng lực & trải nghiệm sản phẩm (đã thiết kế chi tiết)
+
+Từ định hướng trên, các luồng trọng tâm đã được đặc tả nghiệp vụ + UI-UX + prototype tương tác. Đây là phần phản ánh rõ nhất "phần mềm này mang lại trải nghiệm gì".
+
+## A. Trải nghiệm phía Khách hàng — sống khỏe theo Thân · Tâm · Trí
+
+Toàn bộ trải nghiệm KH xoay quanh triết lý **Thân – Tâm – Trí**: Thân (sức khỏe thể chất & tinh thần), Tâm (lối sống lành mạnh, biết ơn, quản trị cảm xúc), Trí (kiến thức tài chính, đầu tư, kinh doanh — Phát triển bản thân).
+
+- **Trang chủ cá nhân hóa:** % hoàn thành ngày/tuần, đánh giá sức khỏe toàn diện theo 3 trụ cột, lịch biểu (học tập/quiz/sự kiện), tổng kết cuối ngày (đủ đạm/calo/nước/ngủ, điểm, lưu ý cải thiện).
+- **"Sức khỏe tổng thể" — Đồng hồ sinh học:** vòng tròn 24h chia múi theo hoạt động, tô màu trạng thái; check-in từng nhiệm vụ với **chấm điểm theo độ đúng giờ** (3/2/1/0 → nền tảng streak & credit thưởng), **uống nước ghi nhận nhiều lần (cốc ~250ml)**, hai vùng "đã/chờ thực hiện" tạo động lực.
+- **Cá nhân hóa thời gian biểu:** KH tự chọn **số bữa ăn (3/4/5)** và giờ từng hoạt động; hệ thống hiển thị **mức tối ưu đồng hồ sinh học** và điểm tối đa (lệch nhịp sinh học → giảm điểm) để cân bằng giữa tối ưu và khả thi.
+- **Gợi ý bữa ăn cá nhân hóa:** thực đơn theo mục tiêu cân nặng + số bữa, cấu trúc **3 nhóm (Đạm/Xơ/Đường-bột)**; ghi nhận bữa ăn bằng **chụp ảnh → AI bóc tách món + ước lượng đơn vị (bát/lạng)** hoặc nhập tay form → **API tính calo**.
+- **Kết nối & truyền cảm hứng:** chat trực tiếp với HLV (hỏi đáp thực đơn, được động viên), chia sẻ tiến bộ.
+
+## B. Trải nghiệm phía HLV — đồng hành & chuyển đổi bằng dữ liệu
+
+- **Tổng quan (Dashboard):** KPI KH/lead, "hôm nay nên tiếp cận", cảnh báo gợi ý bữa ăn cần làm mới.
+- **Quản lý KH tiềm năng theo chân dung:** danh sách lead gắn **chân dung khách hàng + tính cách DISC + giai đoạn sẵn sàng (Stage-of-Change) + lead score + việc cần làm tiếp**; bộ câu hỏi khảo sát sinh chân dung, AI gợi ý cách tiếp cận (có nêu bằng chứng, tôn trọng consent).
+- **Luồng tư vấn chuẩn hóa:** Tạo KH tiềm năng → **Nhập chỉ số Tanita (OCR ảnh)** → **Bản tư vấn** (đối chiếu chuẩn WHO/Tanita, chỉ ra điểm cần cải thiện & nguy cơ) → **Thiết lập mục tiêu** (chọn gói + thời gian, **tính % khả thi**, tinh chỉnh mục tiêu) → **Tạo tài khoản & đặt gói** → **Gợi ý bữa ăn**.
+- **Gợi ý bữa ăn đa phiên bản:** mỗi thực đơn hiệu lực **10 ngày** → đo lại → điều chỉnh mục tiêu → tạo phiên bản mới (lưu lịch sử).
+- **Chi tiết KH & chăm sóc:** xem Tanita, mục tiêu, ảnh check-in, lịch sử thực đơn; **HLV làm gương** — tự thực hiện lộ trình và chia sẻ ảnh/kết quả qua chat tới KH/cộng đồng.
+
+## C. Nền tảng dữ liệu & quy tắc nghiệp vụ
+
+- **Chân dung khách hàng (mô hình 2 bảng):** `users` (cơ bản) + `customer_personas` (JSONB linh hoạt: DISC, Stage, pain points, **lưu cả câu hỏi–câu trả lời khảo sát** làm bằng chứng cho AI suy luận).
+- **Quy tắc Calo & bữa ăn:** tính "con số kỳ diệu" (RMR+AMR+EX=TMR), cấu trúc bữa 3 nhóm thực phẩm, ràng buộc tốc độ an toàn, nước ≥ 0,4 L/10 kg/ngày.
+- **Quy tắc đề xuất gói:** chọn gói theo mục tiêu × thời gian × chân dung (DISC/Stage/ngân sách), tính % đạt được.
+- **Đạo đức & tuân thủ:** AI hỗ trợ không thay người, không thao túng; mọi xử lý dữ liệu cá nhân tuân thủ consent.
+
+> Các luồng trên đã có **prototype HTML tương tác** trong `prototypes/kh/` (Khách hàng) và `prototypes/hlv/` (HLV), nối điều hướng đầy đủ.
+
 ## Lộ trình MVP (tóm tắt)
 
 - **MVP-1 — Nền tảng PSM + Lan tỏa & Gắn kết:** dựng La bàn quy trình/GNV; chia sẻ câu chuyện thành công, nhắc nhở chủ động, chăm sóc theo dịp; nền tảng phễu (DSKHTN số, đặt lịch 2/1).
@@ -85,6 +116,11 @@ Từ tầm nhìn trên, quá trình phân tích As-Is → To-be → GAP → To-d
 | `docs/to-be/` | **`To-be study report_v2.1 (consolidated).md`** — bản hợp nhất: Phần I tổng thể · Phần II La bàn 12 bước (PSM) · Phần III Thu hút & Chuyển đổi (AI) · Phần IV Rà soát rủi ro. |
 | `docs/gap/` | Phân tích khoảng cách (GAP v2.0). |
 | `docs/to-do/` | Khuyến nghị hành động theo MVP (To-do v2.0). |
+| `docs/to-be/` (workflow & UI-UX) | `Workflow-HLV.md`, `Workflow-KH.md` (luồng nghiệp vụ); `UI-UX-HLV_v1.0.md`, `UI-UX-Lo-trinh-Dong-ho-sinh-hoc_v1.0.md` (đặc tả UI-UX); `customer-persona-disc-framework_v1.0.md`; case study `Huawei-Health-Clover-case-study.md`. |
+| `docs/technical/` | Thiết kế kỹ thuật: `customer-persona-data-model_v1.0.md` (mô hình 2 bảng + ERD). |
+| `docs/business-rules/` | `Calorie-Meal-Business-Rules-v1.0.md` (calo & bữa ăn 3 nhóm); `packaged-service-advice-v1.0.md` (đề xuất gói). |
+| `docs/as-is/` (bổ sung) | `high-level-design.md` — HLD hệ thống hiện trạng. |
+| `prototypes/` | Prototype HTML tương tác: `kh/` (màn Khách hàng), `hlv/` (màn HLV), `tabler-icons.min.css`. |
 | `docs/references/` | Tài liệu gốc Quy trình 12 bước kinh doanh. |
 
 > *Các bản v1.0 (To-be/GAP/To-do) và nghiên cứu khả thi v1.0 theo định hướng cũ (vận hành club) được giữ để tham khảo, đã lỗi thời so với định hướng DXP hiện tại.*

@@ -12,11 +12,11 @@ graph LR
     P -->|"Quay lại"| H
 ```
 
-- **Trang chủ** (`prototypes/trang_chu.html`): hiển thị **% hoàn thành ngày/tuần**, **đánh giá sức khỏe toàn diện** (Thân–Tâm–Trí), **lịch biểu cần làm** (học tập, làm quiz, sự kiện…), và **tổng kết cuối ngày (≈22h)**: đủ đạm/calo/nước/ngủ?, % hoàn thành, chấm điểm từng hoạt động, lưu ý cải thiện.
+- **Trang chủ** (`prototypes/kh/trang_chu.html`): hiển thị **% hoàn thành ngày/tuần**, **đánh giá sức khỏe toàn diện** (Thân–Tâm–Trí), **lịch biểu cần làm** (học tập, làm quiz, sự kiện…), và **tổng kết cuối ngày (≈22h)**: đủ đạm/calo/nước/ngủ?, % hoàn thành, chấm điểm từng hoạt động, lưu ý cải thiện.
 - Từ Trang chủ có các mục chức năng, nổi bật:
   - **"Cá nhân hóa thời gian biểu"** (hiển thị nhỏ) → màn cấu hình giờ & số bữa (§A.1).
   - **"Chăm sóc bản thân"** → màn **"Sức khỏe tổng thể"** để check-in nhiệm vụ hằng ngày (§A→§D).
-  - **"Gợi ý bữa ăn"** → màn **xem gợi ý bữa ăn hiện tại** (`prototypes/goi_y_bua_an.html`).
+  - **"Gợi ý bữa ăn"** → màn **xem gợi ý bữa ăn hiện tại** (`prototypes/kh/goi_y_bua_an.html`).
 
 ### 0.1 Màn "Gợi ý bữa ăn" (phía Khách hàng)
 
@@ -54,7 +54,7 @@ graph TD
 
 ## A.1 Màn "Cá nhân hóa thời gian biểu" (trước khi dùng hằng ngày)
 
-Trước khi sử dụng màn **"Sức khỏe tổng thể"** hằng ngày, KH **cá nhân hóa thời gian biểu** một lần (và có thể chỉnh lại sau). Prototype: `prototypes/ca_nhan_hoa_thoi_gian_bieu.html`.
+Trước khi sử dụng màn **"Sức khỏe tổng thể"** hằng ngày, KH **cá nhân hóa thời gian biểu** một lần (và có thể chỉnh lại sau). Prototype: `prototypes/kh/ca_nhan_hoa_thoi_gian_bieu.html`.
 
 KH tùy biến:
 - **Số bữa ăn/ngày**: 3 / 4 / 5 bữa (hệ thống sinh đúng số "nhiệm vụ ăn" tương ứng — vd 5 bữa = Sáng, Phụ sáng, Trưa, Phụ chiều, Tối).
