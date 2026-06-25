@@ -1,9 +1,17 @@
 # **BUSINESS RULES — TÍNH CALO KỲ DIỆU & LẬP GỢI Ý BỮA ĂN**
 ## Dạng Mô Tả BPMN & Decision Tables (Không Code)
 
-**Phiên bản:** v1.0  
+**Phiên bản:** v1.1  
 **Định dạng:** Business Process & Decision Rules  
 **Mục đích:** Mô tả quy trình tính Calo & lập gợi ý bữa ăn dưới dạng BPMN-style process flows & decision tables
+
+> **Changelog v1.1 (bổ sung tầng "khả thi với đời sống thật" — Persona-fit).** Bổ sung **4 tiêu chí khả thi** để thực đơn vừa đạt mục tiêu sức khỏe vừa khả thi & không gây áp lực, đồng thời thể hiện hệ thống *hiểu chân dung khách*:
+> 1. **Chế độ ăn** (chay/mặn) — `diet_type`
+> 2. **Ngân sách/ngày** — `daily_budget` (tái dùng `behavior.budget_sensitivity`)
+> 3. **Sở thích món** — likes **và** dislikes
+> 4. **Quyền chủ động bữa ăn** — `meal_autonomy` (tự nấu / phụ thuộc / ăn ngoài)
+>
+> Các tiêu chí này tạo thành **Process 2.0 (Persona-fit filter)** chạy **trước** lọc bệnh lý, và một **Feasibility Score** (§IX) cảnh báo HLV trước khi giao thực đơn cho khách. Xem điểm thu thập dữ liệu tại `docs/to-be/Workflow-HLV.md` §1.4 và hiển thị tại §1.6.
 
 ---
 
@@ -385,6 +393,81 @@
 
 ## II. BUSINESS PROCESS FLOW — LẬP GỢI Ý BỮA ĂN
 
+### Process 2.0: Lọc theo Chân dung & Khả thi (Persona-fit) — *mới v1.1*
+
+> Mục tiêu: đảm bảo thực đơn **khả thi với đời sống thật** của khách và **giảm áp lực áp dụng**, trước khi đi vào template & lọc bệnh lý. Process này **cấu hình lại catalog món** (nguồn chọn món của Process 2.1b) theo 4 tiêu chí, rồi mới chạy 2.1 → 2.4.
+
+```
+┌────────────────────────────────────────────────┐
+│  INPUT: Persona-fit profile                    │
+│  - diet_type, daily_budget                     │
+│  - liked_foods[], disliked_foods[]             │
+│  - meal_autonomy                               │
+│  + Catalog món (có est_cost, complexity, tags) │
+└───────────────────────┬────────────────────────┘
+                        ▼
+   ┌───────────────────────────────────────────┐
+   │ B1. Lọc chế độ ăn (diet_type)            │
+   │  → đổi catalog NHÓM ĐẠM sang nguồn phù hợp│
+   │  → tăng khẩu phần đạm TV để đủ target_dam │
+   └───────────────────────┬───────────────────┘
+                           ▼
+   ┌───────────────────────────────────────────┐
+   │ B2. Lọc ngân sách (daily_budget)         │
+   │  → loại món có est_cost vượt trần/ngày    │
+   └───────────────────────┬───────────────────┘
+                           ▼
+   ┌───────────────────────────────────────────┐
+   │ B3. Sở thích: loại disliked, ưu tiên liked│
+   └───────────────────────┬───────────────────┘
+                           ▼
+   ┌───────────────────────────────────────────┐
+   │ B4. Quyền chủ động (meal_autonomy)       │
+   │  → lọc theo complexity / dạng output      │
+   │  (tự nấu | dặn người nấu | gọi món ngoài) │
+   └───────────────────────┬───────────────────┘
+                           ▼
+   ┌───────────────────────────────────────────┐
+   │ OUTPUT: Catalog đã cá nhân hóa            │
+   │ + cờ feasibility (cho §IX)                │
+   └───────────────────────────────────────────┘
+```
+
+**Thứ tự ưu tiên khi mâu thuẫn:** An toàn (bệnh lý/dị ứng, Process 2.3) **>** Đủ dinh dưỡng (target_dam, Process 2.4) **>** Ngân sách **>** Sở thích. Tức là không bao giờ hi sinh đủ đạm/an toàn để chiều ngân sách hay sở thích; thay vào đó **hạ Feasibility Score** và cảnh báo HLV (§IX).
+
+> **Yêu cầu dữ liệu catalog (bổ sung v1.1):** mỗi món cần thêm `est_cost` (VNĐ/khẩu phần), `complexity` (1 rất đơn giản – 3 cầu kỳ), `diet_tags[]` (vd `vegan`, `ovo_lacto`, `meat`), `availability` (`home_cook` | `eat_out` | `both`).
+
+#### Decision Table 2.0a — Chế độ ăn → nguồn Nhóm đạm
+
+| `diet_type` | Nguồn đạm cho phép | Quy tắc đặc thù |
+|---|---|---|
+| **OMNIVORE** (ăn mặn) | Gà, cá, tôm, trứng, thịt nạc, đậu | Như v1.0; vẫn hạn chế thịt đỏ/chiên xào |
+| **FLEXITARIAN** (bán chay) | Ưu tiên thực vật + cá/trứng vài bữa | Giảm tần suất thịt; cân đối linh hoạt |
+| **OVO_LACTO** (chay trứng-sữa) | Trứng, sữa, đậu phụ, đậu, nấm, F1 | Bỏ thịt/cá; **tăng khẩu phần để đủ `target_dam`** |
+| **VEGAN** (thuần chay) | Đậu phụ, đậu các loại, tàu hũ ky, nấm, đạm TV/F1 | Bỏ mọi sản phẩm động vật; cảnh báo bổ sung B12; tăng khẩu phần đạm |
+
+> Đạm thực vật loãng hơn → khi `diet_type ∈ {OVO_LACTO, VEGAN}`, nhân hệ số khẩu phần đạm để vẫn đạt `target_dam(g)` của Process 2.1b. Nếu không thể đạt trong trần calo → hạ Feasibility Score, gợi ý HLV bổ sung F1/đạm thực vật.
+
+#### Decision Table 2.0b — Ngân sách/ngày
+
+| `daily_budget` | Trần chi phí/ngày (gợi ý, cấu hình được) | Quy tắc chọn món |
+|---|---|---|
+| **TIẾT KIỆM** | ~≤ 50.000đ | Ưu tiên đạm rẻ (trứng, đậu phụ, cá nhỏ, ức gà); rau theo mùa |
+| **TRUNG BÌNH** | ~50.000–100.000đ | Cân bằng; thi thoảng cá/hải sản |
+| **THOẢI MÁI** | ~> 100.000đ | Mở rộng (cá hồi, hải sản, nhập khẩu) nếu phù hợp mục tiêu |
+
+> Trần VNĐ là **tham số cấu hình theo vùng/thời điểm**, không hard-code. Tổng `est_cost` của thực đơn/ngày hiển thị cho HLV & khách (§1.6).
+
+#### Decision Table 2.0c — Quyền chủ động bữa ăn
+
+| `meal_autonomy` | Dạng output thực đơn | `complexity` cho phép | Tính năng kèm |
+|---|---|---|---|
+| **CHỦ ĐỘNG** (tự đi chợ/nấu) | Công thức nấu theo bữa | 1–3 | Gợi ý meal-prep theo mẻ; danh sách đi chợ |
+| **PHỤ THUỘC** (người khác nấu — vd bố mẹ già) | Món **đơn giản** + **Bản hướng dẫn cho người nấu/đi chợ** chia sẻ được | 1–2 | Xuất bản hướng dẫn gửi con cái/người chăm |
+| **ĂN NGOÀI / ĐẶT SẴN** | **Cách gọi món thông minh** (ít dầu mỡ, thêm rau, đổi cơm) | n/a (không nấu) | Map món quán phổ biến theo 3 nhóm |
+
+---
+
 ### Process 2.1: Chọn Template Bữa Ăn Cơ Bản
 
 ```
@@ -765,11 +848,15 @@ Tổng calo bữa = Σ calo 3 nhóm
       ┌────────────▼──────────────┐
       │ PHASE 2: MEAL PLANNING   │
       │ ───────────────────────  │
+      │ • Persona-fit (2.0):     │
+      │   diet/budget/thích/chủ  │
+      │   động → catalog cá nhân │
       │ • Select base template   │
       │ • Adjust calories 1200→T │
       │ • Filter by medical cond │
       │ • Check allergies        │
       │ • Calculate nutrition    │
+      │ • Feasibility Score (§IX)│
       │ • Apply recommendations  │
       └────────────┬──────────────┘
                    │
@@ -824,10 +911,16 @@ HealthProfile {
                            "DIABETES", "HYPERTENSION", 
                            "HEART_DISEASE", "ACID_REFLUX", ...]
   foodAllergies: List["NUTS", "SHELLFISH", ...]
-  preferredFoods: List[...]
   
   // Preference
   mealFrequency: "FOUR_MEALS" | "FIVE_MEALS"
+
+  // Persona-fit (mới v1.1) — nguồn: customer_personas.persona_data.behavior
+  dietType: "OMNIVORE" | "FLEXITARIAN" | "OVO_LACTO" | "VEGAN"
+  dailyBudget: "TIET_KIEM" | "TRUNG_BINH" | "THOAI_MAI"   // ↔ behavior.budget_sensitivity
+  likedFoods: List[...]                                   // ưu tiên khi chọn món
+  dislikedFoods: List[...]                                // loại khỏi gợi ý
+  mealAutonomy: "CHU_DONG" | "PHU_THUOC" | "AN_NGOAI"
 }
 ```
 
@@ -874,6 +967,14 @@ RecommendationResponse {
     medicalRestrictions: List[String]      // Sodium <1500mg, etc
     dietaryRecommendations: List[String]   // Thực phẩm nên tránh, etc
     minWaterIntakePerDay: Decimal          // Liters
+
+    // Persona-fit output (mới v1.1)
+    estDailyCost: Decimal                  // VNĐ/ngày ước tính
+    cookingGuideForCaregiver: String?      // chỉ khi mealAutonomy = PHU_THUOC
+    eatingOutGuide: List[String]?          // chỉ khi mealAutonomy = AN_NGOAI
+    feasibilityScore: Integer (0-100)      // §IX
+    feasibilityLevel: "HIGH" | "MEDIUM" | "LOW"
+    feasibilityNotes: List[String]         // điểm cần lưu ý / gợi ý chỉnh
   }
   
   status: "SUCCESS" | "WARNING" | "ERROR"
@@ -929,6 +1030,43 @@ Output: CalorieProfile (magic kcal, weekly change, water advisory)
   Validate = Protein, GI, Fiber, Fat targets
   ↓
 Output: MealPlan (5 meals, nutrition, restrictions)
+  ↓
+[PHASE 2.0 chèn trước template] Persona-fit
+  Diet → Budget → Sở thích → Quyền chủ động → Catalog cá nhân hóa
+  ↓
+[PHASE 3] Feasibility Score (§IX) → cảnh báo HLV nếu thấp
 ```
+
+---
+
+## IX. FEASIBILITY SCORE — ĐỘ KHẢ THI ÁP DỤNG (*mới v1.1*)
+
+> Mục tiêu: trước khi giao thực đơn cho khách, hệ thống chấm **độ khả thi áp dụng** dựa trên 4 tiêu chí Persona-fit, **cảnh báo HLV** để chỉnh cho nhẹ nhàng — tránh giao một thực đơn khách không thể/không muốn theo (nguyên nhân chính khiến khách bỏ cuộc & cảm thấy áp lực).
+
+### 9.1 Bốn cấu phần điểm (mỗi cấu phần 0–25)
+
+| Cấu phần | Đạt 25 (tốt) | Trừ điểm khi |
+|---|---|---|
+| **Phù hợp chế độ ăn** | Mọi món hợp `diet_type` và đủ `target_dam` | Phải gượng ép nguồn đạm; thiếu đạm so mục tiêu |
+| **Trong ngân sách** | Tổng `est_cost`/ngày ≤ trần | Vượt trần → trừ theo % vượt |
+| **Hợp sở thích** | Không có món disliked; có món liked | Còn món disliked; thiếu món khách thích |
+| **Khớp quyền chủ động** | `complexity`/dạng output khớp `meal_autonomy` | Món cầu kỳ cho người phụ thuộc; yêu cầu nấu với người ăn ngoài |
+
+**Tổng = Σ 4 cấu phần (0–100).**
+
+### 9.2 Decision Table — Ngưỡng & hành động
+
+| Điểm | Mức | Hành động hệ thống |
+|---|---|---|
+| **80–100** | Cao | Hiển thị badge xanh "Dễ áp dụng"; cho phép giao ngay |
+| **60–79** | Trung bình | Badge vàng + liệt kê 1–2 điểm cần lưu ý; gợi ý chỉnh nhanh |
+| **< 60** | Thấp | Badge đỏ + **chặn mềm**: nhắc HLV chỉnh (đổi món/đổi ngân sách/đổi dạng output) trước khi giao |
+
+> **Nguyên tắc:** Feasibility Score **không** ghi đè ràng buộc an toàn (bệnh lý/dị ứng) hay đủ đạm — đó là điều kiện cứng. Score chỉ phản ánh mức khả thi & vừa-ý; quyết định cuối thuộc về HLV (AI hỗ trợ, không thay người).
+
+### 9.3 Hiển thị
+
+- **§1.6 Gợi ý bữa ăn:** badge Feasibility + dòng "Chi phí ước tính/ngày" + (nếu phụ thuộc) nút "Xuất hướng dẫn cho người nấu".
+- **§1.4/§1.6:** khi điểm thấp, hiện gợi ý điều chỉnh cụ thể (đổi món rẻ hơn / giảm độ cầu kỳ / thay món bị ngán).
 
 ---

@@ -26,7 +26,7 @@ KH xem **thực đơn hiện tại** do HLV tạo: **phiên bản đang hiệu l
 
 ## A. Workflow tổng quát "Cá nhân hóa Lộ trình và Gợi ý bữa ăn"
 
-> **Bối cảnh (Quy trình 002 — CSKH theo lộ trình):** KH **tự thiết kế lộ trình** thay đổi thói quen/lối sống/sức khỏe **dựa trên lộ trình mẫu** hệ thống gợi ý. Mục tiêu cân nặng (từ màn "Thiết lập mục tiêu", `Workflow-HLV.md §1.4`) là đầu vào để **gợi ý bữa ăn** (Calo/ngày, số bữa) theo `docs/business-rules/Calorie-Meal-Business-Rules-v1.0.md`.
+> **Bối cảnh (Quy trình 002 — CSKH theo lộ trình):** KH **tự thiết kế lộ trình** thay đổi thói quen/lối sống/sức khỏe **dựa trên lộ trình mẫu** hệ thống gợi ý. Mục tiêu cân nặng (từ màn "Thiết lập mục tiêu", `Workflow-HLV.md §1.4`) là đầu vào để **gợi ý bữa ăn** (Calo/ngày, số bữa) theo `docs/business-rules/Calorie-Meal-Business-Rules-v1.1.md`.
 
 > **Triết lý lộ trình — Thân · Tâm · Trí:** lộ trình giúp KH thay đổi & đạt kết quả tốt hơn trên 3 trụ cột — **Thân** (sức khỏe thể chất & tinh thần), **Tâm** (lối sống lành mạnh, yêu thương, biết ơn, quản trị cảm xúc), **Trí** (kiến thức về quản trị tài chính, đầu tư, kinh doanh…). Mỗi hoạt động trong ngày đều quy về một trụ cột (xem cột "Trụ cột" ở §B).
 
@@ -129,6 +129,6 @@ Cuối ngày, trang chủ hiển thị bản tổng kết nổi bật:
 ---
 
 ## F. Liên kết dữ liệu & nghiệp vụ
-- **Đầu vào gợi ý bữa ăn:** mục tiêu cân nặng (`adjusted_target`) + thời gian gói → Calo/ngày, số bữa/ngày (`docs/business-rules/Calorie-Meal-Business-Rules-v1.0.md`).
+- **Đầu vào gợi ý bữa ăn:** mục tiêu cân nặng (`adjusted_target`) + thời gian gói → Calo/ngày, số bữa/ngày (`docs/business-rules/Calorie-Meal-Business-Rules-v1.1.md`).
 - **Nhật ký thực tế:** ảnh/tick từng hoạt động ghi vào nhật ký ngày (meal/activity logs) phục vụ phân tích & báo cáo.
 - **Phản hồi HLV:** lộ trình KH tự thiết kế được gửi HLV duyệt/điều chỉnh trước khi chốt.

@@ -7,7 +7,7 @@
 **Liên quan:**
 - Màn "Thiết lập mục tiêu": `docs/to-be/Workflow-HLV.md §A.1.4`.
 - Chân dung KH & dữ liệu: `docs/technical/customer-persona-data-model_v1.0.md`, `docs/to-be/customer-persona-disc-framework_v1.0.md`.
-- Tính calo & lộ trình: `docs/business-rules/Calorie-Meal-Business-Rules-v1.0.md`.
+- Tính calo & lộ trình: `docs/business-rules/Calorie-Meal-Business-Rules-v1.1.md`.
 
 > 🔶 **Các ô đánh dấu `‹CẦN BỔ SUNG›`** là nơi đội nghiệp vụ phải điền dữ liệu thật (catalog gói, ngưỡng, hệ số). Tài liệu cung cấp **khung quy tắc**; số liệu minh họa chỉ để mô tả cấu trúc.
 
@@ -186,7 +186,7 @@ Mục tiêu **cân nặng sau điều chỉnh** (`adjusted_target` của mục t
                          →  số Calo/ngày + số bữa/ngày  (Calorie-Meal-Business-Rules)
 ```
 
-→ Khi `adjusted_target` cân nặng thay đổi (do chọn gói khác hoặc tinh chỉnh), **phải tính lại** gợi ý bữa ăn. Tham chiếu: `docs/business-rules/Calorie-Meal-Business-Rules-v1.0.md`.
+→ Khi `adjusted_target` cân nặng thay đổi (do chọn gói khác hoặc tinh chỉnh), **phải tính lại** gợi ý bữa ăn. Tham chiếu: `docs/business-rules/Calorie-Meal-Business-Rules-v1.1.md`.
 
 ---
 

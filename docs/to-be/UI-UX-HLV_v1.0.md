@@ -6,7 +6,7 @@
 - Nghiệp vụ & sơ đồ: `docs/to-be/Workflow-HLV.md`.
 - Dữ liệu chân dung: `docs/technical/customer-persona-data-model_v1.0.md`.
 - Quy tắc gói: `docs/business-rules/packaged-service-advice-v1.0.md`.
-- Quy tắc Calo/bữa ăn (3 nhóm): `docs/business-rules/Calorie-Meal-Business-Rules-v1.0.md`.
+- Quy tắc Calo/bữa ăn (3 nhóm): `docs/business-rules/Calorie-Meal-Business-Rules-v1.1.md`.
 - UI-UX phía KH: `docs/to-be/UI-UX-Lo-trinh-Dong-ho-sinh-hoc_v1.0.md`.
 
 ---

@@ -7,7 +7,7 @@
 **Bám sát:**
 - Luồng nghiệp vụ: `docs/to-be/Workflow-KH.md` (Quy trình 002 — Cá nhân hóa lộ trình & gợi ý bữa ăn).
 - Tham chiếu thiết kế: `docs/to-be/Huawei-Health-Clover-case-study.md`.
-- Quy tắc Calo/bữa ăn: `docs/business-rules/Calorie-Meal-Business-Rules-v1.0.md`.
+- Quy tắc Calo/bữa ăn: `docs/business-rules/Calorie-Meal-Business-Rules-v1.1.md`.
 
 > ⚠️ **Lưu ý phạm vi:** `Workflow-KH.md` hiện **chưa** mô tả luồng **chụp ảnh / khai báo danh sách món ăn** trong ngày. Tài liệu này **đặc tả bổ sung** luồng đó (§2.4c, §3.3) và đề xuất cập nhật lại `Workflow-KH.md` cho khớp (§6).
 
