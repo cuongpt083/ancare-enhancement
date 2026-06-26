@@ -3,110 +3,336 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gợi ý bữa ăn — Prototype</title>
-<link rel="stylesheet" href="../tabler-icons.min.css">
+<title>Gợi ý bữa ăn — AnCare v1.1</title>
+<link rel="stylesheet" href="tabler-icons.min.css">
 <style>
-  :root{
-    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-    --color-background-primary:#fff;--color-background-secondary:#f6f7f9;--color-background-app:#eef0f3;
-    --color-text-primary:#1a1d21;--color-text-secondary:#6b7280;--color-border-secondary:#d1d5db;--color-border-tertiary:#e5e7eb;
-    --color-accent:#2f6f4f;--color-accent-soft:#e7f1ec;--border-radius-md:10px;--border-radius-lg:14px;
-  }
-  *{box-sizing:border-box;}
-  body,html{margin:0;padding:0;font-family:var(--font-sans);background:var(--color-background-app);color:var(--color-text-primary);}
-  .container{width:100%;max-width:460px;margin:0 auto;padding:0 0 92px;}
-  .appbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:8px;background:var(--color-background-primary);padding:.9rem 1rem;border-bottom:.5px solid var(--color-border-tertiary);}
-  .appbar .ti{font-size:22px;} .appbar h1{font-size:16px;font-weight:600;margin:0;flex:1;}
+:root {
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --color-bg: #eef0f3;
+  --color-surface: #ffffff;
+  --color-surface-2: #f6f7f9;
+  --color-text: #1a1d21;
+  --color-text-2: #6b7280;
+  --color-border: #e5e7eb;
+  --color-border-2: #d1d5db;
+  --color-accent: #2f6f4f;
+  --color-accent-soft: #e7f1ec;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --fs-green-bg: #dcfce7;
+  --fs-green-text: #15803d;
+  --fs-amber-bg: #fef3c7;
+  --fs-amber-text: #92600a;
+  --fs-red-bg: #fee2e2;
+  --fs-red-text: #b42318;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; font-family: var(--font-sans); background: var(--color-bg); color: var(--color-text); overscroll-behavior: contain; }
+body { overflow-x: hidden; }
+.wrap { max-width: 460px; margin: 0 auto; padding-bottom: 96px; }
 
-  .verbar{display:flex;align-items:center;gap:10px;margin:.8rem 1rem 0;padding:.6rem .8rem;background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);}
-  .verbar .vleft{flex:1;font-size:12.5px;} .verbar .vsub{font-size:10.5px;color:var(--color-text-secondary);margin-top:2px;}
-  .verbar .vactive{font-size:10px;font-weight:700;color:#15803d;background:#dcfce7;border-radius:10px;padding:1px 7px;}
-  .verbar .vsel{font-size:11.5px;padding:.35rem;border:1px solid var(--color-border-secondary);border-radius:8px;background:#fff;font-family:inherit;}
-  /* Summary calo */
-  .summary{margin:1rem;background:linear-gradient(135deg,#eafaf0,#e7f1ec);border:1px solid #bfe3cf;border-radius:var(--border-radius-lg);padding:1rem;display:flex;align-items:center;gap:14px;}
-  .summary .big{font-size:26px;font-weight:800;color:var(--color-accent);line-height:1;} .summary .big small{font-size:12px;font-weight:600;color:var(--color-text-secondary);}
-  .summary .info{flex:1;font-size:12px;color:var(--color-text-secondary);line-height:1.5;}
-  .summary .info b{color:var(--color-text-primary);}
+.appbar { position: sticky; top: 0; z-index: 10; background: var(--color-surface); border-bottom: 1px solid var(--color-border); display: flex; align-items: center; gap: 10px; padding: 0.85rem 1rem; }
+.appbar-back { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 8px; border: none; background: none; cursor: pointer; color: var(--color-text); font-size: 22px; flex-shrink: 0; }
+.appbar h1 { font-size: 15.5px; font-weight: 700; flex: 1; }
+.appbar .version-tag { font-size: 11px; color: var(--color-accent); background: var(--color-accent-soft); padding: 2px 8px; border-radius: 20px; font-weight: 600; }
 
-  .sec{font-size:13px;font-weight:700;padding:.5rem 1rem .2rem;}
-  .meal{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);margin:.5rem 1rem;overflow:hidden;}
-  .meal-head{display:flex;align-items:center;gap:10px;padding:.7rem .9rem;background:var(--color-background-secondary);border-bottom:.5px solid var(--color-border-tertiary);}
-  .meal-head .ic{width:30px;height:30px;border-radius:9px;background:var(--color-accent-soft);display:flex;align-items:center;justify-content:center;color:var(--color-accent);}
-  .meal-head .t{flex:1;font-size:13.5px;font-weight:600;} .meal-head .kc{font-size:12px;font-weight:700;color:var(--color-accent);}
-  .meal-body{padding:.5rem .9rem .8rem;}
-  .dish{display:flex;align-items:center;gap:8px;font-size:12.5px;padding:.25rem 0;color:var(--color-text-secondary);}
-  .dish .ti{color:var(--color-accent);font-size:14px;}
-  .grp{padding:.4rem 0;border-top:.5px dashed var(--color-border-tertiary);} .grp:first-child{border-top:none;}
-  .gh{display:flex;align-items:center;gap:6px;margin-bottom:.2rem;}
-  .gn{font-weight:700;color:#fff;border-radius:5px;padding:1px 7px;font-size:9.5px;}
-  .gn-dam{background:#2563eb;} .gn-xo{background:#16a34a;} .gn-bot{background:#f97316;}
-  .gm{font-size:10.5px;color:var(--color-text-secondary);font-weight:600;}
-  .note{font-size:11.5px;color:var(--color-text-secondary);margin:.3rem 1rem 0;line-height:1.5;}
+.version-bar { display: flex; align-items: center; gap: 8px; padding: 0.6rem 1rem; background: var(--color-surface); border-bottom: 1px solid var(--color-border); flex-wrap: wrap; font-size: 12.5px; }
+.vb-label { font-weight: 700; color: var(--color-text); }
+.badge-active { background: #dcfce7; color: #15803d; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
+.vb-date { color: var(--color-text-2); flex: 1; }
+.vb-select { font-size: 12px; border: 1px solid var(--color-border-2); border-radius: 6px; padding: 2px 6px; background: var(--color-surface-2); color: var(--color-text-2); cursor: pointer; }
 
-  .actions{position:fixed;bottom:0;left:0;right:0;max-width:460px;margin:0 auto;display:flex;gap:10px;padding:.8rem 1rem;background:var(--color-background-primary);border-top:.5px solid var(--color-border-tertiary);}
-  .back{width:44px;height:44px;flex:none;border-radius:50%;border:1px solid var(--color-border-secondary);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-  .back .ti{font-size:20px;color:var(--color-accent);}
-  .cta{flex:1;padding:.85rem;font-size:15px;font-weight:700;border:none;border-radius:var(--border-radius-md);background:var(--color-accent);color:#fff;cursor:pointer;}
-  .cta .ti{vertical-align:-2px;}
+.summary-card { background: linear-gradient(135deg, var(--color-accent-soft) 0%, #d4ede1 100%); border: 1px solid #cde5d9; border-radius: var(--r-lg); margin: 0.75rem 1rem; padding: 1rem; }
+.summary-card .big-kcal { font-size: 26px; font-weight: 800; color: var(--color-accent); line-height: 1.1; margin-bottom: 0.5rem; }
+.summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 0.6rem; }
+.summary-item { font-size: 12.5px; color: var(--color-text); display: flex; align-items: center; gap: 5px; }
+.summary-item .ti { color: var(--color-accent); font-size: 14px; }
+.summary-target { font-size: 12px; color: var(--color-accent); font-weight: 600; background: rgba(47,111,79,0.12); padding: 3px 8px; border-radius: 20px; display: inline-block; }
+
+.fs-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--r-lg); margin: 0.75rem 1rem; padding: 1rem; text-align: center; }
+.fs-badge { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 0.5rem 1.25rem; border-radius: 20px; font-size: 15px; font-weight: 800; margin-bottom: 0.6rem; }
+.fs-score-big { font-size: 32px; font-weight: 900; line-height: 1; }
+.fs-bar-wrap { background: var(--color-border); border-radius: 20px; height: 10px; margin: 0.5rem 0; overflow: hidden; }
+.fs-bar { height: 100%; border-radius: 20px; }
+.fs-cost { font-size: 13px; color: var(--color-text-2); margin-bottom: 0.75rem; }
+.fs-chips { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 0.5rem; }
+.fs-chip { font-size: 11.5px; padding: 3px 10px; border-radius: 20px; background: var(--color-accent-soft); color: var(--color-accent); font-weight: 600; border: 1px solid #cde5d9; }
+
+.tabs { display: flex; background: var(--color-surface); margin: 0.5rem 1rem 0; border-radius: var(--r-md) var(--r-md) 0 0; overflow: hidden; border: 1px solid var(--color-border); border-bottom: none; }
+.tab { flex: 1; padding: 0.65rem 0; font-size: 13px; font-weight: 600; text-align: center; cursor: pointer; color: var(--color-text-2); border: none; background: none; border-bottom: 2.5px solid transparent; transition: all 0.15s; min-height: 44px; }
+.tab.active { color: var(--color-accent); border-bottom-color: var(--color-accent); background: var(--color-accent-soft); }
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+.meal-section { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--r-lg); margin: 0.5rem 1rem; overflow: hidden; }
+.meal-header { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem 0.5rem; border-bottom: 1px solid var(--color-border); }
+.meal-title { font-size: 13.5px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+.meal-title .ti { color: var(--color-accent); }
+.meal-kcal { font-size: 12px; color: var(--color-accent); font-weight: 700; background: var(--color-accent-soft); padding: 2px 8px; border-radius: 20px; }
+.meal-items { padding: 0.6rem 1rem 0.75rem; display: flex; flex-direction: column; gap: 8px; }
+.food-item { display: flex; align-items: flex-start; gap: 8px; }
+.food-badge { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; flex-shrink: 0; margin-top: 1px; white-space: nowrap; }
+.badge-protein { background: #dbeafe; color: #2563eb; }
+.badge-fiber   { background: #dcfce7; color: #16a34a; }
+.badge-carb    { background: #ffedd5; color: #ea580c; }
+.badge-snack   { background: #f3e8ff; color: #7c3aed; }
+.food-text { flex: 1; font-size: 12.5px; line-height: 1.5; }
+.food-text .food-name { font-weight: 600; }
+.food-text .food-meta { color: var(--color-text-2); font-size: 11.5px; }
+
+.eat-out-item { display: flex; align-items: flex-start; gap: 8px; padding: 0.7rem 0; border-bottom: 1px solid var(--color-border); }
+.eat-out-item:last-child { border-bottom: none; }
+.meal-tag { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; background: var(--color-accent-soft); color: var(--color-accent); flex-shrink: 0; margin-top: 1px; white-space: nowrap; }
+.eat-out-text { font-size: 12.5px; line-height: 1.5; color: var(--color-text); }
+
+.export-btn { display: flex; align-items: center; justify-content: center; gap: 7px; width: 100%; padding: 0.8rem; font-size: 13.5px; font-weight: 600; border: 1.5px solid var(--color-accent); background: var(--color-accent-soft); color: var(--color-accent); border-radius: var(--r-md); cursor: pointer; margin-bottom: 0.75rem; }
+.cook-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.cook-table th { background: var(--color-surface-2); font-size: 11.5px; font-weight: 700; color: var(--color-text-2); padding: 0.45rem 0.6rem; text-align: left; border-bottom: 1px solid var(--color-border); }
+.cook-table td { padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--color-border); vertical-align: top; line-height: 1.4; }
+.cook-table tr:last-child td { border-bottom: none; }
+
+.notes-card { background: var(--color-surface-2); border: 1px solid var(--color-border); border-radius: var(--r-lg); margin: 0.75rem 1rem; padding: 0.85rem 1rem; }
+.notes-title { font-size: 12.5px; font-weight: 700; color: var(--color-text-2); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.02em; display: flex; align-items: center; gap: 6px; }
+.notes-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.notes-list li { display: flex; align-items: flex-start; gap: 6px; font-size: 12.5px; line-height: 1.5; }
+.notes-list li::before { content: "•"; color: var(--color-accent); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+.action-bar { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 460px; background: var(--color-surface); border-top: 1px solid var(--color-border); padding: 0.65rem 1rem 0.85rem; display: flex; gap: 10px; z-index: 15; align-items: center; }
+.btn-back-circle { width: 48px; height: 48px; border-radius: 50%; border: 1.5px solid var(--color-accent); background: var(--color-surface); color: var(--color-accent); font-size: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; }
+.btn-primary { flex: 1; padding: 0.85rem; font-size: 13.5px; font-weight: 700; border: none; background: var(--color-accent); color: #fff; border-radius: var(--r-md); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 7px; }
+.btn-primary:active { opacity: 0.85; }
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="appbar"><i class="ti ti-arrow-left" style="cursor:pointer" onclick="location.href='hlv_chi_tiet_kh.html'"></i><h1>Gợi ý bữa ăn</h1></div>
+<div class="wrap">
 
-  <div class="verbar">
-    <div class="vleft"><b>Phiên bản #3</b> · <span class="vactive">Đang hiệu lực</span><div class="vsub">Hiệu lực 10 ngày: 18/06 – 27/06 · sau đó cần đánh giá lại</div></div>
-    <select class="vsel"><option>#3 (hiện tại)</option><option>#2 · 08–17/06</option><option>#1 · 29/05–07/06</option></select>
+  <!-- Appbar -->
+  <div class="appbar">
+    <button class="appbar-back" onclick="location.href='hlv_chi_tiet_kh.html'"><i class="ti ti-arrow-left"></i></button>
+    <h1>Gợi ý bữa ăn</h1>
+    <span class="version-tag">v1.1</span>
   </div>
 
-  <div class="summary">
-    <div class="big">1.600 <small>kcal/ngày</small></div>
-    <div class="info">Mục tiêu giảm <b>4 kg / 3 tháng</b> → thâm hụt ~<b>300 kcal/ngày</b>.<br>Chia <b>4 bữa</b> · đạm mục tiêu <b>96 g</b> · nước <b>2,0 L</b>.</div>
+  <!-- Version bar -->
+  <div class="version-bar">
+    <span class="vb-label">Phiên bản #3</span>
+    <span class="badge-active">Đang hiệu lực</span>
+    <span class="vb-date">18/06 – 27/06</span>
+    <select class="vb-select">
+      <option>Phiên bản #3 (hiện tại)</option>
+      <option>Phiên bản #2 (08–17/06)</option>
+      <option>Phiên bản #1 (29/05–07/06)</option>
+    </select>
   </div>
 
-  <div class="sec">Phân bổ & gợi ý theo bữa</div>
+  <!-- Summary card -->
+  <div class="summary-card">
+    <div class="big-kcal">1,450 kcal/ngày</div>
+    <div class="summary-grid">
+      <div class="summary-item"><i class="ti ti-meat"></i> Đạm: 90g/ngày</div>
+      <div class="summary-item"><i class="ti ti-droplet"></i> Nước: ≥ 2.4L/ngày</div>
+      <div class="summary-item"><i class="ti ti-bowl-spoon"></i> 3 bữa chính + 1 bữa phụ</div>
+      <div class="summary-item"><i class="ti ti-clock"></i> 3 tháng / 90 ngày</div>
+    </div>
+    <span class="summary-target"><i class="ti ti-target"></i> Giảm 5kg trong 90 ngày</span>
+  </div>
 
-  <div class="meal">
-    <div class="meal-head"><div class="ic"><i class="ti ti-sun"></i></div><div class="t">Ăn sáng · 07:00</div><div class="kc">450 kcal</div></div>
-    <div class="meal-body">
-      <div class="grp"><div class="gh"><span class="gn gn-dam">Đạm</span><span class="gm">140 kcal · 12g đạm</span></div><div class="dish"><i class="ti ti-egg-fried"></i> 2 trứng luộc</div></div>
-      <div class="grp"><div class="gh"><span class="gn gn-xo">Xơ</span><span class="gm">50 kcal</span></div><div class="dish"><i class="ti ti-apple"></i> 1 phần quả mọng / rau</div></div>
-      <div class="grp"><div class="gh"><span class="gn gn-bot">Đường/bột</span><span class="gm">260 kcal</span></div><div class="dish"><i class="ti ti-bowl-spoon"></i> Yến mạch + sữa hạt + chuối</div></div>
+  <!-- Feasibility Score card -->
+  <div class="fs-card">
+    <div style="font-size: 12px; font-weight: 700; color: var(--color-text-2); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.5rem;">Điểm khả thi bữa ăn</div>
+    <div class="fs-badge" style="background: var(--fs-green-bg); color: var(--fs-green-text);">
+      <span class="fs-score-big">82</span>
+      <span style="font-size: 13px;">/100 · Khả thi tốt</span>
+    </div>
+    <div class="fs-bar-wrap">
+      <div class="fs-bar" style="width: 82%; background: var(--fs-green-text);"></div>
+    </div>
+    <div class="fs-cost"><i class="ti ti-coin"></i> Chi phí ước tính: <strong>~95,000đ/ngày</strong></div>
+    <div style="font-size: 12px; color: var(--color-text-2); margin-bottom: 0.4rem;">Đã lọc theo hồ sơ khách:</div>
+    <div class="fs-chips">
+      <span class="fs-chip">✓ Mặn</span>
+      <span class="fs-chip">✓ Trung bình (80–150k)</span>
+      <span class="fs-chip">✓ Không: Hải sản</span>
+      <span class="fs-chip">✓ Không: Đậu phụ</span>
+      <span class="fs-chip">✓ Tự nấu</span>
     </div>
   </div>
 
-  <div class="meal">
-    <div class="meal-head"><div class="ic"><i class="ti ti-soup"></i></div><div class="t">Ăn trưa · 12:00</div><div class="kc">520 kcal</div></div>
-    <div class="meal-body">
-      <div class="grp"><div class="gh"><span class="gn gn-dam">Đạm</span><span class="gm">250 kcal · 30g đạm</span></div><div class="dish"><i class="ti ti-meat"></i> Ức gà áp chảo (1.5 lạng)</div></div>
-      <div class="grp"><div class="gh"><span class="gn gn-xo">Xơ</span><span class="gm">100 kcal</span></div><div class="dish"><i class="ti ti-salad"></i> ½ bát rau luộc / salad</div></div>
-      <div class="grp"><div class="gh"><span class="gn gn-bot">Đường/bột</span><span class="gm">170 kcal</span></div><div class="dish"><i class="ti ti-bowl-spoon"></i> ½ bát cơm gạo lứt</div></div>
-    </div>
+  <!-- Autonomy tabs -->
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('tu-nau', 0)">Tự nấu</button>
+    <button class="tab" onclick="switchTab('an-ngoai', 1)">Ăn ngoài</button>
+    <button class="tab" onclick="switchTab('nho-nguoi-nau', 2)">Nhờ người nấu</button>
   </div>
 
-  <div class="meal">
-    <div class="meal-head"><div class="ic"><i class="ti ti-cookie"></i></div><div class="t">Bữa phụ chiều · 15:30</div><div class="kc">180 kcal</div></div>
-    <div class="meal-body">
-      <div class="grp"><div class="gh"><span class="gn gn-dam">Đạm</span><span class="gm">80 kcal · 10g đạm</span></div><div class="dish"><i class="ti ti-bowl-spoon"></i> Sữa chua Hy Lạp không đường</div></div>
-      <div class="grp"><div class="gh"><span class="gn gn-bot">Đường/bột</span><span class="gm">100 kcal</span></div><div class="dish"><i class="ti ti-apple"></i> 1 quả táo / ổi</div></div>
+  <!-- Panel: Tự nấu -->
+  <div id="panel-tu-nau" class="tab-panel active">
+    <!-- Bữa sáng -->
+    <div class="meal-section" style="border-radius: 0 0 0 0; border-top: none; border-left: 1px solid var(--color-border); border-right: 1px solid var(--color-border); margin-top: 0; margin-bottom: 0; border-radius: 0;">
+      <div class="meal-header">
+        <div class="meal-title"><i class="ti ti-sun"></i> Bữa sáng</div>
+        <span class="meal-kcal">450 kcal</span>
+      </div>
+      <div class="meal-items">
+        <div class="food-item">
+          <span class="food-badge badge-protein">Đạm</span>
+          <div class="food-text"><div class="food-name">Trứng luộc 2 quả</div><div class="food-meta">150 kcal · 12g đạm</div></div>
+        </div>
+        <div class="food-item">
+          <span class="food-badge badge-fiber">Xơ</span>
+          <div class="food-text"><div class="food-name">Rau xào tỏi 1 chén</div><div class="food-meta">80 kcal · nhiều vitamin</div></div>
+        </div>
+        <div class="food-item">
+          <span class="food-badge badge-carb">Bột/Đường</span>
+          <div class="food-text"><div class="food-name">Bánh mì nguyên cám 1 ổ</div><div class="food-meta">220 kcal · 6g xơ</div></div>
+        </div>
+      </div>
     </div>
+    <!-- Bữa trưa -->
+    <div class="meal-section" style="margin-top: 0.5rem;">
+      <div class="meal-header">
+        <div class="meal-title"><i class="ti ti-sun-high"></i> Bữa trưa</div>
+        <span class="meal-kcal">550 kcal</span>
+      </div>
+      <div class="meal-items">
+        <div class="food-item">
+          <span class="food-badge badge-protein">Đạm</span>
+          <div class="food-text"><div class="food-name">Cá hấp 150g</div><div class="food-meta">180 kcal · 28g đạm</div></div>
+        </div>
+        <div class="food-item">
+          <span class="food-badge badge-fiber">Xơ</span>
+          <div class="food-text"><div class="food-name">Salad rau trộn dầu olive</div><div class="food-meta">90 kcal · chất béo lành mạnh</div></div>
+        </div>
+        <div class="food-item">
+          <span class="food-badge badge-carb">Bột/Đường</span>
+          <div class="food-text"><div class="food-name">Cơm gạo lứt 1 chén</div><div class="food-meta">280 kcal · GI thấp</div></div>
+        </div>
+      </div>
+    </div>
+    <!-- Bữa phụ -->
+    <div class="meal-section" style="margin-top: 0.5rem;">
+      <div class="meal-header">
+        <div class="meal-title"><i class="ti ti-apple"></i> Bữa phụ chiều</div>
+        <span class="meal-kcal">200 kcal</span>
+      </div>
+      <div class="meal-items">
+        <div class="food-item">
+          <span class="food-badge badge-snack">Phụ</span>
+          <div class="food-text"><div class="food-name">Sữa hạt không đường 200ml</div><div class="food-meta">120 kcal · 4g đạm</div></div>
+        </div>
+        <div class="food-item">
+          <span class="food-badge badge-snack">Phụ</span>
+          <div class="food-text"><div class="food-name">Chuối nhỏ 1 quả</div><div class="food-meta">80 kcal · kali cao</div></div>
+        </div>
+      </div>
+    </div>
+    <!-- Bữa tối -->
+    <div class="meal-section" style="margin-top: 0.5rem;">
+      <div class="meal-header">
+        <div class="meal-title"><i class="ti ti-moon"></i> Bữa tối</div>
+        <span class="meal-kcal">450 kcal</span>
+      </div>
+      <div class="meal-items">
+        <div class="food-item">
+          <span class="food-badge badge-protein">Đạm</span>
+          <div class="food-text"><div class="food-name">Ức gà luộc 150g</div><div class="food-meta">165 kcal · 30g đạm</div></div>
+        </div>
+        <div class="food-item">
+          <span class="food-badge badge-fiber">Xơ</span>
+          <div class="food-text"><div class="food-name">Bông cải xanh luộc 1 chén</div><div class="food-meta">55 kcal · vitamin C cao</div></div>
+        </div>
+        <div class="food-item">
+          <span class="food-badge badge-carb">Bột/Đường</span>
+          <div class="food-text"><div class="food-name">Khoai lang luộc 100g</div><div class="food-meta">86 kcal · GI thấp · beta-carotene</div></div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /panel-tu-nau -->
+
+  <!-- Panel: Ăn ngoài -->
+  <div id="panel-an-ngoai" class="tab-panel">
+    <div class="meal-section" style="margin-top: 0; border-radius: 0 0 var(--r-lg) var(--r-lg); border-top: none; margin: 0 1rem;">
+      <div style="padding: 0.85rem 1rem 0.4rem; font-size: 13px; font-weight: 700; color: var(--color-accent); display: flex; align-items: center; gap: 6px;"><i class="ti ti-building-store"></i> Cách gọi món thông minh</div>
+      <div style="padding: 0 1rem 0.1rem; font-size: 12px; color: var(--color-text-2); margin-bottom: 0.3rem;">Hướng dẫn chọn món ăn ngoài phù hợp lộ trình</div>
+      <div style="padding: 0 1rem 0.85rem;">
+        <div class="eat-out-item">
+          <span class="meal-tag">Sáng</span>
+          <div class="eat-out-text"><strong>Phở bò tái</strong> → bỏ bánh phở một nửa, thêm rau sống, không ăn gân bò béo · ~350 kcal</div>
+        </div>
+        <div class="eat-out-item">
+          <span class="meal-tag">Trưa</span>
+          <div class="eat-out-text"><strong>Cơm văn phòng</strong> → chọn cá/gà hơn thịt heo, nhiều rau, ít cơm · ~500 kcal</div>
+        </div>
+        <div class="eat-out-item">
+          <span class="meal-tag">Chiều</span>
+          <div class="eat-out-text"><strong>Sinh tố hoa quả</strong> ít đường + bánh gạo lứt · ~200 kcal</div>
+        </div>
+        <div class="eat-out-item">
+          <span class="meal-tag">Tối</span>
+          <div class="eat-out-text"><strong>Lẩu rau/gà</strong> → tránh váng mỡ, nhiều rau, ít bún/miến · ~400 kcal</div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /panel-an-ngoai -->
+
+  <!-- Panel: Nhờ người nấu -->
+  <div id="panel-nho-nguoi-nau" class="tab-panel">
+    <div class="meal-section" style="margin: 0 1rem; border-radius: 0 0 var(--r-lg) var(--r-lg); border-top: none;">
+      <div style="padding: 0.85rem 1rem 0.75rem;">
+        <button class="export-btn" onclick="alert('Đang xuất PDF...')">
+          <i class="ti ti-file-export"></i> Xuất hướng dẫn cho người nấu / đi chợ
+        </button>
+        <table class="cook-table">
+          <thead>
+            <tr>
+              <th>Thực phẩm cần mua</th>
+              <th>Số lượng/tuần</th>
+              <th>Cách nấu đơn giản</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Trứng gà</td><td>14 quả</td><td>Luộc chín / hấp</td></tr>
+            <tr><td>Ức gà</td><td>1.05 kg</td><td>Luộc hoặc hấp nhạt</td></tr>
+            <tr><td>Cá (rô, tra, điêu hồng)</td><td>1.05 kg</td><td>Hấp gừng hoặc kho nhẹ</td></tr>
+            <tr><td>Rau xanh (cải, bông cải)</td><td>1.5 kg</td><td>Luộc hoặc xào ít dầu</td></tr>
+            <tr><td>Khoai lang</td><td>700g</td><td>Luộc / hấp, không chiên</td></tr>
+            <tr><td>Gạo lứt</td><td>500g</td><td>Nấu nhão, ăn ít hơn gạo trắng</td></tr>
+            <tr><td>Bánh mì nguyên cám</td><td>7 ổ</td><td>Không nướng bơ/phết mỡ</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div><!-- /panel-nho-nguoi-nau -->
+
+  <!-- Notes section -->
+  <div class="notes-card">
+    <div class="notes-title"><i class="ti ti-notes" style="color: var(--color-accent);"></i> Lưu ý quan trọng</div>
+    <ul class="notes-list">
+      <li>Hạn chế thịt đỏ / chiên-xào ≤ 2 lần/tuần</li>
+      <li>Nước ≥ 2.4L/ngày (bao gồm nước lọc và canh rau)</li>
+      <li>Sau 10 ngày → đo lại Tanita → HLV điều chỉnh phiên bản mới</li>
+      <li>Không bỏ bữa — chia đều để tránh tăng insulin đột ngột</li>
+    </ul>
   </div>
 
-  <div class="meal">
-    <div class="meal-head"><div class="ic"><i class="ti ti-moon"></i></div><div class="t">Ăn tối · 18:30</div><div class="kc">450 kcal</div></div>
-    <div class="meal-body">
-      <div class="grp"><div class="gh"><span class="gn gn-dam">Đạm</span><span class="gm">220 kcal · 28g đạm</span></div><div class="dish"><i class="ti ti-fish"></i> Cá hấp (1.5 lạng)</div></div>
-      <div class="grp"><div class="gh"><span class="gn gn-xo">Xơ</span><span class="gm">110 kcal</span></div><div class="dish"><i class="ti ti-salad"></i> Rau xào ít dầu</div></div>
-      <div class="grp"><div class="gh"><span class="gn gn-bot">Đường/bột</span><span class="gm">120 kcal</span></div><div class="dish"><i class="ti ti-bowl-spoon"></i> Khoai lang (1 củ nhỏ)</div></div>
-    </div>
-  </div>
+</div><!-- /wrap -->
 
-  <div class="note">Gợi ý tự sinh theo mục tiêu & số bữa (xem <b>Calorie-Meal-Business-Rules</b>). HLV có thể điều chỉnh; KH theo dõi & check-in tại màn "Sức khỏe tổng thể".</div>
+<!-- Action bar -->
+<div class="action-bar">
+  <button class="btn-back-circle" onclick="location.href='hlv_chi_tiet_kh.html'"><i class="ti ti-arrow-left"></i></button>
+  <button class="btn-primary" onclick="location.href='hlv_chi_tiet_kh.html'">
+    <i class="ti ti-device-floppy"></i> Lưu &amp; về Chi tiết KH
+  </button>
 </div>
 
-<div class="actions">
-  <button class="back" onclick="location.href='hlv_tao_tai_khoan_kh.html'"><i class="ti ti-arrow-left"></i></button>
-  <button class="cta" onclick="location.href='hlv_chi_tiet_kh.html'"><i class="ti ti-check"></i> Lưu & về chi tiết KH</button>
-</div>
+<script>
+function switchTab(id, idx) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab')[idx].classList.add('active');
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+}
+</script>
 </body>
 </html>

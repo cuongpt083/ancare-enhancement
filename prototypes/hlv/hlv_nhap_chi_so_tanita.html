@@ -3,215 +3,593 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nhập chỉ số Tanita — Prototype</title>
-<link rel="stylesheet" href="tabler-icons.min.css">
+<title>Nhập chỉ số Tanita — AnCare v1.1</title>
+<link rel="stylesheet" href="../tabler-icons.min.css">
 <style>
   :root {
     --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --color-background-primary: #ffffff;
-    --color-background-secondary: #f6f7f9;
-    --color-background-app: #eef0f3;
-    --color-text-primary: #1a1d21;
-    --color-text-secondary: #6b7280;
-    --color-border-secondary: #d1d5db;
-    --color-border-tertiary: #e5e7eb;
+    --color-bg: #eef0f3;
+    --color-surface: #ffffff;
+    --color-surface-2: #f6f7f9;
+    --color-text: #1a1d21;
+    --color-text-2: #6b7280;
+    --color-border: #e5e7eb;
+    --color-border-2: #d1d5db;
     --color-accent: #2f6f4f;
     --color-accent-soft: #e7f1ec;
-    --border-radius-md: 10px;
-    --border-radius-lg: 14px;
+    --color-err: #b42318;
+    --r-md: 10px;
+    --r-lg: 14px;
   }
-  * { box-sizing: border-box; }
-  body, html { margin: 0; padding: 0; font-family: var(--font-sans); background: var(--color-background-app); color: var(--color-text-primary); }
-  .container { width: 100%; max-width: 460px; margin: 0 auto; padding: 0 0 92px; }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--font-sans);
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-size: 15px;
+    overscroll-behavior: contain;
+    -webkit-text-size-adjust: 100%;
+  }
+  .screen { max-width: 460px; margin: 0 auto; padding-bottom: 100px; }
 
-  .appbar { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; gap: 8px;
-    background: var(--color-background-primary); padding: 0.9rem 1rem; border-bottom: 0.5px solid var(--color-border-tertiary); }
-  .appbar .ti { font-size: 22px; }
-  .appbar h1 { font-size: 16px; font-weight: 600; margin: 0; flex: 1; }
-  .appbar .step { font-size: 12px; color: var(--color-text-secondary); }
+  /* ── App Bar ── */
+  .appbar {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; gap: 10px;
+    background: var(--color-surface);
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .appbar-back {
+    display: flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: 8px;
+    background: var(--color-surface-2);
+    border: none; cursor: pointer;
+    text-decoration: none; color: var(--color-text);
+    flex-shrink: 0;
+  }
+  .appbar-back .ti { font-size: 20px; }
+  .appbar-title { font-size: 16px; font-weight: 600; flex: 1; margin: 0; }
+  .appbar-badge {
+    font-size: 11px; font-weight: 600;
+    background: var(--color-accent); color: #fff;
+    padding: 2px 7px; border-radius: 20px;
+  }
 
-  .intro { font-size: 12.5px; color: var(--color-text-secondary); padding: 0.9rem 1rem 0; line-height: 1.5; }
+  /* ── OCR Banner ── */
+  .ocr-banner {
+    margin: 12px 12px 0;
+    background: var(--color-accent-soft);
+    border: 1.5px solid var(--color-accent);
+    border-radius: var(--r-lg);
+    padding: 14px 16px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .ocr-banner-row {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .ocr-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--color-accent); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .ocr-icon .ti { font-size: 20px; }
+  .ocr-text { flex: 1; }
+  .ocr-text strong { display: block; font-size: 13.5px; font-weight: 600; color: var(--color-text); }
+  .ocr-text span { font-size: 12px; color: var(--color-text-2); }
+  .ocr-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--color-accent); color: #fff;
+    border: none; border-radius: var(--r-md);
+    padding: 10px 16px; font-size: 13.5px; font-weight: 600;
+    font-family: var(--font-sans); cursor: pointer;
+    min-height: 44px;
+    transition: opacity .15s, transform .1s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .ocr-btn:active { opacity: .8; transform: scale(.97); }
+  .ocr-divider {
+    text-align: center; font-size: 12px; color: var(--color-text-2);
+    border-top: 1px dashed var(--color-border-2); padding-top: 10px;
+    margin-top: 0;
+  }
 
-  /* OCR action */
-  .ocr { display: flex; gap: 10px; padding: 0.8rem 1rem; }
-  .ocr button { flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px;
-    padding: 0.8rem; font-size: 14px; font-weight: 600; border-radius: var(--border-radius-md); cursor: pointer; }
-  .ocr .primary { background: var(--color-accent); color: #fff; border: none; }
-  .ocr .ghost { background: var(--color-background-primary); color: var(--color-accent); border: 1px solid var(--color-accent); }
-  .ocr-hint { font-size: 11px; color: var(--color-text-secondary); padding: 0 1rem 0.4rem; display: flex; gap: 6px; align-items: flex-start; }
-  .ocr-hint .ti { color: var(--color-accent); font-size: 14px; }
+  /* ── OCR processing mock ── */
+  .ocr-processing {
+    display: none;
+    align-items: center; gap: 10px;
+    padding: 12px 0;
+    font-size: 13px; color: var(--color-text-2);
+  }
+  .ocr-processing.show { display: flex; }
+  .spinner {
+    width: 20px; height: 20px; border-radius: 50%;
+    border: 2.5px solid var(--color-border-2);
+    border-top-color: var(--color-accent);
+    animation: spin .7s linear infinite;
+    flex-shrink: 0;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* OCR status banner */
-  .ocr-status { display: none; align-items: center; gap: 8px; margin: 0 1rem 0.4rem; padding: 0.6rem 0.75rem;
-    background: var(--color-accent-soft); border: 0.5px solid var(--color-accent); border-radius: var(--border-radius-md);
-    font-size: 12px; color: var(--color-accent); }
-  .ocr-status.show { display: flex; }
-  .ocr-status .ti { font-size: 16px; }
+  /* ── Section label ── */
+  .section-label {
+    font-size: 11px; font-weight: 600; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--color-text-2);
+    padding: 0 16px; margin: 16px 0 6px;
+  }
 
-  /* Group */
-  .group { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary);
-    border-radius: var(--border-radius-lg); margin: 0.7rem 1rem; overflow: hidden; }
-  .group-title { font-size: 12px; font-weight: 600; color: var(--color-text-secondary); text-transform: uppercase;
-    letter-spacing: .3px; padding: 0.7rem 0.9rem 0.4rem; }
+  /* ── Card ── */
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--r-lg);
+    margin: 0 12px;
+    overflow: hidden;
+  }
+  .card + .card { margin-top: 10px; }
 
-  /* Field row */
-  .frow { display: flex; align-items: center; gap: 10px; padding: 0.6rem 0.9rem; border-top: 0.5px solid var(--color-border-tertiary); }
-  .frow:first-of-type { border-top: none; }
-  .flabel { flex: 1; font-size: 13.5px; }
-  .flabel .unit { color: var(--color-text-secondary); font-weight: 400; font-size: 12px; }
-  .flabel .info { color: var(--color-text-secondary); font-size: 11px; cursor: help; vertical-align: 1px; }
-  .finput { position: relative; width: 132px; flex: none; }
-  .finput input { width: 100%; padding: 0.55rem 2.1rem 0.55rem 0.65rem; font-size: 14px; font-family: inherit; text-align: right;
-    border: 1px solid var(--color-border-secondary); border-radius: var(--border-radius-md); background: var(--color-background-primary); }
-  .finput input:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-soft); }
-  .finput .suffix { position: absolute; right: 0.6rem; top: 50%; transform: translateY(-50%); font-size: 11.5px; color: var(--color-text-secondary); pointer-events: none; }
-  /* auto-filled by OCR */
-  .frow.autofilled input { border-color: var(--color-accent); background: var(--color-accent-soft); }
-  .frow .auto-tag { display: none; }
-  .frow.autofilled .auto-tag { display: inline-flex; align-items: center; gap: 2px; font-size: 9.5px; color: var(--color-accent);
-    background: #fff; border: 0.5px solid var(--color-accent); border-radius: 5px; padding: 1px 4px; margin-left: 6px; }
-  .frow.required .flabel:after { content: " *"; color: #b42318; }
-  .from-profile { display: inline-flex; align-items: center; gap: 2px; font-size: 9.5px; color: var(--color-text-secondary);
-    background: var(--color-background-secondary); border: 0.5px solid var(--color-border-secondary); border-radius: 5px; padding: 1px 5px; margin-left: 6px; }
-  .from-profile .ti { font-size: 11px; }
-  .finput input[readonly] { background: var(--color-background-secondary); color: var(--color-text-secondary); border-style: dashed; }
+  /* ── Field ── */
+  .field {
+    padding: 0 16px;
+    position: relative;
+  }
+  .field + .field { margin-top: 2px; }
+  .field-inner {
+    padding: 10px 0 10px;
+    border-bottom: 1px solid var(--color-border);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .field:last-child .field-inner { border-bottom: none; }
+  .field-left { flex: 1; min-width: 0; }
+  .field label {
+    display: block;
+    font-size: 12px; font-weight: 500;
+    color: var(--color-text-2); margin-bottom: 4px;
+  }
+  .field label .req { color: var(--color-err); margin-left: 2px; }
+  .field input[type=number] {
+    width: 100%; padding: 7px 10px;
+    font-size: 15px; font-weight: 600;
+    font-family: var(--font-sans);
+    border: 1px solid var(--color-border-2);
+    border-radius: var(--r-md);
+    background: var(--color-surface);
+    color: var(--color-text);
+    outline: none;
+    transition: border-color .15s, background .3s;
+    -webkit-appearance: none;
+    min-height: 44px;
+    inputmode: decimal;
+  }
+  .field input:focus { border-color: var(--color-accent); }
+  .field input.error { border-color: var(--color-err); }
+  .field input.ai-filled { background: #f0fdf4; border-color: var(--color-accent); }
 
-  /* BMI auto card */
-  .bmi { display: flex; align-items: center; gap: 10px; padding: 0.6rem 0.9rem; border-top: 0.5px solid var(--color-border-tertiary); background: var(--color-background-secondary); }
-  .bmi .flabel { font-weight: 600; }
-  .bmi .val { font-size: 16px; font-weight: 700; color: var(--color-accent); }
-  .bmi .val small { font-size: 11px; color: var(--color-text-secondary); font-weight: 500; }
+  /* ── Unit badge ── */
+  .unit {
+    font-size: 12px; font-weight: 500; color: var(--color-text-2);
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    border-radius: 6px; padding: 4px 8px;
+    white-space: nowrap; flex-shrink: 0;
+  }
 
-  .actions { position: fixed; bottom: 0; left: 0; right: 0; max-width: 460px; margin: 0 auto;
-    display: flex; align-items: center; gap: 12px; padding: 0.8rem 1rem; background: var(--color-background-primary);
-    border-top: 0.5px solid var(--color-border-tertiary); }
-  .back { width: 44px; height: 44px; flex: none; border-radius: 50%; border: 1px solid var(--color-border-secondary);
-    background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-  .back .ti { font-size: 20px; color: var(--color-accent); }
-  .cta { flex: 1; padding: 0.85rem; font-size: 15px; font-weight: 700; border-radius: var(--border-radius-md); border: none; cursor: pointer;
-    background: var(--color-accent); color: #fff; }
-  .cta:disabled { background: var(--color-border-secondary); color: #fff; cursor: not-allowed; }
-  .cta-note { font-size: 11px; color: #b42318; padding: 0 1rem; position: fixed; bottom: 70px; left: 0; right: 0; max-width: 460px; margin: 0 auto; text-align: center; display: none; }
-  .cta-note.show { display: block; }
+  /* ── AI badge ── */
+  .ai-badge {
+    display: none;
+    font-size: 10px; font-weight: 700; color: var(--color-accent);
+    background: var(--color-accent-soft);
+    border: 1px solid var(--color-accent);
+    border-radius: 5px; padding: 2px 6px; flex-shrink: 0;
+  }
+  .ai-badge.show { display: inline-block; }
+
+  /* ── Tooltip ── */
+  .tooltip-wrap {
+    position: relative; display: inline-flex;
+    align-items: center; flex-shrink: 0;
+  }
+  .tooltip-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border-2);
+    font-size: 12px; cursor: pointer;
+    color: var(--color-text-2);
+    transition: background .15s;
+  }
+  .tooltip-btn:active { background: var(--color-accent-soft); }
+  .tooltip-popup {
+    display: none;
+    position: absolute; right: 0; top: 30px;
+    background: #1a1d21; color: #fff;
+    font-size: 12px; border-radius: 8px;
+    padding: 9px 12px; width: 200px;
+    z-index: 100; line-height: 1.5;
+    box-shadow: 0 4px 16px rgba(0,0,0,.25);
+  }
+  .tooltip-popup::before {
+    content: ''; position: absolute; top: -6px; right: 8px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 6px solid #1a1d21;
+  }
+  .tooltip-wrap.open .tooltip-popup { display: block; }
+
+  /* ── Read-only field (chiều cao) ── */
+  .readonly-field {
+    display: flex; align-items: center; gap: 10px;
+    margin: 12px 12px 0;
+    background: var(--color-accent-soft);
+    border: 1.5px solid var(--color-accent);
+    border-radius: var(--r-md);
+    padding: 11px 14px;
+  }
+  .readonly-field .ti { font-size: 18px; color: var(--color-accent); }
+  .readonly-label { font-size: 12px; color: var(--color-accent); font-weight: 500; }
+  .readonly-value { font-size: 15px; font-weight: 700; color: var(--color-accent); margin-left: auto; }
+  .readonly-note { font-size: 11px; color: var(--color-text-2); margin-left: 4px; }
+
+  /* ── BMI chip ── */
+  .bmi-row {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .bmi-chip {
+    font-size: 12px; font-weight: 600;
+    padding: 3px 10px; border-radius: 20px;
+    display: none;
+  }
+  .bmi-chip.show { display: inline-block; }
+  .bmi-chip.normal { background: #dcfce7; color: #16a34a; }
+  .bmi-chip.thin { background: #fef3c7; color: #92400e; }
+  .bmi-chip.overweight { background: #ffedd5; color: #c2410c; }
+  .bmi-chip.obese { background: #fee2e2; color: #991b1b; }
+
+  /* ── Bottom CTA ── */
+  .action-bar {
+    position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 100%; max-width: 460px;
+    padding: 12px 16px;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    z-index: 50;
+  }
+  .btn-cta {
+    width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 14px 16px; border-radius: var(--r-md);
+    font-size: 15px; font-weight: 700;
+    font-family: var(--font-sans);
+    background: var(--color-accent); color: #fff;
+    border: none; cursor: pointer;
+    min-height: 52px;
+    transition: opacity .15s, transform .1s;
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+  }
+  .btn-cta:active { opacity: .8; transform: scale(.98); }
+  .btn-cta:disabled { background: #c3d5cc; cursor: not-allowed; pointer-events: none; }
+
+  ::-webkit-scrollbar { width: 0; }
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="appbar">
-    <i class="ti ti-arrow-left" style="cursor:pointer" onclick="location.href='hlv_tao_kh_tiem_nang.html'"></i>
-    <h1>Nhập chỉ số Tanita</h1>
-    <span class="step">Bước 2/2</span>
+<div class="screen">
+
+  <!-- App Bar -->
+  <header class="appbar">
+    <a href="hlv_tao_kh_tiem_nang.html" class="appbar-back" aria-label="Quay lại">
+      <i class="ti ti-arrow-left"></i>
+    </a>
+    <h1 class="appbar-title">Nhập chỉ số Tanita</h1>
+    <span class="appbar-badge">v1.1</span>
+  </header>
+
+  <!-- OCR Banner -->
+  <div class="ocr-banner">
+    <div class="ocr-banner-row">
+      <div class="ocr-icon"><i class="ti ti-camera"></i></div>
+      <div class="ocr-text">
+        <strong>Nhập tự động từ ảnh cân</strong>
+        <span>Chụp phiếu Tanita để điền tất cả chỉ số</span>
+      </div>
+    </div>
+    <button class="ocr-btn" onclick="startOCR()" id="ocr-btn">
+      <i class="ti ti-camera"></i> Chụp ảnh phiếu cân
+    </button>
+    <div class="ocr-processing" id="ocr-processing">
+      <div class="spinner"></div>
+      <span>Đang xử lý ảnh… vui lòng đợi</span>
+    </div>
+    <div class="ocr-divider">hoặc nhập tay từng chỉ số bên dưới</div>
   </div>
 
-  <div class="intro">Nhập tay hoặc <b>chụp/chọn ảnh</b> trang kết quả cân Tanita — hệ thống tự nhận diện và điền các chỉ số, HLV kiểm tra lại.</div>
-
-  <div class="ocr">
-    <button class="primary" onclick="runOCR()"><i class="ti ti-camera"></i> Chụp ảnh</button>
-    <button class="ghost" onclick="runOCR()"><i class="ti ti-photo"></i> Chọn ảnh</button>
-  </div>
-  <div class="ocr-hint"><i class="ti ti-info-circle"></i><span>Ô được AI tự điền sẽ tô xanh kèm nhãn “AI” — hãy đối chiếu với phiếu cân trước khi tạo bản tư vấn.</span></div>
-  <div class="ocr-status" id="ocrStatus"><i class="ti ti-circle-check"></i> Đã nhận diện 9 chỉ số từ ảnh. Vui lòng kiểm tra lại.</div>
-
-  <!-- Nhóm cơ bản -->
-  <div class="group">
-    <div class="group-title">Cơ bản</div>
-    <div class="frow required" data-key="weight">
-      <div class="flabel">Cân nặng <span class="auto-tag"><i class="ti ti-sparkles"></i>AI</span></div>
-      <div class="finput"><input type="number" inputmode="decimal" placeholder="55.5" oninput="recalc()"><span class="suffix">kg</span></div>
-    </div>
-    <div class="frow" data-key="height">
-      <div class="flabel">Chiều cao <span class="from-profile"><i class="ti ti-user"></i> từ hồ sơ</span></div>
-      <div class="finput"><input type="number" value="160" readonly><span class="suffix">cm</span></div>
-    </div>
-    <div class="bmi">
-      <div class="flabel">BMI <span class="unit">(tự tính)</span></div>
-      <div class="val" id="bmiVal">— <small id="bmiCat"></small></div>
-    </div>
+  <!-- Chiều cao (from profile) -->
+  <div class="readonly-field">
+    <i class="ti ti-ruler"></i>
+    <span class="readonly-label">Chiều cao</span>
+    <span class="readonly-note">Từ hồ sơ</span>
+    <span class="readonly-value">1m61</span>
   </div>
 
-  <!-- Nhóm thành phần cơ thể -->
-  <div class="group">
-    <div class="group-title">Thành phần cơ thể</div>
-    <div class="frow" data-key="fat">
-      <div class="flabel">Tỷ lệ mỡ <span class="auto-tag"><i class="ti ti-sparkles"></i>AI</span></div>
-      <div class="finput"><input type="number" inputmode="decimal" placeholder="22.5"><span class="suffix">%</span></div>
+  <!-- ══ Group: Cơ bản ══ -->
+  <div class="section-label">Cơ bản</div>
+  <div class="card">
+
+    <!-- Cân nặng -->
+    <div class="field" id="f-cannang">
+      <div class="field-inner">
+        <div class="field-left">
+          <label for="cannang">Cân nặng <span class="req">*</span></label>
+          <input type="number" id="cannang" inputmode="decimal" placeholder="60.5"
+                 min="20" max="200" step="0.1" oninput="calcBMI(); checkCTA()">
+        </div>
+        <span class="unit">kg</span>
+        <span class="ai-badge" id="ai-cannang">AI</span>
+      </div>
     </div>
-    <div class="frow" data-key="muscle">
-      <div class="flabel">Khối lượng cơ <span class="auto-tag"><i class="ti ti-sparkles"></i>AI</span></div>
-      <div class="finput"><input type="number" inputmode="decimal" placeholder="38.0"><span class="suffix">kg</span></div>
+
+    <!-- BMI (auto) -->
+    <div class="field">
+      <div class="field-inner">
+        <div class="field-left">
+          <label>BMI <span style="font-size:10.5px; font-weight:400">(tự tính)</span></label>
+          <div class="bmi-row">
+            <span id="bmi-val" style="font-size:15px; font-weight:700; color: var(--color-text)">—</span>
+            <span class="bmi-chip" id="bmi-chip">—</span>
+          </div>
+        </div>
+        <div class="tooltip-wrap" id="tt-bmi" onclick="toggleTT('tt-bmi')">
+          <button class="tooltip-btn" aria-label="Giải thích BMI"><i class="ti ti-info-circle" style="font-size:14px"></i></button>
+          <div class="tooltip-popup">BMI = Cân nặng ÷ (Chiều cao²). BMI 18.5–24.9: bình thường · &lt;18.5: thiếu cân · 25–29.9: thừa cân · ≥30: béo phì.</div>
+        </div>
+      </div>
     </div>
-    <div class="frow" data-key="water">
-      <div class="flabel">Tỷ lệ nước <span class="auto-tag"><i class="ti ti-sparkles"></i>AI</span></div>
-      <div class="finput"><input type="number" inputmode="decimal" placeholder="55.0"><span class="suffix">%</span></div>
-    </div>
-    <div class="frow" data-key="bone">
-      <div class="flabel">Khối lượng xương <span class="auto-tag"><i class="ti ti-sparkles"></i>AI</span></div>
-      <div class="finput"><input type="number" inputmode="decimal" placeholder="2.4"><span class="suffix">kg</span></div>
-    </div>
-    <div class="frow" data-key="visceral">
-      <div class="flabel">Mỡ nội tạng <span class="info" title="Mức 1–12: bình thường; ≥13: cao">ⓘ</span> <span class="auto-tag"><i class="ti ti-sparkles"></i>AI</span></div>
-      <div class="finput"><input type="number" inputmode="numeric" placeholder="4"><span class="suffix">mức</span></div>
-    </div>
+
   </div>
 
-  <!-- Nhóm chỉ số khác -->
-  <div class="group">
-    <div class="group-title">Chỉ số khác</div>
-    <div class="frow" data-key="physique">
-      <div class="flabel">Vóc dáng <span class="info" title="Physique rating 1–9 của Tanita">ⓘ</span> <span class="auto-tag"><i class="ti ti-sparkles"></i>AI</span></div>
-      <div class="finput"><input type="number" inputmode="numeric" placeholder="5"><span class="suffix">1–9</span></div>
-    </div>
-    <div class="frow" data-key="metaage">
-      <div class="flabel">Tuổi sinh học <span class="auto-tag"><i class="ti ti-sparkles"></i>AI</span></div>
-      <div class="finput"><input type="number" inputmode="numeric" placeholder="28"><span class="suffix">tuổi</span></div>
-    </div>
-    <div class="frow" data-key="bmr">
-      <div class="flabel">Năng lượng nghỉ ngơi <span class="auto-tag"><i class="ti ti-sparkles"></i>AI</span></div>
-      <div class="finput"><input type="number" inputmode="numeric" placeholder="1450"><span class="suffix">kcal</span></div>
-    </div>
-  </div>
-</div>
+  <!-- ══ Group: Thành phần cơ thể ══ -->
+  <div class="section-label">Thành phần cơ thể</div>
+  <div class="card">
 
-<div class="cta-note" id="ctaNote">Cần nhập đầy đủ tất cả chỉ số Tanita để tạo bản tư vấn.</div>
-<div class="actions">
-  <button class="back" title="Quay lại" onclick="location.href='hlv_tao_kh_tiem_nang.html'"><i class="ti ti-arrow-left"></i></button>
-  <button class="cta" id="cta" disabled onclick="location.href='hlv_ban_tu_van.html'">Tạo bản Tư Vấn</button>
+    <div class="field">
+      <div class="field-inner">
+        <div class="field-left">
+          <label for="mo-co-the">Mỡ cơ thể</label>
+          <input type="number" id="mo-co-the" inputmode="decimal" placeholder="25.0" min="3" max="60" step="0.1">
+        </div>
+        <span class="unit">%</span>
+        <span class="ai-badge" id="ai-mo-co-the">AI</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-inner">
+        <div class="field-left">
+          <label for="co-bap">Lượng cơ bắp</label>
+          <input type="number" id="co-bap" inputmode="decimal" placeholder="44.2" min="10" max="100" step="0.1">
+        </div>
+        <span class="unit">kg</span>
+        <span class="ai-badge" id="ai-co-bap">AI</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-inner">
+        <div class="field-left">
+          <label for="nuoc">Lượng nước</label>
+          <input type="number" id="nuoc" inputmode="decimal" placeholder="52.3" min="30" max="80" step="0.1">
+        </div>
+        <span class="unit">%</span>
+        <span class="ai-badge" id="ai-nuoc">AI</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-inner">
+        <div class="field-left">
+          <label for="xuong">Lượng xương</label>
+          <input type="number" id="xuong" inputmode="decimal" placeholder="2.3" min="1" max="6" step="0.1">
+        </div>
+        <span class="unit">kg</span>
+        <span class="ai-badge" id="ai-xuong">AI</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-inner">
+        <div class="field-left">
+          <label for="mo-noi-tang">Mỡ nội tạng</label>
+          <input type="number" id="mo-noi-tang" inputmode="decimal" placeholder="5" min="1" max="9" step="1">
+        </div>
+        <span class="unit">điểm</span>
+        <span class="ai-badge" id="ai-mo-noi-tang">AI</span>
+        <div class="tooltip-wrap" id="tt-mnt" onclick="toggleTT('tt-mnt')">
+          <button class="tooltip-btn" aria-label="Giải thích mỡ nội tạng"><i class="ti ti-info-circle" style="font-size:14px"></i></button>
+          <div class="tooltip-popup">Mỡ nội tạng 1–4: bình thường · 5–9: cần chú ý · ≥10: nguy cơ cao. Đây là mỡ bao quanh các cơ quan nội tạng.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══ Group: Chỉ số khác ══ -->
+  <div class="section-label">Chỉ số khác</div>
+  <div class="card">
+
+    <div class="field">
+      <div class="field-inner">
+        <div class="field-left">
+          <label for="can-doi">Chỉ số cân đối vóc dáng</label>
+          <input type="number" id="can-doi" inputmode="decimal" placeholder="4" min="1" max="9" step="1">
+        </div>
+        <span class="unit">điểm</span>
+        <span class="ai-badge" id="ai-can-doi">AI</span>
+        <div class="tooltip-wrap" id="tt-cd" onclick="toggleTT('tt-cd')">
+          <button class="tooltip-btn" aria-label="Giải thích chỉ số cân đối"><i class="ti ti-info-circle" style="font-size:14px"></i></button>
+          <div class="tooltip-popup">Thang từ 1–9. Điểm thấp: nhiều mỡ ít cơ. Điểm cao: nhiều cơ ít mỡ. Mục tiêu lý tưởng: 5–7.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-inner">
+        <div class="field-left">
+          <label for="tuoi-sinh-hoc">Tuổi sinh học</label>
+          <input type="number" id="tuoi-sinh-hoc" inputmode="decimal" placeholder="32" min="10" max="99" step="1">
+        </div>
+        <span class="unit">tuổi</span>
+        <span class="ai-badge" id="ai-tuoi-sinh-hoc">AI</span>
+        <div class="tooltip-wrap" id="tt-tsb" onclick="toggleTT('tt-tsb')">
+          <button class="tooltip-btn" aria-label="Giải thích tuổi sinh học"><i class="ti ti-info-circle" style="font-size:14px"></i></button>
+          <div class="tooltip-popup">Tuổi sinh học phản ánh tình trạng sức khỏe thực tế. Thấp hơn tuổi thật là tốt — cơ thể đang trẻ hơn tuổi.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-inner">
+        <div class="field-left">
+          <label for="nang-luong">Năng lượng nghỉ ngơi (BMR)</label>
+          <input type="number" id="nang-luong" inputmode="decimal" placeholder="1320" min="800" max="3000" step="1">
+        </div>
+        <span class="unit">kcal/ngày</span>
+        <span class="ai-badge" id="ai-nang-luong">AI</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="height:12px"></div>
+
+</div><!-- /screen -->
+
+<!-- ── Bottom CTA ── -->
+<div class="action-bar">
+  <a href="hlv_ban_tu_van.html" class="btn-cta" id="btn-cta" onclick="return checkCTA_click(event)">
+    <i class="ti ti-clipboard-heart"></i> Tạo bản Tư Vấn
+  </a>
 </div>
 
 <script>
-  function val(key){ var el=document.querySelector('[data-key="'+key+'"] input'); return el? parseFloat(el.value):NaN; }
-  // Tất cả chỉ số Tanita HLV phải nhập (chiều cao lấy từ hồ sơ, không tính)
-  var TANITA_KEYS=['weight','fat','muscle','water','bone','visceral','physique','metaage','bmr'];
-  function recalc(){
-    var w=val('weight'), h=val('height');
-    var bmiEl=document.getElementById('bmiVal');
-    var cta=document.getElementById('cta'), note=document.getElementById('ctaNote');
-    // BMI tự tính từ chiều cao (hồ sơ) + cân nặng
-    if(w>0 && h>0){
-      var bmi = w/Math.pow(h/100,2);
-      var cat = bmi<18.5?'Thiếu cân': bmi<23?'Bình thường': bmi<25?'Thừa cân':'Béo phì';
-      bmiEl.innerHTML = bmi.toFixed(1)+' <small>'+cat+'</small>';
-    } else { bmiEl.innerHTML='— '; }
-    // CTA chỉ bật khi ĐỦ TẤT CẢ chỉ số Tanita
-    var missing = TANITA_KEYS.filter(function(k){ return !(val(k)>=0); });
-    if(missing.length===0){ cta.disabled=false; note.classList.remove('show'); }
-    else { cta.disabled=true; }
+  const HEIGHT_M = 1.61;
+
+  /* ── BMI calc ── */
+  function calcBMI() {
+    const w = parseFloat(document.getElementById('cannang').value);
+    const bmiVal = document.getElementById('bmi-val');
+    const bmiChip = document.getElementById('bmi-chip');
+
+    if (!w || isNaN(w)) {
+      bmiVal.textContent = '—';
+      bmiChip.className = 'bmi-chip';
+      return;
+    }
+    const bmi = w / (HEIGHT_M * HEIGHT_M);
+    bmiVal.textContent = bmi.toFixed(1);
+    bmiChip.classList.add('show');
+
+    bmiChip.className = 'bmi-chip show';
+    if (bmi < 18.5) {
+      bmiChip.textContent = 'Thiếu cân'; bmiChip.classList.add('thin');
+    } else if (bmi < 25) {
+      bmiChip.textContent = 'Bình thường'; bmiChip.classList.add('normal');
+    } else if (bmi < 30) {
+      bmiChip.textContent = 'Thừa cân'; bmiChip.classList.add('overweight');
+    } else {
+      bmiChip.textContent = 'Béo phì'; bmiChip.classList.add('obese');
+    }
   }
-  // recalc khi nhập bất kỳ ô Tanita nào
-  document.querySelectorAll('.group input:not([readonly])').forEach(function(i){ i.addEventListener('input', recalc); });
-  document.getElementById('cta').addEventListener('mouseenter',function(){
-    if(this.disabled) document.getElementById('ctaNote').classList.add('show');
+
+  /* ── CTA state ── */
+  function checkCTA() {
+    const w = document.getElementById('cannang').value.trim();
+    const btn = document.getElementById('btn-cta');
+    if (w) {
+      btn.removeAttribute('disabled');
+      btn.style.background = '';
+      btn.style.cursor = '';
+      btn.style.pointerEvents = '';
+    } else {
+      btn.setAttribute('disabled', '');
+      btn.style.background = '#c3d5cc';
+      btn.style.cursor = 'not-allowed';
+      btn.style.pointerEvents = 'none';
+    }
+  }
+
+  function checkCTA_click(e) {
+    const w = document.getElementById('cannang').value.trim();
+    if (!w) {
+      e.preventDefault();
+      document.getElementById('cannang').classList.add('error');
+      document.getElementById('cannang').focus();
+      return false;
+    }
+    return true;
+  }
+
+  /* ── Tooltip ── */
+  function toggleTT(id) {
+    const wrap = document.getElementById(id);
+    const others = document.querySelectorAll('.tooltip-wrap.open');
+    others.forEach(o => { if (o.id !== id) o.classList.remove('open'); });
+    wrap.classList.toggle('open');
+  }
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.tooltip-wrap')) {
+      document.querySelectorAll('.tooltip-wrap.open').forEach(o => o.classList.remove('open'));
+    }
   });
-  // Demo OCR: tô xanh + nhãn AI + điền giá trị mẫu
-  function runOCR(){
-    var demo={weight:'55.5',height:'160',fat:'22.5',muscle:'38.0',water:'55.0',bone:'2.4',visceral:'4',physique:'5',metaage:'28',bmr:'1450'};
-    Object.keys(demo).forEach(function(k){
-      var row=document.querySelector('[data-key="'+k+'"]');
-      if(row){ row.querySelector('input').value=demo[k]; row.classList.add('autofilled'); }
-    });
-    document.getElementById('ocrStatus').classList.add('show');
-    recalc();
+
+  /* ── OCR mock ── */
+  const demoValues = {
+    'cannang': '60.5',
+    'mo-co-the': '28.4',
+    'co-bap': '41.2',
+    'nuoc': '51.8',
+    'xuong': '2.2',
+    'mo-noi-tang': '8',
+    'can-doi': '4',
+    'tuoi-sinh-hoc': '38',
+    'nang-luong': '1290'
+  };
+
+  function startOCR() {
+    const btn = document.getElementById('ocr-btn');
+    const proc = document.getElementById('ocr-processing');
+
+    btn.style.display = 'none';
+    proc.classList.add('show');
+
+    setTimeout(() => {
+      proc.classList.remove('show');
+      btn.style.display = '';
+      btn.innerHTML = '<i class="ti ti-check"></i> Đã nhận ảnh';
+      btn.style.background = '#16a34a';
+
+      // Fill all demo values
+      Object.entries(demoValues).forEach(([id, val]) => {
+        const input = document.getElementById(id);
+        if (input) {
+          input.value = val;
+          input.classList.add('ai-filled');
+          const badge = document.getElementById('ai-' + id);
+          if (badge) badge.classList.add('show');
+        }
+      });
+
+      calcBMI();
+      checkCTA();
+    }, 2000);
   }
+
+  /* ── Init ── */
+  checkCTA();
+  document.getElementById('btn-cta').style.background = '#c3d5cc';
+  document.getElementById('btn-cta').style.cursor = 'not-allowed';
+  document.getElementById('btn-cta').style.pointerEvents = 'none';
 </script>
 </body>
 </html>

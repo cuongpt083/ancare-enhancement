@@ -85,11 +85,12 @@ graph TD
   - Thanh tìm kiếm + bộ lọc (Tất cả / Nóng / Ấm / Lạnh / Cần theo dõi).
   - Nhóm "Hôm nay nên tiếp cận" + "Tất cả lead".
   - **Thẻ lead:** avatar, tên, **thẻ DISC**, giai đoạn (Stage), nguồn (nóng/ấm/lạnh), **lead score**, "việc cần làm tiếp" → mở luồng tư vấn (1.1→1.6).
-  - **FAB "+"** → Tạo KH tiềm năng mới.
+  - **FAB "+"** → Tạo KH tiềm năng mới (`hlv_tao_kh_tiem_nang.html`).
 - **Tab "KH của tôi"** (KH đã chính thức):
   - Thanh tìm kiếm + bộ lọc (Tất cả / Đúng lộ trình / Cần làm mới TĐ / Cần nhắc).
   - **Thẻ KH:** avatar, tên, **gói + ngày X/Y**, trạng thái lộ trình, cờ "gợi ý bữa ăn cần làm mới" → mở **Chi tiết KH** (§2).
-- **Bộ lọc/tìm kiếm áp riêng theo tab.** FAB "+" chỉ hiện ở tab KH tiềm năng.
+  - **FAB "Thêm mới"** (nhánh tắt) → `hlv_tao_tai_khoan_kh.html` trực tiếp, bỏ qua B1–B4. Dùng khi KH đã quyết định và không cần qua giai đoạn tư vấn (giới thiệu, khách cũ, quen biết sẵn). Xem `Workflow-HLV_v1.1-draft.md §1 — Nhánh tắt`.
+- **Bộ lọc/tìm kiếm áp riêng theo tab.** FAB thay đổi đích đến theo tab đang hiển thị: tab tiềm năng → tạo lead; tab KH của tôi → tạo tài khoản trực tiếp.
 
 ### 1.1. Tạo KH tiềm năng mới — 2 Card
 - **Card "Thông tin cơ bản"** (→ `users`): Họ tên (bắt buộc), SĐT, Ngày sinh, Giới tính, **Chiều cao**, Email, Mã giới thiệu, **toggle consent AI**.

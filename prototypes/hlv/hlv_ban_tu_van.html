@@ -2,240 +2,1251 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bản tư vấn — Prototype</title>
-<link rel="stylesheet" href="tabler-icons.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Bản tư vấn — AnCare</title>
+<link rel="stylesheet" href="../tabler-icons.min.css">
 <style>
   :root {
     --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --color-background-primary: #ffffff;
-    --color-background-secondary: #f6f7f9;
-    --color-background-app: #eef0f3;
-    --color-text-primary: #1a1d21;
-    --color-text-secondary: #6b7280;
-    --color-border-secondary: #d1d5db;
-    --color-border-tertiary: #e5e7eb;
+    --color-bg: #eef0f3;
+    --color-surface: #ffffff;
+    --color-surface-2: #f6f7f9;
+    --color-text: #1a1d21;
+    --color-text-2: #6b7280;
+    --color-border: #e5e7eb;
+    --color-border-2: #d1d5db;
     --color-accent: #2f6f4f;
     --color-accent-soft: #e7f1ec;
-    --border-radius-md: 10px;
-    --border-radius-lg: 14px;
+    --r-md: 10px;
+    --r-lg: 14px;
   }
-  * { box-sizing: border-box; }
-  body, html { margin: 0; padding: 0; font-family: var(--font-sans); background: var(--color-background-app); color: var(--color-text-primary); }
-  .container { width: 100%; max-width: 460px; margin: 0 auto; padding: 0 0 92px; }
 
-  /* Patient header */
-  .phead { background: var(--color-background-primary); padding: 1rem; border-bottom: 0.5px solid var(--color-border-tertiary); }
-  .phead h1 { font-size: 18px; font-weight: 700; margin: 0 0 2px; }
-  .phead .meta { font-size: 13px; color: var(--color-text-secondary); }
-  .phead .phone { font-size: 12.5px; color: var(--color-text-secondary); margin-top: 2px; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* Card */
-  .card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary);
-    border-radius: var(--border-radius-lg); margin: 1rem; overflow: hidden; }
-  .card-title { font-size: 14px; font-weight: 600; padding: 0.9rem 1rem 0.6rem; display: flex; align-items: center; gap: 8px; }
-  .card-title .ti { color: var(--color-accent); font-size: 18px; }
+  html, body {
+    font-family: var(--font-sans);
+    background: var(--color-bg);
+    color: var(--color-text);
+    overscroll-behavior: contain;
+    -webkit-font-smoothing: antialiased;
+  }
 
-  /* Severity dot */
-  .sev { width: 8px; height: 8px; border-radius: 50%; flex: none; }
-  .sev.red { background: #b42318; } .sev.yellow { background: #b8860b; } .sev.green { background: var(--color-accent); }
+  .phone-frame {
+    width: 100%;
+    max-width: 460px;
+    margin: 0 auto;
+    min-height: 100vh;
+    background: var(--color-bg);
+    position: relative;
+    overflow-x: hidden;
+  }
 
-  /* Improvement list (Card 1) */
-  .imp-row { display: flex; align-items: center; gap: 10px; padding: 0.8rem 1rem; border-top: 0.5px solid var(--color-border-tertiary); cursor: pointer; }
-  .imp-row .name { flex: 1; font-size: 14px; font-weight: 500; }
-  .imp-row .val { font-size: 14px; font-weight: 600; }
-  .imp-row .val.red { color: #b42318; } .imp-row .val.yellow { color: #854f0b; }
-  .imp-row .chev { color: var(--color-text-secondary); font-size: 16px; transition: transform .2s; }
-  .imp.open .imp-row .chev { transform: rotate(180deg); }
-  .imp-detail { display: none; padding: 0.2rem 1rem 1rem; background: var(--color-background-secondary); }
-  .imp.open .imp-detail { display: block; }
-  .imp-detail h5 { font-size: 12.5px; font-weight: 600; margin: 0.9rem 0 0.4rem; display: flex; align-items: center; gap: 6px; }
-  .imp-detail h5 .ti { font-size: 14px; }
-  .imp-detail h5.now { color: var(--color-accent); }
-  .imp-detail h5.risk { color: #b42318; }
-  .imp-detail ul { margin: 0; padding-left: 18px; }
-  .imp-detail li { font-size: 12.5px; color: var(--color-text-secondary); line-height: 1.55; margin-bottom: 3px; }
+  /* ── STICKY HEADER ── */
+  .top-bar {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: var(--color-surface);
+    border-bottom: 0.5px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    height: 54px;
+  }
+  .top-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 44px;
+  }
+  .btn-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: var(--color-surface-2);
+    cursor: pointer;
+    color: var(--color-text);
+    font-size: 18px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .btn-back:active { background: var(--color-border); }
+  .top-bar-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+  .disc-badge {
+    background: #fef3c7;
+    color: #92600a;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+    letter-spacing: 0.2px;
+  }
 
-  /* Detailed table (Card 2) */
-  .drow { display: grid; grid-template-columns: 1.2fr 0.7fr 1.4fr; gap: 8px; padding: 0.8rem 1rem; border-top: 0.5px solid var(--color-border-tertiary); }
-  .drow .dn { font-size: 13.5px; font-weight: 600; }
-  .drow .who { font-size: 10.5px; color: var(--color-text-secondary); line-height: 1.4; margin-top: 3px; display: block; }
-  .drow .dv { font-size: 15px; font-weight: 700; }
-  .drow .dv.red { color: #b42318; } .drow .dv.yellow { color: #854f0b; } .drow .dv.green { color: var(--color-accent); }
-  .drow .da { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; }
-  .hidden-rows { display: none; }
-  .hidden-rows.show { display: contents; }
-  .source { font-size: 10px; color: var(--color-text-secondary); line-height: 1.5; padding: 0.8rem 1rem; border-top: 0.5px solid var(--color-border-tertiary); background: var(--color-background-secondary); }
-  .more-btn { width: calc(100% - 2rem); margin: 0.8rem 1rem; padding: 0.7rem; background: transparent; border: 0.5px solid var(--color-border-secondary);
-    border-radius: var(--border-radius-md); font-size: 13.5px; font-weight: 600; color: var(--color-text-primary); cursor: pointer;
-    display: flex; align-items: center; justify-content: center; gap: 6px; }
+  /* ── SCROLLABLE CONTENT ── */
+  .scroll-body {
+    padding-bottom: 96px;
+  }
 
-  /* sub note */
-  .subnote { margin: 1rem; padding: 0.9rem 1rem; background: var(--color-accent-soft); border-radius: var(--border-radius-lg); }
-  .subnote h3 { font-size: 13px; margin: 0 0 0.3rem; display: flex; align-items: center; gap: 6px; color: var(--color-accent); }
-  .subnote p { font-size: 12px; color: var(--color-text-secondary); margin: 0; line-height: 1.5; }
+  /* ── PATIENT CARD ── */
+  .patient-card {
+    background: var(--color-surface);
+    margin: 10px 12px;
+    border-radius: var(--r-lg);
+    padding: 14px 14px 12px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+  }
+  .patient-name-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+  .patient-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+  .stage-chip {
+    background: #fffbeb;
+    color: #b45309;
+    border: 1px solid #fcd34d;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 20px;
+  }
+  .patient-meta {
+    font-size: 12.5px;
+    color: var(--color-text-2);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .patient-phone {
+    font-size: 12.5px;
+    color: var(--color-text-2);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .patient-phone i, .patient-meta i {
+    font-size: 13px;
+    color: var(--color-accent);
+  }
 
-  .actions { position: fixed; bottom: 0; left: 0; right: 0; max-width: 460px; margin: 0 auto;
-    display: flex; gap: 10px; padding: 0.8rem 1rem; background: var(--color-background-primary); border-top: 0.5px solid var(--color-border-tertiary); }
-  .btn { flex: 1; padding: 0.9rem; font-size: 15px; font-weight: 700; border-radius: var(--border-radius-md); cursor: pointer; }
-  .btn-secondary { background: var(--color-background-secondary); color: var(--color-text-primary); border: 0.5px solid var(--color-border-secondary); }
-  .btn-primary { background: var(--color-accent); color: #fff; border: none; }
-  .btn .ti { vertical-align: -2px; }
+  /* ── LAYER 0 — Empathy banner ── */
+  .empathy-banner {
+    background: linear-gradient(135deg, #f0fdf4, #e7f1ec);
+    border-left: 3px solid var(--color-accent);
+    border-radius: var(--r-lg);
+    padding: 14px 14px 12px;
+    margin: 0 12px 10px;
+  }
+  .empathy-label {
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .empathy-quote {
+    font-size: 13.5px;
+    font-style: italic;
+    color: #374151;
+    line-height: 1.6;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .empathy-quote i {
+    color: var(--color-accent);
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* ── CARDS ── */
+  .section-card {
+    background: var(--color-surface);
+    border-radius: var(--r-lg);
+    margin: 0 12px 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 14px 10px;
+    border-bottom: 0.5px solid var(--color-border);
+  }
+  .card-header i {
+    font-size: 18px;
+  }
+  .card-header-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  /* ── LAYER 1 — Positive indicators ── */
+  .indicator-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 14px;
+    border-bottom: 0.5px solid var(--color-border);
+  }
+  .indicator-row:last-of-type { border-bottom: none; }
+  .indicator-icon-wrap {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: #f0fdf4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .indicator-icon-wrap i { color: var(--color-accent); font-size: 17px; }
+  .indicator-info { flex: 1; }
+  .indicator-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 2px;
+  }
+  .indicator-note {
+    font-size: 11.5px;
+    color: var(--color-text-2);
+    line-height: 1.4;
+  }
+  .indicator-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+  .indicator-value {
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .badge {
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .badge-green { background: #dcfce7; color: #166534; }
+  .badge-amber { background: #fef3c7; color: #92600a; }
+  .badge-red { background: #fee2e2; color: #991b1b; }
+  .card-footer-note {
+    padding: 10px 14px 12px;
+    font-size: 12px;
+    color: var(--color-text-2);
+    font-style: italic;
+    border-top: 0.5px solid var(--color-border);
+    line-height: 1.5;
+  }
+
+  /* ── LAYER 2 — Concerns accordion ── */
+  .concern-subtitle {
+    padding: 8px 14px 6px;
+    font-size: 11.5px;
+    color: var(--color-text-2);
+    font-style: italic;
+  }
+  .accordion-item {
+    border-bottom: 0.5px solid var(--color-border);
+  }
+  .accordion-item:last-child { border-bottom: none; }
+  .accordion-trigger {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+    cursor: pointer;
+    background: var(--color-surface);
+    border: none;
+    width: 100%;
+    text-align: left;
+    min-height: 54px;
+    transition: background 0.15s;
+  }
+  .accordion-trigger:active { background: var(--color-surface-2); }
+  .severity-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-amber { background: #f59e0b; }
+  .dot-red { background: #ef4444; }
+  .accordion-main { flex: 1; }
+  .accordion-name-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 3px;
+  }
+  .acc-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+  .symptom-chip {
+    font-size: 10.5px;
+    font-weight: 500;
+    background: #fef3c7;
+    color: #92600a;
+    padding: 2px 6px;
+    border-radius: 6px;
+  }
+  .acc-value-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .acc-value {
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .acc-value-amber { color: #d97706; }
+  .acc-value-red { color: #dc2626; }
+  .accordion-chevron {
+    flex-shrink: 0;
+    font-size: 16px;
+    color: var(--color-text-2);
+    transition: transform 0.25s ease;
+  }
+  .accordion-chevron.open { transform: rotate(180deg); }
+  .accordion-body {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease, padding 0.2s ease;
+    background: #fafbfc;
+  }
+  .accordion-body.open {
+    max-height: 200px;
+  }
+  .accordion-body-inner {
+    padding: 12px 14px 14px 32px;
+    border-top: 0.5px solid var(--color-border);
+  }
+  .acc-body-text {
+    font-size: 13px;
+    color: #374151;
+    line-height: 1.65;
+  }
+  .acc-state-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-bottom: 5px;
+  }
+
+  /* ── LAYER 3 — Risk toggle ── */
+  .risk-toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 12px 10px;
+    padding: 13px 14px;
+    background: var(--color-surface);
+    border-radius: var(--r-lg);
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    min-height: 48px;
+    border: none;
+    width: calc(100% - 24px);
+    text-align: left;
+  }
+  .risk-toggle-row:active { background: var(--color-surface-2); }
+  .risk-toggle-label {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #d97706;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .risk-toggle-label i { font-size: 16px; }
+  .risk-chevron {
+    font-size: 16px;
+    color: #d97706;
+    transition: transform 0.25s ease;
+  }
+  .risk-chevron.open { transform: rotate(180deg); }
+  .risk-panel {
+    display: none;
+    margin: -4px 12px 10px;
+    background: var(--color-surface);
+    border-radius: 0 0 var(--r-lg) var(--r-lg);
+    border-top: 0.5px solid var(--color-border);
+    padding: 14px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  }
+  .risk-panel.open { display: block; }
+  .risk-disclaimer {
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    border-radius: var(--r-md);
+    padding: 9px 11px;
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    margin-bottom: 12px;
+  }
+  .risk-disclaimer i { color: #ea580c; font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+  .risk-disclaimer span { font-size: 11.5px; color: #7c2d12; font-weight: 500; line-height: 1.4; }
+  .risk-list { list-style: none; margin-bottom: 10px; }
+  .risk-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+    color: #374151;
+    padding: 5px 0;
+    line-height: 1.5;
+  }
+  .risk-list li::before {
+    content: '•';
+    color: #f59e0b;
+    font-size: 16px;
+    flex-shrink: 0;
+    line-height: 1.2;
+  }
+  .risk-source {
+    font-size: 11px;
+    color: var(--color-text-2);
+    padding-top: 8px;
+    border-top: 0.5px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .risk-source i { font-size: 12px; }
+  .risk-disc-note {
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--color-text-2);
+    font-style: italic;
+    padding: 6px 8px;
+    background: var(--color-surface-2);
+    border-radius: 6px;
+  }
+
+  /* ── LAYER 4 — Good news card ── */
+  .goodnews-card {
+    background: var(--color-accent-soft);
+    border: 1px solid var(--color-accent);
+    border-radius: var(--r-lg);
+    margin: 0 12px 10px;
+    padding: 14px;
+  }
+  .goodnews-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .goodnews-header i { color: var(--color-accent); font-size: 20px; }
+  .goodnews-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+  .goodnews-body {
+    font-size: 13.5px;
+    color: #1f4033;
+    line-height: 1.65;
+    margin-bottom: 10px;
+  }
+  .goodnews-note {
+    font-size: 11.5px;
+    color: #2f6f4f99;
+    font-style: italic;
+    margin-bottom: 12px;
+  }
+  .why-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(47,111,79,0.12);
+    border: 1px solid rgba(47,111,79,0.3);
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--color-accent);
+    width: 100%;
+    text-align: left;
+    min-height: 44px;
+  }
+  .why-btn i { font-size: 15px; }
+  .why-chevron {
+    margin-left: auto;
+    font-size: 15px;
+    transition: transform 0.25s ease;
+  }
+  .why-chevron.open { transform: rotate(180deg); }
+  .why-panel {
+    display: none;
+    margin-top: 10px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 8px;
+    padding: 11px 12px;
+  }
+  .why-panel.open { display: block; }
+  .why-panel p {
+    font-size: 12.5px;
+    color: #1f4033;
+    line-height: 1.6;
+  }
+  .why-panel ul {
+    list-style: none;
+    margin-top: 6px;
+  }
+  .why-panel ul li {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: 12.5px;
+    color: #374151;
+    padding: 3px 0;
+    line-height: 1.5;
+  }
+  .why-panel ul li::before {
+    content: '✓';
+    color: var(--color-accent);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* ── FAB — Objection Handler ── */
+  .fab-objection {
+    position: fixed;
+    bottom: 84px;
+    right: calc(50% - 230px + 16px);
+    background: #7c3aed;
+    border-radius: 20px;
+    padding: 0.5rem 1rem 0.5rem 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: white;
+    font-size: 12.5px;
+    font-weight: 600;
+    box-shadow: 0 4px 14px rgba(124,58,237,0.3);
+    border: none;
+    cursor: pointer;
+    z-index: 20;
+    min-height: 44px;
+    font-family: var(--font-sans);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .fab-objection:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 8px rgba(124,58,237,0.25);
+  }
+  .fab-objection i { font-size: 18px; }
+
+  /* ── MODAL — Objection Handler ── */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 50;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  .modal-backdrop.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .modal-sheet {
+    background: var(--color-surface);
+    border-radius: 20px 20px 0 0;
+    width: 100%;
+    max-width: 460px;
+    padding: 0 0 env(safe-area-inset-bottom, 12px);
+    max-height: 92vh;
+    overflow-y: auto;
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+    position: relative;
+  }
+  .modal-backdrop.open .modal-sheet {
+    transform: translateY(0);
+  }
+  .modal-drag-handle {
+    width: 36px;
+    height: 4px;
+    background: var(--color-border-2);
+    border-radius: 2px;
+    margin: 10px auto 0;
+  }
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px 10px;
+    border-bottom: 0.5px solid var(--color-border);
+  }
+  .modal-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+  .modal-close {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--color-surface-2);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: var(--color-text-2);
+    flex-shrink: 0;
+  }
+  .modal-close:active { background: var(--color-border); }
+  .modal-body { padding: 14px 16px; }
+  .objection-subtitle {
+    font-size: 12px;
+    color: var(--color-text-2);
+    margin-bottom: 12px;
+  }
+  .objection-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .obj-chip {
+    background: var(--color-surface-2);
+    border: 1.5px solid var(--color-border);
+    border-radius: 10px;
+    padding: 10px 10px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--color-text);
+    cursor: pointer;
+    text-align: center;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    line-height: 1.3;
+  }
+  .obj-chip:active { background: var(--color-border); }
+  .obj-chip.selected {
+    background: #f5f3ff;
+    border-color: #7c3aed;
+    color: #5b21b6;
+    font-weight: 600;
+  }
+  .script-panel {
+    display: none;
+    border-top: 0.5px solid var(--color-border);
+    padding-top: 14px;
+  }
+  .script-panel.open { display: block; }
+  .script-section-title {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--color-text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+  }
+  .script-block {
+    background: var(--color-surface-2);
+    border-radius: 10px;
+    padding: 11px 12px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .script-block-left { flex: 1; }
+  .script-layer-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-text-2);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .script-text {
+    font-size: 13px;
+    color: var(--color-text);
+    line-height: 1.55;
+  }
+  .copy-btn {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: transparent;
+    border: 1px solid var(--color-border-2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-2);
+    font-size: 14px;
+    margin-top: 2px;
+    transition: all 0.15s;
+  }
+  .copy-btn:active { background: var(--color-border); }
+  .copy-btn.copied { color: var(--color-accent); border-color: var(--color-accent); }
+
+  /* ── ACTION BAR ── */
+  .action-bar {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 460px;
+    background: var(--color-surface);
+    border-top: 0.5px solid var(--color-border);
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+    display: flex;
+    gap: 10px;
+    z-index: 25;
+  }
+  .btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 48px;
+    border-radius: var(--r-lg);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    font-family: var(--font-sans);
+    transition: opacity 0.15s, transform 0.15s;
+  }
+  .btn:active { opacity: 0.8; transform: scale(0.98); }
+  .btn-secondary {
+    background: var(--color-surface-2);
+    color: var(--color-text);
+    border: 1.5px solid var(--color-border-2);
+    flex: 0.9;
+  }
+  .btn-primary {
+    background: var(--color-accent);
+    color: #fff;
+    flex: 1;
+  }
+  .btn i { font-size: 17px; }
+
+  /* ── UTILITY ── */
+  @media (min-width: 460px) {
+    .fab-objection { right: calc(50% - 230px + 16px); }
+  }
+  @media (max-width: 459px) {
+    .fab-objection { right: 16px; }
+  }
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="phead">
-    <h1>KH03</h1>
-    <div class="meta">Nữ · 38 tuổi · cao 1m61</div>
-    <div class="phone">+84 098 911 111</div>
+<div class="phone-frame">
+
+  <!-- ── TOP BAR ── -->
+  <header class="top-bar">
+    <div class="top-bar-left">
+      <a href="hlv_nhap_chi_so_tanita.html" class="btn-back" aria-label="Quay lại">
+        <i class="ti ti-arrow-left"></i>
+      </a>
+    </div>
+    <span class="top-bar-title">Bản tư vấn</span>
+    <span class="disc-badge">DISC: I/S</span>
+  </header>
+
+  <!-- ── SCROLLABLE BODY ── -->
+  <div class="scroll-body">
+
+    <!-- PATIENT CARD -->
+    <div class="patient-card">
+      <div class="patient-name-row">
+        <span class="patient-name">KH Chị Lan</span>
+        <span class="stage-chip">Đang cân nhắc</span>
+      </div>
+      <div class="patient-meta">
+        <i class="ti ti-gender-female"></i>
+        Nữ · 38 tuổi · 1m61
+      </div>
+      <div class="patient-phone">
+        <i class="ti ti-phone"></i>
+        +84 098 911 111
+      </div>
+    </div>
+
+    <!-- LAYER 0 — Empathy Banner -->
+    <div class="empathy-banner">
+      <div class="empathy-label">
+        <i class="ti ti-heart" style="color:var(--color-accent);font-size:13px;"></i>
+        Phản chiếu hành trình của bạn
+      </div>
+      <div class="empathy-quote">
+        <i class="ti ti-heart"></i>
+        <span>"Cảm ơn chị đã chia sẻ. Chị kể rằng gần đây hay mệt mỏi sau khi đi làm về, quần áo bắt đầu chật hơn và chị muốn có nhiều năng lượng hơn để chơi với con. Đây là lý do rất ý nghĩa để bắt đầu."</span>
+      </div>
+    </div>
+
+    <!-- LAYER 1 — Điểm cơ thể đang ổn -->
+    <div class="section-card">
+      <div class="card-header">
+        <i class="ti ti-thumb-up" style="color:var(--color-accent);"></i>
+        <span class="card-header-title">Điểm cơ thể đang ổn</span>
+      </div>
+
+      <div class="indicator-row">
+        <div class="indicator-icon-wrap">
+          <i class="ti ti-barbell"></i>
+        </div>
+        <div class="indicator-info">
+          <div class="indicator-name">Lượng cơ bắp</div>
+          <div class="indicator-note">Nền tảng cơ bắp tốt — lợi thế khi giảm mỡ</div>
+        </div>
+        <div class="indicator-right">
+          <span class="indicator-value" style="color:var(--color-accent);">50 kg</span>
+          <span class="badge badge-green">Tốt</span>
+        </div>
+      </div>
+
+      <div class="indicator-row">
+        <div class="indicator-icon-wrap">
+          <i class="ti ti-droplet"></i>
+        </div>
+        <div class="indicator-info">
+          <div class="indicator-name">Lượng nước</div>
+          <div class="indicator-note">Cân bằng nước tốt</div>
+        </div>
+        <div class="indicator-right">
+          <span class="indicator-value" style="color:var(--color-accent);">50%</span>
+          <span class="badge badge-green">Bình thường</span>
+        </div>
+      </div>
+
+      <div class="card-footer-note">
+        Đây là nền tảng sức khỏe để chúng ta cùng phát huy.
+      </div>
+    </div>
+
+    <!-- LAYER 2 — Điểm nên quan tâm -->
+    <div class="section-card">
+      <div class="card-header">
+        <i class="ti ti-alert-circle" style="color:#d97706;"></i>
+        <span class="card-header-title">Điểm mình nên quan tâm hơn</span>
+      </div>
+      <div class="concern-subtitle">Kết nối với những gì chị đã chia sẻ:</div>
+
+      <!-- Accordion 1 -->
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)" aria-expanded="false">
+          <span class="severity-dot dot-amber"></span>
+          <div class="accordion-main">
+            <div class="accordion-name-row">
+              <span class="acc-name">Cân nặng</span>
+              <span class="symptom-chip">→ áo chật hơn gần đây</span>
+            </div>
+            <div class="acc-value-row">
+              <span class="acc-value acc-value-amber">60 kg</span>
+              <span class="badge badge-amber">Chú ý</span>
+            </div>
+          </div>
+          <i class="ti ti-chevron-down accordion-chevron"></i>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <div class="acc-state-label">Ghi nhận</div>
+            <p class="acc-body-text">Cân nặng chị hiện cao hơn ngưỡng lý tưởng một chút. Điều này hoàn toàn có thể cải thiện được và chúng ta sẽ đi từng bước nhỏ nhé.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accordion 2 -->
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)" aria-expanded="false">
+          <span class="severity-dot dot-red"></span>
+          <div class="accordion-main">
+            <div class="accordion-name-row">
+              <span class="acc-name">Mỡ nội tạng</span>
+              <span class="symptom-chip">→ dễ mệt mỏi, khó tập trung</span>
+            </div>
+            <div class="acc-value-row">
+              <span class="acc-value acc-value-red">8 điểm</span>
+              <span class="badge badge-red">Cần chú ý</span>
+            </div>
+          </div>
+          <i class="ti ti-chevron-down accordion-chevron"></i>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <div class="acc-state-label">Ghi nhận</div>
+            <p class="acc-body-text">Mỡ nội tạng ở mức cần chú ý. Đây có thể là lý do chị hay cảm thấy mệt sau buổi chiều. Tin vui là đây cũng là loại mỡ phản ứng tốt nhất với thay đổi lối sống.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accordion 3 -->
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)" aria-expanded="false">
+          <span class="severity-dot dot-red"></span>
+          <div class="accordion-main">
+            <div class="accordion-name-row">
+              <span class="acc-name">Tuổi sinh học</span>
+              <span class="symptom-chip">→ cảm giác thiếu năng lượng</span>
+            </div>
+            <div class="acc-value-row">
+              <span class="acc-value acc-value-red">50 tuổi</span>
+              <span class="badge badge-red">Cần chú ý</span>
+            </div>
+          </div>
+          <i class="ti ti-chevron-down accordion-chevron"></i>
+        </button>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <div class="acc-state-label">Ghi nhận</div>
+            <p class="acc-body-text">Tuổi sinh học đang cao hơn tuổi thật. Nhưng đây là chỉ số rất linh hoạt — cải thiện được trong vòng 2–3 tháng nếu ăn đúng và vận động đều.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAYER 3 — Risk toggle -->
+    <button class="risk-toggle-row" onclick="toggleRisk()" id="riskToggleBtn" aria-expanded="false">
+      <span class="risk-toggle-label">
+        <i class="ti ti-info-circle"></i>
+        Vì sao nên quan tâm sớm?
+      </span>
+      <i class="ti ti-chevron-right risk-chevron" id="riskChevron"></i>
+    </button>
+    <div class="risk-panel" id="riskPanel">
+      <div class="risk-disclaimer">
+        <i class="ti ti-alert-triangle"></i>
+        <span>Thông tin tham khảo — không phải chẩn đoán y tế</span>
+      </div>
+      <ul class="risk-list">
+        <li>Nếu không được chú ý, mỡ nội tạng cao có thể làm tăng nguy cơ mệt mỏi mãn tính &amp; giảm năng suất làm việc</li>
+        <li>Ảnh hưởng chất lượng giấc ngủ theo thời gian</li>
+        <li>Nguy cơ huyết áp &amp; tim mạch tăng theo tuổi nếu không được kiểm soát</li>
+      </ul>
+      <div class="risk-source">
+        <i class="ti ti-books"></i>
+        Nguồn: WHO · Tanita Research 2023
+      </div>
+      <div class="risk-disc-note">
+        (Với khách nhóm C, mục này mở sẵn kèm bảng số liệu chi tiết)
+      </div>
+    </div>
+
+    <!-- LAYER 4 — Good news -->
+    <div class="goodnews-card">
+      <div class="goodnews-header">
+        <i class="ti ti-sparkles"></i>
+        <span class="goodnews-title">Tin vui: việc này hoàn toàn làm được</span>
+      </div>
+      <p class="goodnews-body">"Với nền tảng cơ bắp tốt và mục tiêu rõ ràng như chị, lộ trình giảm 5kg và cải thiện năng lượng trong 90 ngày là khả thi và an toàn. Nhiều khách tương tự đã làm được — và chúng ta cũng sẽ làm được cùng nhau."</p>
+      <p class="goodnews-note">(Mục tiêu chính xác sẽ được tính ở bước tiếp theo)</p>
+      <button class="why-btn" onclick="toggleWhy()" id="whyBtn" aria-expanded="false">
+        <i class="ti ti-shield-check"></i>
+        Vì sao hệ thống tự tin điều này?
+        <i class="ti ti-chevron-down why-chevron" id="whyChevron"></i>
+      </button>
+      <div class="why-panel" id="whyPanel">
+        <ul>
+          <li>Tốc độ giảm an toàn 0.5–1kg/tuần theo khuyến nghị WHO</li>
+          <li>Lượng cơ bắp hiện tại hỗ trợ trao đổi chất tốt</li>
+          <li>3 tháng phù hợp với mục tiêu chị đặt ra</li>
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- /scroll-body -->
+
+  <!-- ── FAB Objection Handler ── -->
+  <button class="fab-objection" onclick="openModal()" aria-label="Mở xử lý băn khoăn">
+    <i class="ti ti-message-question"></i>
+    Khách đang băn khoăn
+  </button>
+
+  <!-- ── ACTION BAR ── -->
+  <div class="action-bar">
+    <a href="hlv_danh_sach_kh_tiem_nang.html" class="btn btn-secondary">
+      <i class="ti ti-check"></i>
+      Lưu &amp; gửi KH
+    </a>
+    <a href="hlv_thiet_lap_muc_tieu.html" class="btn btn-primary">
+      Tiếp tục
+      <i class="ti ti-arrow-right"></i>
+    </a>
   </div>
 
-  <!-- CARD 1: Những điểm cần cải thiện -->
-  <div class="card">
-    <div class="card-title"><i class="ti ti-alert-triangle"></i> Những điểm cần cải thiện</div>
+</div><!-- /phone-frame -->
 
-    <div class="imp">
-      <div class="imp-row" onclick="tgImp(this)"><span class="sev red"></span><span class="name">Cân nặng</span><span class="val red">60 kg</span><i class="ti ti-chevron-down chev"></i></div>
-      <div class="imp-detail">
-        <h5 class="now"><i class="ti ti-chart-dots"></i> Phân tích hiện trạng</h5>
-        <ul><li>Cao hơn ngưỡng lý tưởng (52–56 kg) khoảng 4 kg.</li><li>Thừa cân nhẹ theo chuẩn châu Á.</li><li>Mục tiêu giảm 4–8 kg trong 3–4 tháng (1–1.5 kg/tuần).</li></ul>
-        <h5 class="risk"><i class="ti ti-heartbeat"></i> Nguy cơ bệnh lý</h5>
-        <ul><li>Tăng nguy cơ tim mạch & huyết áp.</li><li>Nguy cơ tiểu đường type 2.</li><li>Tăng áp lực lên khớp gối.</li></ul>
-      </div>
+<!-- ── MODAL OVERLAY ── -->
+<div class="modal-backdrop" id="modalBackdrop" onclick="handleBackdropClick(event)" role="dialog" aria-modal="true" aria-label="Khách đang băn khoăn">
+  <div class="modal-sheet" id="modalSheet">
+    <div class="modal-drag-handle"></div>
+    <div class="modal-header">
+      <span class="modal-title">Khách đang băn khoăn về gì?</span>
+      <button class="modal-close" onclick="closeModal()" aria-label="Đóng">
+        <i class="ti ti-x"></i>
+      </button>
     </div>
+    <div class="modal-body">
+      <p class="objection-subtitle">Chọn điều khách đang lo ngại — hệ thống gợi ý mạch phản hồi phù hợp</p>
 
-    <div class="imp">
-      <div class="imp-row" onclick="tgImp(this)"><span class="sev red"></span><span class="name">Mỡ nội tạng</span><span class="val red">8 điểm</span><i class="ti ti-chevron-down chev"></i></div>
-      <div class="imp-detail">
-        <h5 class="now"><i class="ti ti-chart-dots"></i> Phân tích hiện trạng</h5>
-        <ul><li>Mức 8 — thuộc vùng nguy cơ (an toàn ≤ 4), gấp đôi ngưỡng.</li><li>Cần ưu tiên giảm mỡ vùng bụng/nội tạng.</li></ul>
-        <h5 class="risk"><i class="ti ti-heartbeat"></i> Nguy cơ bệnh lý</h5>
-        <ul><li>Gan nhiễm mỡ, kháng insulin.</li><li>Nguy cơ tim mạch & hội chứng chuyển hóa.</li></ul>
+      <div class="objection-grid">
+        <button class="obj-chip" onclick="selectObjection(this, 'chua-can')" data-key="chua-can">Chưa cần thiết</button>
+        <button class="obj-chip" onclick="selectObjection(this, 'dat-qua')" data-key="dat-qua">Đắt quá / Chưa có tiền</button>
+        <button class="obj-chip" onclick="selectObjection(this, 'hoi-nguoi-than')" data-key="hoi-nguoi-than">Để hỏi người thân</button>
+        <button class="obj-chip" onclick="selectObjection(this, 'so-kho')" data-key="so-kho">Sợ quá khó thực hiện</button>
+        <button class="obj-chip" onclick="selectObjection(this, 'da-thu')" data-key="da-thu">Đã thử rồi không hiệu quả</button>
+        <button class="obj-chip" onclick="selectObjection(this, 'muon-nghi')" data-key="muon-nghi">Muốn suy nghĩ thêm</button>
       </div>
-    </div>
 
-    <div class="imp">
-      <div class="imp-row" onclick="tgImp(this)"><span class="sev yellow"></span><span class="name">Chỉ số cân đối</span><span class="val yellow">3 điểm</span><i class="ti ti-chevron-down chev"></i></div>
-      <div class="imp-detail">
-        <h5 class="now"><i class="ti ti-chart-dots"></i> Phân tích hiện trạng</h5>
-        <ul><li>Mỡ cao + cơ cao — khối lượng tốt nhưng tỷ lệ chưa cân đối (chuẩn = 5).</li><li>Trọng tâm: giảm mỡ, giữ cơ.</li></ul>
-        <h5 class="risk"><i class="ti ti-heartbeat"></i> Nguy cơ bệnh lý</h5>
-        <ul><li>Mất cân đối thành phần cơ thể nếu giảm cân sai cách (mất cơ).</li></ul>
-      </div>
-    </div>
+      <!-- Script Panel -->
+      <div class="script-panel" id="scriptPanel">
+        <div class="script-section-title">Mạch 3 lớp phản hồi</div>
 
-    <div class="imp">
-      <div class="imp-row" onclick="tgImp(this)"><span class="sev red"></span><span class="name">Tuổi sinh học</span><span class="val red">50 tuổi</span><i class="ti ti-chevron-down chev"></i></div>
-      <div class="imp-detail">
-        <h5 class="now"><i class="ti ti-chart-dots"></i> Phân tích hiện trạng</h5>
-        <ul><li>Cao hơn tuổi thật 12 năm — lão hóa trao đổi chất sớm.</li><li>Cải thiện được qua chế độ ăn + vận động + giấc ngủ.</li></ul>
-        <h5 class="risk"><i class="ti ti-heartbeat"></i> Nguy cơ bệnh lý</h5>
-        <ul><li>Suy giảm chuyển hóa, giảm khối cơ theo tuổi.</li><li>Lão hóa sớm, giảm sức bền.</li></ul>
-      </div>
-    </div>
+        <div class="script-block">
+          <div class="script-block-left">
+            <div class="script-layer-label">🫶 Thấu hiểu</div>
+            <p class="script-text" id="scriptUnderstand"></p>
+          </div>
+          <button class="copy-btn" onclick="copyScript(this, 'scriptUnderstand')" aria-label="Sao chép">
+            <i class="ti ti-copy"></i>
+          </button>
+        </div>
 
-    <div class="imp">
-      <div class="imp-row" onclick="tgImp(this)"><span class="sev yellow"></span><span class="name">BMI</span><span class="val yellow">23.1</span><i class="ti ti-chevron-down chev"></i></div>
-      <div class="imp-detail">
-        <h5 class="now"><i class="ti ti-chart-dots"></i> Phân tích hiện trạng</h5>
-        <ul><li>23.1 kg/m² — thừa cân theo chuẩn châu Á (bình thường 18.5–22.9).</li><li>Mục tiêu đưa về &lt; 23.</li></ul>
-        <h5 class="risk"><i class="ti ti-heartbeat"></i> Nguy cơ bệnh lý</h5>
-        <ul><li>Nguy cơ tim mạch & tiểu đường bắt đầu tăng.</li></ul>
+        <div class="script-block">
+          <div class="script-block-left">
+            <div class="script-layer-label">🔄 Lật khung</div>
+            <p class="script-text" id="scriptReframe"></p>
+          </div>
+          <button class="copy-btn" onclick="copyScript(this, 'scriptReframe')" aria-label="Sao chép">
+            <i class="ti ti-copy"></i>
+          </button>
+        </div>
+
+        <div class="script-block">
+          <div class="script-block-left">
+            <div class="script-layer-label">➡️ Tiến tới</div>
+            <p class="script-text" id="scriptForward"></p>
+          </div>
+          <button class="copy-btn" onclick="copyScript(this, 'scriptForward')" aria-label="Sao chép">
+            <i class="ti ti-copy"></i>
+          </button>
+        </div>
       </div>
-    </div>
+
+    </div><!-- /modal-body -->
   </div>
-
-  <!-- CARD 2: Bảng phân tích chỉ số chi tiết -->
-  <div class="card">
-    <div class="card-title"><i class="ti ti-table"></i> Bảng phân tích chỉ số chi tiết</div>
-
-    <!-- 2 dòng mặc định -->
-    <div class="drow">
-      <div><div class="dn">Cân nặng</div><span class="who">WHO: 52–56 kg (lý tưởng cho nữ cao 161 cm)</span></div>
-      <div class="dv red">60 kg</div>
-      <div class="da">Cao hơn ngưỡng lý tưởng 4.0 kg — thừa cân nhẹ theo chuẩn châu Á.</div>
-    </div>
-    <div class="drow">
-      <div><div class="dn">Mỡ cơ thể</div><span class="who">WHO: Lý tưởng ≤ 21.1% · Tốt ≤ 24.0% · TB ≤ 27.7% · Xấu &gt; 31.5% (nữ)</span></div>
-      <div class="dv green">18 %</div>
-      <div class="da">Tỷ lệ mỡ ở mức lý tưởng theo tuổi. Thấp hơn mức lý tưởng (≤ 21.1%) ~1.9 kg mỡ.</div>
-    </div>
-
-    <!-- dòng ẩn -->
-    <div class="hidden-rows" id="hiddenRows">
-      <div class="drow">
-        <div><div class="dn">Mỡ nội tạng</div><span class="who">WHO: Tốt ≤ 4 · Nguy cơ &gt; 4</span></div>
-        <div class="dv red">8 điểm</div>
-        <div class="da">Mỡ nội tạng ở vùng nguy cơ — cần chủ ý giảm.</div>
-      </div>
-      <div class="drow">
-        <div><div class="dn">Lượng cơ bắp</div><span class="who">WHO: Thấp ≤ 47% · TB 47–70% · Cao ≥ 70% (nữ)</span></div>
-        <div class="dv green">50 kg</div>
-        <div class="da">Lượng cơ 50.0 kg (~83.3%), nằm trong ngưỡng cao, vượt 8.0 kg so với ngưỡng cao.</div>
-      </div>
-      <div class="drow">
-        <div><div class="dn">Chỉ số cân đối</div><span class="who">WHO: 1 béo phì · 2–4 lệch · 5 chuẩn · 6–8 khoẻ/thon · 9 VĐV (lý tưởng 5–9)</span></div>
-        <div class="dv yellow">3 điểm</div>
-        <div class="da">Mỡ cao + cơ cao — khối lượng tốt nhưng cần giảm mỡ.</div>
-      </div>
-      <div class="drow">
-        <div><div class="dn">Năng lượng nghỉ ngơi</div><span class="who">WHO: ~1255 kcal/ngày (± 15%)</span></div>
-        <div class="dv green">1340 kcal/ngày</div>
-        <div class="da">BMR khớp với dự đoán Mifflin–St Jeor.</div>
-      </div>
-      <div class="drow">
-        <div><div class="dn">Tuổi sinh học</div><span class="who">WHO: ≤ 38 (tuổi thật)</span></div>
-        <div class="dv red">50 tuổi</div>
-        <div class="da">Tuổi sinh học cao hơn tuổi thật 12 năm — cần điều chỉnh gấp.</div>
-      </div>
-      <div class="drow">
-        <div><div class="dn">Lượng xương</div><span class="who">WHO: Trung bình ≈ 2.4 kg (theo giới + trọng lượng cơ thể)</span></div>
-        <div class="dv green">3 kg</div>
-        <div class="da">Lượng xương 3.0 kg quanh mức trung bình (2.4 kg).</div>
-      </div>
-      <div class="drow">
-        <div><div class="dn">Nước</div><span class="who">WHO: 50–55% (nữ)</span></div>
-        <div class="dv green">50 %</div>
-        <div class="da">Tỷ lệ nước trong mức khỏe mạnh.</div>
-      </div>
-      <div class="drow">
-        <div><div class="dn">BMI</div><span class="who">WHO: 18.5–22.9 (bình thường, chuẩn châu Á)</span></div>
-        <div class="dv yellow">23.1 kg/m²</div>
-        <div class="da">Thừa cân (châu Á) — nguy cơ tim mạch & tiểu đường bắt đầu tăng.</div>
-      </div>
-      <div class="source">
-        Nguồn: Bảng cân nặng lý tưởng theo chiều cao (per-cm, nam/nữ) + WHO Expert Consultation 2004 (Lancet 363:157-163) — Asian-Pacific action points · Bảng tham chiếu tỷ lệ mỡ theo tuổi + giới (9 dải tuổi) · Bảng phân loại mỡ nội tạng (Tanita / tham chiếu lâm sàng) · Bảng lượng cơ bắp (% cân nặng) theo giới (7 dải tuổi) · Bảng phân loại thể hình theo cơ × mỡ (Tanita) · Mifflin–St Jeor 1990 · Tanita BC-series · Bảng lượng xương trung bình theo giới + trọng lượng cơ thể · WHO Expert Consultation 2004 — Asian-Pacific action points.
-      </div>
-    </div>
-
-    <button class="more-btn" onclick="tgMore()"><span id="moreTxt">Xem thêm</span><i class="ti ti-chevron-down" id="moreIc"></i></button>
-  </div>
-
-  <div class="subnote">
-    <h3><i class="ti ti-notes"></i> Bài phân tích chi tiết các chỉ số</h3>
-    <p>Hệ thống sẽ đưa ra bài tư vấn dành riêng cho bạn dựa trên bảng phân tích chỉ số ở trên.</p>
-  </div>
-
-  <div class="subnote" style="background:#fff;border:0.5px dashed var(--color-border-secondary)">
-    <h3 style="color:var(--color-text-primary)"><i class="ti ti-help-circle"></i> KH có quyết định trải nghiệm giải pháp không?</h3>
-    <p><b>Có</b> → bấm “Tiếp tục” để sang màn Thiết lập mục tiêu. &nbsp;<b>Chưa</b> → bấm “Hoàn tất”, hệ thống đề xuất hành động kế tiếp theo DISC.</p>
-  </div>
-</div>
-
-<div class="actions">
-  <button class="btn btn-secondary" onclick="location.href='hlv_danh_sach_kh_tiem_nang.html'"><i class="ti ti-check"></i> Hoàn tất</button>
-  <button class="btn btn-primary" onclick="location.href='hlv_thiet_lap_muc_tieu.html'">Tiếp tục <i class="ti ti-arrow-right"></i></button>
 </div>
 
 <script>
-  function tgImp(row){ row.parentElement.classList.toggle('open'); }
-  function tgMore(){
-    var hr=document.getElementById('hiddenRows'), t=document.getElementById('moreTxt'), ic=document.getElementById('moreIc');
-    hr.classList.toggle('show');
-    var on=hr.classList.contains('show');
-    t.textContent = on ? 'Thu gọn' : 'Xem thêm';
-    ic.className = on ? 'ti ti-chevron-up' : 'ti ti-chevron-down';
+  // ── ACCORDION (Layer 2) ──
+  function toggleAccordion(trigger) {
+    const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+    const body = trigger.nextElementSibling;
+    const chevron = trigger.querySelector('.accordion-chevron');
+
+    if (isOpen) {
+      trigger.setAttribute('aria-expanded', 'false');
+      body.classList.remove('open');
+      chevron.classList.remove('open');
+    } else {
+      trigger.setAttribute('aria-expanded', 'true');
+      body.classList.add('open');
+      chevron.classList.add('open');
+    }
+  }
+
+  // ── RISK TOGGLE (Layer 3) ──
+  function toggleRisk() {
+    const panel = document.getElementById('riskPanel');
+    const chevron = document.getElementById('riskChevron');
+    const btn = document.getElementById('riskToggleBtn');
+    const isOpen = panel.classList.contains('open');
+
+    if (isOpen) {
+      panel.classList.remove('open');
+      chevron.style.transform = 'rotate(0deg)';
+      btn.setAttribute('aria-expanded', 'false');
+    } else {
+      panel.classList.add('open');
+      chevron.style.transform = 'rotate(90deg)';
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  }
+
+  // ── WHY EXPAND (Layer 4) ──
+  function toggleWhy() {
+    const panel = document.getElementById('whyPanel');
+    const chevron = document.getElementById('whyChevron');
+    const btn = document.getElementById('whyBtn');
+    const isOpen = panel.classList.contains('open');
+
+    if (isOpen) {
+      panel.classList.remove('open');
+      chevron.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    } else {
+      panel.classList.add('open');
+      chevron.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  }
+
+  // ── MODAL ──
+  function openModal() {
+    const backdrop = document.getElementById('modalBackdrop');
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    const backdrop = document.getElementById('modalBackdrop');
+    backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+    // Reset selections after close animation
+    setTimeout(() => {
+      document.querySelectorAll('.obj-chip').forEach(c => c.classList.remove('selected'));
+      document.getElementById('scriptPanel').classList.remove('open');
+    }, 300);
+  }
+
+  function handleBackdropClick(e) {
+    if (e.target === document.getElementById('modalBackdrop')) {
+      closeModal();
+    }
+  }
+
+  // ── OBJECTION SCRIPTS ──
+  const scripts = {
+    'chua-can': {
+      understand: 'Dạ em hiểu, chị chưa cảm thấy cấp bách lúc này. Cảm giác đó rất bình thường vì cơ thể mình thường thích nghi dần với những thay đổi.',
+      reframe: 'Điều em muốn chia sẻ là những chỉ số này thường không gây khó chịu ngay — nhưng âm thầm ảnh hưởng đến năng lượng và cảm giác mỗi ngày. Đó cũng là lý do chị hay mệt sau buổi chiều dù không làm gì nặng.',
+      forward: 'Chị có muốn thử bước tiếp theo nhỏ thôi không? Mình chỉ xem xét lộ trình thôi — chưa cam kết gì cả. Nếu chị thấy phù hợp thì mình tiếp tục, không thì không sao ạ.'
+    },
+    'dat-qua': {
+      understand: 'Dạ em hiểu, chi phí là điều rất thực tế và chị hoàn toàn đúng khi cân nhắc kỹ. Em không muốn chị quyết định khi chưa thấy rõ giá trị.',
+      reframe: 'Điều em muốn chia sẻ là chi phí cho một lộ trình 3 tháng thực ra ít hơn nhiều so với những gì mình mất khi năng lượng thấp — cả sức khỏe lẫn năng suất làm việc. Nhiều chị bắt đầu và nhận ra đây là khoản đầu tư xứng đáng nhất.',
+      forward: 'Mình có thể xem xét phương án linh hoạt hơn không ạ? Em sẽ tìm hiểu thêm về các gói phù hợp với ngân sách của chị và quay lại thông tin cho chị nhé.'
+    },
+    'hoi-nguoi-than': {
+      understand: 'Dạ em rất trân trọng điều đó — chị muốn có sự đồng thuận của gia đình trước khi quyết định. Điều đó cho thấy chị rất cẩn thận và có trách nhiệm.',
+      reframe: 'Thường thì người thân sẽ ủng hộ nếu họ thấy rõ lý do và lợi ích. Em có thể chuẩn bị một tóm tắt ngắn về lộ trình để chị chia sẻ với gia đình — sẽ dễ thuyết phục hơn nhiều.',
+      forward: 'Chị có muốn em gửi tóm tắt lộ trình qua Zalo không? Chị xem trước, rồi hỏi ý kiến người thân — mình sẽ nói chuyện thêm sau khi chị trao đổi xong ạ.'
+    },
+    'so-kho': {
+      understand: 'Dạ em hiểu lo ngại này lắm — nhiều người cảm thấy choáng ngợp khi nghĩ đến việc thay đổi thói quen. Cảm giác đó hoàn toàn bình thường.',
+      reframe: 'Điều em muốn nói là lộ trình của mình được thiết kế từ bước nhỏ nhất có thể. Không yêu cầu tập gym mỗi ngày hay ăn kiêng khắt khe — chỉ cần điều chỉnh từng thứ nhỏ, vừa sức với lịch của chị.',
+      forward: 'Chị thử nghe qua bước đầu tiên xem sao nhé? Nếu cảm thấy quá khó thì mình điều chỉnh ngay, không cần lo. Em ở đây đồng hành cùng chị từng bước một.'
+    },
+    'da-thu': {
+      understand: 'Dạ em hiểu — chị đã đầu tư công sức và tiền bạc rồi mà không thấy kết quả thì thật sự rất nản. Em rất trân trọng chị chia sẻ điều này.',
+      reframe: 'Hầu hết các phương pháp chị từng thử có thể thiếu một mảnh quan trọng: dữ liệu cơ thể thực. Khi biết chính xác tỉ lệ mỡ, cơ, và tuổi sinh học của mình, lộ trình sẽ được cá nhân hoá hoàn toàn — không phải công thức chung cho tất cả mọi người.',
+      forward: 'Lần này mình có đủ số liệu từ máy Tanita để thiết kế đúng cho cơ thể của chị. Chị có muốn thử xem lộ trình cá nhân hoá trông như thế nào không ạ?'
+    },
+    'muon-nghi': {
+      understand: 'Dạ em hoàn toàn tôn trọng điều đó — quyết định liên quan đến sức khoẻ xứng đáng được suy nghĩ kỹ. Chị cứ thoải mái nhé.',
+      reframe: 'Chỉ có một điều nhỏ em muốn để lại: thường thì những chỉ số như mỡ nội tạng không tự cải thiện theo thời gian nếu không có hành động — nên mỗi tuần chờ đợi sẽ mất thêm một chút lợi thế.',
+      forward: 'Em sẽ gửi bản tư vấn này qua Zalo để chị có thể xem lại từ từ nhé. Chị có câu hỏi gì thêm thì nhắn em bất cứ lúc nào ạ.'
+    }
+  };
+
+  function selectObjection(chip, key) {
+    // Deselect all
+    document.querySelectorAll('.obj-chip').forEach(c => c.classList.remove('selected'));
+    chip.classList.add('selected');
+
+    const data = scripts[key];
+    document.getElementById('scriptUnderstand').textContent = data.understand;
+    document.getElementById('scriptReframe').textContent = data.reframe;
+    document.getElementById('scriptForward').textContent = data.forward;
+
+    const panel = document.getElementById('scriptPanel');
+    panel.classList.add('open');
+
+    // Smooth scroll to script panel
+    setTimeout(() => {
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 50);
+  }
+
+  // ── COPY SCRIPT ──
+  function copyScript(btn, textId) {
+    const text = document.getElementById(textId).textContent;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(() => {
+        showCopied(btn);
+      }).catch(() => fallbackCopy(text, btn));
+    } else {
+      fallbackCopy(text, btn);
+    }
+  }
+
+  function fallbackCopy(text, btn) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showCopied(btn);
+  }
+
+  function showCopied(btn) {
+    const icon = btn.querySelector('i');
+    btn.classList.add('copied');
+    icon.className = 'ti ti-check';
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      icon.className = 'ti ti-copy';
+    }, 1800);
   }
 </script>
 </body>

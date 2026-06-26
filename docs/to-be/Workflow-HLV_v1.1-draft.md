@@ -17,6 +17,7 @@
 ```mermaid
 graph TD
     START([Bắt đầu: KH tới / cuộc hẹn]) --> S1
+    SHORTCUT(["Nhánh tắt:<br/>Danh sách KH · tab 'KH của tôi'<br/>→ nút 'Thêm mới'"]) --> S5
 
     S1["B1 · Tạo KH tiềm năng + Chân dung<br/>(Thông tin cơ bản · Aim/nỗi đau · DISC · Stage · Khả thi bữa ăn)"]
     S1 --> S2["B2 · Nhập chỉ số Tanita<br/>(nhập tay hoặc OCR ảnh)"]
@@ -44,10 +45,20 @@ graph TD
     Q3 -- "Đạt" --> END([Hoàn tất · về Chi tiết KH])
 
     classDef new fill:#e6f7ff,stroke:#1890ff;
+    classDef shortcut fill:#f6ffed,stroke:#52c41a;
     class S3,OH1,OH2,S4,S6,ADJ new;
+    class SHORTCUT shortcut;
 ```
 
-> Ô **nền xanh** là phần mới/được nâng cấp so với v1.0. Lớp **"Vì sao?"** (Conversational-Explainable-UX) không vẽ thành bước riêng vì nó **bám vào mọi ô có kết quả** (bản tư vấn, % đạt được, gói, Feasibility) — HLV/KH bấm để xem lập luận.
+> Ô **nền xanh** là phần mới/được nâng cấp so với v1.0. Ô **nền xanh lá nhạt** là nhánh tắt (shortcut). Lớp **"Vì sao?"** (Conversational-Explainable-UX) không vẽ thành bước riêng vì nó **bám vào mọi ô có kết quả** (bản tư vấn, % đạt được, gói, Feasibility) — HLV/KH bấm để xem lập luận.
+
+### Nhánh tắt: Tạo KH trực tiếp từ tab "KH của tôi"
+
+Trên thực tế, HLV thường gặp trường hợp KH **đã sẵn sàng đăng ký ngay** mà không cần qua giai đoạn lead nurturing (ví dụ: khách được giới thiệu, khách cũ quay lại, quen biết sẵn). Trong trường hợp này, HLV có thể bấm nút **"Thêm mới"** tại tab "KH của tôi" để đi thẳng vào B5 (Tạo tài khoản), bỏ qua B1–B4.
+
+- **Khi dùng:** KH đã quyết định, không cần tư vấn thêm; HLV đã trao đổi offline.
+- **Không thu thập:** chân dung (DISC/Stage/Aim), chỉ số Tanita, bản tư vấn đồng cảm ở bước tạo — những bước này có thể bổ sung sau từ màn **Chi tiết KH** (đo Tanita, tạo gợi ý bữa ăn, cập nhật chân dung).
+- **Cần tránh:** dùng nhánh tắt khi KH thực sự cần được tư vấn — bỏ qua B1–B3 đồng nghĩa bỏ lớp đồng cảm và dữ liệu cá nhân hóa.
 
 ---
 

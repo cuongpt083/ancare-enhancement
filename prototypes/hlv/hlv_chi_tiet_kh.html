@@ -3,123 +3,342 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chi tiết KH — Prototype</title>
-<link rel="stylesheet" href="../tabler-icons.min.css">
+<title>Chi tiết KH — AnCare v1.1</title>
+<link rel="stylesheet" href="tabler-icons.min.css">
 <style>
-  :root{
-    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-    --color-background-primary:#fff;--color-background-secondary:#f6f7f9;--color-background-app:#eef0f3;
-    --color-text-primary:#1a1d21;--color-text-secondary:#6b7280;--color-border-secondary:#d1d5db;--color-border-tertiary:#e5e7eb;
-    --color-accent:#2f6f4f;--color-accent-soft:#e7f1ec;--border-radius-md:10px;--border-radius-lg:14px;
-  }
-  *{box-sizing:border-box;}
-  body,html{margin:0;padding:0;font-family:var(--font-sans);background:var(--color-background-app);color:var(--color-text-primary);}
-  .container{width:100%;max-width:460px;margin:0 auto;padding:0 0 24px;}
-  .appbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:8px;background:var(--color-background-primary);padding:.9rem 1rem;border-bottom:.5px solid var(--color-border-tertiary);}
-  .appbar .ti{font-size:22px;cursor:pointer;} .appbar h1{font-size:16px;font-weight:600;margin:0;flex:1;}
+:root {
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --color-bg: #eef0f3;
+  --color-surface: #ffffff;
+  --color-surface-2: #f6f7f9;
+  --color-text: #1a1d21;
+  --color-text-2: #6b7280;
+  --color-border: #e5e7eb;
+  --color-border-2: #d1d5db;
+  --color-accent: #2f6f4f;
+  --color-accent-soft: #e7f1ec;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --fs-green-bg: #dcfce7;
+  --fs-green-text: #15803d;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; font-family: var(--font-sans); background: var(--color-bg); color: var(--color-text); overscroll-behavior: contain; }
+body { overflow-x: hidden; }
+.wrap { max-width: 460px; margin: 0 auto; padding-bottom: 80px; }
 
-  .profile{display:flex;align-items:center;gap:12px;background:var(--color-background-primary);padding:1rem;border-bottom:.5px solid var(--color-border-tertiary);}
-  .profile .ava{width:54px;height:54px;border-radius:50%;background:var(--color-accent-soft);color:var(--color-accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px;}
-  .profile .nm{font-size:17px;font-weight:700;} .profile .meta{font-size:12px;color:var(--color-text-secondary);margin-top:2px;}
-  .profile .ico{font-size:20px;color:var(--color-accent);}
+/* Appbar */
+.appbar { position: sticky; top: 0; z-index: 10; background: var(--color-surface); border-bottom: 1px solid var(--color-border); display: flex; align-items: center; gap: 10px; padding: 0.85rem 1rem; }
+.appbar-back { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 8px; border: none; background: none; cursor: pointer; color: var(--color-text); font-size: 22px; flex-shrink: 0; }
+.appbar h1 { font-size: 15.5px; font-weight: 700; flex: 1; }
+.appbar .version-tag { font-size: 11px; color: var(--color-accent); background: var(--color-accent-soft); padding: 2px 8px; border-radius: 20px; font-weight: 600; }
 
-  .card{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);margin:1rem;overflow:hidden;}
-  .card-head{display:flex;align-items:center;gap:10px;padding:.8rem 1rem;background:var(--color-background-secondary);border-bottom:.5px solid var(--color-border-tertiary);}
-  .card-head .ti{font-size:18px;color:var(--color-accent);} .card-head h2{font-size:13.5px;font-weight:600;margin:0;flex:1;}
-  .card-head .link{font-size:12px;color:var(--color-accent);font-weight:600;cursor:pointer;}
-  .card-body{padding:.7rem 1rem 1rem;}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-  .stat{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.5rem .6rem;}
-  .stat .v{font-size:14px;font-weight:700;} .stat .k{font-size:10.5px;color:var(--color-text-secondary);}
-  .row{display:flex;justify-content:space-between;font-size:12.5px;padding:.35rem 0;border-bottom:.5px solid var(--color-border-tertiary);}
-  .row:last-child{border-bottom:none;} .row .gv{font-weight:600;color:var(--color-accent);}
+/* Cards */
+.card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--r-lg); margin: 0.75rem 1rem; overflow: hidden; }
+.card-title { font-size: 13.5px; font-weight: 700; padding: 0.85rem 1rem 0.5rem; display: flex; align-items: center; gap: 8px; }
+.card-title .ti { color: var(--color-accent); font-size: 17px; }
+.card-body { padding: 0 1rem 1rem; }
 
-  /* Meal version */
-  .mv-cur{display:flex;align-items:center;gap:10px;padding:.6rem .7rem;background:var(--color-accent-soft);border-radius:var(--border-radius-md);}
-  .mv-cur .ic{font-size:22px;color:var(--color-accent);}
-  .mv-cur .t{flex:1;} .mv-cur .t .n{font-size:13.5px;font-weight:700;} .mv-cur .t .s{font-size:11px;color:var(--color-text-secondary);}
-  .badge{font-size:9.5px;font-weight:700;border-radius:10px;padding:2px 8px;white-space:nowrap;}
-  .b-active{background:#dcfce7;color:#15803d;} .b-exp{background:#fee2e2;color:#b42318;}
-  .hist{margin-top:.6rem;} .hist .hrow{display:flex;align-items:center;gap:8px;font-size:12px;padding:.4rem 0;border-top:.5px solid var(--color-border-tertiary);color:var(--color-text-secondary);}
-  .hist .hrow .v{margin-left:auto;}
-  .mealbtn{width:100%;margin-top:.7rem;padding:.7rem;font-size:13px;font-weight:700;border:none;border-radius:var(--border-radius-md);background:var(--color-accent);color:#fff;cursor:pointer;}
-  .mealbtn.ghost{background:#fff;color:var(--color-accent);border:1px solid var(--color-accent);margin-top:.5rem;}
+/* Header card with accent top border */
+.header-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--r-lg); margin: 0.75rem 1rem; overflow: hidden; border-top: 3px solid var(--color-accent); }
+.header-card-inner { padding: 1rem; }
+.avatar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 0.75rem; }
+.avatar { width: 54px; height: 54px; border-radius: 50%; background: var(--color-accent); color: #fff; font-size: 20px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.kh-meta { flex: 1; }
+.kh-name { font-size: 17px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+.disc-badge { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; background: #fef3c7; color: #92600a; }
+.kh-pkg { font-size: 12.5px; color: var(--color-text-2); margin-top: 3px; display: flex; align-items: center; gap: 5px; }
+.kh-pkg .ti { color: var(--color-accent); font-size: 13px; }
+.prog-row { display: flex; align-items: center; gap: 8px; margin-bottom: 0.75rem; }
+.prog-bar-wrap { flex: 1; background: var(--color-border); border-radius: 20px; height: 8px; overflow: hidden; }
+.prog-bar { height: 100%; background: var(--color-accent); border-radius: 20px; }
+.prog-label { font-size: 12px; color: var(--color-text-2); white-space: nowrap; }
+.btn-row { display: flex; gap: 8px; }
+.btn-sm { flex: 1; padding: 0.55rem 0; font-size: 12px; font-weight: 600; border: 1.5px solid var(--color-accent); background: var(--color-surface); color: var(--color-accent); border-radius: var(--r-md); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px; min-height: 40px; transition: background 0.15s; }
+.btn-sm:active { background: var(--color-accent-soft); }
+.btn-sm .ti { font-size: 14px; }
 
-  .acts{display:flex;gap:10px;margin:0 1rem;}
-  .acts .a{flex:1;background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:.7rem;text-align:center;cursor:pointer;font-size:12px;font-weight:600;}
-  .acts .a .ti{display:block;font-size:20px;color:var(--color-accent);margin-bottom:.3rem;}
-  .photos{display:flex;gap:8px;} .photo{flex:1;aspect-ratio:3/4;border-radius:var(--border-radius-md);background:linear-gradient(135deg,#eef4f0,#e3eee8);display:flex;align-items:center;justify-content:center;color:var(--color-accent);}
+/* Quick action cards */
+.quick-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0 1rem 0.25rem; }
+.quick-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--r-md); padding: 0.75rem 0.5rem; display: flex; flex-direction: column; align-items: center; gap: 5px; cursor: pointer; transition: border-color 0.15s, background 0.15s; text-align: center; min-height: 76px; justify-content: center; }
+.quick-card:active { border-color: var(--color-accent); background: var(--color-accent-soft); }
+.quick-card .ti { font-size: 22px; color: var(--color-accent); }
+.quick-card span { font-size: 11.5px; font-weight: 600; color: var(--color-text); line-height: 1.3; }
+
+/* Section label */
+.section-label { font-size: 12px; font-weight: 700; color: var(--color-text-2); text-transform: uppercase; letter-spacing: 0.04em; padding: 0.6rem 1rem 0.2rem; }
+
+/* Meal version card */
+.meal-ver-row { display: flex; align-items: center; gap: 8px; margin-bottom: 0.75rem; flex-wrap: wrap; }
+.ver-label { font-size: 13px; font-weight: 700; }
+.badge-active { background: #dcfce7; color: #15803d; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
+.badge-expired { background: var(--color-surface-2); color: var(--color-text-2); font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 20px; }
+.fs-inline { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 20px; background: var(--fs-green-bg); color: var(--fs-green-text); }
+.meal-cost { font-size: 12px; color: var(--color-text-2); }
+.meal-btn-row { display: flex; gap: 8px; margin-top: 0.6rem; }
+.btn-outline { flex: 1; padding: 0.65rem; font-size: 12.5px; font-weight: 600; border: 1.5px solid var(--color-accent); background: var(--color-surface); color: var(--color-accent); border-radius: var(--r-md); cursor: pointer; text-align: center; min-height: 44px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+.btn-primary-sm { flex: 1; padding: 0.65rem; font-size: 12.5px; font-weight: 700; border: none; background: var(--color-accent); color: #fff; border-radius: var(--r-md); cursor: pointer; min-height: 44px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+.history-row { display: flex; gap: 6px; margin-top: 0.6rem; flex-wrap: wrap; }
+.hist-item { font-size: 11.5px; color: var(--color-text-2); background: var(--color-surface-2); border: 1px solid var(--color-border); padding: 3px 10px; border-radius: 20px; }
+
+/* Tanita grid */
+.tanita-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 0.75rem; }
+.tanita-item { background: var(--color-surface-2); border-radius: var(--r-md); padding: 0.6rem 0.75rem; }
+.tanita-item .t-label { font-size: 11px; color: var(--color-text-2); margin-bottom: 3px; font-weight: 500; }
+.tanita-item .t-value { font-size: 15px; font-weight: 800; color: var(--color-text); }
+.tanita-item .t-unit { font-size: 11px; font-weight: 500; color: var(--color-text-2); margin-left: 2px; }
+.tanita-date { font-size: 12px; color: var(--color-text-2); display: flex; align-items: center; gap: 5px; margin-bottom: 0.75rem; }
+
+/* Goals table */
+.goals-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.goals-table th { font-size: 11px; font-weight: 700; color: var(--color-text-2); text-transform: uppercase; letter-spacing: 0.02em; padding: 0.4rem 0.6rem; border-bottom: 1px solid var(--color-border); text-align: left; }
+.goals-table td { padding: 0.55rem 0.6rem; border-bottom: 1px solid var(--color-border); vertical-align: middle; }
+.goals-table tr:last-child td { border-bottom: none; }
+.goal-pbar-wrap { background: var(--color-border); border-radius: 20px; height: 6px; overflow: hidden; margin-top: 4px; }
+.goal-pbar { height: 100%; background: var(--color-accent); border-radius: 20px; }
+.goal-pct { font-size: 11px; color: var(--color-accent); font-weight: 700; margin-top: 2px; }
+
+/* Check-in photos */
+.photo-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 0.6rem; }
+.photo-placeholder { aspect-ratio: 3/4; background: var(--color-surface-2); border: 1px solid var(--color-border); border-radius: var(--r-md); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer; }
+.photo-placeholder .ti { font-size: 24px; color: var(--color-border-2); }
+.photo-placeholder .photo-date { font-size: 10.5px; color: var(--color-text-2); text-align: center; }
+.view-history-link { font-size: 12.5px; color: var(--color-accent); font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
+
+/* NBA card */
+.nba-card { background: var(--color-accent-soft); border: 1px solid #cde5d9; border-radius: var(--r-lg); margin: 0.75rem 1rem; padding: 1rem; }
+.nba-header { display: flex; align-items: center; gap: 8px; margin-bottom: 0.6rem; }
+.nba-header .ti { font-size: 18px; color: var(--color-accent); }
+.nba-header span { font-size: 13px; font-weight: 700; color: var(--color-accent); }
+.nba-text { font-size: 13px; line-height: 1.6; color: var(--color-text); margin-bottom: 0.75rem; }
+.nba-btn { display: inline-flex; align-items: center; gap: 6px; padding: 0.6rem 1rem; font-size: 13px; font-weight: 600; border: 1.5px solid var(--color-accent); background: var(--color-surface); color: var(--color-accent); border-radius: var(--r-md); cursor: pointer; }
+
+/* Bottom navbar */
+.bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 460px; background: var(--color-surface); border-top: 1px solid var(--color-border); display: flex; z-index: 15; }
+.nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 0.5rem 0 0.6rem; cursor: pointer; min-height: 56px; border: none; background: none; color: var(--color-text-2); font-size: 11px; font-weight: 500; transition: color 0.15s; }
+.nav-item .ti { font-size: 22px; }
+.nav-item.active { color: var(--color-accent); }
+.nav-item.active .ti { color: var(--color-accent); }
 </style>
 </head>
 <body>
-<div class="container">
-  <div class="appbar"><i class="ti ti-arrow-left" onclick="location.href='hlv_tong_quan.html'"></i><h1>Chi tiết KH</h1><i class="ti ti-dots"></i></div>
+<div class="wrap">
 
-  <div class="profile">
-    <div class="ava">L</div>
-    <div style="flex:1"><div class="nm">Chị Lan</div><div class="meta">Nữ · 32 tuổi · Gói Tăng cường (ngày 11/90)</div></div>
-    <i class="ti ti-message-heart ico" title="Chat"></i>
+  <!-- Appbar -->
+  <div class="appbar">
+    <button class="appbar-back" onclick="location.href='hlv_danh_sach_kh_tiem_nang.html'"><i class="ti ti-arrow-left"></i></button>
+    <h1>Chi tiết khách hàng</h1>
+    <span class="version-tag">v1.1</span>
   </div>
 
-  <!-- Hành động nhanh -->
-  <div class="acts">
-    <div class="a"><i class="ti ti-chart-line"></i>Tiến độ</div>
-    <div class="a"><i class="ti ti-target"></i>Điều chỉnh mục tiêu</div>
-    <div class="a"><i class="ti ti-message-heart"></i>Chat</div>
-  </div>
-
-  <!-- Gợi ý bữa ăn (đa phiên bản) -->
-  <div class="card">
-    <div class="card-head"><i class="ti ti-tools-kitchen-2"></i><h2>Gợi ý bữa ăn</h2><span class="link" onclick="location.href='hlv_goi_y_bua_an.html'">Xem chi tiết</span></div>
-    <div class="card-body">
-      <div class="mv-cur">
-        <i class="ti ti-tools-kitchen-2 ic"></i>
-        <div class="t"><div class="n">Phiên bản #2 · 1.600 kcal/ngày · 4 bữa</div><div class="s">Hiệu lực: 08/06 – 17/06 (10 ngày)</div></div>
-        <span class="badge b-exp">Hết hiệu lực</span>
+  <!-- Header card -->
+  <div class="header-card">
+    <div class="header-card-inner">
+      <div class="avatar-row">
+        <div class="avatar">L</div>
+        <div class="kh-meta">
+          <div class="kh-name">
+            Chị Lan
+            <span class="disc-badge">I/S</span>
+          </div>
+          <div class="kh-pkg"><i class="ti ti-package"></i> Gói Tăng cường · Ngày 11/90</div>
+        </div>
       </div>
-      <div class="hist">
-        <div class="hrow"><i class="ti ti-history"></i> Phiên bản #1 · 1.700 kcal <span class="v">29/05–07/06</span></div>
-        <div class="hrow"><i class="ti ti-history"></i> Phiên bản #2 · 1.600 kcal <span class="v">08/06–17/06</span></div>
+      <div class="prog-row">
+        <div class="prog-bar-wrap">
+          <div class="prog-bar" style="width: 12%;"></div>
+        </div>
+        <span class="prog-label">12% (11/90 ngày)</span>
       </div>
-      <button class="mealbtn" onclick="location.href='hlv_thiet_lap_muc_tieu.html'"><i class="ti ti-refresh"></i> Đánh giá lại & tạo phiên bản mới (#3)</button>
-      <button class="mealbtn ghost" onclick="location.href='hlv_goi_y_bua_an.html'">Xem phiên bản hiện tại</button>
-    </div>
-  </div>
-
-  <!-- Chỉ số Tanita -->
-  <div class="card">
-    <div class="card-head"><i class="ti ti-scale"></i><h2>Chỉ số Tanita mới nhất</h2><span class="link">Cập nhật</span></div>
-    <div class="card-body">
-      <div class="grid">
-        <div class="stat"><div class="v">58 kg</div><div class="k">Cân nặng</div></div>
-        <div class="stat"><div class="v">22.4</div><div class="k">BMI</div></div>
-        <div class="stat"><div class="v">6 điểm</div><div class="k">Mỡ nội tạng</div></div>
-        <div class="stat"><div class="v">45 tuổi</div><div class="k">Tuổi sinh học</div></div>
+      <div class="btn-row">
+        <button class="btn-sm" onclick=""><i class="ti ti-chart-bar"></i> Tiến độ</button>
+        <button class="btn-sm" onclick="location.href='hlv_thiet_lap_muc_tieu.html'"><i class="ti ti-target"></i> Điều chỉnh MĐ</button>
+        <button class="btn-sm" onclick=""><i class="ti ti-message-circle"></i> Chat</button>
       </div>
     </div>
   </div>
 
-  <!-- Mục tiêu chỉ số -->
-  <div class="card">
-    <div class="card-head"><i class="ti ti-target"></i><h2>Mục tiêu chỉ số</h2></div>
-    <div class="card-body">
-      <div class="row"><span>Cân nặng</span><span class="gv">58 → 56 kg</span></div>
-      <div class="row"><span>Mỡ nội tạng</span><span class="gv">6 → 5 điểm</span></div>
-      <div class="row"><span>BMI</span><span class="gv">22.4 → 22.0</span></div>
+  <!-- Quick actions -->
+  <div class="section-label">Thao tác nhanh</div>
+  <div class="quick-row">
+    <div class="quick-card" onclick="location.href='hlv_nhap_chi_so_tanita.html'">
+      <i class="ti ti-scale"></i>
+      <span>Đo Tanita mới</span>
+    </div>
+    <div class="quick-card" onclick="">
+      <i class="ti ti-camera"></i>
+      <span>Cập nhật check-in</span>
+    </div>
+    <div class="quick-card" onclick="location.href='hlv_goi_y_bua_an.html'">
+      <i class="ti ti-tools-kitchen-2"></i>
+      <span>Tạo bữa ăn mới</span>
     </div>
   </div>
 
-  <!-- Ảnh check-in -->
+  <!-- Gợi ý bữa ăn section -->
+  <div class="section-label" style="margin-top: 0.5rem;">Gợi ý bữa ăn</div>
   <div class="card">
-    <div class="card-head"><i class="ti ti-camera"></i><h2>Ảnh check-in</h2><span class="link">Thêm</span></div>
-    <div class="card-body">
-      <div class="photos">
-        <div class="photo"><i class="ti ti-user-circle" style="font-size:24px"></i></div>
-        <div class="photo"><i class="ti ti-body-scan" style="font-size:24px"></i></div>
-        <div class="photo"><i class="ti ti-ruler-measure" style="font-size:24px"></i></div>
+    <div class="card-body" style="padding-top: 0.85rem;">
+      <div class="meal-ver-row">
+        <span class="ver-label">#3</span>
+        <span class="badge-active">Đang hiệu lực</span>
+        <span style="font-size: 12px; color: var(--color-text-2);">18/06–27/06</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 0.35rem;">
+        <span class="fs-inline"><i class="ti ti-star-filled"></i> 82/100</span>
+        <span class="meal-cost"><i class="ti ti-coin"></i> ~95,000đ/ngày</span>
+      </div>
+      <div class="meal-btn-row">
+        <button class="btn-outline" onclick="location.href='hlv_goi_y_bua_an.html'">
+          <i class="ti ti-eye"></i> Xem phiên bản hiện tại
+        </button>
+        <button class="btn-primary-sm" onclick="location.href='hlv_thiet_lap_muc_tieu.html'">
+          <i class="ti ti-refresh"></i> Đánh giá lại &amp; tạo phiên bản mới
+        </button>
+      </div>
+      <div class="history-row">
+        <span class="hist-item">#2 · Hết hiệu lực · 08–17/06</span>
+        <span class="hist-item">#1 · 29/05–07/06</span>
       </div>
     </div>
   </div>
-</div>
+
+  <!-- Tanita section -->
+  <div class="section-label">Tanita gần nhất</div>
+  <div class="card">
+    <div class="card-body" style="padding-top: 0.85rem;">
+      <div class="tanita-date"><i class="ti ti-calendar"></i> Đo ngày 16/06/2026</div>
+      <div class="tanita-grid">
+        <div class="tanita-item">
+          <div class="t-label">Cân nặng</div>
+          <div class="t-value">60<span class="t-unit">kg</span></div>
+        </div>
+        <div class="tanita-item">
+          <div class="t-label">BMI</div>
+          <div class="t-value">23.1</div>
+        </div>
+        <div class="tanita-item">
+          <div class="t-label">Mỡ cơ thể</div>
+          <div class="t-value">18<span class="t-unit">%</span></div>
+        </div>
+        <div class="tanita-item">
+          <div class="t-label">Mỡ nội tạng</div>
+          <div class="t-value">8<span class="t-unit">điểm</span></div>
+        </div>
+        <div class="tanita-item">
+          <div class="t-label">Cơ bắp</div>
+          <div class="t-value">50<span class="t-unit">kg</span></div>
+        </div>
+        <div class="tanita-item">
+          <div class="t-label">Tuổi sinh học</div>
+          <div class="t-value">50<span class="t-unit">tuổi</span></div>
+        </div>
+      </div>
+      <button class="btn-outline" style="width: 100%;" onclick="location.href='hlv_nhap_chi_so_tanita.html'">
+        <i class="ti ti-plus"></i> Nhập Tanita mới
+      </button>
+    </div>
+  </div>
+
+  <!-- Mục tiêu chỉ số section -->
+  <div class="section-label">Mục tiêu chỉ số</div>
+  <div class="card">
+    <div class="card-body" style="padding-top: 0.85rem;">
+      <table class="goals-table">
+        <thead>
+          <tr>
+            <th>Mục tiêu</th>
+            <th>Hiện tại → Đích</th>
+            <th>Tiến độ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-weight: 600;">Giảm cân</td>
+            <td style="font-size: 12px; color: var(--color-text-2);">60 → 55 kg</td>
+            <td>
+              <div class="goal-pbar-wrap"><div class="goal-pbar" style="width: 20%;"></div></div>
+              <div class="goal-pct">20% (11/90 ngày)</div>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600;">Giảm mỡ nội tạng</td>
+            <td style="font-size: 12px; color: var(--color-text-2);">8 → 4 điểm</td>
+            <td>
+              <div class="goal-pbar-wrap"><div class="goal-pbar" style="width: 10%;"></div></div>
+              <div class="goal-pct">10% (11/90 ngày)</div>
+            </td>
+          </tr>
+          <tr>
+            <td style="font-weight: 600;">Tuổi sinh học</td>
+            <td style="font-size: 12px; color: var(--color-text-2);">50 → 38 tuổi</td>
+            <td>
+              <div class="goal-pbar-wrap"><div class="goal-pbar" style="width: 5%;"></div></div>
+              <div class="goal-pct">5% (11/90 ngày)</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Ảnh check-in section -->
+  <div class="section-label">Ảnh check-in</div>
+  <div class="card">
+    <div class="card-body" style="padding-top: 0.85rem;">
+      <div class="photo-row">
+        <div class="photo-placeholder">
+          <i class="ti ti-camera"></i>
+          <span class="photo-date">16/06</span>
+        </div>
+        <div class="photo-placeholder">
+          <i class="ti ti-camera"></i>
+          <span class="photo-date">06/06</span>
+        </div>
+        <div class="photo-placeholder">
+          <i class="ti ti-camera"></i>
+          <span class="photo-date">29/05</span>
+        </div>
+      </div>
+      <span class="view-history-link"><i class="ti ti-history"></i> Xem lịch sử ảnh</span>
+    </div>
+  </div>
+
+  <!-- Next-Best-Action card -->
+  <div class="nba-card">
+    <div class="nba-header">
+      <i class="ti ti-clock"></i>
+      <span>Việc cần làm tiếp</span>
+    </div>
+    <div class="nba-text">
+      Gợi ý bữa ăn phiên bản #3 hết hiệu lực vào <strong>27/06</strong> — nhắc đo Tanita và tạo phiên bản mới để tiếp tục lộ trình của Chị Lan.
+    </div>
+    <button class="nba-btn" onclick="alert('Đã đặt nhắc lịch ngày 25/06/2026')">
+      <i class="ti ti-bell"></i> Đặt nhắc lịch
+    </button>
+  </div>
+
+</div><!-- /wrap -->
+
+<!-- Bottom Navbar -->
+<nav class="bottom-nav">
+  <button class="nav-item" onclick="location.href='hlv_tong_quan.html'">
+    <i class="ti ti-layout-dashboard"></i>
+    <span>Tổng quan</span>
+  </button>
+  <button class="nav-item active">
+    <i class="ti ti-users"></i>
+    <span>Danh sách KH</span>
+  </button>
+  <button class="nav-item">
+    <i class="ti ti-message-circle"></i>
+    <span>Chat</span>
+  </button>
+  <button class="nav-item">
+    <i class="ti ti-user-circle"></i>
+    <span>Hồ sơ</span>
+  </button>
+</nav>
+
 </body>
 </html>
