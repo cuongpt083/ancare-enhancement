@@ -22,6 +22,8 @@ graph LR
 
 KH xem **thực đơn hiện tại** do HLV tạo: **phiên bản đang hiệu lực** (còn hiệu lực đến ngày nào — mỗi bản 10 ngày), tổng **Calo/ngày**, phân bổ & món gợi ý theo từng bữa. Có nút **"Hỏi HLV về thực đơn này"** → mở màn **Chat** để hỏi đáp về gợi ý bữa ăn hiện tại. (KH chỉ xem; việc tạo/đổi phiên bản do HLV thực hiện — xem `Workflow-HLV.md §3`.)
 
+> 🍽️ **Đã cá nhân hóa theo Persona-fit (v1.1):** thực đơn được lọc theo **chế độ ăn, ngân sách, món thích, và quyền chủ động bữa ăn** của KH (xem `Calorie-Meal-Business-Rules-v1.1.md` Process 2.0). Màn có thể hiển thị **chi phí ước tính/ngày**; nếu KH thuộc nhóm *phụ thuộc người nấu* thì kèm **"Hướng dẫn cho người nấu/đi chợ"**; nếu *ăn ngoài* thì hiển thị **cách gọi món thông minh**.
+
 > 👥 **HLV làm gương:** Chuỗi điều hướng này dành cho **Khách hàng**, nhưng **HLV cũng thực hiện chính các nhiệm vụ này** (qua cùng các màn) để **làm gương**. HLV có thể **chia sẻ** việc đã làm — qua **hình ảnh, chat** — và **gửi cho Khách hàng** (nút "chia sẻ" trên hoạt động đã hoàn thành). Xem thêm `Workflow-HLV.md`.
 
 ## A. Workflow tổng quát "Cá nhân hóa Lộ trình và Gợi ý bữa ăn"

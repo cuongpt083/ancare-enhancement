@@ -45,9 +45,15 @@ Cấu trúc đề xuất cho mỗi bản ghi persona/lead (gợi ý lưu trong `
 - `lifestyle` — lịch sinh hoạt, mức vận động, thói quen ăn uống.
 - `channels[]` — kênh hay dùng (Zalo, Facebook, TikTok, gặp trực tiếp). **[lead]**
 - `tech_comfort` — mức quen công nghệ (thấp/trung/cao).
-- `budget_sensitivity` — nhạy giá (cao/trung/thấp) + khả năng chi cho sức khỏe. **[lead]**
+- `budget_sensitivity` — nhạy giá (cao/trung/thấp) + khả năng chi cho sức khỏe. **[lead]** *(cũng map sang `daily_budget` cho Persona-fit bữa ăn)*
 - `decision_factors[]` — yếu tố quyết định mua (bằng chứng khoa học, người thật-việc thật, giá, sự đồng hành, thương hiệu). **[lead]**
 - `objections[]` — phản đối thường gặp (sợ sản phẩm "đa cấp", từng thất bại giảm cân, không có thời gian, hỏi ý kiến chồng/vợ).
+
+**Tiêu chí khả thi bữa ăn (Persona-fit — đầu vào gợi ý bữa ăn, xem `Calorie-Meal-Business-Rules-v1.1.md` Process 2.0):**
+- `diet_type` — `omnivore` (ăn mặn) / `flexitarian` (bán chay) / `ovo_lacto` (chay trứng-sữa) / `vegan` (thuần chay).
+- `daily_budget` — `tiet_kiem` / `trung_binh` / `thoai_mai` (đồng bộ với `budget_sensitivity`).
+- `liked_foods[]` / `disliked_foods[]` — món thích (ưu tiên) / không thích (loại).
+- `meal_autonomy` — `chu_dong` (tự đi chợ/nấu) / `phu_thuoc` (người khác nấu — vd bố mẹ già) / `an_ngoai` (ăn ngoài/đặt sẵn).
 
 ### 4. Thẻ tính cách DISC (thẻ phụ — điều chỉnh tông giọng)
 - `disc_primary` — D / I / S / C (xem Phần III).

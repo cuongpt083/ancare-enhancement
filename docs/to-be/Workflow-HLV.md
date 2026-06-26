@@ -268,14 +268,20 @@ graph LR
 
 ### 2. Chăm sóc Khách hàng (KH của tôi)
 
-**Điểm vào ứng dụng HLV — màn "Tổng quan" (Dashboard).** Prototype: `prototypes/hlv/hlv_tong_quan.html`. Hiển thị KPI (số KH, lead, "hôm nay nên tiếp cận", **gợi ý bữa ăn cần làm mới**), cảnh báo, truy cập nhanh (KH tiềm năng / KH của tôi / Chat), danh sách KH cần chú ý → mở **"Chi tiết KH"**.
+**Điểm vào ứng dụng HLV — màn "Tổng quan" (Dashboard).** Prototype: `prototypes/hlv/hlv_tong_quan.html`. Hiển thị KPI (số KH, lead, "hôm nay nên tiếp cận", **gợi ý bữa ăn cần làm mới**), cảnh báo, **truy cập nhanh (v1.1): Danh sách KH · Kho tài liệu · Chat**, danh sách KH cần chú ý → mở **"Chi tiết KH"**.
+
+> 🔁 **Thay đổi v1.1 (Truy cập nhanh):**
+> - Gộp 2 nút "KH tiềm năng" + "KH của tôi" thành **một nút "Danh sách KH"** → mở màn 2 tab (tab **KH tiềm năng mở mặc định**, tab **KH của tôi**). Xem `UI-UX-HLV_v1.1.md §1.0`.
+> - Bổ sung nút **"Kho tài liệu"** → màn khai thác kho tri thức (xem §4 dưới đây).
 
 **Màn "Chi tiết KH".** Prototype: `prototypes/hlv/hlv_chi_tiet_kh.html`. Gồm: hồ sơ + gói (ngày X/Y), **Gợi ý bữa ăn (đa phiên bản — §3)**, Tanita mới nhất, mục tiêu chỉ số, ảnh check-in; hành động: Tiến độ, **Điều chỉnh mục tiêu**, Chat. Đây là màn quay về sau khi tạo tài khoản & gợi ý bữa ăn (hoàn thiện vòng lặp).
 
 ```mermaid
 graph LR
-    TQ["Tổng quan (Dashboard)"] --> DS["Danh sách KH tiềm năng"]
+    TQ["Tổng quan (Dashboard)"] -->|"Danh sách KH"| DS["Danh sách KH<br/>(tab KH tiềm năng | KH của tôi)"]
+    TQ -->|"Kho tài liệu"| KTL["Kho tài liệu"]
     TQ --> CT["Chi tiết KH"]
+    DS -->|"tab KH của tôi"| CT
     CT -->|"Xem / làm mới"| GYB["Gợi ý bữa ăn"]
     GYB -->|"Lưu"| CT
     CT -->|"Điều chỉnh mục tiêu → tạo bản mới"| TLM["Thiết lập mục tiêu"]
@@ -304,4 +310,35 @@ Mỗi gợi ý bữa ăn **chỉ có hiệu lực 10 ngày**. Sau 10 ngày, nế
 >      │         ├─ target_calo     // calo mục tiêu của nhóm
 >      │         ├─ target_protein  // (g) — CHỈ nhóm protein
 >      │         └─ dishes[]        // món từ catalog của nhóm: tên, khẩu phần/đơn vị, calo
->      ├─ notes             
+>      ├─ notes              // hạn chế thịt đỏ/chiên-xào; nước 0.4L/10kg/ngày
+>      ├─ created_by_coach / created_at
+>      └─ tanita_ref        // bản Tanita căn cứ để tạo
+> ```
+>
+> Cấu trúc trên đã cập nhật theo **mẫu phiếu Nutrition club** (3 nhóm: đạm/xơ/đường-bột) — logic chi tiết ở `docs/business-rules/Calorie-Meal-Business-Rules-v1.1.md §2.1b`.
+
+### 4. Kho tài liệu — khai thác kho tri thức *(mới v1.1)*
+
+**Điểm vào:** nút **"Kho tài liệu"** ở màn Tổng quan (Truy cập nhanh). Mục đích: không gian để HLV **tự học** và **lấy nội dung chia sẻ** cho KH/cộng đồng. Tổ chức theo **micro-course** (gắn Module Đào tạo — README §3). UI-UX chi tiết: `UI-UX-HLV_v1.1.md §3`.
+
+**6 chủ đề:**
+
+1. **Kiến thức dinh dưỡng** — video, slide bài giảng.
+2. **Kiến thức vận động** — video, slide bài giảng.
+3. **Phát triển bản thân** — slide đào tạo, video, tài liệu, sách.
+4. **Kỹ năng kinh doanh** — slide đào tạo, video, tài liệu, sách.
+5. **Câu chuyện bản thân** — video, slide (testimonial/câu chuyện thành công, để truyền cảm hứng & làm "bằng chứng người thật").
+6. **Danh mục Nhóm dinh dưỡng / CLB** (Gym, Fit dinh dưỡng…) **& danh sách Huấn luyện viên** — tra cứu & kết nối.
+
+**Hành vi chính:** tìm kiếm toàn kho + lọc theo định dạng (Video/Slide/Tài liệu/Sách); mở mục → trình xem tương ứng; mỗi mục có **"Chia sẻ cho KH"** (qua Chat) và **"Lưu"**. Chủ đề 1–5 là **thư viện nội dung**; chủ đề 6 là **danh mục Nhóm/CLB + HLV** (cấu trúc khác — xem `UI-UX-HLV_v1.1.md §3.1b`).
+
+```mermaid
+graph LR
+    TQ["Tổng quan"] -->|"Kho tài liệu"| KTL["Kho tài liệu (lưới 6 chủ đề)"]
+    KTL -->|"Chủ đề 1–5"| LIB["Thư viện nội dung<br/>(video/slide/tài liệu/sách)"]
+    KTL -->|"Chủ đề 6"| DIR["Danh mục Nhóm/CLB + HLV"]
+    LIB -->|"mở mục"| VIEW["Trình xem + Chia sẻ cho KH / Lưu"]
+    DIR -->|"chọn"| DETAIL["Chi tiết Nhóm / Hồ sơ HLV"]
+```
+
+> **Tuân thủ:** gợi ý "đề xuất cho bạn" (nếu có) chỉ chạy khi `ai_data_sharing_enabled = true`; danh mục Nhóm/HLV lấy từ dữ liệu vận hành AnCare, **không trùng lặp VNHUB** (chỉ phục vụ tra cứu & kết nối, theo định hướng độc lập ở README).             
