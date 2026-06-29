@@ -7,13 +7,13 @@
 
 **Liên quan:**
 - Nghiệp vụ & sơ đồ: `docs/to-be/Workflow-HLV.md` (+ bản nâng cấp `Workflow-HLV_v1.1-draft.md`).
-- Bản tư vấn đồng cảm: `docs/to-be/Empathy-Consultation_v1.0.md`.
-- Xử lý băn khoăn/từ chối: `docs/to-be/Objection-Handler_v1.0.md`.
-- Trải nghiệm hội thoại & "Vì sao": `docs/to-be/Conversational-Explainable-UX_v1.0.md`.
+- Bản tư vấn đồng cảm: `docs/srs/Empathy-Consultation_v1.0.md`.
+- Xử lý băn khoăn/từ chối: `docs/srs/Objection-Handler_v1.0.md`.
+- Trải nghiệm hội thoại & "Vì sao": `docs/srs/Conversational-Explainable-UX_v1.0.md`.
 - Dữ liệu chân dung: `docs/technical/customer-persona-data-model_v1.0.md`.
 - Quy tắc gói: `docs/business-rules/packaged-service-advice-v1.0.md`.
 - Quy tắc Calo/bữa ăn (3 nhóm + Persona-fit + Feasibility): `docs/business-rules/Calorie-Meal-Business-Rules-v1.1.md`.
-- UI-UX phía KH: `docs/to-be/UI-UX-Lo-trinh-Dong-ho-sinh-hoc_v1.0.md`.
+- UI-UX phía KH: `docs/srs/UI-UX-Lo-trinh-Dong-ho-sinh-hoc_v1.0.md`.
 
 ---
 

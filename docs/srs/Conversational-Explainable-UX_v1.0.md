@@ -162,7 +162,7 @@ Triển khai tăng dần, mỗi mức đứng độc lập có giá trị:
 
 ## 8. Liên kết tài liệu
 
-- Hiện thực của nguyên lý: `docs/to-be/Empathy-Consultation_v1.0.md` (generative copy cho Bản tư vấn), `docs/to-be/Objection-Handler_v1.0.md` (diễn đạt theo DISC).
+- Hiện thực của nguyên lý: `docs/srs/Empathy-Consultation_v1.0.md` (generative copy cho Bản tư vấn), `docs/srs/Objection-Handler_v1.0.md` (diễn đạt theo DISC).
 - Dữ liệu & provenance: `docs/technical/customer-persona-data-model_v1.0.md`.
 - Engine quyết định: `docs/business-rules/Calorie-Meal-Business-Rules-v1.1.md`, `docs/business-rules/packaged-service-advice-v1.0.md`; Next-Best-Action (To-do TD-AC5/TD-AC2).
 - Áp dụng trong luồng: `docs/to-be/Workflow-HLV.md` §1.1, §1.3, §1.4, §1.6.

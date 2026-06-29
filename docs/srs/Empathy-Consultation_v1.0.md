@@ -2,7 +2,7 @@
 
 > **Mục đích.** Đặc tả cách thiết kế lại màn **"Bản tư vấn"** (`Workflow-HLV.md` §1.3) theo hướng **đồng cảm trước, phân tích sau** — để phù hợp với khách đang có nỗi đau sức khỏe và khách đa nghi/đề phòng, mà **không làm mất** chức năng tạo nhu cầu cải thiện (hỗ trợ chuyển đổi).
 >
-> **Quan hệ tài liệu.** Đây là một **tầng "empathy layer"** đặt phía trên §1.3 hiện có; không thay logic tính toán chỉ số, chỉ đổi **trật tự trình bày, ngôn ngữ, mức độ phơi bày thông tin và tông giọng**. Ghép cùng `docs/to-be/Objection-Handler_v1.0.md` tại điểm chốt.
+> **Quan hệ tài liệu.** Đây là một **tầng "empathy layer"** đặt phía trên §1.3 hiện có; không thay logic tính toán chỉ số, chỉ đổi **trật tự trình bày, ngôn ngữ, mức độ phơi bày thông tin và tông giọng**. Ghép cùng `docs/srs/Objection-Handler_v1.0.md` tại điểm chốt.
 >
 > **Nguồn tri thức.** Kỹ thuật "hỏi triệu chứng/nỗi đau trước → gắn vào chỉ số", hình ảnh hóa, làm gương, kể chuyện người thật — chắt lọc từ 2 video thực hành tư vấn 15 phút (công thức 1-7-2-3-2). Có **giảm liều** các kỹ thuật gây sốc/áp lực để bám nguyên tắc README *"AI hỗ trợ không thao túng"*.
 >
@@ -147,7 +147,7 @@ Tái dùng nguồn của §1.3 (`health_profiles.tanita_data` + bảng chuẩn) 
 ## 9. Liên kết tài liệu
 
 - Ghép vào: `docs/to-be/Workflow-HLV.md` §1.3 (con trỏ tham chiếu đã chèn).
-- Tiếp nối: `docs/to-be/Objection-Handler_v1.0.md` (xử lý băn khoăn tại điểm chốt).
+- Tiếp nối: `docs/srs/Objection-Handler_v1.0.md` (xử lý băn khoăn tại điểm chốt).
 - Dữ liệu: `docs/technical/customer-persona-data-model_v1.0.md`; khung DISC `docs/to-be/customer-persona-disc-framework_v1.0.md`.
 - Quy tắc tốc độ an toàn & mục tiêu: `docs/business-rules/Calorie-Meal-Business-Rules-v1.1.md`.
 - Nguồn công thức 15 phút (1-7-2-3-2): transcript video, `docs/references/transcripts/`.
