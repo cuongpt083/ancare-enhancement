@@ -1,23 +1,24 @@
 # Backlog — Danh sách phẳng (sắp theo ưu tiên)
 
-> Tổng: **43 user stories** · **21 Must · 14 Should · 8 Could** · 157 Acceptance Criteria.
+> Tổng: **44 user stories** · **22 Must · 14 Should · 8 Could** · 165 Acceptance Criteria.
 > Chi tiết mỗi story nằm trong file epic tương ứng (`epics/E0X-*.md`).
 
-## Must (P0) — 21 story
+## Must (P0) — 22 story
 | ID | Epic | Tên ngắn | Vai trò | Khuôn | Mockup |
 |---|---|---|---|---|---|
 | US-E00-01 | E00 | Đăng nhập / xác thực | HLV+KH | T1 | S-AUTH-01 |
 | US-E00-02 | E00 | Shell + floating bubble | HLV | T3 | S-AUTH-02 |
 | US-E01-01 | E01 | Xem DS KHTN ưu tiên hôm nay | HLV | T2 | S-LEAD-01 |
 | US-E01-02 | E01 | Tạo lead mới (form định danh) | HLV | T1 | S-LEAD-02 |
-| US-E02-01 | E02 | Cân quét / nhập Tanita (OCR) | HLV | T1 | S-CONS-01 |
-| US-E02-02 | E02 | Khảo sát chân dung | HLV | T1 | S-CONS-02 |
-| US-E02-03 | E02 | Bản tư vấn (5 lớp đồng cảm) | HLV | T1 | S-CONS-03 |
-| US-E02-04 | E02 | Xác định mục tiêu + % khả thi | HLV | T1 | S-CONS-04 |
-| US-E02-05 | E02 | Xử lý từ chối / chốt gói | HLV | T1 | S-CONS-05 |
-| US-E02-06 | E02 | Gợi ý bữa ăn 10 ngày đầu | HLV | T1 | S-CONS-06 |
-| US-E02-07 | E02 | Tạo tài khoản KH | HLV | T1 | S-CONS-07 |
-| US-E02-08 | E02 | Disclaimer "không thần dược" | HLV | — | (component) |
+| US-E02-01 | E02 | Phá băng & Xây dựng thiện cảm | HLV | T1 | S-CONS-01 |
+| US-E02-02 | E02 | Khảo sát & Khai thác thông tin | HLV | T1 | S-CONS-02 |
+| US-E02-03 | E02 | Hướng dẫn đo lường Tanita (OCR + tư thế) | HLV | T1 | S-CONS-03 |
+| US-E02-04 | E02 | Phân tích chỉ số & Cảnh báo (5 bước) | HLV | T1 | S-CONS-04 |
+| US-E02-05 | E02 | Tư vấn giải pháp + Xác định mục tiêu | HLV | T1 | S-CONS-05 |
+| US-E02-06 | E02 | Xử lý từ chối / Chốt gói | HLV | T1 | S-CONS-06 |
+| US-E02-07 | E02 | Gợi ý bữa ăn 10 ngày đầu | HLV | T1 | S-CONS-07 |
+| US-E02-08 | E02 | Tạo tài khoản KH | HLV | T1 | S-CONS-08 |
+| US-E02-09 | E02 | Disclaimer "không thần dược" | HLV | — | (component) |
 | US-E03-01 | E03 | Gửi talking point hằng ngày | HLV | T1 | S-CARE-01 |
 | US-E03-03 | E03 | Điều chỉnh bữa ăn theo mốc | HLV | T1 | S-CARE-03 |
 | US-E03-09 | E03 | Nhắc kết nối KH sau 72h | HLV | T1 | S-CARE-09 |
@@ -62,9 +63,9 @@
 ## Trạng thái
 | Trạng thái | Ý nghĩa |
 |---|---|
-| 📝 Written | Story đã viết đầy đủ (hiện tại: tất cả 43) |
+| 📝 Written | Story đã viết đầy đủ (hiện tại: tất cả 44) |
 | 🎨 Mockup | Đã có mockup tuân khuôn |
 | 🔗 Prototype | Đã có prototype HTML nối điều hướng |
 | ✅ Done | Đạt DoD (mockup + prototype + AC kiểm thử) |
 
-> Tất cả 43 story đang ở trạng thái 📝 Written. Bước tiếp: làm mockup cho các story Must (P0) trước.
+> Tất cả 44 story đang ở trạng thái 📝 Written. Bước tiếp: làm mockup cho các story Must (P0) trước.

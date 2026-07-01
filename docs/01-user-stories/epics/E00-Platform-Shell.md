@@ -68,7 +68,7 @@
   - Prototype: `docs/04-prototypes/customer/HLTH-03_dat_muc_tieu.html` *(chưa tạo)*
   - Khuôn màn: T1
   - Nghiệp vụ: `docs/00-foundation/business-rules/Calorie-Meal-Business-Rules-v1.1.md` (tốc độ an toàn).
-- **Open question:** Mục tiêu do KH tự đặt hay chỉ xác nhận gợi ý từ HLV (luồng tư vấn US-E02-04)?
+- **Open question:** Mục tiêu do KH tự đặt hay chỉ xác nhận gợi ý từ HLV (luồng tư vấn US-E02-05)?
 
 ---
 

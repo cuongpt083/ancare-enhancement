@@ -183,7 +183,7 @@
 - **Acceptance Criteria:**
   - AC1 — Given KH không tương tác 72h, When đến hạn, Then HLV nhận nhắc "Kết nối lại với KH" kèm gợi ý hành động (rủ sự kiện, chia sẻ nội dung, hỏi thăm).
   - AC2 — Given nhắc, When HLV đánh dấu đã kết nối, Then reset bộ đếm 72h & ghi vào timeline.
-  - AC3 — Given KH phản hồi tiêu cực/từ chối, When HLV đánh dấu, Then mở Objection Handler (gắn US-E02-05) hoặc gợi ý chuyển bảo trợ.
+    - AC3 — Given KH phản hồi tiêu cực/từ chối, When HLV đánh dấu, Then mở Objection Handler (gắn US-E02-06) hoặc gợi ý chuyển bảo trợ.
   - AC4 — Given KH muốn giới thiệu người khác, When HLV ghi nhận, Then tạo lead mới (gắn US-E01-02) & ghi nguồn giới thiệu.
 - **Truy vết:**
   - Mockup: `docs/03-mockups/coach/S-CARE-09_nhac_72h.png` *(chưa tạo)*

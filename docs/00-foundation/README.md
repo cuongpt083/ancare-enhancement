@@ -10,7 +10,8 @@
 | `personas.md` | 3 vai trò người dùng (HLV, KH, Founder/Admin) + khung chân dung khách hàng (DISC + Stage-of-Change). |
 | `glossary.md` | Thuật ngữ & viết tắt dùng xuyên suốt dự án. |
 | `feature-tree.md` | Cây chức năng — **xương sống để sinh epics & user stories** (giữ nguyên từ bản gốc). |
-| `business-rules/` | Quy tắc nghiệp vụ thật (logic tính toán): `Calorie-Meal-Business-Rules-v1.1.md`, `packaged-service-advice-v1.0.md`. |
+| `business-rules/` | Quy tắc nghiệp vụ thật (logic tính toán): `Calorie-Meal-Business-Rules-v1.1.md`, `packaged-service-advice-v1.0.md`, `Consultation-15min-Process-v1.0.md` (quy trình tư vấn 15 phút — 5 giai đoạn, 5 bước phân tích, logic giải pháp). |
+| `consultation-sample-15-minutes.md` | Trích xuất nội dung tư vấn thực tế từ file ghi âm — nguồn gốc của `business-rules/Consultation-15min-Process-v1.0.md`. |
 
 ## Quy ước
 
