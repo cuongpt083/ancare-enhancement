@@ -64,8 +64,9 @@
 | Trạng thái | Ý nghĩa |
 |---|---|
 | 📝 Written | Story đã viết đầy đủ (hiện tại: tất cả 44) |
+| 🎨 Mockup | Đã có mockup tuân khuôn (hiện tại: 20/22 Must — US-E02-09 là component inline) |
 | 🎨 Mockup | Đã có mockup tuân khuôn |
 | 🔗 Prototype | Đã có prototype HTML nối điều hướng |
 | ✅ Done | Đạt DoD (mockup + prototype + AC kiểm thử) |
 
-> Tất cả 44 story đang ở trạng thái 📝 Written. Bước tiếp: làm mockup cho các story Must (P0) trước.
+> Tất cả 44 story đang ở trạng thái 📝 Written. **20/22 story Must (P0) đã có mockup wireframe** (xem `docs/03-mockups/index.md`; US-E02-09 disclaimer là component inline). Bước tiếp: review wireframe → hi-fi → prototype nối điều hướng.

@@ -1,0 +1,126 @@
+/* AnCare Base Layout — primitives cho 4 khuôn màn T1-T4 (mobile-first 375px) */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Be Vietnam Pro', Inter, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 15px; line-height: 1.5; color: var(--text); background: var(--bg-subtle);
+  max-width: 375px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column;
+}
+/* ===== Screen shell ===== */
+.screen { display: flex; flex-direction: column; min-height: 100vh; }
+/* AppBar */
+.appbar {
+  display: flex; align-items: center; gap: var(--s-12); padding: var(--s-12) var(--s-16);
+  background: var(--bg); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10;
+}
+.appbar .back { font-size: 22px; color: var(--accent); cursor: pointer; line-height: 1; width: 32px; }
+.appbar h1 { font-size: 16px; font-weight: 600; flex: 1; }
+.appbar .info { font-size: 18px; color: var(--text-muted); cursor: pointer; }
+/* Content */
+.content { flex: 1; padding: var(--s-16); display: flex; flex-direction: column; gap: var(--s-16); overflow-y: auto; }
+/* Card */
+.card {
+  background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-md);
+  padding: var(--s-16); box-shadow: var(--shadow-card);
+}
+.card.subtle { background: var(--bg-subtle); border-color: transparent; box-shadow: none; }
+.card h2 { font-size: 15px; margin-bottom: var(--s-8); }
+.card .hint { font-size: 13px; color: var(--text-muted); margin-top: var(--s-8); }
+/* Wireframe placeholder block */
+.wf {
+  background: var(--wf-fill); border: 1px dashed var(--wf-line); border-radius: var(--radius-sm);
+  padding: var(--s-12); color: var(--text-muted); font-size: 13px; text-align: center; min-height: 44px;
+  display: flex; align-items: center; justify-content: center;
+}
+.wf.tall { min-height: 120px; }
+.wf.big { min-height: 180px; }
+/* Chip / nhãn */
+.chip {
+  display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600;
+  padding: 3px 8px; border-radius: 99px; background: var(--bg-subtle); color: var(--text);
+}
+.chip.good { background: #e3f4e9; color: var(--state-good); }
+.chip.warn { background: #fbf0d8; color: var(--state-warn); }
+.chip.alert { background: #fae3df; color: var(--state-alert); }
+.chip.idle { background: #eef1f3; color: var(--text-muted); }
+.chip.accent { background: #e3efe8; color: var(--accent); }
+/* CTA fixed bottom (khuôn T1) */
+.cta-bar {
+  position: sticky; bottom: 0; background: var(--bg); border-top: 1px solid var(--border);
+  padding: var(--s-12) var(--s-16); display: flex; gap: var(--s-12);
+}
+.btn {
+  flex: 1; height: 48px; border: none; border-radius: var(--radius-md); font-size: 15px; font-weight: 600;
+  cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+}
+.btn.primary { background: var(--accent); color: #fff; }
+.btn.secondary { background: var(--bg-subtle); color: var(--text); }
+.btn.ghost { background: transparent; color: var(--accent); }
+/* FAB (khuôn T2) */
+.fab {
+  position: fixed; right: 16px; bottom: 20px; width: 56px; height: 56px; border-radius: 50%;
+  background: var(--accent); color: #fff; border: none; font-size: 26px; box-shadow: var(--shadow-fab);
+  cursor: pointer; z-index: 9; display: flex; align-items: center; justify-content: center;
+}
+/* Search input (khuôn T2) */
+.search {
+  display: flex; align-items: center; gap: 8px; background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--radius-md); padding: 10px var(--s-12); color: var(--text-muted);
+}
+.search input { border: none; outline: none; flex: 1; font-size: 14px; background: transparent; }
+/* List item / thẻ (khuôn T2) */
+.list-item {
+  background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-md);
+  padding: var(--s-12) var(--s-16); display: flex; align-items: center; gap: var(--s-12); cursor: pointer;
+}
+.list-item .avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--bg-subtle); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--text-muted); }
+.list-item .meta { flex: 1; min-width: 0; }
+.list-item .meta .name { font-size: 15px; font-weight: 600; }
+.list-item .meta .sub { font-size: 13px; color: var(--text-muted); }
+.list-item .chips { display: flex; gap: 4px; flex-shrink: 0; }
+/* Tabs (khuôn T2) */
+.tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); }
+.tabs .tab { flex: 1; text-align: center; padding: 10px; font-size: 14px; color: var(--text-muted); cursor: pointer; border-bottom: 2px solid transparent; }
+.tabs .tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+/* Focus card (khuôn T3) */
+.focus-card {
+  background: var(--accent); color: #fff; border-radius: var(--radius-md); padding: var(--s-16);
+  box-shadow: var(--shadow-fab);
+}
+.focus-card .label { font-size: 13px; opacity: .85; }
+.focus-card .title { font-size: 18px; font-weight: 700; margin-top: 4px; }
+.focus-card .action { margin-top: var(--s-12); display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; }
+/* Quick actions row (khuôn T3) */
+.quick-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-12); }
+.quick-item { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--s-12); text-align: center; cursor: pointer; }
+.quick-item .icon { font-size: 22px; color: var(--accent); }
+.quick-item .label { font-size: 12px; margin-top: 4px; color: var(--text-muted); }
+/* Header (khuôn T4) */
+.profile-header { background: var(--bg); padding: var(--s-16); text-align: center; border-bottom: 1px solid var(--border); }
+.profile-header .avatar-lg { width: 72px; height: 72px; border-radius: 50%; background: var(--bg-subtle); margin: 0 auto var(--s-8); display: flex; align-items: center; justify-content: center; font-size: 30px; color: var(--text-muted); }
+.profile-header .name { font-size: 17px; font-weight: 700; }
+.profile-header .sub { font-size: 13px; color: var(--text-muted); }
+/* Action row (khuôn T4) */
+.action-row { display: flex; gap: var(--s-8); padding: 0 var(--s-16) var(--s-16); }
+.action-row .btn { height: 40px; font-size: 13px; }
+/* Collapsible card (khuôn T4) */
+.collapse-head { display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
+.collapse-head .chev { color: var(--text-muted); }
+/* Disclaimer inline (US-E02-09) */
+.disclaimer {
+  font-size: 12px; color: var(--text-muted); font-style: italic; padding: var(--s-8) var(--s-12);
+  border-top: 1px dashed var(--border); margin-top: var(--s-12);
+}
+/* Vì sao affordance (L7) */
+.why { font-size: 13px; color: var(--accent); cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
+/* Progress dots (luồng tư vấn) */
+.progress-dots { display: flex; gap: 6px; padding: var(--s-8) var(--s-16); background: var(--bg); border-bottom: 1px solid var(--border); }
+.progress-dots .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); }
+.progress-dots .dot.active { background: var(--accent); }
+.progress-dots .dot.done { background: var(--state-good); }
+/* Bottom nav (shell) */
+.bottom-nav { display: flex; border-top: 1px solid var(--border); background: var(--bg); position: sticky; bottom: 0; }
+.bottom-nav .nav-item { flex: 1; text-align: center; padding: 8px 0 10px; color: var(--text-muted); cursor: pointer; }
+.bottom-nav .nav-item.active { color: var(--accent); }
+.bottom-nav .nav-item .icon { font-size: 20px; }
+.bottom-nav .nav-item .label { font-size: 11px; }

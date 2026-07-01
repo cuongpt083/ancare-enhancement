@@ -1,0 +1,35 @@
+/* AnCare Design Tokens — Dùng cho mọi mockup/prototype (mobile-first 375px) */
+:root {
+  /* Màu thương hiệu */
+  --accent-coach: #2f6f4f;
+  --accent-customer: #2f9e6e;
+  --accent: var(--accent-coach); /* đổi sang customer ở màn KH */
+  /* Trạng thái */
+  --state-good: #16a34a;
+  --state-warn: #d99a14;
+  --state-alert: #c5402f;
+  --state-idle: #cdd4db;
+  /* Trụ cột */
+  --pillar-than: #16a34a;
+  --pillar-tam: #8b5cf6;
+  --pillar-tri: #f97316;
+  /* Nền & chữ */
+  --bg: #ffffff;
+  --bg-subtle: #f6f8f7;
+  --bg-wireframe: #eef2f0;
+  --text: #1f2933;
+  --text-muted: #6b7780;
+  --border: #e1e6ea;
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  /* Spacing (bội 4) */
+  --s-4: 4px; --s-8: 8px; --s-12: 12px; --s-16: 16px; --s-24: 24px; --s-32: 32px; --s-48: 48px;
+  /* Shadow */
+  --shadow-card: 0 1px 3px rgba(0,0,0,.08);
+  --shadow-fab: 0 4px 12px rgba(0,0,0,.18);
+  /* Số liệu wireframe (chỉ mockup) */
+  --wf-fill: #e7ecea;
+  --wf-line: #b8c4be;
+}

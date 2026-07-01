@@ -1,0 +1,24 @@
+<!-- Mockup US-E06-01 Check-in đồng hồ sinh học 24h | Khuôn T3 (focus=đồng hồ) | KH (tô màu + gợi ý D28, điểm 3/2/1/0 D27) -->
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sức khỏe tổng thể — AnCare</title>
+<link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
+<style>:root{--accent:var(--accent-customer)}
+.clock{width:200px;height:200px;border-radius:50%;background:conic-gradient(var(--state-good) 0 25%,var(--state-idle) 25% 45%,var(--state-warn) 45% 60%,var(--bg-subtle) 60% 100%);margin:0 auto;position:relative;display:flex;align-items:center;justify-content:center}
+.clock::after{content:"24h";position:absolute;font-size:20px;font-weight:700;color:var(--text)}
+</style></head><body><div class="screen">
+  <div class="appbar"><span class="back">‹</span><h1>Sức khỏe tổng thể</h1><span class="info">ⓘ</span></div>
+  <div class="content">
+    <div class="clock"></div>
+    <div class="card"><h2>Đã thực hiện</h2>
+      <div class="list-item"><div class="avatar" style="color:var(--state-good)">✓</div><div class="meta"><div class="name">Uống nước (1.5/2.6 lít)</div><div class="sub">đúng giờ · +3</div></div><span class="chip good">Tốt</span></div>
+      <div class="list-item"><div class="avatar" style="color:var(--state-good)">✓</div><div class="meta"><div class="name">Bữa sáng</div><div class="sub">đúng giờ · +3</div></div><span class="chip good">Tốt</span></div>
+    </div>
+    <div class="card"><h2>Chờ thực hiện</h2>
+      <div class="list-item"><div class="avatar" style="color:var(--state-idle)">○</div><div class="meta"><div class="name">Vận động chiều</div><div class="sub">16:00 — sắp đến giờ</div></div><span class="chip idle">Chờ</span></div>
+      <div class="list-item"><div class="avatar" style="color:var(--state-idle)">○</div><div class="meta"><div class="name">Bữa tối</div><div class="sub">19:00</div></div><span class="chip idle">Chờ</span></div>
+    </div>
+    <button class="btn primary" style="width:100%">+ Cốc nước (250ml)</button>
+    <div class="hint" style="text-align:center">Nước ≥ 0.4 lít/10kg · điểm 3/2/1/0 theo độ đúng giờ</div>
+  </div>
+  <div class="bottom-nav"><div class="nav-item active"><div class="icon">🏠</div><div class="label">Sức khỏe</div></div><div class="nav-item"><div class="icon">🍴</div><div class="label">Bữa ăn</div></div><div class="nav-item"><div class="icon">💬</div><div class="label">Chat</div></div><div class="nav-item"><div class="icon">👤</div><div class="label">Hồ sơ</div></div></div>
+</div></body></html>
