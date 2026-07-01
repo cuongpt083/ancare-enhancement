@@ -37,4 +37,4 @@
 ### Stage-of-Change (khi nào nói gì)
 `precontemplation` → `contemplation` → `preparation` → `action` → `maintenance`. Giai đoạn càng sớm → càng cần làm ấm/đồng cảm, chưa chốt gói.
 
-> **TODO chưng cất tiếp**: 3 persona lõi có tên + avatar (Phần IV của `docs/99-archive/to-be/customer-persona-disc-framework_v1.0.md`) — cần đưa vào đây sau khi rà soát. Hiện đã có schema & nguyên tắc đủ để bắt đầu viết user stories.
+> **Q30 (đã chốt):** 3 persona lõi sẽ được **định nghĩa lại** (PO cung cấp input sau). Tạm giữ schema + nguyên tắc ở trên đủ để làm mockup. Khi PO cung cấp, điền 3 persona (tên + avatar + đặc trưng + mục tiêu trội + DISC/Stage tiêu biểu) vào đây.

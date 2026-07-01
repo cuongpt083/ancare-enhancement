@@ -194,9 +194,11 @@
 
 ---
 
-## Open questions epic
-- Cơ chế chọn talking point theo giai đoạn KH (Stage-of-Change) hay theo tuần cố định?
-- Catalog 21 talking point + chuyên sâu bệnh lý → đưa vào foundation.
-- Nhắc 72h: tự động hay HLV xác nhận?
-- Metric báo cáo hành trình (tinh thần, thói quen, lan tỏa) cần chốt.
-- Engine sinh infographic cần PoC (gộp với E06-08).
+## Open questions epic — đã chốt (xem `docs/00-foundation/decisions-log.md`)
+- ✅ **D17** Chọn talking point → **hybrid** (tuần mặc định, HLV đổi theo Stage).
+- ⏳ **D18** Catalog 21 talking point → PO cung cấp sau (placeholder `Content-Catalogs-Placeholder-v1.0.md` §2).
+- ✅ **D19** Nhắc 72h → **tự động gửi nhắc đến HLV**; HLV đánh dấu hoàn thành.
+- ✅ **D20** Metric báo cáo hành trình → tinh thần (talking point) + thói quen (tỷ lệ check-in) + lan tỏa (số người chia sẻ).
+- ⏳ **D21** Ánh xạ 12 bước → PO cung cấp sau (placeholder `Content-Catalogs-Placeholder-v1.0.md` §3).
+
+> Chi tiết đầy đủ: `docs/00-foundation/decisions-log.md`.

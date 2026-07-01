@@ -72,7 +72,9 @@
 
 ---
 
-## Open questions epic
-- DMO club "bước tiếp" ánh xạ thế nào từ quy trình 12 bước sang gợi ý hành động?
-- Phân quyền: HLV thấy tuyến dưới đến bao nhiêu cấp?
-- "Vòng tròn thành công" cần định nghĩa & đặc tả (chưa có trong glossary — thêm khi chốt).
+## Open questions epic — đã chốt (xem `docs/00-foundation/decisions-log.md`)
+- ⏳ **D21** Ánh xạ 12 bước → DMO/Vòng tròn thành công → PO cung cấp sau (placeholder `Content-Catalogs-Placeholder-v1.0.md` §3).
+- ✅ **D22** Phân quyền tuyến dưới → **cấp 1 + cấp 2** (cháu).
+- ✅ **D23** Vòng tròn thành công → **synonym quy trình 12 bước** (glossary).
+
+> Chi tiết đầy đủ: `docs/00-foundation/decisions-log.md`.

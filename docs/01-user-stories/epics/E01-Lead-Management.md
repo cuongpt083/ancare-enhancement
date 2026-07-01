@@ -135,7 +135,12 @@
 
 ---
 
-## Open questions epic
-- Copilot làm ấm/mời (AI) thuộc P1 hay P2? (theo định hướng: P1 thư viện kịch bản + Stage-of-Change → P3 RAG.)
-- Cơ chế chống trùng lead: duy nhất theo SĐT hay + mã giới thiệu?
+## Open questions epic — đã chốt (xem `docs/00-foundation/decisions-log.md`)
+- ✅ **D12** Quy tắc chấm điểm lead_score → **P0: HLV gắn cờ ưu tiên thủ công**; chấm điểm tự động làm sau.
+- ⏳ **D13** Catalog DMO → PO cung cấp sau (placeholder `Content-Catalogs-Placeholder-v1.0.md` §1).
+- ✅ **D14** Copilot làm ấm/mời → **P1 rule-based** (MVP-2); RAG sau.
+- ✅ **D15** Chống trùng lead → **duy nhất theo SĐT**.
+- ✅ **D16** Nguồn import → **P0 chỉ nhập tay**; import sau.
+
+> Chi tiết đầy đủ: `docs/00-foundation/decisions-log.md`.
 - Quy tắc chấm điểm `lead_score` cần chốt thành business-rule trong foundation.

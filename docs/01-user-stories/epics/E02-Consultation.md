@@ -212,9 +212,33 @@
 
 ---
 
-## Open questions epic
-- Bảng tiêu chuẩn WHO/Tanita theo tuổi & giới cho US-E02-04.
-- Objection Handler: chốt nhánh 5 phản đối × 4 DISC cho US-E02-06.
-- Catalog món ăn & hệ số đơn vị cho US-E02-07 (tham khảo anh Hoàng — `[TBD]`).
-- Công thức % khả thi cho US-E02-05.
-- Bộ câu hỏi khảo sát rút gọn (DISC + Stage + pain points) cho US-E02-02.
+## Open questions epic — đã chốt (xem `docs/00-foundation/decisions-log.md`)
+- ✅ **D01** 1 shell chung HLV/KH → **1 app chung role-based** (mockup 1 bộ 2 nhánh).
+- ✅ **D02** Mục tiêu KH & KD → **tách 2 model riêng** (health_goal + business_goal).
+- ⏳ **D05** Bảng tiêu chuẩn WHO/Tanita → AI tìm/đề xuất (TODO fetch).
+- ⏳ **D06** Bộ câu hỏi khảo sát → 7 nhóm sample, DISC/Stage HLV tự đánh giá ngoài form.
+- ⏳ **D07** Objection Handler 5×4 → PO cung cấp mẫu câu sau (placeholder `Objection-Handler-Framework-v1.0.md`).
+- ✅ **D08** 3 chương trình theo mục tiêu → đã đưa vào `Consultation-15min-Process-v1.0.md` §6.
+- ✅ **D09** Công thức % khả thi → tốc độ an toàn × thời gian.
+- ✅ **D10** Danh sách đội ngũ (US-E02-01) → HLV tự nhập/tùy chỉnh.
+- ✅ **D11** Disclaimer → inline.
+- ✅ **D13** Catalog DMO → PO cung cấp sau (placeholder).
+- ✅ **D14** Copilot làm ấm/mời → P1 rule-based.
+- ✅ **D15** Chống trùng lead → theo SĐT.
+- ✅ **D16** Import lead → P0 chỉ nhập tay.
+- ✅ **D17** Chọn talking point → hybrid (tuần mặc định, HLV đổi theo Stage).
+- ⏳ **D18** 21 talking point → PO cung cấp sau (placeholder).
+- ✅ **D19** Nhắc 72h → tự động gửi nhắc đến HLV.
+- ✅ **D20** Metric báo cáo → talking point (tinh thần) + tỷ lệ check-in (thói quen) + số người chia sẻ (lan tỏa).
+- ⏳ **D21** Ánh xạ 12 bước → PO cung cấp sau (placeholder).
+- ✅ **D22** Phân quyền tuyến dưới → cấp 1 + cấp 2.
+- ✅ **D23** Vòng tròn thành công → synonym 12 bước (glossary).
+- ✅ **D24** Gamification → gộp 1 hệ thống credit chung.
+- ✅ **D25** Sơ đồ trả thưởng → tĩnh (P0).
+- ⏳ **D26** Catalog micro-course → PO cung cấp sau (placeholder).
+- ✅ **D27** Streak/credit → P0 chỉ điểm check-in (3/2/1/0).
+- ✅ **D28** Đồng hồ sinh học → tô màu trạng thái + gợi ý nhiệm vụ (không quản gia ảo phức tạp ở P0).
+- ✅ **D29** AI companion chat → proactively gợi ý nhẹ, không phán xét.
+- ⏳ **D30** 3 persona lõi → PO định nghĩa lại (placeholder).
+
+> **Chú thích:** ✅ đã chốt hoàn toàn · ⏳ đã chốt hướng nhưng chờ PO cung cấp nội dung chi tiết.

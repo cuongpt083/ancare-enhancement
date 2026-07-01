@@ -25,3 +25,4 @@
 | **Persona-fit** | Lọc thực đơn theo chế độ ăn/ngân sách/sở thích (chỉ dùng nội bộ) |
 | **Content-Attribution Matching** | Cơ chế khách tự gắn về HLV qua mã giới thiệu trên nội dung chia sẻ |
 | **DXP** | Digital User Experience Platform |
+| **Vòng tròn thành công** | Synonym quy trình 12 bước Herbalife (Bước 1-12: thu hút → nhân bản thành Giám sát viên vận hành club) — xem `docs/99-archive/references/01.Quy-trinh-12-buoc-kinh-doanh.md` (D23) |

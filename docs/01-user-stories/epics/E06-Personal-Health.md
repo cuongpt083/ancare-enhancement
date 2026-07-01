@@ -174,8 +174,10 @@
 
 ---
 
-## Open questions epic
-- Cơ chế streak & credit thưởng (gamification) cần đặc tả business-rule.
-- Ảnh trước–sau / testimonial cho tông giọng I (DISC) — kho nội dung cần xây.
-- Đồng hồ sinh học: quy tắc tô màu & quản gia ảo (tham chiếu Huawei Clover case study).
-- AI bóc tách món ăn & sinh infographic — 2 PoC cần làm (Feasibility).
+## Open questions epic — đã chốt (xem `docs/00-foundation/decisions-log.md`)
+- ✅ **D24** Gamification → **gộp 1 hệ thống credit chung** (sức khỏe + học tập).
+- ✅ **D27** Streak/credit → **P0 chỉ điểm check-in (3/2/1/0)**; credit/streak/badge sau.
+- ✅ **D28** Đồng hồ sinh học → **tô màu trạng thái + gợi ý nhiệm vụ** (không quản gia ảo phức tạp ở P0).
+- ✅ **D29** AI companion chat → **proactively gợi ý nhẹ** (phát hiện KH cần hỗ trợ, không phán xét).
+
+> Chi tiết đầy đủ: `docs/00-foundation/decisions-log.md`. Câu kỹ thuật PoC (AI bóc tách món, sinh infographic) cần đội kỹ thuật — không thuộc open question nghiệp vụ.

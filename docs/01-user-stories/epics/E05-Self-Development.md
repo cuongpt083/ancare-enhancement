@@ -93,7 +93,9 @@
 
 ---
 
-## Open questions epic
-- Gamification (điểm/streak/badge) thuộc epic này hay E06? (đề xuất: gamification sức khỏe → E06; gamification học tập → E05.)
-- Sơ đồ trả thưởng: nội dung tĩnh hay tính toán động theo tuyến dưới?
-- Catalog micro-course 5 mảng (KD · tâm thế · SP · mạng lưới · thấu hiểu) cần đặc tả.
+## Open questions epic — đã chốt (xem `docs/00-foundation/decisions-log.md`)
+- ✅ **D24** Gamification → **gộp 1 hệ thống credit chung** (sức khỏe + học tập).
+- ✅ **D25** Sơ đồ trả thưởng → **tĩnh** (P0).
+- ⏳ **D26** Catalog micro-course 5 mảng → PO cung cấp sau (placeholder `Content-Catalogs-Placeholder-v1.0.md` §4).
+
+> Chi tiết đầy đủ: `docs/00-foundation/decisions-log.md`.

@@ -110,7 +110,14 @@
 
 ---
 
-## Open questions epic
-- 1 shell chung HLV/KH hay 2 app tách biệt? (Feasibility: app KH React Native, app HLV nâng cấp — cần chốt.)
-- Mục tiêu KH và mục tiêu kinh doanh HLV có dùng chung mô hình dữ liệu hay tách?
-- Floating bubble: chốt danh sách tính năng có thể gán (Tư vấn 15p · CSKH · Đào tạo · Cộng đồng · Xử lý từ chối — feature-tree §3).
+## Open questions epic — đã chốt (xem `docs/00-foundation/decisions-log.md`)
+- ✅ **D01** 1 shell chung HLV/KH → **1 app chung role-based**.
+- ✅ **D02** Mục tiêu KH & KD → **tách 2 model riêng**.
+- ✅ **D03** Mục tiêu sức khỏe → **hybrid** (KH xác nhận gợi ý HLV lúc onboarding, sau đó tự đổi được).
+- ✅ **D04** Onboarding KH → đơn giản (chào mừng → mục tiêu → lộ trình → disclaimer → trang chủ).
+- ✅ **D09** Công thức % khả thi → tốc độ an toàn × thời gian.
+- ✅ **D10** Danh sách đội ngũ (US-E02-01) → HLV tự nhập.
+- ✅ **D11** Disclaimer → inline.
+- ✅ **D23** Vòng tròn thành công → synonym 12 bước (glossary).
+
+> Chi tiết đầy đủ tất cả 30 quyết định: `docs/00-foundation/decisions-log.md`.
