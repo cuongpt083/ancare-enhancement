@@ -45,10 +45,8 @@
 - **Ưu tiên:** Must (P0)
 - **INVEST:** Independent ✓ · Negotiable ✓ · Valuable ✓ · Estimable ✓ · Small ✓ · Testable ✓
 - **Acceptance Criteria:**
-  - AC1 — Given đã nhập Tanita, When vào bước khảo sát, Then hiện câu hỏi từng nhóm (bệnh lý → ăn → uống → vận động → mong muốn), mỗi câu 1 màn (T1), KH trả lời ngắn gọn.
-  - AC2 — Given câu hỏi DISC, When KH trả lời, Then hệ thống đề xuất `disc_primary` (D/I/S/C) — HLV xác nhận.
-  - AC3 — Given câu hỏi bệnh lý, When KH nêu vấn đề (vd "mất ngủ"), Then ghi vào `pain_points[]`.
-  - AC4 — Given hoàn thành khảo sát, When chuyển bước, Then dữ liệu gắn vào phiên & sẵn sàng sinh bản tư vấn.
+  - AC1 — Given đã nhập Tanita, When vào bước khảo sát, Then hiển thị một loạt câu hỏi (bệnh lý, ăn, uống, vận động, DISC, mong muốn), KH trả lời ngắn gọn (ví dụ: tôi chỉ bị mất ngủ, còn lại bình thường, hoặc gõ text một số câu trả lời), Then hệ thống phân tích và ghi vào `pain_points[]`.
+  - AC2 — Given hoàn thành khảo sát, When chuyển bước, Then dữ liệu gắn vào phiên & sẵn sàng sinh bản tư vấn.
 - **Truy vết:**
   - Mockup: `docs/03-mockups/coach/S-CONS-02_khao_sat.png` *(chưa tạo)*
   - Prototype: `docs/04-prototypes/coach/CONS-02_khao_sat.html` *(chưa tạo)*

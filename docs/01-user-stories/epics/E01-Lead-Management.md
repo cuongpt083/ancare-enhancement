@@ -43,8 +43,8 @@
 - **Ưu tiên:** Must (P0)
 - **INVEST:** Independent ✓ · Negotiable ✓ · Valuable ✓ · Estimable ✓ · Small ✓ · Testable ✓
 - **Acceptance Criteria:**
-  - AC1 — Given HLV bấm "Tạo KH tiềm năng" (FAB), When mở form (khuôn T1), Then yêu cầu tối thiểu: Họ tên + SĐT; các trường khác (ngày sinh, giới tính, chiều cao) tùy chọn, gập trong "Thêm thông tin".
-  - AC2 — Given nhập đủ Họ tên + SĐT, When bấm "Lưu", Then lead được tạo & tự động kiểm tra trùng SĐT → nếu trùng, gợi ý mở lead cũ thay vì tạo mới.
+  - AC1 — Given HLV bấm "Tạo KH tiềm năng" (FAB), When mở form (khuôn T1), Then yêu cầu tối thiểu: Họ tên + Liên hệ (email hoặc số điện thoại, số Zalo, Facebook, Telegram...); các trường khác (ngày sinh, giới tính, chiều cao) tùy chọn, gập trong "Thêm thông tin".
+  - AC2 — Given nhập đủ Họ tên, When bấm "Lưu", Then lead được tạo & tự động kiểm tra trùng Liên hệ (email hoặc số điện thoại, số Zalo, Facebook, Telegram...) → nếu trùng, gợi ý mở lead cũ thay vì tạo mới.
   - AC3 — Given lead đã tạo, When xem DS KHTN, Then lead mới xuất hiện ở đầu danh sách "mới thêm".
   - AC4 — Given đang nhập, When HLV thoát giữa chừng, Then tự động lưu nháp; lần sau mở lại tiếp tục.
 - **Truy vết:**

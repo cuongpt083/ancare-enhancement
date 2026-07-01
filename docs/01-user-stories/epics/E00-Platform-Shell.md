@@ -76,7 +76,7 @@
 - **Epic:** E00 — Platform Shell
 - **Vai trò:** HLV
 - **Story:** Là HLV, tôi muốn đặt mục tiêu kinh doanh (số KH mới / doanh thu / số thành viên mới), để theo dõi tiến độ theo tuần/tháng và biết mình cần đẩy gì.
-- **Ưu tiên:** Should (P1)
+- **Ưu tiên:** Could (P2)
 - **INVEST:** Independent ✓ · Negotiable ✓ · Valuable ✓ · Estimable ✓ · Small ✓ · Testable ✓
 - **Acceptance Criteria:**
   - AC1 — Given HLV vào mục tiêu KD, When đặt mục tiêu tuần/tháng, Then lưu & hiển thị tiến độ trên màn tổng quan (T3).
