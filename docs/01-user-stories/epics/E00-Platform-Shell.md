@@ -18,20 +18,18 @@
 ### US-E00-01 — Đăng nhập / xác thực
 - **Epic:** E00 — Platform Shell
 - **Vai trò:** HLV + KH
-- **Story:** Là HLV/KH, tôi muốn đăng nhập nhanh bằng SĐT + OTP (hoặc liên kết Zalo), để vào ứng dụng trong ≤30 giây mà không nhớ mật khẩu phức tạp.
+- **Story:** Là HLV/KH, tôi muốn đăng nhập nhanh bằng SĐT/Email và mật khẩu (password), để vào ứng dụng trong ≤30 giây. Ứng dụng cho phép nhớ mật khẩu.
 - **Ưu tiên:** Must (P0)
 - **INVEST:** Independent ✓ · Negotiable ✓ · Valuable ✓ · Estimable ✓ · Small ✓ · Testable ✓
 - **Acceptance Criteria:**
   - AC1 — Given chưa đăng nhập, When mở ứng dụng, Then thấy màn welcome với 2 lựa chọn: "Đăng nhập HLV" / "Tôi là khách hàng".
-  - AC2 — Given chọn đăng nhập, When nhập SĐT, Then nhận OTP qua SMS/Zalo; nhập đúng → vào màn hình chính.
-  - AC3 — Given KH được HLV mời (có link onboarding), When mở link, Then đi thêng đăng ký tài khoản KH gắn về HLV đó.
-  - AC4 — Given đã đăng nhập, When mở lại ứng dụng, Then phiên còn hạn → vào thẳng màn hình chính (không hỏi lại).
+  - AC2 — Given chọn đăng nhập, When nhập SĐT or Email and Password; nhập đúng → vào màn hình chính.
+  - AC3 — Given đã đăng nhập, When mở lại ứng dụng, Then phiên còn hạn → vào thẳng màn hình chính (không hỏi lại).
 - **Truy vết:**
   - Mockup: `docs/03-mockups/coach/S-AUTH-01_dang_nhap.png` *(chưa tạo)*
   - Prototype: `docs/04-prototypes/coach/AUTH-01_dang_nhap.html` *(chưa tạo)*
   - Khuôn màn: T1
   - Nghiệp vụ: —
-- **Open question:** Liên kết Zalo OA hay Zalo SDK riêng? Cơ chế onboarding KH gắn HLV cần đặc tả (mã giới thiệu).
 
 ---
 
