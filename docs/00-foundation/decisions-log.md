@@ -75,3 +75,16 @@
 - **D21**: PO cung cấp bản ánh xạ 12 bước → điền vào business-rules mới
 - **D26**: PO cung cấp catalog micro-course → điền vào business-rules mới
 - **D30**: PO cung cấp input 3 persona mới → cập nhật `personas.md`
+
+---
+
+## I — Pending (phát sinh từ GAP analysis E01/E02 — chờ PO chốt)
+> Nguồn: `docs/03-mockups/gap-analysis-E01-E02.md` §4 Reconciliation.
+
+| ID | Câu hỏi | Bối cảnh | Tác động |
+|---|---|---|---|
+| **Q31** | Quy tắc tính RFM (Recency/Frequency/Monetary) + 3 ngưỡng trạng thái (tích cực/có nguy cơ/kém quan tâm)? | draft-requirements §2.3 yêu cầu card Summary RFM nhưng chưa có quy tắc. | US-E01-01, S-LEAD-01; business-rule RFM mới |
+| **Q32** | Cơ chế attribution người mời khi tạo KH: mặc định HLV đăng nhập, cho đổi sang HLV/KH khác? Quy tắc chống lạm dụng? | draft §2.4 yêu cầu trường “Tên+SĐT người mời”. | US-E01-02, US-E02-08; Content-Attribution Matching |
+| **Q33** | Màn “Phá băng” (US-E02-01): giữ là bước app tùy chọn, hay bỏ (chỉ verbal off-app), hay gộp vào Card Chân dung KH? | draft To-Be KHÔNG có phá băng; E02 hiện có US-E02-01. | US-E02-01, S-CONS-01 |
+| **Q34** | Objection Handler (US-E02-06): giữ FAB 5 nhánh (D07) hay chỉ nút “Đóng về DS KH” theo draft? | draft chỉ nói “KH chưa đồng ý → Đóng”. | US-E02-06, S-CONS-06 |
+| **Q35** | “Khảo sát mục tiêu” (draft §2.4): là màn riêng giữa Thêm mới KH và Khảo sát Tanita, hay cùng Card Chân dung KH? | draft §2.4 nói “Lưu → Khảo sát mục tiêu” nhưng §2.5 là Khảo sát Tanita — lệch tên. | luồng E02 |

@@ -102,3 +102,12 @@
 4. **Kết quả**: mockup cuối = kế thừa As-Is ổn + đổi đúng GAP → team dev có spec triển khai chính xác.
 
 > Có thể làm từng nhóm (vd “E02 trước”, “E06 sau”) — không cần làm hết 20 màn cùng lúc.
+## Danh sách GAP analysis đã làm
+| Nhóm | File | Trạng thái |
+|---|---|---|
+| E01 + E02 (Quản lý KH + Tư vấn 15p) | `gap-analysis-E01-E02.md` | ✅ xong (chờ PO chốt Q31-Q35 + cập nhật mockup) |
+| E00 Shell/Auth | — | ⏳ chờ As-Is |
+| E03 Customer Care | — | ⏳ chờ As-Is |
+| E04 Team Ops | — | ⏳ chờ As-Is |
+| E05 Self-Dev | — | ⏳ chờ As-Is |
+| E06 Personal Health | — | ⏳ chờ As-Is |
