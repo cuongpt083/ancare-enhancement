@@ -1,7 +1,18 @@
 <!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Phân tích kết quả — AnCare</title>
 <link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
-
+<style>
+.table tr.clickable { cursor: pointer; }
+.table tr.clickable:hover td { background: var(--bg-subtle); }
+.table tr.detail td { padding: 0; background: var(--bg-subtle); }
+.table .detail-inner { display: none; padding: var(--s-12); border-top: 1px solid var(--border); }
+.table tr.expanded + tr.detail td .detail-inner { display: block; }
+.table tr.expanded td { background: var(--accent-subtle); }
+.detail-table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }
+.detail-table th { text-align: left; color: var(--text-muted); font-weight: 600; padding: 6px 0; background: transparent; }
+.detail-table td { text-align: left; padding: 6px 0; border: none; background: transparent; }
+.row-hint { color: var(--accent); font-size: var(--text-xs); font-weight: 600; }
+</style>
 </head><body><div class="screen">
 <div class="appbar"><span class="back"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></span><h1>Phân tích kết quả</h1><span class="info"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="8.01"/><line x1="12" y1="12" x2="12" y2="16"/></svg></span></div>
 <div class="progress-dots"><span class="dot done"></span><span class="dot done"></span><span class="dot done"></span><span class="dot active"></span></div>
@@ -10,15 +21,42 @@
     <table class="table">
       <thead><tr><th>Chỉ số</th><th>Hiện tại</th><th>Cần ±</th><th>Tiêu chuẩn</th><th>Đánh giá</th></tr></thead>
       <tbody>
-        <tr class="good"><td>Cân nặng</td><td>64.8 kg</td><td>−2.8</td><td>62</td><td><span class="chip good">Tốt</span></td></tr>
-        <tr class="good"><td>Khối lượng cơ</td><td>52.0 kg</td><td>+0</td><td>≥38%</td><td><span class="chip good">Tốt</span></td></tr>
-        <tr class="good"><td>Khối lượng xương</td><td>2.8 kg</td><td>+0</td><td>2.5-3.5</td><td><span class="chip good">Tốt</span></td></tr>
-        <tr class="good"><td>Tỷ lệ nước</td><td>57.7%</td><td>+0</td><td>&gt;50%</td><td><span class="chip good">Tốt</span></td></tr>
-        <tr class="warn"><td>Tỷ lệ mỡ</td><td>18.9%</td><td>−1.4%</td><td>17.5%</td><td><span class="chip warn">Thừa 1.4%</span></td></tr>
-        <tr class="alert"><td>Mỡ nội tạng</td><td>10</td><td>−3</td><td>1-7</td><td><span class="chip alert">Nguy hiểm</span></td></tr>
-        <tr class="good"><td>Vóc dáng</td><td>Bình thường</td><td>—</td><td>—</td><td><span class="chip good">Tốt</span></td></tr>
-        <tr class="good"><td>Tuổi sinh học</td><td>37</td><td>—</td><td>≤42</td><td><span class="chip good">Trẻ 5t</span></td></tr>
-        <tr class="good"><td>RMR</td><td>1276</td><td>—</td><td>—</td><td><span class="chip good">Tốt</span></td></tr>
+        <tr class="good clickable" onclick="toggleRow(this)"><td>Cân nặng <span class="row-hint">(quan trọng)</span></td><td>64.8 kg</td><td>−2.8</td><td>62</td><td><span class="chip good">Tốt</span></td></tr>
+        <tr class="detail"><td colspan="5"><div class="detail-inner">
+          <table class="detail-table"><tr><th>Ý nghĩa</th><td>Cân nặng cho biết tổng khối lượng cơ thể, là cơ sở tính BMI, nhu cầu calo và nước.</td></tr><tr><th>Nguy cơ bệnh lý</th><td>Thừa cân lâu dài tăng nguy cơ tim mạch, tiểu đường type 2, thoái hóa khớp. Giảm 2.8kg về mục tiêu 62kg giúp giảm tải cho cơ thể.</td></tr></table>
+        </div></td></tr>
+        <tr class="good clickable" onclick="toggleRow(this)"><td>Khối lượng cơ <span class="row-hint">(quan trọng)</span></td><td>52.0 kg</td><td>+0</td><td>≥38%</td><td><span class="chip good">Tốt</span></td></tr>
+        <tr class="detail"><td colspan="5"><div class="detail-inner">
+          <table class="detail-table"><tr><th>Ý nghĩa</th><td>Cơ bắp giúp đốt cháy năng lượng, ổn định đường huyết và hỗ trợ khớp.</td></tr><tr><th>Nguy cơ bệnh lý</th><td>Mất cơ (sarcopenia) làm giảm trao đổi chất, dễ tích mỡ, tăng nguy cơ ngã và gãy xương ở người lớn tuổi.</td></tr></table>
+        </div></td></tr>
+        <tr class="good clickable" onclick="toggleRow(this)"><td>Tỷ lệ nước <span class="row-hint">(quan trọng)</span></td><td>57.7%</td><td>+0</td><td>&gt;50%</td><td><span class="chip good">Tốt</span></td></tr>
+        <tr class="detail"><td colspan="5"><div class="detail-inner">
+          <table class="detail-table"><tr><th>Ý nghĩa</th><td>Nước chiếm phần lớn cơ thể, tham gia trao đổi chất, vận chuyển dinh dưỡng và điều hòa nhiệt.</td></tr><tr><th>Nguy cơ bệnh lý</th><td>Thiếu nước làm máu đặc, tăng nguy cơ huyết áp, táo bón, mệt mỏi, ảnh hưởng thận.</td></tr></table>
+        </div></td></tr>
+        <tr class="warn clickable" onclick="toggleRow(this)"><td>Tỷ lệ mỡ <span class="row-hint">(quan trọng)</span></td><td>18.9%</td><td>−1.4%</td><td>17.5%</td><td><span class="chip warn">Thừa 1.4%</span></td></tr>
+        <tr class="detail"><td colspan="5"><div class="detail-inner">
+          <table class="detail-table"><tr><th>Ý nghĩa</th><td>Tỷ lệ mỡ cơ thể cho biết tỷ trọng mỡ trên tổng cân nặng, quan trọng hơn cân nặng đơn thuần.</td></tr><tr><th>Nguy cơ bệnh lý</th><td>Mỡ thừa làm tăng nguy cơ tim mạch, tiểu đường, huyết áp, gan nhiễm mỡ, đặc biệt khi mỡ nội tạng cao.</td></tr></table>
+        </div></td></tr>
+        <tr class="good clickable" onclick="toggleRow(this)"><td>Tuổi sinh học <span class="row-hint">(quan trọng)</span></td><td>37</td><td>—</td><td>≤42</td><td><span class="chip good">Trẻ 5t</span></td></tr>
+        <tr class="detail"><td colspan="5"><div class="detail-inner">
+          <table class="detail-table"><tr><th>Ý nghĩa</th><td>Tuổi sinh học phản ánh mức độ lão hóa thực tế của cơ thể dựa trên chỉ số cơ, mỡ, nước.</td></tr><tr><th>Nguy cơ bệnh lý</th><td>Tuổi sinh học cao hơn tuổi thật cho thấy cơ thể đang lão hóa nhanh do thói quen không lành mạnh.</td></tr></table>
+        </div></td></tr>
+        <tr class="good clickable" onclick="toggleRow(this)"><td>Khối lượng xương</td><td>2.8 kg</td><td>+0</td><td>2.5-3.5</td><td><span class="chip good">Tốt</span></td></tr>
+        <tr class="detail"><td colspan="5"><div class="detail-inner">
+          <table class="detail-table"><tr><th>Ý nghĩa</th><td>Đánh giá khối lượng xương, yếu tố liên quan đến sức mạnh cơ thể và nguy cơ loãng xương.</td></tr><tr><th>Nguy cơ bệnh lý</th><td>Xương thấp kéo dài tăng nguy cơ loãng xương, gãy xương, đặc biệt ở phụ nữ mãn kinh.</td></tr></table>
+        </div></td></tr>
+        <tr class="alert clickable" onclick="toggleRow(this)"><td>Mỡ nội tạng</td><td>10</td><td>−3</td><td>1-7</td><td><span class="chip alert">Nguy hiểm</span></td></tr>
+        <tr class="detail"><td colspan="5"><div class="detail-inner">
+          <table class="detail-table"><tr><th>Ý nghĩa</th><td>Mỡ nội tạng là mỡ bao quanh các cơ quan trong ổ bụng, không sờ thấy nhưng nguy hiểm nhất.</td></tr><tr><th>Nguy cơ bệnh lý</th><td>Mỡ nội tạng cao là yếu tố chính gây tiểu đường, tim mạch, huyết áp, gan nhiễm mỡ, đột quỵ.</td></tr></table>
+        </div></td></tr>
+        <tr class="good clickable" onclick="toggleRow(this)"><td>Vóc dáng</td><td>Bình thường</td><td>—</td><td>—</td><td><span class="chip good">Tốt</span></td></tr>
+        <tr class="detail"><td colspan="5"><div class="detail-inner">
+          <table class="detail-table"><tr><th>Ý nghĩa</th><td>Đánh giá tỷ lệ cơ/mỡ so với chiều cao, giúp nhận diện kiểu hình cơ thể.</td></tr><tr><th>Nguy cơ bệnh lý</th><td>Vóc dáng kém thường đi kèm mỡ nội tạng cao hoặc mất cơ, cần điều chỉnh lối sống.</td></tr></table>
+        </div></td></tr>
+        <tr class="good clickable" onclick="toggleRow(this)"><td>RMR</td><td>1276</td><td>—</td><td>—</td><td><span class="chip good">Tốt</span></td></tr>
+        <tr class="detail"><td colspan="5"><div class="detail-inner">
+          <table class="detail-table"><tr><th>Ý nghĩa</th><td>Resting Metabolic Rate: lượng calo cơ thể cần để duy trì hoạt động cơ bản khi nghỉ ngơi.</td></tr><tr><th>Nguy cơ bệnh lý</th><td>RMR thấp do mất cơ làm giảm khả năng đốt mỡ, dễ tăng cân trở lại.</td></tr></table>
+        </div></td></tr>
       </tbody>
     </table>
   </div>
@@ -43,4 +81,10 @@
   </div>
 </div>
 <div class="cta-bar"><button class="btn secondary">Đóng</button><button class="btn primary"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>Xem lộ trình</button></div>
-</div></body></html>
+</div>
+<script>
+function toggleRow(row) {
+  row.classList.toggle('expanded');
+}
+</script>
+</body></html>
