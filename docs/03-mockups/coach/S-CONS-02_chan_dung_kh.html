@@ -1,37 +1,19 @@
 <!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Chân dung KH — AnCare</title>
-<link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
-
-</head><body><div class="screen">
+<title>Chân dung KH — AnCare</title><link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css"></head><body><div class="screen">
 <div class="appbar"><span class="back"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></span><h1>Chân dung KH</h1><span class="info"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="8.01"/><line x1="12" y1="12" x2="12" y2="16"/></svg></span></div>
 <div class="progress-dots"><span class="dot done"></span><span class="dot active"></span><span class="dot "></span><span class="dot "></span></div>
 <div class="content" style="padding-top:var(--s-12)">
-  <div class="card">
-    <h2>Thông tin cơ bản</h2>
+  <div class="card"><h2>Thông tin cơ bản</h2>
+    <div class="field"><label>Người mời</label><input value="Thủy (HLV)"></div>
+    <div class="field"><label>SĐT người mời</label><input placeholder="SĐT (tùy chọn)"></div>
     <div class="field"><label>Họ và tên KH <span style="color:var(--state-alert)">*</span></label><input placeholder="Họ và tên"></div>
-    <div class="flex gap-12">
-      <div class="field flex-1"><label>Số điện thoại</label><input placeholder="SĐT"></div>
-      <div class="field flex-1"><label>Email</label><input placeholder="Email"></div>
-    </div>
-    <div class="flex gap-12">
-      <div class="field flex-1"><label>Ngày sinh</label><input placeholder="dd/mm/yyyy"></div>
-      <div class="field flex-1"><label>Giới tính</label><input placeholder="Nam"></div>
-    </div>
-    <div class="flex gap-12">
-      <div class="field flex-1"><label>Chiều cao (cm)</label><input placeholder="170"></div>
-      <div class="field flex-1"><label>Cân nặng (kg)</label><input placeholder="64.8"></div>
-    </div>
-    <div class="field"><label>Người mời</label><input placeholder="Thủy (HLV)" value="Thủy (HLV)"></div>
+    <div class="flex gap-12"><div class="field flex-1"><label>Số điện thoại</label><input placeholder="SĐT"></div><div class="field flex-1"><label>Email</label><input placeholder="Email"></div></div>
+    <div class="flex gap-12"><div class="field flex-1"><label>Ngày sinh</label><input placeholder="dd/mm/yyyy"></div><div class="field flex-1"><label>Giới tính</label><input value="Nam"></div></div>
+    <div class="flex gap-12"><div class="field flex-1"><label>Chiều cao (cm)</label><input placeholder="170"></div><div class="field flex-1"><label>Địa chỉ</label><input placeholder="Địa chỉ"></div></div>
   </div>
-  <div class="card">
-    <h2>Chân dung Khách hàng</h2>
-    <div class="card subtle" style="margin-bottom:var(--s-12)">
-      <div style="font-size:var(--text-sm);line-height:1.7;color:var(--text-secondary)">
-        <strong>1.</strong> Mệt mỏi/dễ cảm? &nbsp;<strong>2.</strong> Đau đầu, đau lưng, đau mỏi? &nbsp;<strong>3.</strong> Có tiểu đường, huyết áp, tim mạch, khớp? &nbsp;<strong>4.</strong> Công việc/gia đình có áp lực? &nbsp;<strong>5.</strong> Giấc ngủ tốt không? &nbsp;<strong>6.</strong> Hay đói hoặc thèm ăn? &nbsp;<strong>7.</strong> Thường ăn đồ chế biến sẵn? &nbsp;<strong>8.</strong> Có nghĩ thức ăn ảnh hưởng sức khỏe? &nbsp;<strong>9.</strong> Có thường bỏ bữa sáng? &nbsp;<strong>10.</strong> Mỗi ngày uống khoảng bao nhiêu cốc nước? &nbsp;<strong>11.</strong> Có tập thể dục không? &nbsp;<strong>12.</strong> Bác sĩ có khuyên giảm cân hoặc giảm cholesterol? &nbsp;<strong>13.</strong> Muốn giảm cân hoặc giảm vòng bụng? &nbsp;<strong>14.</strong> Muốn tăng cân? &nbsp;<strong>15.</strong> Có hút thuốc hoặc tiếp xúc khói thuốc? &nbsp;<strong>16.</strong> Có thường uống rượu, bia hoặc cà phê? &nbsp;<strong>17.</strong> Mục tiêu chính khi kiểm tra sức khỏe là gì?
-      </div>
-    </div>
-    <div class="field"><label>Trả lời (HLV nhập gộp)</label><textarea placeholder="Tóm tắt câu trả lời của KH, tập trung kết quả mong muốn..."></textarea></div>
+  <div class="card"><h2>Chân dung Khách hàng</h2>
+    <div class="card subtle" style="margin-bottom:var(--s-12)"><div style="font-size:var(--text-sm);line-height:1.7;color:var(--text-secondary)"><strong>1.</strong> Bạn muốn chúng tôi giúp bạn điều gì về sức khỏe? &nbsp;<strong>2.</strong> Lâu nay có đi khám bác sĩ không? &nbsp;<strong>3.</strong> Bác sĩ có khuyên giảm cân hoặc giảm mỡ máu? &nbsp;<strong>4.</strong> Thường ăn gì vào bữa sáng? &nbsp;<strong>5.</strong> Mệt mỏi/dễ cảm? &nbsp;<strong>6.</strong> Đau đầu, đau lưng, đau mỏi? &nbsp;<strong>7.</strong> Có tiểu đường, huyết áp, tim mạch, khớp? &nbsp;<strong>8.</strong> Công việc/gia đình có áp lực? &nbsp;<strong>9.</strong> Giấc ngủ tốt không? &nbsp;<strong>10.</strong> Hay đói hoặc thèm ăn? &nbsp;<strong>11.</strong> Thường ăn đồ chế biến sẵn? &nbsp;<strong>12.</strong> Có nghĩ thức ăn ảnh hưởng sức khỏe? &nbsp;<strong>13.</strong> Mỗi ngày uống khoảng bao nhiêu cốc nước? &nbsp;<strong>14.</strong> Có tập thể dục không? &nbsp;<strong>15.</strong> Có hút thuốc hoặc tiếp xúc khói thuốc? &nbsp;<strong>16.</strong> Có thường uống rượu, bia hoặc cà phê?</div></div>
+    <div class="field"><label>Trả lời (HLV nhập gộp)</label><textarea placeholder="Tóm tắt câu trả lời, tập trung kết quả KH mong muốn..."></textarea></div>
   </div>
 </div>
-<div class="cta-bar"><button class="btn primary"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Lưu → Khảo sát Tanita</button></div>
-</div></body></html>
+<div class="cta-bar"><button class="btn primary"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Lưu → Khảo sát Tanita</button></div></div></body></html>

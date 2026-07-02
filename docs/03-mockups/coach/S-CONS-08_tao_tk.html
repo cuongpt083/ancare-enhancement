@@ -1,24 +1,35 @@
 <!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Tạo tài khoản KH — AnCare</title>
-<link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
-
-</head><body><div class="screen">
+<title>Tạo tài khoản KH — AnCare</title><link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css"></head><body><div class="screen">
 <div class="appbar"><span class="back"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></span><h1>Tạo tài khoản KH</h1><span class="info"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="8.01"/><line x1="12" y1="12" x2="12" y2="16"/></svg></span></div>
 <div class="content" style="padding-top:var(--s-12)">
-  <div class="focus-card" style="margin-bottom:var(--s-16)">
-    <div class="label">Thông tin đăng nhập</div>
-    <div class="title" style="font-size:var(--text-xl)">Phạm Hạnh</div>
-  </div>
-  <div class="card">
+  <div class="focus-card" style="margin-bottom:var(--s-16)"><div class="label">Thông tin đăng nhập</div><div class="title" style="font-size:var(--text-xl)">Phạm Hạnh</div></div>
+  <div class="card"><h2>Thông tin tài khoản</h2>
     <div class="field"><label>Tài khoản</label><input value="097xxxxxxx"></div>
-    <div class="field"><label>Mật khẩu</label><input value="AnCare@2026" type="text"></div>
-    <div class="field"><label>Xác nhận mật khẩu</label><input value="AnCare@2026" type="text"></div>
-    <div class="hint" style="margin-bottom:var(--s-12)">Mật khẩu ngẫu nhiên, HLV có thể chỉnh sửa.</div>
-    <div class="flex items-center gap-12" style="padding:var(--s-12);background:var(--bg-subtle);border-radius:var(--radius-md)">
-      <span style="color:var(--accent)"><svg viewBox="0 0 24 24" class="icon"/></span>
-      <span class="hint" style="margin:0">Gửi email/SMS chứa tài khoản & mật khẩu cho KH</span>
+    <div class="field"><label>Mật khẩu</label><input value="1"></div>
+    <div class="hint" style="margin-bottom:var(--s-12)">Mật khẩu mặc định = 1, HLV có thể chỉnh sửa.</div>
+    <div class="flex items-center gap-12" style="padding:var(--s-12);background:var(--bg-subtle);border-radius:var(--radius-md)"><span style="color:var(--accent)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span><span class="hint" style="margin:0">Gửi email chứa tài khoản & mật khẩu cho KH</span></div>
+  </div>
+  <div class="card"><h2>Mục tiêu cải thiện</h2>
+    <div class="table-wrap" style="margin-bottom:var(--s-12)"><table class="table">
+      <thead><tr><th>Chỉ số</th><th>Hiện tại</th><th>Tiêu chuẩn</th><th>Đánh giá</th><th>Mục tiêu</th></tr></thead><tbody>
+        <tr class="good"><td>Cân nặng</td><td>64.8</td><td>62</td><td><span class="chip good">Tốt</span></td><td><input value="62" style="width:56px;height:32px;text-align:center;border:1px solid var(--border);border-radius:var(--radius-sm)"></td></tr>
+        <tr class="warn"><td>Tỷ lệ mỡ</td><td>18.9%</td><td>17.5%</td><td><span class="chip warn">Thừa 1.4%</span></td><td><input value="17.5" style="width:56px;height:32px;text-align:center;border:1px solid var(--border);border-radius:var(--radius-sm)"></td></tr>
+        <tr class="alert"><td>Mỡ nội tạng</td><td>10</td><td>1-7</td><td><span class="chip alert">Nguy hiểm</span></td><td><input value="7" style="width:56px;height:32px;text-align:center;border:1px solid var(--border);border-radius:var(--radius-sm)"></td></tr>
+        <tr class="good"><td>Cơ</td><td>52</td><td>≥38%</td><td><span class="chip good">Tốt</span></td><td><input value="52" style="width:56px;height:32px;text-align:center;border:1px solid var(--border);border-radius:var(--radius-sm)"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="hint" style="margin-bottom:var(--s-8)">Mục tiêu mặc định = tiêu chuẩn, HLV có thể sửa.</div>
+  </div>
+  <div class="card"><h2>Số bữa ăn/ngày</h2>
+    <div class="pills"><span class="pill">3 bữa</span><span class="pill active">4 bữa</span><span class="pill">5 bữa</span></div>
+  </div>
+  <div class="card"><h2>Ảnh check-in ban đầu</h2>
+    <div class="hint" style="margin-bottom:var(--s-12)">Lưu vào nhật ký ngày tạo TK, dùng làm ảnh gốc so tiến độ.</div>
+    <div class="flex gap-12">
+      <div style="flex:1;text-align:center;padding:var(--s-16);border:2px dashed var(--border);border-radius:var(--radius-md);cursor:pointer"><div style="color:var(--accent)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="hint" style="margin-top:var(--s-4)">Chân dung</div></div>
+      <div style="flex:1;text-align:center;padding:var(--s-16);border:2px dashed var(--border);border-radius:var(--radius-md);cursor:pointer"><div style="color:var(--accent)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="hint" style="margin-top:var(--s-4)">Toàn thân</div></div>
+      <div style="flex:1;text-align:center;padding:var(--s-16);border:2px dashed var(--border);border-radius:var(--radius-md);cursor:pointer"><div style="color:var(--accent)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="hint" style="margin-top:var(--s-4)">Vòng eo</div></div>
     </div>
   </div>
 </div>
-<div class="cta-bar"><button class="btn primary"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Tạo tài khoản</button></div>
-</div></body></html>
+<div class="cta-bar"><button class="btn primary"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Tạo tài khoản</button></div></div></body></html>
