@@ -15,7 +15,7 @@ Người dùng sau khi đăng nhập với vai trò HLV.
     - Hồ sơ: quản lý tài khoản, cài đặt ứng dụng, gói chăm sóc của tôi
 - Nút Floating button: cho phép HLV tùy biến hành vi thường xuyên làm của mình. Ví dụ: thêm mới KH, thêm mới KH tiềm năng, tạo bản tư vấn... Khi bấm vào nút này, ứng dụng hiển thị menu dạng radial với các hành vi mà HLV đã tùy biến.
 
-### 2. Nhóm màn hình quản lý KH (Team)
+### 2. Nhóm màn hình quản lý danh sách KH (Team)
 
 Flow màn hình thao tác phục vụ tư vấn 15 phút để chuyển đổi KH tiềm năng thành KH (có mua gói giải pháp):
 
@@ -29,9 +29,28 @@ Flow màn hình thao tác phục vụ tư vấn 15 phút để chuyển đổi K
      - Tên KH
      - Gói dịch vụ: tên gói, tiến độ hoàn thành mục tiêu, thời gian sử dụng còn lại
      - Nhóm KH: nhóm KH (màu sắc tùy theo nhóm)
-     - Bấm vào tên KH hoặc thẻ thông tin chi tiết sẽ chuyển sang màn hình chi tiết thông tin KH
+     - Bấm vào tên KH hoặc thẻ thông tin chi tiết sẽ chuyển sang "Màn hình chi tiết chỉ số KH"
 
-    Màn hình "KH của tôi" sẽ có nút "Thêm mới" để nhập thông tin KH mới. Khi bấm vào nút này sẽ chuyển sang màn hình "Thêm mới KH".
+     Màn hình "KH của tôi" sẽ có nút "Thêm mới" để nhập thông tin KH mới. Khi bấm vào nút này sẽ chuyển sang màn hình "Thêm mới KH".
+
+    3.3. Màn hình chi tiết Kết quả của KH
+    Màn hình này hiển thị đầy đủ thông tin về kết quả của KH, kế thừa từ màn hình Trang chủ trong file docs/03-mockups/draft-requirements-kh.md
+
+    Màn hình này có thêm nút "Tạo báo cáo" để HLV tạo báo cáo kết quả của KH dành cho HLV. Bấm vào nút này sẽ chuyển sang màn hình "Tạo báo cáo" (Màn hình 3.4).
+
+    3.4. Màn hình báo cáo kết quả của KH dành cho HLV
+
+    Màn hình này có nhiệm vụ hiển thị:
++ Biểu đồ tổng kết thông tin trong ngày (thực hiện vào buổi tối khoảng 21h00 - 22h00): hiển thị các thông tin tóm tắt về tình hình sức khỏe, thể chất của cá nhân KH, kèm theo các Phân tích và Đề xuất bao gồm:
+        + Phân tích chuyên sâu về các chỉ số đo được trong ngày.
+        + Lý do ảnh hưởng đến chỉ số
+        + Lời khuyên, góp ý cho ngày hôm sau.
+        + Nâng cấp gói sản phẩm, mua bổ sung sản phẩm (nếu cần)
+    + Bảng tổng hợp tiến trình (periodic report) theo gói trải nghiệm: hiển thị tiến trình KH đang sử dụng, bao gồm các chỉ số, mục tiêu, ngày đầu, ngày gần nhất và thay đổi.
+    + Nội dung Đề xuất: Tab này hiển thị các sản phẩm/gói giải pháp mà KH có thể quan tâm.
+    + Nút tạo Infographic về nhật ký: cho phép KH tạo infographic về các nội dung trong ngày: Nội dung kiến thức (tóm lược từ các nội dung đã học trong ngày), Hành trình trải nghiệm (bữa ăn, thể chất), Ảnh bản thân, ảnh giao lưu trong ngày. Đây là infographic dạng dọc để chia sẻ qua mạng xã hội (Zalo, Facebook, ...).
+
+    
 4. Màn hình "Thêm mới KH" có nhiệm vụ nhận thông tin đầu vào của 1 KH mới hoặc một KH tiềm năng mới. Màn hình này gồm các card thông tin sau:
     4.1. Thông tin cơ bản: bao gồm các trường thông tin sau:
         - Tên người mời: (là một HLV hoặc một KH đóng vai trò đại sứ hoặc bảo trợ). Mặc định: Tên của HLV đang đăng nhập. HLV có thể nhập tên HLV hoặc KH khác để chỉ định người giới thiệu. Sau khi tạo tài khỏa KH thì khách hàng sẽ hiển thị tại KH của tôi tại tài khoản của nguoi mời

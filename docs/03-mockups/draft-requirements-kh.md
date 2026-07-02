@@ -62,18 +62,6 @@ Màn hình này hiển thị danh sách các nhiệm vụ check-in mà KH cần 
 ### 3. Màn hình ghi nhận bữa ăn 
 Màn hình này hiển thị sau khi KH bấm nút "chụp ảnh" bữa ăn ở màn hình check-in KH. Màn hình này dùng để KH chụp ảnh món ăn (có thể chụp ảnh hoặc upload ảnh từ thư viện ảnh có sẵn). Sau khi chụp ảnh xong, ứng dụng hiển thị ảnh và AI sẽ đánh giá cấu trúc bữa ăn (tỷ lệ % của Đạm, Tinh bột, Chất béo) và hiển thị dưới dạng Calo và gam Đạm đối với 3 nhóm: Năng lượng- Đường bột - Đạm - Chất béo tốt. Hiển thị so sánh với thiêu chuẩn được bổ sung thiếu/thừa. Có 1 câu nhận xét. Đây là các giá trị ước tính,KH có thể chỉnh sửa lại để phù hợp với thực tế. Sau khi chỉnh xong KH bấm nút “Lưu” để lưu lại thông tin. Nếu KH có sử dụng các sản phẩm hỗ trợ, ứng dụng sẽ hiển thị thêm mục bổ sung thông tin sử dụng các sản phẩm hỗ trợ này (ví dụ: số viên, số ml...)
 
-### 2. Màn hình báo cáo
-
-Màn hình này có nhiệm vụ hiển thị:
-+ Biểu đồ tổng kết thông tin trong ngày (thực hiện vào buổi tối khoảng 21h00 - 22h00): hiển thị các thông tin tóm tắt về tình hình sức khỏe, thể chất của cá nhân KH, kèm theo các Phân tích và Đề xuất bao gồm:
-        + Phân tích chuyên sâu về các chỉ số đo được trong ngày.
-        + Lý do ảnh hưởng đến chỉ số
-        + Lời khuyên, góp ý cho ngày hôm sau.
-        + Nâng cấp gói sản phẩm, mua bổ sung sản phẩm (nếu cần)
-    + Bảng tổng hợp tiến trình (periodic report) theo gói trải nghiệm: hiển thị tiến trình KH đang sử dụng, bao gồm các chỉ số, mục tiêu, ngày đầu, ngày gần nhất và thay đổi.
-    + Nội dung Đề xuất: Tab này hiển thị các sản phẩm/gói giải pháp mà KH có thể quan tâm.
-    + Nút tạo Infographic về nhật ký: cho phép KH tạo infographic về các nội dung trong ngày: Nội dung kiến thức (tóm lược từ các nội dung đã học trong ngày), Hành trình trải nghiệm (bữa ăn, thể chất), Ảnh bản thân, ảnh giao lưu trong ngày. Đây là infographic dạng dọc để chia sẻ qua mạng xã hội (Zalo, Facebook, ...)
-
 ### 3. Màn hình đào tạo
 
 * **Sẽ mô tả chi tiết sau**
