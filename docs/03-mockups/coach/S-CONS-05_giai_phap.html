@@ -1,14 +1,14 @@
-<!-- Mockup US-E02-05 Xem lộ trình (lợi ích/kết quả/loại lộ trình/gói SP/cam kết) | Khuôn T1 | HLV (draft §2.7) -->
+<!-- Mockup US-E02-05 Xem lộ trình (lộ trình 3 tháng cố định + mô tả từng tháng) | Khuôn T1 | HLV (draft §7 cập nhật) -->
 <!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Xem lộ trình — AnCare</title>
 <link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
 <style>
-.dur{display:flex;gap:8px;margin:8px 0}
-.dur label{flex:1;border:2px solid var(--border);border-radius:var(--radius-md);padding:8px;text-align:center;font-size:13px;font-weight:600;cursor:pointer}
-.dur label.active{border-color:var(--accent);background:#e3efe8;color:var(--accent)}
 .pkg-item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:14px}
 .benefit{display:flex;gap:8px;align-items:flex-start;padding:6px 0;font-size:14px}
 .benefit::before{content:"✓";color:var(--state-good);font-weight:700}
+.month{border-left:3px solid var(--accent);padding:10px 0 10px 12px;margin:8px 0;background:var(--bg-subtle);border-radius:0 var(--radius-sm) var(--radius-sm) 0}
+.month .mh{font-weight:700;font-size:14px;color:var(--accent)}
+.month .md{font-size:13px;color:var(--text);margin-top:4px;line-height:1.5}
 </style></head><body><div class="screen">
   <div class="appbar"><span class="back">‹</span><h1>Xem lộ trình</h1><span class="info">ⓘ</span></div>
   <div class="progress-dots"><span class="dot done"></span><span class="dot done"></span><span class="dot done"></span><span class="dot active"></span></div>
@@ -25,13 +25,11 @@
       <div class="wf" style="text-align:left;justify-content:flex-start">[ dự kiến: −3kg mỡ, giữ cơ 52kg, nước >55% ]</div>
     </div>
     <div class="card">
-      <h2>Lộ trình</h2>
-      <div class="dur">
-        <label>1 tháng</label>
-        <label class="active">3 tháng</label>
-        <label>Trọn đời</label>
-      </div>
-      <div class="hint">Mặc định 3 tháng</div>
+      <h2>Lộ trình 3 tháng <span class="chip accent" style="margin-left:4px">mặc định</span></h2>
+      <div class="month"><div class="mh">Tháng 1</div><div class="md">Điều chỉnh cân nặng, trang bị kiến thức cơ bản để thay đổi tư duy về dinh dưỡng và thể chất.</div></div>
+      <div class="month"><div class="mh">Tháng 2</div><div class="md">Tăng cơ, tăng cường sức khỏe, điều chỉnh các thói quen không lành mạnh.</div></div>
+      <div class="month"><div class="mh">Tháng 3</div><div class="md">Tối ưu hóa vóc dáng, trẻ hóa, duy trì năng lượng và xây dựng thói quen lành mạnh bền vững.</div></div>
+      <div class="hint">Lộ trình cố định 3 tháng (không chọn 1 tháng/trọn đời).</div>
     </div>
     <div class="card">
       <h2>Gói sản phẩm đi kèm</h2>

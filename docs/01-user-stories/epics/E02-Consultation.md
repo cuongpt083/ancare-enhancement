@@ -92,27 +92,28 @@
 
 ---
 
-### US-E02-05 — Tư vấn giải pháp + Xác định mục tiêu
+### US-E02-05 — Xem lộ trình (giải pháp + lộ trình 3 tháng)
 - **Epic:** E02 — Consultation
 - **Vai trò:** HLV
-- **Story:** Là HLV, tôi muốn hệ thống tự đề xuất giải pháp theo mục tiêu (giảm→Cơ-Nước-Mỡ, tăng→Dinh dưỡng tế bào, giữ→Bữa ăn lành mạnh) & tính % khả thi, để đề xuất gói phù hợp & tinh chỉnh mà không tính tay.
+- **Story:** Là HLV, tôi muốn xem lộ trình đầy đủ (lợi ích + kết quả + lộ trình 3 tháng + gói sản phẩm + cam kết) để giải thích cho KH & chốt tham gia.
 - **Ưu tiên:** Must (P0)
 - **INVEST:** Independent ✓ · Negotiable ✓ · Valuable ✓ · Estimable ✓ · Small ✓ · Testable ✓
 - **Acceptance Criteria:**
-  - AC1 — Given bản phân tích + kết luận nhu cầu (Bước 5, US-E02-04), When vào "Tư vấn giải pháp" (T1), Then hệ thống đề xuất chương trình theo logic:
-    - **giảm cân** → **"Cân bằng Cơ — Nước — Mỡ"**
-    - **tăng cân** → **"Dinh dưỡng tế bào"**
-    - **giữ cân** → **"Bữa ăn lành mạnh"**
-  - AC2 — Given giải pháp đề xuất (vd "Cơ — Nước — Mỡ"), When xem, Then hiện cơ chế giải pháp (giảm **đúng mỡ thừa**, giữ/tăng cơ + nước) + phân tích sai lầm khi tự giảm cân (nhịn ăn/tập quá sức → mất cơ+nước, mỡ giữ nguyên/tăng).
-  - AC3 — Given gói + thời gian, When xem, Then hiện nhãn ngôn ngữ khả thi ("Khả thi" / "Tham vọng") thay vì % số — L4.
-  - AC4 — Given muốn tinh chỉnh, When HLV bấm "Chỉnh", Then mở tùy chỉnh mục tiêu/thời gian; khả thi cập nhật theo thời gian thực.
-  - AC5 — Given "Vì sao?" tại khả thi, When bấm, Then giải thích yếu tố ảnh hưởng (tốc độ an toàn, baseline, thời gian) — L7.
+  - AC1 — Given bản phân tích + tick mục tiêu (US-E02-04), When vào "Xem lộ trình" (T1), Then hiện tên chương trình đề xuất theo logic: giảm cân→"Cơ — Nước — Mỡ", tăng cân→"Dinh dưỡng tế bào", giữ cân→"Bữa ăn lành mạnh".
+  - AC2 — Given chương trình, When xem, Then hiện **lợi ích** (gạch đầu dòng) + **kết quả đạt được** (dự kiến).
+  - AC3 — Given lộ trình, When xem, Then hiện **lộ trình 3 tháng cố định** (không cho chọn 1 tháng/trọn đời), mô tả từng tháng:
+    - **Tháng 1:** điều chỉnh cân nặng, trang bị kiến thức cơ bản thay đổi tư duy dinh dưỡng & thể chất.
+    - **Tháng 2:** tăng cơ, tăng cường sức khỏe, điều chỉnh thói quen không lành mạnh.
+    - **Tháng 3:** tối ưu vóc dáng, trẻ hóa, duy trì năng lượng, xây dựng thói quen lành mạnh bền vững.
+  - AC4 — Given gói sản phẩm, When xem, Then hiện danh sách SP đi kèm chương trình (**không hiện giá** — HLV giải thích ngoài app).
+  - AC5 — Given cam kết, When xem, Then hiện disclaimer inline (US-E02-09).
+  - AC6 — Given KH đồng ý + thanh toán xong (ngoài app), When HLV bấm "Tạo tài khoản", Then mở pop-up Tạo TK (US-E02-08); Given KH chưa đồng ý, When bấm "Đóng", Then về DS KH.
 - **Truy vết:**
-  - Mockup: `docs/03-mockups/coach/S-CONS-05_giai_phap.png` *(chưa tạo)*
-  - Prototype: `docs/04-prototypes/coach/CONS-05_giai_phap.html` *(chưa tạo)*
+  - Mockup: `docs/03-mockups/coach/S-CONS-05_giai_phap.html` ✅
+  - Prototype: `docs/04-prototypes/coach/CONS-05_giai_phap.html` ✅
   - Khuôn màn: T1
-  - Nghiệp vụ: `docs/00-foundation/business-rules/Consultation-15min-Process-v1.0.md` §6; `packaged-service-advice-v1.0.md` (quy tắc gói); `Calorie-Meal-Business-Rules-v1.1.md` (tốc độ an toàn).
-- **Open question:** Công thức % khả thi cần chốt (dựa tốc độ an toàn + adherence dự kiến).
+  - Nghiệp vụ: `docs/00-foundation/business-rules/Consultation-15min-Process-v1.0.md` §6 (logic chương trình); `packaged-service-advice-v1.0.md` (gói SP).
+- **Open question:** ✅ D08 chốt logic 3 chương trình; D09 (% khả thi) không còn áp dụng (lộ trình cố định 3 tháng).
 
 ---
 

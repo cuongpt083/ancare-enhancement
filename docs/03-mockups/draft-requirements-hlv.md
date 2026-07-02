@@ -97,7 +97,10 @@ Flow màn hình thao tác phục vụ tư vấn 15 phút để chuyển đổi K
 7. Màn hình "Xem lộ trình": Dựa trên mục tiêu và chương trình đã chọn, ứng dụng có nhiệm vụ hiển thị lộ trình cho KH và đưa ra lời khuyên cho HLV, bao gồm:
     - Lợi ích của chương trình: hiển thị lợi ích của chương trình dưới dạng các gạch đầu dòng
     - Kết quả đạt được
-    - Lộ trình: chọn theo các lựa chọn 1 tháng, 3 tháng, trọn đời. Trong đó, mặc định là 3 tháng.
+    - Lộ trình: mô tả lộ trình 3 tháng (không được chọn, mặc định hiển thị 3 tháng). Trong đó:
+        - tháng 1: Điều chỉnh cân nặng, trang bị kiến thức cơ bản để thay đổi tư duy về dinh dưỡng và thể chất
+        - tháng 2: Tăng cơ, tăng cường sức khỏe, điều chỉnh các thói quen không lành mạnh
+        - tháng 3: Tối ưu hóa vóc dáng, trẻ hóa, duy trì năng lượng và xây dựng thói quen lành mạnh bền vững
     - Gói chương trình: hiển thị các gói sản phẩm đi kèm với chương trình. Không hiển thị giá, HLV sẽ giải thích chi tiết bên ngoài app.
     - Các cam kết, disclaimer.
 
