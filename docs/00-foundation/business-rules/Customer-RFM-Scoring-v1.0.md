@@ -14,7 +14,7 @@
 | 2 hôm trước | 1 |
 | Quá 3 hôm | 0 |
 
-> “Hoạt động” = login + khai báo bữa ăn + tương tác HLV (cả 3 cùng ngày mới đạt R=3). Nếu chỉ login/khai báo 1 phần → cần PO làm rõ (mặc định tạm: đủ cả 3 mới tính ngày đó). *(Xem Open question Q31a)*
+> **Q31a (đã chốt):** R=3 yêu cầu **cả 3 hoạt động** cùng ngày: login + khai báo bữa ăn + tương tác HLV. Nếu thiếu bất kỳ hoạt động nào trong ngày → ngày đó **không đạt R=3** (xét ngày gần nhất đủ cả 3 để tính recency).
 
 ### F — Frequency (hành động hằng ngày)
 | Hành động trong ngày | Điểm |
@@ -27,13 +27,25 @@
 > “Đủ các nhiệm vụ” = hoàn thành các nhiệm vụ trên đồng hồ sinh học (US-E06-01) trong ngày.
 
 ### M — Monetary (giá trị gói khách dùng)
-| Gói | Điểm |
+| Gói (trong chương trình) | Điểm |
 |---|---|
 | Tối ưu | 3 |
 | Nâng cao | 2 |
 | Cơ bản | 1 |
 
-> Danh mục gói (Tối ưu / Nâng cao / Cơ bản) cần PO xác nhận ánh xạ từ `packaged-service-advice-v1.0.md`. *(Xem Open question Q31b)*
+> **Q31b (đã chốt) — Quan hệ phân cấp Chương trình → Gói (KHÔNG phải ánh xạ 1-1):**
+>
+> Có **2 cấp**:
+> 1. **Chương trình** (theo mục tiêu — `Consultation-15min-Process-v1.0.md` §6.1):
+>    - Giảm cân → **Cơ — Nước — Mỡ**
+>    - Tăng cân → **Dinh dưỡng tế bào**
+>    - Giữ cân → **Bữa ăn lành mạnh**
+>    - Mỗi chương trình có **nhóm sản phẩm bổ sung khác nhau**.
+> 2. **Gói** (trong từng chương trình): **Tối ưu / Nâng cao / Cơ bản** — khác nhau về **danh mục sản phẩm bổ sung** trong chương trình đó (Tối ưu = đầy đủ SP nhất; Cơ bản = ít SP nhất).
+>
+> **M (monetary) = cấp Gói**, độc lập với Chương trình: Tối ưu=3 / Nâng cao=2 / Cơ bản=1 **bất kể chương trình nào**. Vd: KH dùng chương trình "Cơ — Nước — Mỡ" gói Tối ưu → M=3; KH dùng "Dinh dưỡng tế bào" gói Cơ bản → M=1.
+>
+> **Cấu trúc dữ liệu đề xuất:** `customer.program` (Cơ-Nước-Mỡ / Dinh dưỡng tế bào / Bữa ăn lành mạnh) + `customer.package_tier` (Tối ưu / Nâng cao / Cơ bản) + `customer.supplements[]` (danh mục SP bổ sung theo gói trong chương trình).
 
 ## 2. Tổng điểm & 3 trạng thái
 
@@ -58,5 +70,5 @@ Tổng RFM = R + F + M (thang 0–9).
 
 ---
 ## Open question
-- **Q31a**: R=3 yêu cầu “login + khai báo bữa ăn + tương tác HLV” cả 3 cùng ngày — nếu KH chỉ làm 2/3 thì tính recency ngày đó là bao nhiêu? (mặc định tạm: chưa đủ 3 → không tính ngày đó vào recency, lấy ngày gần nhất đủ 3). Cần PO chốt.
-- **Q31b**: Ánh xạ gói Tối ưu/Nâng cao/Cơ bản ↔ gói trong `packaged-service-advice-v1.0.md` (Cơ-Nước-Mỡ / Dinh dưỡng tế bào / Bữa ăn lành mạnh?). Cần PO chốt.
+- *(không còn — Q31a, Q31b đã chốt 2026-07-02)*
+- **TODO chưng cất tiếp:** danh mục sản phẩm bổ sung cụ thể cho từng tổ hợp Chương trình × Gói (9 tổ hợp: 3 chương trình × 3 gói) → cần PO cung cấp nội dung.
