@@ -114,7 +114,6 @@ Flow màn hình thao tác phục vụ tư vấn 15 phút để chuyển đổi K
         - Ngày bắt đầu gói: Tính là ngày hiện tại 
         - Ngày kết thúc gói: Ngày hôm nay cộng thêm số tháng đã chọn
         - Số buổi: 1 tháng sẽ là 30 buổi, 2 tháng sẽ là 60 buổi, 3 tháng sẽ là 90 buổi
-    - Gói chương trình: hiển thị các gói sản phẩm đi kèm với chương trình. Không hiển thị giá, HLV sẽ giải thích chi tiết bên ngoài app.
     - Các cam kết, disclaimer.
 
     Sau khi KH đồng ý tham gia chương trình và thanh toán xong (bên ngoài app), HLV bấm vào "Tạo tài khoản", ứng dụng sẽ hiển thị màn hình pop-up "Tạo Tài khoản KH" để HLV nhập thông tin tài khoản KH.
