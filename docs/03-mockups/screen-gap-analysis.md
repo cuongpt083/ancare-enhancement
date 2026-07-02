@@ -110,4 +110,4 @@
 | E03 Customer Care | — | ⏳ chờ As-Is |
 | E04 Team Ops | — | ⏳ chờ As-Is |
 | E05 Self-Dev | — | ⏳ chờ As-Is |
-| E06 Personal Health | — | ⏳ chờ As-Is |
+| E06 Personal Health | `gap-analysis-E06.md` | ✅ xong (dùng archive screenshots-kh, chờ PO cập nhật As-Is hiện tại) |
