@@ -40,15 +40,7 @@ Flow màn hình thao tác phục vụ tư vấn 15 phút để chuyển đổi K
 
     3.4. Màn hình báo cáo kết quả của KH dành cho HLV
 
-    Màn hình này có nhiệm vụ hiển thị:
-+ Biểu đồ tổng kết thông tin trong ngày (thực hiện vào buổi tối khoảng 21h00 - 22h00): hiển thị các thông tin tóm tắt về tình hình sức khỏe, thể chất của cá nhân KH, kèm theo các Phân tích và Đề xuất bao gồm:
-        + Phân tích chuyên sâu về các chỉ số đo được trong ngày.
-        + Lý do ảnh hưởng đến chỉ số
-        + Lời khuyên, góp ý cho ngày hôm sau.
-        + Nâng cấp gói sản phẩm, mua bổ sung sản phẩm (nếu cần)
-    + Bảng tổng hợp tiến trình (periodic report) theo gói trải nghiệm: hiển thị tiến trình KH đang sử dụng, bao gồm các chỉ số, mục tiêu, ngày đầu, ngày gần nhất và thay đổi.
-    + Nội dung Đề xuất: Tab này hiển thị các sản phẩm/gói giải pháp mà KH có thể quan tâm.
-    + Nút tạo Infographic về nhật ký: cho phép KH mở màn hình Tạo Infographic (màn 3.5) để HLV tạo báo cáo dạng Infographic chia sẻ cho KH.
+    Màn hình này có nhiệm vụ hiển thị các báo cáo kết quả của KH mà hệ thống đã xử lý tự động, định kỳ bởi các Job. Màn hình này chủ yếu tập trung vào hiển thị các biểu đồ. Bên cạnh nội dung báo cáo (hiển thị trong prototype dạng place-holder), màn hình này sẽ có thêm nút Tạo infographic. Nút này khi bấm sẽ cho phép HLV mở màn hình Tạo Infographic (màn 3.5) để HLV tạo báo cáo dạng Infographic chia sẻ cho KH.
 
     3.5. Màn hình Tạo Infographic (Màn hình 3.5): có nhiệm vụ tạo báo cáo dạng Infographic chia sẻ cho KH.
 
