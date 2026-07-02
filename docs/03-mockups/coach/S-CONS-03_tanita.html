@@ -1,31 +1,33 @@
-<!-- Mockup US-E02-03 Hướng dẫn đo Tanita | Khuôn T1 | HLV -->
+<!-- Mockup US-E02-03 Khảo sát Tanita (OCR + 9 chỉ số theo thứ tự cân) | Khuôn T1 | HLV (draft §2.5) -->
 <!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Đo lường Tanita — AnCare</title>
+<title>Khảo sát Tanita — AnCare</title>
 <link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
-</head><body><div class="screen">
-  <div class="appbar"><span class="back">‹</span><h1>Đo lường Tanita</h1><span class="info">ⓘ</span></div>
-  <div class="progress-dots"><span class="dot done"></span><span class="dot done"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
+<style>
+.tfield{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px}
+.tfield input{width:90px;text-align:right;border:1px solid var(--border);border-radius:var(--radius-sm);padding:6px 8px;font-size:14px}
+.tfield .unit{color:var(--text-muted);font-size:12px;margin-left:4px}
+</style></head><body><div class="screen">
+  <div class="appbar"><span class="back">‹</span><h1>Khảo sát Tanita</h1><span class="info">ⓘ</span></div>
+  <div class="progress-dots"><span class="dot done"></span><span class="dot done"></span><span class="dot active"></span><span class="dot"></span></div>
   <div class="content">
     <div class="card">
-      <h2>Thông tin cơ bản</h2>
-      <div class="search"><input placeholder="Tên (điền sẵn: Phạm Hạnh)"></div>
-      <div class="search" style="margin-top:8px"><input placeholder="Tuổi · 42"></div>
-      <div class="search" style="margin-top:8px"><input placeholder="Chiều cao (cm)"></div>
+      <h2>Nhập nhanh</h2>
+      <button class="btn primary" style="width:100%;margin-bottom:8px">📷 Chụp ảnh phiếu Tanita</button>
+      <button class="btn secondary" style="width:100%">🖼 Chọn ảnh từ thư viện</button>
+      <div class="hint" style="margin-top:8px">OCR tự trích xuất → “Sử dụng kết quả” hoặc “Chỉnh sửa”</div>
     </div>
     <div class="card">
-      <h2>Checklist tư thế đo</h2>
-      <div class="list-item"><div class="avatar">✓</div><div class="meta"><div class="name">Tháo chìa khóa, bỏ điện thoại</div></div></div>
-      <div class="list-item"><div class="avatar">✓</div><div class="meta"><div class="name">Chạm gót chân vào điện cực</div></div></div>
-      <div class="list-item"><div class="avatar">✓</div><div class="meta"><div class="name">Đứng thẳng, nhìn thẳng</div></div></div>
-      <div class="list-item alert"><div class="avatar" style="color:var(--state-alert)">!</div><div class="meta"><div class="name">KHÔNG cúi đầu nhìn xuống</div></div></div>
-    </div>
-    <div class="card">
-      <h2>Nhập chỉ số</h2>
-      <button class="btn primary" style="width:100%;margin-bottom:8px">📷 Chụp ảnh cân Tanita (OCR)</button>
-      <div class="hint" style="text-align:center">hoặc</div>
-      <button class="btn secondary" style="width:100%;margin-top:8px">Nhập tay</button>
-      <div class="hint">OCR nhận: cân nặng · mỡ% · cơkg · nước% · mỡ nội tạng · xương · tuổi sinh học · BMR</div>
+      <h2>Nhập tay (theo thứ tự hiển thị trên cân Tanita)</h2>
+      <div class="tfield"><span>1. Cân nặng</span><span><input placeholder="64.8"><span class="unit">kg</span></span></div>
+      <div class="tfield"><span>2. Tỷ lệ mỡ cơ thể</span><span><input placeholder="18.9"><span class="unit">%</span></span></div>
+      <div class="tfield"><span>3. Khối lượng xương</span><span><input placeholder="2.8"><span class="unit">kg</span></span></div>
+      <div class="tfield"><span>4. Tỷ lệ nước</span><span><input placeholder="57.7"><span class="unit">%</span></span></div>
+      <div class="tfield"><span>5. Khối lượng cơ</span><span><input placeholder="52.0"><span class="unit">kg</span></span></div>
+      <div class="tfield"><span>6. Vóc dáng</span><span><input placeholder="Bình thường"></span></div>
+      <div class="tfield"><span>7. Tuổi sinh học</span><span><input placeholder="37"><span class="unit">tuổi</span></span></div>
+      <div class="tfield"><span>8. Năng lượng nghỉ ngơi</span><span><input placeholder="1276"><span class="unit">kcal</span></span></div>
+      <div class="tfield" style="border:none"><span>9. Tỷ lệ mỡ nội tạng</span><span><input placeholder="10"><span class="unit">(1-50)</span></span></div>
     </div>
   </div>
-  <div class="cta-bar"><button class="btn secondary">‹ Quay lại</button><button class="btn primary">Tạo bản phân tích →</button></div>
+  <div class="cta-bar"><button class="btn secondary">‹ Quay lại</button><button class="btn primary">Tạo bản tư vấn →</button></div>
 </div></body></html>

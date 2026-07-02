@@ -1,18 +1,67 @@
-<!-- Mockup US-E02-07 Gợi ý bữa ăn 10 ngày | Khuôn T1 | HLV -->
+<!-- Mockup US-E02-07 Xây dựng gợi ý bữa ăn (30/40/30 + 4 bữa chi tiết + nước + thời gian) | Khuôn T1 | HLV (draft §2.9) -->
 <!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Gợi ý bữa ăn 10 ngày — AnCare</title>
+<title>Xây dựng bữa ăn — AnCare</title>
 <link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
-</head><body><div class="screen">
-  <div class="appbar"><span class="back">‹</span><h1>Thực đơn 10 ngày</h1><span class="info">ⓘ</span></div>
+<style>
+.stepper{display:inline-flex;align-items:center;gap:0;border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden}
+.stepper button{width:36px;height:36px;border:none;background:var(--bg-subtle);font-size:18px;cursor:pointer}
+.stepper span{padding:0 14px;font-weight:600;font-size:15px}
+.meal-item{padding:8px 0;border-bottom:1px solid var(--border);font-size:13px}
+.meal-item .grp{font-weight:600;color:var(--accent);font-size:12px;text-transform:uppercase}
+.meal-item .det{color:var(--text-muted);margin-top:2px}
+.struct{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0;text-align:center;font-size:12px}
+.struct div{background:var(--bg-subtle);border-radius:var(--radius-sm);padding:8px}
+.struct strong{display:block;font-size:16px;color:var(--accent);margin-top:2px}
+</style></head><body><div class="screen">
+  <div class="appbar"><span class="back">‹</span><h1>Xây dựng bữa ăn</h1><span class="info">ⓘ</span></div>
   <div class="content">
-    <div class="focus-card"><div class="label">Thực đơn theo mục tiêu · 3 nhóm</div><div class="title">Đạm · Xơ · Đường-bột</div><div class="action">Dễ áp dụng ↓</div></div>
-    <div class="tabs"><div class="tab active">Ngày 1</div><div class="tab">2</div><div class="tab">3</div><div class="tab">…</div><div class="tab">10</div></div>
-    <div class="card"><h2>Bữa sáng</h2><div class="wf">[ món · phần · nhóm ]</div></div>
-    <div class="card"><h2>Phụ sáng</h2><div class="wf">[ món · phần · nhóm ]</div></div>
-    <div class="card"><h2>Bữa trưa</h2><div class="wf">[ món · phần · nhóm ]</div></div>
-    <div class="card subtle"><div class="hint">persona-fit: diet_type · budget · liked/disliked</div></div>
-    <span class="chip good">Dễ áp dụng</span> <span class="why">Vì sao? (ngân sách, khẩu vị, độ phức tạp)</span>
-    <button class="btn ghost" style="margin:8px 16px">✎ Chỉnh món (gợi ý thay thế cùng nhóm)</button>
+    <div class="card">
+      <h2>Card Mục tiêu</h2>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin:8px 0">
+        <span>Calo/ngày (kỳ diệu)</span>
+        <div class="stepper"><button>−</button><span>1359</span><button>+</button></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin:8px 0">
+        <span>Số bữa ăn</span>
+        <div class="stepper"><button>−</button><span>4</span><button>+</button></div>
+      </div>
+      <button class="btn primary" style="width:100%;margin-top:8px">Tạo gợi ý bữa ăn</button>
+    </div>
+    <div class="card">
+      <h2>Cấu trúc bữa ăn</h2>
+      <div style="font-size:13px;color:var(--text-muted);margin-bottom:8px">Con số kỳ diệu: <strong style="color:var(--accent)">1359 kcal</strong></div>
+      <div class="struct">
+        <div>Đạm<strong>30%</strong></div>
+        <div>Bột đường<strong>40%</strong></div>
+        <div>Béo tốt<strong>30%</strong></div>
+      </div>
+      <div class="hint">Nước khuyến nghị: <strong>2.5L (8 cốc)</strong> — công thức 0.4L/10kg</div>
+    </div>
+    <div class="card">
+      <h2>Bữa sáng</h2>
+      <div class="meal-item"><div class="grp">Đạm</div><div class="det">F1 + PPP · 1 phần · 180 kcal</div></div>
+      <div class="meal-item"><div class="grp">Bột đường</div><div class="det">— (F1 thay thế)</div></div>
+      <div class="meal-item"><div class="grp">Rau</div><div class="det">— </div></div>
+      <div class="meal-item"><div class="grp">Món kèm</div><div class="det">Trà thảo mộc</div></div>
+      <div class="meal-item"><div class="grp">TPCN bổ sung</div><div class="det">(theo gói đã mua)</div></div>
+      <div class="meal-item" style="border:none"><div class="grp" style="color:var(--state-warn)">Lưu ý HLV</div><div class="det">Ăn ngược (đạm trước, bột cuối), nhai kỹ</div></div>
+    </div>
+    <div class="card">
+      <h2>Bữa trưa</h2>
+      <div class="meal-item"><div class="grp">Đạm</div><div class="det">Ức gà 150g · 1 lạng · 165 kcal</div></div>
+      <div class="meal-item"><div class="grp">Bột đường</div><div class="det">Cơm lứt · ½ bát · 100 kcal</div></div>
+      <div class="meal-item"><div class="grp">Rau</div><div class="det">Rau luộc · 1 bát · 30 kcal</div></div>
+    </div>
+    <div class="card"><h2>Bữa phụ (xế)</h2><div class="meal-item"><div class="grp">Món kèm</div><div class="det">Trái cây ít ngọt (ổi/táo)</div></div></div>
+    <div class="card"><h2>Bữa tối</h2><div class="meal-item"><div class="grp">Đạm</div><div class="det">Cá hấp · 1 lạng · 110 kcal</div></div><div class="meal-item"><div class="grp">Bột đường</div><div class="det">Cơm lứt · ½ bát</div></div><div class="meal-item"><div class="grp">Rau</div><div class="det">Rau · 1 bát</div></div></div>
+    <div class="card">
+      <h2>Khuyến nghị thời gian sinh hoạt</h2>
+      <div style="font-size:13px;line-height:2">
+        7:00-7:30 Ăn sáng · 11:30-13:00 Ăn trưa<br>
+        16:00-17:00 Bữa phụ · 18:00-19:00 Ăn tối<br>
+        23:00 Ngủ · Vận động 30 phút/ngày
+      </div>
+    </div>
   </div>
-  <div class="cta-bar"><button class="btn secondary">‹</button><button class="btn primary">Giao cho khách →</button></div>
+  <div class="cta-bar"><button class="btn secondary">‹</button><button class="btn primary">Hoàn thành → DS KH</button></div>
 </div></body></html>

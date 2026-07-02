@@ -1,17 +1,40 @@
-<!-- Mockup US-E01-01 DS KHTN ưu tiên hôm nay | Khuôn T2 | HLV (P0: cờ ưu tiên thủ công D12) -->
+<!-- Mockup US-E01-01 DS KH: tabs KHTN (default) / KH của tôi + Summary RFM | Khuôn T2 | HLV (draft §2.3, Q31 RFM) -->
 <!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Danh sách KH tiềm năng — AnCare</title>
+<title>Danh sách khách hàng — AnCare</title>
 <link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
-</head><body><div class="screen">
-  <div class="appbar"><span class="back">‹</span><h1>KH tiềm năng</h1><span class="info">ⓘ</span></div>
-  <div style="padding:12px 16px"><div class="search"><input placeholder="Tìm KH…"></div></div>
-  <div class="tabs"><div class="tab active">Ưu tiên hôm nay</div><div class="tab">Mới thêm</div><div class="tab">Tất cả</div></div>
-  <div class="content">
-    <div class="list-item"><div class="avatar">📌</div><div class="meta"><div class="name">Chị Lan (cờ thủ công)</div><div class="sub">Đang cân nhắc</div></div><div class="chips"><span class="chip accent">Ưu tiên</span></div></div>
+<style>
+.rfm-stat{display:flex;gap:8px;margin:12px 0}
+.rfm-stat div{flex:1;text-align:center;border-radius:var(--radius-md);padding:10px;font-size:12px}
+.rfm-stat div strong{display:block;font-size:20px;font-weight:700}
+.rfm-stat .good{background:#eef9f1;color:var(--state-good)}
+.rfm-stat .warn{background:#fbf3e0;color:var(--state-warn)}
+.rfm-stat .alert{background:#fae7e3;color:var(--state-alert)}
+</style></head><body><div class="screen">
+  <div class="appbar"><span class="back">‹</span><h1>Khách hàng</h1><span class="info">ⓘ</span></div>
+  <div class="tabs"><div class="tab active">KH tiềm năng</div><div class="tab">KH của tôi</div></div>
+  <!-- Tab KH tiềm năng (default) -->
+  <div style="padding:12px 16px"><div class="search"><input placeholder="Tìm KH tiềm năng…"></div></div>
+  <div class="content" style="padding-top:0">
+    <div class="list-item"><div class="avatar">👤</div><div class="meta"><div class="name">Chị Lan</div><div class="sub">Đang cân nhắc</div></div><div class="chips"><span class="chip warn">Cân nhắc</span></div></div>
     <div class="list-item"><div class="avatar">👤</div><div class="meta"><div class="name">Anh Minh</div><div class="sub">Chưa đủ thông tin</div></div><div class="chips"><span class="chip idle">Mới</span></div></div>
     <div class="list-item"><div class="avatar">👤</div><div class="meta"><div class="name">Chị Hương</div><div class="sub">Sẵn sàng</div></div><div class="chips"><span class="chip good">Sẵn sàng</span></div></div>
-    <div class="list-item"><div class="avatar">👤</div><div class="meta"><div class="name">Anh Đạt</div><div class="sub">Đang cân nhắc</div></div><div class="chips"><span class="chip warn">Cân nhắc</span></div></div>
-    <div class="hint" style="padding:0 16px">Mỗi thẻ ≤2 nhãn (L6). DISC/nguồn/score → chi tiết (T4). Không hiện số score (L4).</div>
+    <div class="hint" style="padding:0 16px">≤2 nhãn/thẻ (L6). DISC/nguồn → chi tiết (T4). Không hiện score số (L4).</div>
+    <div class="card subtle"><div class="hint" style="text-align:center">↓ Xem trước "KH của tôi" (tab kia): có Summary RFM + Danh sách</div></div>
+    <div class="card">
+      <h2 style="font-size:13px;color:var(--text-muted)">[Tab KH của tôi] Card Summary RFM</h2>
+      <div class="search" style="margin:8px 0"><input placeholder="Lọc: Tên + Trạng thái RFM"></div>
+      <div class="rfm-stat">
+        <div class="good"><strong>5</strong>Tích cực</div>
+        <div class="warn"><strong>3</strong>Có nguy cơ</div>
+        <div class="alert"><strong>2</strong>Kém quan tâm</div>
+      </div>
+      <div class="hint">RFM = R(recency) + F(frequency) + M(monetary) — xem Customer-RFM-Scoring-v1.0.md</div>
+    </div>
+    <div class="card">
+      <h2 style="font-size:13px;color:var(--text-muted)">[Tab KH của tôi] Card Danh sách</h2>
+      <div class="list-item"><div class="avatar">👤</div><div class="meta"><div class="name">Khách hàng 01</div><div class="sub">Gói 10 ngày · còn 8 ngày · tiến độ 20%</div></div><div class="chips"><span class="chip good">Tích cực</span></div></div>
+      <div class="list-item"><div class="avatar">👤</div><div class="meta"><div class="name">Chị Mai</div><div class="sub">Gói 1 tháng · còn 5 ngày · tiến độ 80%</div></div><div class="chips"><span class="chip warn">Có nguy cơ</span></div></div>
+    </div>
   </div>
   <button class="fab">＋</button>
 </div></body></html>

@@ -248,16 +248,16 @@
 | # | Lệch | Hiện tại (stories/mockups) | Draft To-Be | Hành động đề xuất |
 |---|---|---|---|---|
 | R1 | Phá băng (US-E02-01) | có màn Phá băng checklist | KHÔNG có (draft bắt đầu tại Team → Thêm mới KH) | ✅ **Q33 chốt**: BỎ màn Phá băng; nội dung chuyển E05 đào tạo. US-E02-01 xóa, S-CONS-01 xóa. |
-| R2 | Thứ tự Tanita vs Khảo sát | mockup S-CONS-02 khảo sát → S-CONS-03 Tanita | draft: Thêm mới KH (Chân dung) → Tanita | **Khớp** — giữ thứ tự Khảo sát(Chân dung) → Tanita. Đổi tên S-CONS-02 → “Chân dung KH” cho rõ. |
-| R3 | Phân tích (S-CONS-04) | dạng 5 bước narrative | draft: bảng 4 cột × 9 dòng + drop-down + tick mục tiêu | **Cập nhật mockup S-CONS-04** sang dạng bảng draft (chi tiết hơn). |
-| R4 | Giải pháp (S-CONS-05) | focus card 3 chương trình | draft: “Xem lộ trình” (lợi ích/kết quả/1-3-trọn đời/gói SP/cam kết) | **Cập nhật mockup S-CONS-05** thêm các thành phần draft. |
+| R2 | Thứ tự Tanita vs Khảo sát | mockup S-CONS-02 khảo sát → S-CONS-03 Tanita | draft: Thêm mới KH (Chân dung) → Tanita | ✅ **Đã cập nhật**: S-CONS-02→chan_dung_kh; S-CONS-03→9 chỉ số theo thứ tự cân. |
+| R3 | Phân tích (S-CONS-04) | dạng 5 bước narrative | draft: bảng 4 cột × 9 dòng + drop-down + tick mục tiêu | ✅ **Đã cập nhật**: S-CONS-04 = bảng 9 dòng + màu + tick mục tiêu → chương trình. |
+| R4 | Giải pháp (S-CONS-05) | focus card 3 chương trình | draft: “Xem lộ trình” (lợi ích/kết quả/1-3-trọn đời/gói SP/cam kết) | ✅ **Đã cập nhật**: S-CONS-05 = Xem lộ trình đầy đủ (lợi ích/kết quả/loại/gói SP/cam kết). |
 | R5 | Objection (S-CONS-06) | có FAB 5 nhánh | draft: chỉ “KH chưa đồng ý → Đóng về DS KH” | ✅ **Q34 chốt**: P0 chỉ “Đóng về DS KH” (man-to-man); Objection Handler FAB chuyển P1+. S-CONS-06 → chot_goi. |
-| R6 | Bữa ăn (S-CONS-07) | đơn giản (3 nhóm + persona-fit) | draft: cấu trúc 30/40/30 + món kèm + lưu ý + thời gian sinh hoạt | **Cập nhật mockup S-CONS-07** enrich theo draft. |
-| R7 | Tạo TK (S-CONS-08) | màn full điền sẵn | draft: pop-up + MK random + gửi email | **Cập nhật mockup S-CONS-08** sang pop-up. |
-| R8 | E01 KH tiềm năng | mockup S-LEAD-01 (T2, cờ thủ công D12) | draft: tabs KHTN/KH + RFM Summary | **Cập nhật S-LEAD-01** thêm tabs + Summary RFM; **thêm business-rule RFM** (mới, chưa có trong decisions-log). |
+| R6 | Bữa ăn (S-CONS-07) | đơn giản (3 nhóm + persona-fit) | draft: cấu trúc 30/40/30 + món kèm + lưu ý + thời gian sinh hoạt | ✅ **Đã cập nhật**: S-CONS-07 = cấu trúc 30/40/30 + 4 bữa chi tiết + nước + thời gian sinh hoạt. |
+| R7 | Tạo TK (S-CONS-08) | màn full điền sẵn | draft: pop-up + MK random + gửi email | ✅ **Đã cập nhật**: S-CONS-08 = pop-up modal + MK random + gửi email. |
+| R8 | E01 KH tiềm năng | mockup S-LEAD-01 (T2, cờ thủ công D12) | draft: tabs KHTN/KH + RFM Summary | ✅ **Đã cập nhật**: S-LEAD-01 = tabs KHTN/KH + Summary RFM; business-rule `Customer-RFM-Scoring-v1.0.md` (Q31 ✅). |
 | R9 | RFM trạng thái | chưa có | 3 trạng thái + màu | ✅ **Q31 chốt**: `Customer-RFM-Scoring-v1.0.md`. ⏳ Q31a/Q31b chờ PO. |
 | R10 | Attribution người mời | Content-Attribution Matching (D?? chung) | draft cụ thể: Tên+SĐT người mời, default HLV | ✅ **Q32 chốt**: mặc định HLV, cho đổi (chống trùng SĐT). |
 | R11 | “Khảo sát mục tiêu” (draft §2.4 cuối) | — | draft nói “Lưu → Khảo sát mục tiêu” rồi §2.5 là “Khảo sát Tanita” | **Lệch tên** — cần PO xác nhận: có màn “Khảo sát mục tiêu” riêng hay đó là cùng Card Chân dung? |
 | R12 | Cân mục tiêu | ở Thêm mới KH (B2 As-Is) | draft: tick ở Phân tích | **Di chuyển** — đã phản ánh trong GAP §2.3. |
 
-> **Tóm lại:** 12 điểm lệch — **5 đã chốt** (R1 Q33 ✅, R5 Q34 ✅, R9 Q31 ✅, R10 Q32 ✅, R11 Q35 ✅) + 7 cập nhật mockup (R2 đổi tên S-CONS-02→Chân dung ✅, R3 S-CONS-04 bảng 9 dòng, R4 S-CONS-05 thêm Xem lộ trình, R6 S-CONS-07 enrich bữa ăn, R7 S-CONS-08 sang pop-up, R8 S-LEAD-01 thêm tabs+RFM).
+> **Tóm lại:** 12 điểm lệch — **5 đã chốt** (R1 Q33 ✅, R5 Q34 ✅, R9 Q31 ✅, R10 Q32 ✅, R11 Q35 ✅) + 7 cập nhật mockup — **TẤT CẢ ✅** (R2 Chân dung, R3 bảng 9 dòng, R4 Xem lộ trình, R6 bữa ăn 30/40/30, R7 pop-up TK, R8 tabs+RFM; bonus: S-LEAD-02 người mời, S-CONS-03 9 chỉ số Tanita).

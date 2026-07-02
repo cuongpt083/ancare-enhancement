@@ -1,18 +1,32 @@
-<!-- Mockup US-E02-08 Tạo tài khoản KH | Khuôn T1 | HLV -->
+<!-- Mockup US-E02-08 Pop-up Tạo tài khoản KH (MK random + gửi email) | Khuôn T1 (modal) | HLV (draft §2.8) -->
 <!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Tạo tài khoản khách hàng — AnCare</title>
+<title>Tạo tài khoản KH — AnCare</title>
 <link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
-</head><body><div class="screen">
-  <div class="appbar"><span class="back">‹</span><h1>Tạo tài khoản KH</h1><span class="info">ⓘ</span></div>
-  <div class="content">
-    <div class="focus-card"><div class="label">Điền sẵn từ dữ liệu lead</div><div class="title">Chỉ xác nhận → gửi link</div></div>
-    <div class="card">
-      <div class="search"><input value="Phạm Hạnh"></div>
-      <div class="search" style="margin-top:8px"><input value="090x xxx xxx (SĐT)"></div>
-      <div class="hint">gắn về HLV hiện tại</div>
-    </div>
-    <div class="card subtle"><div class="hint">KH nhận link kích hoạt (Zalo/SMS) → onboarding: chào mừng → mục tiêu → lộ trình → disclaimer → trang chủ (D04)</div></div>
-    <div class="disclaimer">⚠️ Disclaimer hiển thị trong onboarding KH lần đầu.</div>
+<style>
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center}
+.modal{background:var(--bg);width:100%;max-width:375px;border-radius:var(--radius-lg) var(--radius-lg) 0 0;padding:20px 16px 16px;max-height:85vh;overflow-y:auto}
+.modal h2{font-size:18px;margin-bottom:16px;text-align:center}
+.modal .field{margin-bottom:12px}
+.modal .field label{font-size:12px;color:var(--text-muted);display:block;margin-bottom:4px}
+</style></head><body><div class="overlay"><div class="modal">
+  <h2>Tạo tài khoản KH</h2>
+  <div class="field">
+    <label>Tài khoản (SĐT hoặc Email)</label>
+    <div class="search"><input value="tes@gmail.com"></div>
+    <div class="hint">lấy từ thông tin KH, HLV có thể chỉnh sửa</div>
   </div>
-  <div class="cta-bar"><button class="btn secondary">‹</button><button class="btn primary">Gửi link kích hoạt →</button></div>
-</div></body></html>
+  <div class="field">
+    <label>Mật khẩu (tạo ngẫu nhiên)</label>
+    <div class="search"><input value="Ab7xK9#2"></div>
+    <div class="hint">auto random, HLV có thể chỉnh sửa</div>
+  </div>
+  <div class="field">
+    <label>Xác nhận mật khẩu</label>
+    <div class="search"><input value="Ab7xK9#2"></div>
+  </div>
+  <div class="card subtle" style="margin:12px 0"><div class="hint">Sau khi tạo, app gửi email chứa thông tin tài khoản (tài khoản + mật khẩu) cho KH.</div></div>
+  <div style="display:flex;gap:8px;margin-top:16px">
+    <button class="btn secondary">Hủy</button>
+    <button class="btn primary">Tạo tài khoản → bữa ăn</button>
+  </div>
+</div></div></body></html>
