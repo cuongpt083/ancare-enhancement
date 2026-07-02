@@ -1,60 +1,43 @@
 # E02 — Consultation 15 phút
 
 - **Vai trò:** HLV (với khách ngồi cạnh)
-- **Mục tiêu:** Số hóa buổi tư vấn 15 phút theo **quy trình tiêu chuẩn 5 giai đoạn** (Phá băng → Khảo sát → Đo lường → Phân tích & Cảnh báo → Tư vấn giải pháp & Chốt chương trình) → Gợi ý bữa ăn → Tạo tài khoản KH → Disclaimer.
+- **Mục tiêu:** Số hóa buổi tư vấn 15 phút theo **quy trình tiêu chuẩn** (Khảo sát Chân dung KH → Đo lường Tanita → Phân tích & Cảnh báo → Tư vấn giải pháp & Chốt chương trình) → Tạo tài khoản KH → Gợi ý bữa ăn → Disclaimer.
+- **Ghi chú:** Giai đoạn "Phá băng & xây thiện cảm" đã **bỏ khỏi luồng app** (Q33) — nội dung chuyển vào kho đào tạo (E05). Quy trình xử lý từ chối tạm **"Đóng về DS KH"** (Q34, man-to-man, hạn chế nhìn màn hình) — Objection Handler FAB để P1+.
 - **Nguồn:** feature-tree §2.2; **quy trình chuẩn:** `docs/00-foundation/business-rules/Consultation-15min-Process-v1.0.md` (chưng cất từ `docs/00-foundation/consultation-sample-15-minutes.md`); tham chiếu `docs/99-archive/srs/Objection-Handler_v1.0.md`.
 
 ## Danh sách stories
 | ID | Bước | Tên ngắn | Ưu tiên |
 |---|---|---|---|
-| US-E02-01 | Giai đoạn 1 | Phá băng & Xây dựng thiện cảm | Must |
-| US-E02-02 | Giai đoạn 2 | Khảo sát & Khai thác thông tin | Must |
-| US-E02-03 | Giai đoạn 3 | Hướng dẫn đo lường Tanita (OCR + tư thế) | Must |
-| US-E02-04 | Giai đoạn 4 | Phân tích chỉ số & Cảnh báo sức khỏe (5 bước) | Must |
-| US-E02-05 | Giai đoạn 5 | Tư vấn giải pháp + Xác định mục tiêu | Must |
-| US-E02-06 | Giai đoạn 5 | Xử lý từ chối / Chốt gói (3–6 tháng) | Must |
+| US-E02-02 | Giai đoạn 1 | Chân dung KH (gộp khảo sát mục tiêu) | Must |
+| US-E02-03 | Giai đoạn 2 | Hướng dẫn đo lường Tanita (OCR + tư thế) | Must |
+| US-E02-04 | Giai đoạn 3 | Phân tích chỉ số & Cảnh báo sức khỏe (5 bước) | Must |
+| US-E02-05 | Giai đoạn 4 | Tư vấn giải pháp + Xác định mục tiêu | Must |
+| US-E02-06 | Giai đoạn 4 | Chốt gói (đơn giản — Q34) | Must |
 | US-E02-07 | Sau chốt | Gợi ý bữa ăn 10 ngày đầu | Must |
 | US-E02-08 | Sau chốt | Tạo tài khoản KH | Must |
 | US-E02-09 | Xuyên suốt | Disclaimer "không thần dược" | Must |
 
----
-
-### US-E02-01 — Phá băng & Xây dựng thiện cảm
-- **Epic:** E02 — Consultation
-- **Vai trò:** HLV
-- **Story:** Là HLV, tôi muốn một checklist phá băng & xây dựng thiện cảm (hỏi thăm cá nhân, đồng cảm/khen ngợi, giới thiệu bản thân & đội ngũ kèm kết quả tiêu biểu), để tạo niềm tin ngay trong 1–2 phút đầu trước khi đi vào khảo sát.
-- **Ưu tiên:** Must (P0)
-- **INVEST:** Independent ✓ · Negotiable ✓ · Valuable ✓ · Estimable ✓ · Small ✓ · Testable ✓
-- **Acceptance Criteria:**
-  - AC1 — Given KH vào buổi tư vấn, When HLV mở bước "Phá băng", Then hiện checklist (khuôn T1): (1) hỏi thăm cá nhân (vd năm sinh), (2) đồng cảm & khen ngợi đặc điểm tích cực, (3) giới thiệu bản thân & vai trò, (4) giới thiệu đội ngũ kèm kết quả tiêu biểu.
-  - AC2 — Given giới thiệu đội ngũ, When HLV xem, Then hiện danh sách thành viên + kết quả đã đạt được (vd: cải thiện trào ngược dạ dày, giảm 5 cân, giúp người thân cải thiện sức khỏe) → tạo niềm tin bằng bằng chứng người thật; HLV có thể tùy chỉnh danh sách.
-  - AC3 — Given hoàn thành phá băng, When HLV bấm "Bắt đầu khảo sát", Then chuyển sang US-E02-02.
-- **Truy vết:**
-  - Mockup: `docs/03-mockups/coach/S-CONS-01_pha_bang.png` *(chưa tạo)*
-  - Prototype: `docs/04-prototypes/coach/CONS-01_pha_bang.html` *(chưa tạo)*
-  - Khuôn màn: T1
-  - Nghiệp vụ: `docs/00-foundation/business-rules/Consultation-15min-Process-v1.0.md` §2.
-- **Open question:** Danh sách đội ngũ & kết quả tiêu biểu: HLV tự nhập hay có template chung cho club?
+> **Đã xóa:** US-E02-01 Phá băng (Q33 — chuyển nội dung vào E05 đào tạo). Mockup S-CONS-01 xóa.
 
 ---
 
-### US-E02-02 — Khảo sát & Khai thác thông tin
+### US-E02-02 — Chân dung KH (gộp khảo sát mục tiêu)
 - **Epic:** E02 — Consultation
 - **Vai trò:** HLV
-- **Story:** Là HLV, tôi muốn chạy bộ khảo sát theo trình tự 7 nhóm chuẩn (mục tiêu → tiền sử bệnh lý → giấc ngủ → ăn sáng → uống nước → vận động/sinh hoạt → tạo động lực), để thu thập đủ dữ liệu sinh bản tư vấn & tạo động lực trước khi đo lường.
+- **Story:** Là HLV, tôi muốn thu thập Chân dung KH qua bộ câu hỏi (mục tiêu mong muốn + tiền sử bệnh lý + thói quen ăn/uống/ngủ/vận động) với ô trả lời ngắn gọn, để hệ thống tự phân tích & ghi chân dung, làm đầu vào cho bản phân tích Tanita.
 - **Ưu tiên:** Must (P0)
 - **INVEST:** Independent ✓ · Negotiable ✓ · Valuable ✓ · Estimable ✓ · Small ✓ · Testable ✓
 - **Acceptance Criteria:**
-  - AC1 — Given hoàn thành phá băng (US-E02-01), When vào khảo sát, Then hiện câu hỏi theo trình tự 7 nhóm: (1) mục tiêu mong muốn, (2) tiền sử bệnh lý (tim mạch/huyết áp/đại tràng/dạ dày), (3) giấc ngủ (giờ ngủ/giờ thức/độ sâu), (4) ăn sáng, (5) uống nước, (6) vận động & sinh hoạt (tập thể dục/hút thuốc/rượu bia), (7) tạo động lực.
-  - AC2 — Given KH trả lời, When nhập ngắn gọn (text/gõ, vd "tôi chỉ bị mất ngủ, còn lại bình thường"), Then hệ thống phân tích & ghi vào `primary_goal`, `pain_points[]`, `lifestyle` (sleep, diet, water, exercise, habits).
-  - AC3 — Given khảo sát xong, When đến nhóm 7 (tạo động lực), Then hiện gợi ý câu chuyện thành công của HLV + hàng nghìn người đã giúp để truyền tự tin cho KH trước khi đo.
-  - AC4 — Given hoàn thành khảo sát, When HLV bấm "Tiếp theo", Then chuyển sang đo lường Tanita (US-E02-03).
+  - AC1 — Given KH vào buổi tư vấn (sau Thêm mới KH), When HLV mở "Chân dung KH", Then hiện Card gồm 2 phần: (a) danh sách câu hỏi cơ bản (vd 10 câu — hiện thị để HLV đọc hỏi, không cần tương tác), (b) ô trả lời cho HLV từng câu (nhập text, độ dài không giới hạn, tập trung kết quả KH mong muốn vd "tôi chỉ bị mất ngủ, còn lại bình thường").
+  - AC2 — Given câu hỏi mục tiêu mong muốn (giảm cân/tăng cơ/đẹp da/kiểm soát bệnh lý), When HLV nhập trả lời, Then ghi `primary_goal` (thay thế "Khảo sát mục tiêu" riêng — Q35 gộp).
+  - AC3 — Given câu hỏi tiền sử/thói quen, When HLV nhập, Then hệ thống tự phân tích & ghi vào `pain_points[]`, `lifestyle` (sleep, diet, water, exercise, habits) → lưu "Chân dung KH" vào hồ sơ KH.
+  - AC4 — Given hoàn thành Chân dung, When HLV bấm "Lưu → Khảo sát Tanita", Then chuyển sang US-E02-03.
 - **Truy vết:**
-  - Mockup: `docs/03-mockups/coach/S-CONS-02_khao_sat.png` *(chưa tạo)*
-  - Prototype: `docs/04-prototypes/coach/CONS-02_khao_sat.html` *(chưa tạo)*
+  - Mockup: `docs/03-mockups/coach/S-CONS-02_chan_dung_kh.png` *(đổi tên từ S-CONS-02_khao_sat)*
+  - Prototype: `docs/04-prototypes/coach/CONS-02_chan_dung_kh.html` *(chưa tạo)*
   - Khuôn màn: T1
-  - Nghiệp vụ: `docs/00-foundation/business-rules/Consultation-15min-Process-v1.0.md` §3; Persona framework — `docs/00-foundation/personas.md`.
-- **Open question:** Bộ câu hỏi khảo sát rút gọn cần chốt đầy đủ (DISC + Stage + pain points) — đặc tả business-rule.
+  - Nghiệp vụ: `docs/00-foundation/business-rules/Consultation-15min-Process-v1.0.md` §3; Persona framework — `docs/00-foundation/personas.md` (DISC/Stage HLV tự đánh giá ngoài form — D06).
+- **Open question:** Bộ 10 câu hỏi Chân dung cụ thể cần chốt (pain points + lifestyle) — đặc tả business-rule.
 
 ---
 
@@ -133,23 +116,22 @@
 
 ---
 
-### US-E02-06 — Xử lý từ chối / Chốt gói (3–6 tháng)
+### US-E02-06 — Chốt gói (đơn giản — Q34)
 - **Epic:** E02 — Consultation
 - **Vai trò:** HLV
-- **Story:** Là HLV, tôi muốn trợ lý xử lý từ chối (Objection Handler) gợi ý cách phản hồi khi khách băn khoăn, để chốt gói cao nhất 3–6 tháng mà vẫn tôn trọng quyết định khách.
+- **Story:** Là HLV, tôi muốn chốt gói với KH sau khi xem lộ trình; nếu KH chưa đồng ý thì **Đóng về DS KH** (xử lý từ chối làm man-to-man ngoài app), để luồng app gọn & tập trung vào quyết định.
 - **Ưu tiên:** Must (P0)
-- **INVEST:** Independent ✓ · Negotiable ✓ · Valuable ✓ · Estimable ⚠ (nhánh phản đối) · Small ✓ · Testable ✓
+- **INVEST:** Independent ✓ · Negotiable ✓ · Valuable ✓ · Estimable ✓ · Small ✓ · Testable ✓
 - **Acceptance Criteria:**
-  - AC1 — Given bước chốt gói, When khách nêu băn khoăn, Then HLV bấm FAB "Khách đang băn khoăn" → mở nhánh phản đối (đắt/rẻ · phụ thuộc SP · tái béo · đa cấp/TPCN/BĐ gen · đói).
-  - AC2 — Given chọn nhánh, When xem gợi ý, Then hiện mẫu câu phản hồi phù hợp DISC + Stage (gợi ý chỉnh sửa được, **không auto-gửi** — L5).
-  - AC3 — Given khách vẫn từ chối, When HLV đánh dấu "để sau", Then cập nhật Stage & gợi ý DMO tiếp theo (không tạo áp lực).
-  - AC4 — Given chốt thành công, When HLV chọn gói + thời gian, Then chuyển sang tạo tài khoản (US-E02-08).
+  - AC1 — Given đã xem lộ trình (US-E02-05), When KH đồng ý, Then HLV bấm "Tạo tài khoản" → chuyển sang US-E02-08.
+  - AC2 — Given KH chưa đồng ý, When HLV bấm "Đóng", Then quay về DS KH (luồng E01); KH giữ trạng thái "tiềm năng/chưa chốt".
+  - AC3 — Given xử lý từ chối, Then **không có Objection Handler trong app ở P0** (Q34 — man-to-man, hạn chế HLV nhìn màn hình); Objection Handler FAB 5 nhánh (D07) đặt **P1+ sau** khi có đủ kịch bản.
 - **Truy vết:**
-  - Mockup: `docs/03-mockups/coach/S-CONS-06_xu_ly_tu_choi.png` *(chưa tạo)*
-  - Prototype: `docs/04-prototypes/coach/CONS-06_xu_ly_tu_choi.html` *(chưa tạo)*
-  - Khuôn màn: T1 + component ObjectionHandler
-  - Nghiệp vụ: `docs/99-archive/srs/Objection-Handler_v1.0.md` (chưng cất tiếp vào foundation).
-- **Open question:** Nhánh phản đối & mẫu câu cần chốt đầy đủ 4 DISC × 5 phản đối.
+  - Mockup: `docs/03-mockups/coach/S-CONS-06_chot_goi.png` *(đổi tên từ S-CONS-06_xu_ly_tu_choi)*
+  - Prototype: `docs/04-prototypes/coach/CONS-06_chot_goi.html` *(chưa tạo)*
+  - Khuôn màn: T1
+  - Nghiệp vụ: Q34 (decisions-log); `Objection-Handler-Framework-v1.0.md` (P1+, placeholder).
+- **Open question:** Khi nào đủ kịch bản để bật Objection Handler (D07)? — P1+.
 
 ---
 
@@ -217,10 +199,10 @@
 - ✅ **D02** Mục tiêu KH & KD → **tách 2 model riêng** (health_goal + business_goal).
 - ⏳ **D05** Bảng tiêu chuẩn WHO/Tanita → AI tìm/đề xuất (TODO fetch).
 - ⏳ **D06** Bộ câu hỏi khảo sát → 7 nhóm sample, DISC/Stage HLV tự đánh giá ngoài form.
-- ⏳ **D07** Objection Handler 5×4 → PO cung cấp mẫu câu sau (placeholder `Objection-Handler-Framework-v1.0.md`).
+- ⏳ **D07** Objection Handler 5×4 → **chuyển P1+** (Q34: P0 chỉ "Đóng về DS KH", man-to-man); placeholder `Objection-Handler-Framework-v1.0.md`.
 - ✅ **D08** 3 chương trình theo mục tiêu → đã đưa vào `Consultation-15min-Process-v1.0.md` §6.
 - ✅ **D09** Công thức % khả thi → tốc độ an toàn × thời gian.
-- ✅ **D10** Danh sách đội ngũ (US-E02-01) → HLV tự nhập/tùy chỉnh.
+- ~~**D10** Danh sách đội ngũ (US-E02-01)~~ → **KHÔNG còn** (Q33: US-E02-01 Phá băng xóa, nội dung chuyển E05 đào tạo).
 - ✅ **D11** Disclaimer → inline.
 - ✅ **D13** Catalog DMO → PO cung cấp sau (placeholder).
 - ✅ **D14** Copilot làm ấm/mời → P1 rule-based.
@@ -240,5 +222,10 @@
 - ✅ **D28** Đồng hồ sinh học → tô màu trạng thái + gợi ý nhiệm vụ (không quản gia ảo phức tạp ở P0).
 - ✅ **D29** AI companion chat → proactively gợi ý nhẹ, không phán xét.
 - ⏳ **D30** 3 persona lõi → PO định nghĩa lại (placeholder).
+- ✅ **Q31** RFM → đã chốt (`Customer-RFM-Scoring-v1.0.md`); ⏳ Q31a/Q31b chờ PO.
+- ✅ **Q32** Attribution người mời → mặc định HLV, cho đổi (chống trùng SĐT).
+- ✅ **Q33** Phá băng → **BỎ khỏi luồng app**; nội dung chuyển E05 đào tạo. US-E02-01 xóa.
+- ✅ **Q34** Objection → P0 chỉ "Đóng về DS KH"; Objection Handler FAB P1+.
+- ✅ **Q35** "Khảo sát mục tiêu" → **gộp vào Card Chân dung KH** (US-E02-02).
 
 > **Chú thích:** ✅ đã chốt hoàn toàn · ⏳ đã chốt hướng nhưng chờ PO cung cấp nội dung chi tiết.

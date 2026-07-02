@@ -247,17 +247,17 @@
 
 | # | Lệch | Hiện tại (stories/mockups) | Draft To-Be | Hành động đề xuất |
 |---|---|---|---|---|
-| R1 | Phá băng (US-E02-01) | có màn Phá băng checklist | KHÔNG có (draft bắt đầu tại Team → Thêm mới KH) | **Đổi US-E02-01 thành bước tùy chọn/off-app** (phá băng lời nói, không màn app) HOẶC gộp vào Card Chân dung. Chờ PO chốt. |
+| R1 | Phá băng (US-E02-01) | có màn Phá băng checklist | KHÔNG có (draft bắt đầu tại Team → Thêm mới KH) | ✅ **Q33 chốt**: BỎ màn Phá băng; nội dung chuyển E05 đào tạo. US-E02-01 xóa, S-CONS-01 xóa. |
 | R2 | Thứ tự Tanita vs Khảo sát | mockup S-CONS-02 khảo sát → S-CONS-03 Tanita | draft: Thêm mới KH (Chân dung) → Tanita | **Khớp** — giữ thứ tự Khảo sát(Chân dung) → Tanita. Đổi tên S-CONS-02 → “Chân dung KH” cho rõ. |
 | R3 | Phân tích (S-CONS-04) | dạng 5 bước narrative | draft: bảng 4 cột × 9 dòng + drop-down + tick mục tiêu | **Cập nhật mockup S-CONS-04** sang dạng bảng draft (chi tiết hơn). |
 | R4 | Giải pháp (S-CONS-05) | focus card 3 chương trình | draft: “Xem lộ trình” (lợi ích/kết quả/1-3-trọn đời/gói SP/cam kết) | **Cập nhật mockup S-CONS-05** thêm các thành phần draft. |
-| R5 | Objection (S-CONS-06) | có FAB 5 nhánh | draft: chỉ “KH chưa đồng ý → Đóng về DS KH” | **Giữ Objection Handler** (D07) — draft chưa nói nhưng nghiệp vụ cần; bổ sung làm overlay. Chờ PO. |
+| R5 | Objection (S-CONS-06) | có FAB 5 nhánh | draft: chỉ “KH chưa đồng ý → Đóng về DS KH” | ✅ **Q34 chốt**: P0 chỉ “Đóng về DS KH” (man-to-man); Objection Handler FAB chuyển P1+. S-CONS-06 → chot_goi. |
 | R6 | Bữa ăn (S-CONS-07) | đơn giản (3 nhóm + persona-fit) | draft: cấu trúc 30/40/30 + món kèm + lưu ý + thời gian sinh hoạt | **Cập nhật mockup S-CONS-07** enrich theo draft. |
 | R7 | Tạo TK (S-CONS-08) | màn full điền sẵn | draft: pop-up + MK random + gửi email | **Cập nhật mockup S-CONS-08** sang pop-up. |
 | R8 | E01 KH tiềm năng | mockup S-LEAD-01 (T2, cờ thủ công D12) | draft: tabs KHTN/KH + RFM Summary | **Cập nhật S-LEAD-01** thêm tabs + Summary RFM; **thêm business-rule RFM** (mới, chưa có trong decisions-log). |
-| R9 | RFM trạng thái | chưa có | 3 trạng thái + màu | **Thêm Q31 vào decisions-log**: quy tắc tính RFM (Recency/Frequency/Monetary ngưỡng) — cần PO chốt. |
-| R10 | Attribution người mời | Content-Attribution Matching (D?? chung) | draft cụ thể: Tên+SĐT người mời, default HLV | **Thêm Q32**: cơ chế attribution khi tạo KH (mặc định HLV, cho đổi) — cần PO chốt. |
+| R9 | RFM trạng thái | chưa có | 3 trạng thái + màu | ✅ **Q31 chốt**: `Customer-RFM-Scoring-v1.0.md`. ⏳ Q31a/Q31b chờ PO. |
+| R10 | Attribution người mời | Content-Attribution Matching (D?? chung) | draft cụ thể: Tên+SĐT người mời, default HLV | ✅ **Q32 chốt**: mặc định HLV, cho đổi (chống trùng SĐT). |
 | R11 | “Khảo sát mục tiêu” (draft §2.4 cuối) | — | draft nói “Lưu → Khảo sát mục tiêu” rồi §2.5 là “Khảo sát Tanita” | **Lệch tên** — cần PO xác nhận: có màn “Khảo sát mục tiêu” riêng hay đó là cùng Card Chân dung? |
 | R12 | Cân mục tiêu | ở Thêm mới KH (B2 As-Is) | draft: tick ở Phân tích | **Di chuyển** — đã phản ánh trong GAP §2.3. |
 
-> **Tóm lại:** 12 điểm lệch — 3 điểm cần PO chốt (R1 phá băng, R5 objection, R11 khảo sát mục tiêu) + 2 quy tắc mới cần PO (R9 RFM, R10 attribution) + 7 điểm cập nhật mockup (R2-R4,R6-R8). Khi PO chốt R1/R5/R9/R10/R11, tôi cập nhật stories + mockups cho khớp.
+> **Tóm lại:** 12 điểm lệch — **5 đã chốt** (R1 Q33 ✅, R5 Q34 ✅, R9 Q31 ✅, R10 Q32 ✅, R11 Q35 ✅) + 7 cập nhật mockup (R2 đổi tên S-CONS-02→Chân dung ✅, R3 S-CONS-04 bảng 9 dòng, R4 S-CONS-05 thêm Xem lộ trình, R6 S-CONS-07 enrich bữa ăn, R7 S-CONS-08 sang pop-up, R8 S-LEAD-01 thêm tabs+RFM).

@@ -1,21 +1,20 @@
 # Backlog — Danh sách phẳng (sắp theo ưu tiên)
 
-> Tổng: **44 user stories** · **22 Must · 14 Should · 8 Could** · 165 Acceptance Criteria.
+> Tổng: **43 user stories** · **21 Must · 14 Should · 8 Could** · ~160 Acceptance Criteria.
 > Chi tiết mỗi story nằm trong file epic tương ứng (`epics/E0X-*.md`).
 
-## Must (P0) — 22 story
+## Must (P0) — 21 story
 | ID | Epic | Tên ngắn | Vai trò | Khuôn | Mockup |
 |---|---|---|---|---|---|
 | US-E00-01 | E00 | Đăng nhập / xác thực | HLV+KH | T1 | S-AUTH-01 |
 | US-E00-02 | E00 | Shell + floating bubble | HLV | T3 | S-AUTH-02 |
 | US-E01-01 | E01 | Xem DS KHTN ưu tiên hôm nay | HLV | T2 | S-LEAD-01 |
 | US-E01-02 | E01 | Tạo lead mới (form định danh) | HLV | T1 | S-LEAD-02 |
-| US-E02-01 | E02 | Phá băng & Xây dựng thiện cảm | HLV | T1 | S-CONS-01 |
-| US-E02-02 | E02 | Khảo sát & Khai thác thông tin | HLV | T1 | S-CONS-02 |
+| US-E02-02 | E02 | Chân dung KH (gộp khảo sát mục tiêu) | HLV | T1 | S-CONS-02 |
 | US-E02-03 | E02 | Hướng dẫn đo lường Tanita (OCR + tư thế) | HLV | T1 | S-CONS-03 |
 | US-E02-04 | E02 | Phân tích chỉ số & Cảnh báo (5 bước) | HLV | T1 | S-CONS-04 |
 | US-E02-05 | E02 | Tư vấn giải pháp + Xác định mục tiêu | HLV | T1 | S-CONS-05 |
-| US-E02-06 | E02 | Xử lý từ chối / Chốt gói | HLV | T1 | S-CONS-06 |
+| US-E02-06 | E02 | Chốt gói (đơn giản — Q34) | HLV | T1 | S-CONS-06 |
 | US-E02-07 | E02 | Gợi ý bữa ăn 10 ngày đầu | HLV | T1 | S-CONS-07 |
 | US-E02-08 | E02 | Tạo tài khoản KH | HLV | T1 | S-CONS-08 |
 | US-E02-09 | E02 | Disclaimer "không thần dược" | HLV | — | (component) |
@@ -63,10 +62,10 @@
 ## Trạng thái
 | Trạng thái | Ý nghĩa |
 |---|---|
-| 📝 Written | Story đã viết đầy đủ (hiện tại: tất cả 44) |
-| 🎨 Mockup | Đã có mockup tuân khuôn (hiện tại: 20/22 Must — US-E02-09 là component inline) |
+| 📝 Written | Story đã viết đầy đủ (hiện tại: tất cả 43) |
+| 🎨 Mockup | Đã có mockup tuân khuôn (hiện tại: 19/21 Must — US-E02-09 inline, US-E02-01 xóa Q33) |
 | 🎨 Mockup | Đã có mockup tuân khuôn |
 | 🔗 Prototype | Đã có prototype HTML nối điều hướng |
 | ✅ Done | Đạt DoD (mockup + prototype + AC kiểm thử) |
 
-> Tất cả 44 story đang ở trạng thái 📝 Written. **20/22 story Must (P0) đã có mockup wireframe** (xem `docs/03-mockups/index.md`; US-E02-09 disclaimer là component inline). Bước tiếp: review wireframe → hi-fi → prototype nối điều hướng.
+> Tất cả 44 story đang ở trạng thái 📝 Written. **19/21 story Must (P0) đã có mockup wireframe** (xem `docs/03-mockups/index.md`; US-E02-09 disclaimer là component inline; US-E02-01 Phá băng đã xóa Q33). Bước tiếp: review wireframe → hi-fi → prototype nối điều hướng.
