@@ -12,6 +12,7 @@
 | `feature-tree.md` | Cây chức năng — **xương sống để sinh epics & user stories** (giữ nguyên từ bản gốc). |
 | `business-rules/` | Quy tắc nghiệp vụ thật (logic tính toán): `Calorie-Meal-Business-Rules-v1.1.md`, `packaged-service-advice-v1.0.md`, `Consultation-15min-Process-v1.0.md` (quy trình tư vấn 15 phút — 5 giai đoạn, 5 bước phân tích, logic giải pháp). |
 | `consultation-sample-15-minutes.md` | Trích xuất nội dung tư vấn thực tế từ file ghi âm — nguồn gốc của `business-rules/Consultation-15min-Process-v1.0.md`. |
+| `as-is-current/` | **As-Is app hiện tại (bản sống)** — PO nộp ảnh chụp + mô tả tổng quát; AI phân tích để đánh GAP màn hình. Xem `as-is-current/README.md`. (Bản cũ đóng băng: `docs/99-archive/as-is/`.) |
 | `decisions-log.md` | **Nguồn sự thật cho mọi open question đã chốt** — 30 quyết định (D01-D30) qua vòng hỏi-đáp PO. |
 
 ## Quy ước
