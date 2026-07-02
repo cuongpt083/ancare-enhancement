@@ -1,6 +1,8 @@
-# As-Is Notes — Phân tích Luồng Đăng nhập & Tạo Khách hàng HLV (AN-Care)
+# As-Is Notes — Phân tích Luồng Nghiệp vụ HLV & Khách Hàng (AN-Care)
 
-Tài liệu này ghi chép kết quả phân tích từ video screen record quy trình đăng nhập bằng tài khoản Huấn Luyện Viên (HLV) và thực hiện thêm mới thành viên trên ứng dụng di động AN-Care (link nguồn: [YouTube Video](https://www.youtube.com/watch?v=hTXHwBV2toU)).
+Tài liệu này ghi chép kết quả phân tích từ hai video screen record quy trình nghiệp vụ trên ứng dụng di động AN-Care:
+1. Quy trình đăng nhập bằng tài khoản Huấn Luyện Viên (HLV) và thực hiện thêm mới thành viên (link nguồn: [YouTube Video](https://www.youtube.com/watch?v=hTXHwBV2toU)).
+2. Quy trình check-in hằng ngày và phỏng đoán dinh dưỡng món ăn bằng AI của vai trò Khách Hàng (KH) (nguồn: file video `screen-record-KH.mp4`).
 
 ---
 
@@ -175,4 +177,188 @@ Dưới đây là chi tiết giao diện, các trường thông tin (Bắt buộ
   - **Hạn chế:** Các chỉ số Đạm và Nước được tính toán tự động nhưng chưa hiển thị công thức hay lý do đằng sau con số đó (ví dụ: nước tính theo công thức `0.4L/10kg` cộng thêm bù hao vận động).
 
 ---
+
+## 3. Sơ đồ luồng tổng quát phía Khách Hàng (KH)
+
+Quy trình thao tác của Khách hàng (KH) trong video `screen-record-KH.mp4` mô tả hoạt động check-in hằng ngày, tải ảnh bữa ăn, xử lý lỗi upload và sử dụng AI phỏng đoán dinh dưỡng món ăn diễn ra theo luồng nghiệp vụ sau:
+
+```mermaid
+graph TD
+    A["[Màn 01 & 02] Trang Chủ & Cuộn Trang (Dashboard)"] -->|Chạm Thẻ Check-in| B["[Màn 04 & 05] Chi tiết Check-in hằng ngày"]
+    B -->|Chạm Camera Bữa Sáng/Trưa/Tối| C["[Màn 06] Giao diện Tải ảnh lên (Upload Empty)"]
+    C -->|Chụp/Chọn ảnh| D["[Màn 03] Tải ảnh thành công (Ghi nhận bữa ăn)"]
+    C -->|Mạng lỗi hoặc tải lại| E["[Màn 07] Giao diện Lỗi tải lên & Thử lại (Error & Retry)"]
+    E -->|Thử lại thành công| D
+    D -->|Quay lại Check-in| B
+    B -->|Chạm bữa ăn có ảnh| F["[Màn 08] Chi tiết bữa ăn & Phỏng đoán món ăn"]
+    F -->|Bấm Phỏng đoán| G["[Màn 09] Modal Thêm món ăn thủ công (Nhập liệu)"]
+    G -->|Bấm Lưu| H["[Màn 10] Bữa ăn đã xác nhận (Tổng tạm tính dinh dưỡng)"]
+```
+
+---
+
+## 4. Mô tả chi tiết từng màn hình phía Khách Hàng (KH)
+
+Dưới đây là chi tiết giao diện, các trường thông tin (Bắt buộc/Tùy chọn) và nút chức năng của từng màn hình xuất hiện trong luồng video của vai trò Khách hàng (KH).
+
+### Màn 01 — Trang Chủ (Dashboard - KH)
+- **Path ảnh:** `screenshots-kh/01_dashboard.png`
+- **Vai trò:** Khách hàng (KH)
+- **Luồng:** Mở ứng dụng → Đăng nhập tự động/thành công → Trang Chủ của Khách hàng.
+- **Trường thông tin hiển thị:**
+  - **Lời chào & Tên người dùng**: "Chào buổi tối, Mipt01!" kèm Avatar và nhãn VIP, ngày hết hạn gói `"HH 02/10/2026"`.
+  - **Thẻ Check-in hôm nay**: Hiển thị tiến độ hoàn thành các chỉ mục check-in: `"Check-in hôm nay 1/5 mục đã ghi"`, danh sách các chỉ mục gồm `"Nước • Bữa • Ngủ • Cân"`, kèm thanh tiến độ 5 chấm tròn.
+  - **Tiến trình**: Thông báo `"Chưa có báo cáo tiến trình. Huấn luyện viên sẽ xuất báo cáo đánh giá tiến độ cho bạn theo định kỳ."`
+  - **Mục tiêu của bạn**: Hiển thị chỉ số ngày `"Ngày 1/11"`. Thông báo `"Chưa có mục tiêu. Liên hệ huấn luyện viên để thiết lập mục tiêu của bạn."` và chuỗi liên tiếp `"0 ngày liên tiếp"`.
+  - **Giảm cân**: Hiển thị mục tiêu `"Giảm cân"`, chỉ số lượng calo khuyên dùng `"1.988 kcal/ngày • CSKD"`.
+  - **Thanh điều hướng dưới (Bottom Tab Bar)**: Gồm 4 tab: *Trang Chủ*, *Chat*, *Lịch sử*, *Hồ sơ*.
+- **Các nút chức năng:**
+  - **Nút Nhắn HLV**: Nằm trong mục Tiến trình, mở màn hình Chat trực tiếp với HLV.
+  - **Thẻ Check-in hôm nay**: Bấm vào để chuyển đến màn hình "Check-in hằng ngày" chi tiết.
+- **AI phân tích As-Is:**
+  - **Bố cục:** Thiết kế theo dạng thẻ (Card) trực quan trên nền xám nhạt, sử dụng màu xanh lục thương hiệu cho các phần quan trọng.
+  - **Điểm mạnh:** Thanh tiến độ check-in 5 chấm giúp người dùng có động lực hoàn thành các chỉ tiêu trong ngày.
+  - **Hạn chế:** Khi chưa được HLV cập nhật mục tiêu hoặc báo cáo, các ô hiển thị thông tin trống chiếm khá nhiều diện tích.
+
+---
+
+### Màn 02 — Trang Chủ - Chỉ số cơ thể & Thực đơn (Dashboard Scroll - KH)
+- **Path ảnh:** `screenshots-kh/02_dashboard_scroll.png`
+- **Vai trò:** Khách hàng (KH)
+- **Luồng:** Cuộn xuống từ Trang Chủ.
+- **Trường thông tin hiển thị:**
+  - **Bảng chỉ số cơ thể**: Tiêu đề `"Chỉ số cơ thể (02/07)"` kèm nhãn xanh `"Đã cập nhật"`. Bảng hiển thị 8 chỉ số chính đo từ cân Tanita:
+    - *C.Nặng*: `80.0` kg
+    - *Mỡ (%)*: `38.0` %
+    - *Cơ (kg)*: `28.0` kg
+    - *Nước*: `55.0` %
+    - *Mỡ NT*: `4.0` lvl
+    - *Xương*: `2.7` kg
+    - *Tuổi SH*: `25` tuổi
+    - *BMR*: `1400` kcal
+  - **Thực đơn hôm nay**: Tiêu đề `"Thực đơn hôm nay"` kèm nhãn `"Ngày 1/11"`. Danh sách món ăn gợi ý theo bữa:
+    - *Ăn sáng* (217 kcal):
+      - Đạm: Sữa F1 (Bữa ăn lành mạnh) - 2 muỗng + 250ml (87 kcal)
+      - Rau / vitamin: Canh rau - 1 bát (39 kcal)
+      - Tinh bột: 2 thìa vừng đen - 2 thìa (91 kcal)
+    - *Ăn trưa* (904 kcal):
+      - Đạm: Ức gà áp chảo - 1.5 lạng (362 kcal)
+      - (phần dưới bị khuất)
+- **Các nút chức năng:**
+  - **Nút tích chọn xanh (Check-in nhanh)**: Nằm bên phải tên bữa ăn, dùng để đánh dấu đã hoàn thành bữa ăn.
+  - **Nút Camera**: Dùng để chụp ảnh hoặc tải ảnh món ăn lên cho bữa đó.
+- **AI phân tích As-Is:**
+  - **Điểm mạnh:** Hiển thị chi tiết calo và thành phần dinh dưỡng (Đạm, Rau, Tinh bột) cho từng nguyên liệu trong thực đơn, giúp người dùng dễ dàng theo dõi.
+
+---
+
+### Màn 03 — Ghi nhận bữa ăn thành công (Meal Logged Successfully)
+- **Path ảnh:** `screenshots-kh/03_ghi_nhan_bua_an_thanh_cong.png`
+- **Vai trò:** Khách hàng (KH)
+- **Luồng:** Từ Trang chủ → Click nút Camera ở bữa ăn → Chụp/Chọn ảnh → Tải lên thành công.
+- **Trường thông tin hiển thị:**
+  - **Ảnh bữa ăn**: Hiển thị ảnh món ăn vừa chụp/chọn ở kích thước lớn.
+  - **Nhãn trạng thái**: Biểu tượng tick xanh lớn kèm dòng chữ `"Đã ghi nhận bữa Sáng"` (hoặc bữa Trưa/Tối tương ứng) và `"Ảnh đã được ghi nhận."`
+  - **Danh sách ảnh đã chụp hôm nay (1)**: Hiển thị các thumbnail ảnh đã tải lên trong ngày.
+- **Các nút chức năng:**
+  - **Nút Chụp lại**: Bấm để chụp hoặc chọn ảnh khác thay thế cho ảnh hiện tại.
+  - **Nút quay lại (<)**: Ở góc trên bên trái để quay về màn hình trước đó.
+- **AI phân tích As-Is:**
+  - **Điểm mạnh:** Thông báo thành công trực quan, hiển thị rõ ràng hình ảnh đã tải lên để người dùng tự kiểm tra lại.
+
+---
+
+### Màn 04 — Chi tiết Check-in hằng ngày (Daily Check-in Details)
+- **Path ảnh:** `screenshots-kh/04_check_in_hang_ngay.png`
+- **Vai trò:** Khách hàng (KH)
+- **Luồng:** Bấm vào thẻ "Check-in hôm nay" từ Trang chủ.
+- **Trường thông tin hiển thị:**
+  - **Bảng chỉ số cơ thể**: Hiển thị chi tiết các chỉ số đo cơ thể dưới dạng các ô thẻ nhỏ (Cân nặng 80.0 kg, Chiều cao -- cm, BMI --, Tỷ lệ mỡ 38.0 %, Cơ 28.0 kg, Tỷ lệ nước 55.0 %, Xương 2.7 kg, Mỡ nội tạng 4 lvl, Tuổi TĐC 25 t, BMR (TĐC cơ bản) 1400 kcal/ngày).
+  - **Thực đơn hôm nay**: Hiển thị thực đơn tương tự màn Trang Chủ, nhưng lúc này bữa ăn đã log thành công (ví dụ "Ăn sáng") sẽ có dấu tick xanh lá nổi bật và phần "Ảnh đã chụp (1)" hiển thị thumbnail kèm nút "+ thêm ảnh" nét đứt.
+- **Các nút chức năng:**
+  - **Nút Chạm để cân lại hôm nay >**: Cho phép người dùng kết nối cân hoặc nhập lại chỉ số cơ thể của ngày hôm nay.
+  - **Nút "+ thêm ảnh"**: Nằm cạnh ảnh đã chụp để người dùng có thể đăng thêm ảnh cho cùng một bữa ăn.
+- **AI phân tích As-Is:**
+  - **Điểm mạnh:** Tập trung toàn bộ thông tin kiểm tra hằng ngày (chỉ số cơ thể, thực đơn ăn uống, trạng thái check-in) vào một nơi duy nhất.
+
+---
+
+### Màn 05 — Chi tiết Check-in hằng ngày - Phần dưới (Daily Check-in Scroll)
+- **Path ảnh:** `screenshots-kh/05_check_in_hang_ngay_scroll.png`
+- **Vai trò:** Khách hàng (KH)
+- **Luồng:** Cuộn xuống dưới cùng của màn hình "Check-in hằng ngày".
+- **Trường thông tin hiển thị:**
+  - **Phỏng đoán bữa ăn**: Hiển thị danh sách các bữa ăn đã được AI/Hệ thống phỏng đoán và xác nhận (Ví dụ: `"Bữa trưa - Đã xác nhận"`, `"Bữa sáng - Đã xác nhận"`).
+  - **Nước, shake & sức khoẻ**:
+    - **Nước lọc**: Hiển thị lượng nước đã uống trên tổng lượng mục tiêu (ví dụ: `0/21 ly`).
+- **Các nút chức năng:**
+  - **Nút tăng/giảm nước (+ / -)**: Cho phép người dùng chạm nhanh để tăng hoặc giảm số ly nước lọc đã uống trong ngày.
+- **AI phân tích As-Is:**
+  - **Điểm mạnh:** Hỗ trợ đếm số ly nước đơn giản, dễ thao tác.
+  - **Hạn chế:** Số lượng ly nước mục tiêu khá lớn (21 ly), có thể gây áp lực trực quan nếu không hiển thị quy đổi sang ml hoặc lít.
+
+---
+
+### Màn 06 — Giao diện Chọn ảnh tải lên (Upload Empty State)
+- **Path ảnh:** `screenshots-kh/06_upload_empty.png`
+- **Vai trò:** Khách hàng (KH)
+- **Luồng:** Nhấp vào nút Camera của một bữa ăn chưa có ảnh.
+- **Trường thông tin hiển thị:**
+  - **Khung tải lên trống**: Khung nét đứt màu xám chứa biểu tượng camera xanh và dòng chữ `"Chạm để chụp ảnh bữa ăn hoặc chọn từ thư viện"`.
+- **Các nút chức năng:**
+  - **Nút Chụp**: Màu xanh lá đậm, biểu tượng camera, dùng để mở camera chụp trực tiếp.
+  - **Nút Thư viện**: Màu trắng viền xanh lá, biểu tượng hình ảnh, dùng để mở thư viện ảnh trên thiết bị.
+  - **Nút quay lại (<)**: Ở góc trên bên trái.
+
+---
+
+### Màn 07 — Lỗi tải ảnh lên & Thử lại (Upload Error & Retry State)
+- **Path ảnh:** `screenshots-kh/07_upload_error.png`
+- **Vai trò:** Khách hàng (KH)
+- **Luồng:** Quá trình tải ảnh lên gặp lỗi (do mạng hoặc hệ thống).
+- **Trường thông tin hiển thị:**
+  - **Ảnh bữa ăn**: Hiển thị ảnh đang cố gắng tải lên kèm theo icon xoay reload đè trên góc phải ảnh.
+- **Các nút chức năng:**
+  - **Nút Thử lại**: Nút màu xanh lá đậm nằm chính giữa bên dưới ảnh để gửi lại yêu cầu upload.
+
+---
+
+### Màn 08 — Chi tiết bữa ăn & Phỏng đoán món ăn (Meal Detail & Predict Option)
+- **Path ảnh:** `screenshots-kh/08_chi_tiet_bua_an_ai.png`
+- **Vai trò:** Khách hàng (KH)
+- **Luồng:** Click chọn vào một bữa ăn đã tải ảnh thành công (ví dụ "Bữa tối") từ màn hình chi tiết check-in hoặc trang chủ.
+- **Trường thông tin hiển thị:**
+  - **Tiêu đề**: `"Bữa tối • 2026-07-02"` (Tên bữa ăn và ngày).
+  - **Ảnh đại diện của bữa ăn**: Nằm ở góc trên bên trái.
+- **Các nút chức năng:**
+  - **Nút Phỏng đoán món ăn**: Màu xanh lục nhạt, chữ trắng, chiếm toàn bộ chiều ngang dưới ảnh. Bấm vào đây để kích hoạt AI tự động nhận diện món ăn từ hình ảnh vừa tải lên.
+
+---
+
+### Màn 09 — Modal Thêm món ăn thủ công (Add Dish Modal Form)
+- **Path ảnh:** `screenshots-kh/09_modal_them_mon.png`
+- **Vai trò:** Khách hàng (KH)
+- **Luồng:** Nhấp vào nút "Phỏng đoán món ăn" hoặc chọn thêm món thủ công từ màn hình chi tiết bữa ăn.
+- **Trường thông tin hiển thị & nhập liệu:**
+  - **Tên món** — *Bắt buộc*: Ô nhập văn bản để điền tên món ăn (ví dụ đang gõ chữ: `"Ca"`).
+  - **Định lượng** — *Bắt buộc*: Nhập trọng lượng/khối lượng món ăn (mặc định: `100`).
+  - **Đơn vị** — *Bắt buộc*: Đơn vị tính (mặc định: `g`).
+  - **Calo (kcal)** — *Tự động/Tùy chọn*: Lượng Calo tương ứng (hệ thống tự tính hoặc nhập tay).
+  - **Đạm (g)** — *Tự động/Tùy chọn*: Hàm lượng đạm tương ứng.
+- **Các nút chức năng:**
+  - **Nút Lưu**: Màu xanh lục nhạt có icon loading/spinner, bấm vào để xác nhận thêm món ăn vào thực đơn bữa tối thực tế.
+  - **Nút Đóng (x)**: Ở góc trên bên phải của modal để hủy thao tác.
+
+---
+
+### Màn 10 — Xác nhận bữa ăn hoàn tất (Confirmed Meal Details)
+- **Path ảnh:** `screenshots-kh/10_bua_an_da_xac_nhan.png`
+- **Vai trò:** Khách hàng (KH)
+- **Luồng:** Từ màn hình Thêm món/Phỏng đoán → Bấm "Lưu" → Quay lại màn hình Chi tiết bữa ăn đã cập nhật chỉ số dinh dưỡng.
+- **Trường thông tin hiển thị:**
+  - **Nhãn trạng thái**: Dòng chữ `"Bữa ăn đã xác nhận."`
+  - **Thẻ chi tiết món ăn**: Hiển thị tên món ăn đã lưu (`"Ca"`) kèm định lượng và các chỉ số dinh dưỡng tính toán (`"~100 g • ~97 kcal • ~20g đạm"`).
+  - **Tổng tạm tính**: Dòng chữ tổng hợp dinh dưỡng của bữa ăn hiện tại (`"Tổng tạm tính: ~97 kcal • ~20g đạm"`).
+- **Các nút chức năng:**
+  - **Nút Sửa lại**: Nằm ở chân màn hình, cho phép chỉnh sửa lại thông tin món ăn hoặc thay đổi định lượng dinh dưỡng nếu cần.
 
