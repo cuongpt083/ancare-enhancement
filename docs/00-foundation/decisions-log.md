@@ -83,7 +83,7 @@
 
 | ID | Câu hỏi | Bối cảnh | Tác động |
 |---|---|---|---|
-| **Q31** | Quy tắc tính RFM (Recency/Frequency/Monetary) + 3 ngưỡng trạng thái (tích cực/có nguy cơ/kém quan tâm)? | draft-requirements §2.3 yêu cầu card Summary RFM nhưng chưa có quy tắc. | US-E01-01, S-LEAD-01; business-rule RFM mới |
+| **Q31** | Quy tắc tính RFM (Recency/Frequency/Monetary) + 3 ngưỡng trạng thái (tích cực/có nguy cơ/kém quan tâm)? | ✅ **Đã chốt** (2026-07-02): RFM = R+F+M (0-9). R: hôm nay=3/hôm qua=2/2 hôm=1/quá 3 hôm=0 (cần login+khai báo bữa+tương tác HLV). F: đủ check-in+chat+nhiệm vụ=3, 2/3=2, chỉ check-in=1, không=0. M: Tối ưu=3/Nâng cao=2/Cơ bản=1. Trạng thái: 7-9 tích cực (xanh), 4-6 có nguy cơ (vàng), 0-3 kém quan tâm (đỏ). Quy tắc đầy đủ: `business-rules/Customer-RFM-Scoring-v1.0.md`. ⏳ Q31a (R=3 cần cả 3 hoạt động?), Q31b (ánh xạ gói) chờ PO. | US-E01-01, S-LEAD-01; business-rule ✅ |
 | **Q32** | Cơ chế attribution người mời khi tạo KH: mặc định HLV đăng nhập, cho đổi sang HLV/KH khác? Quy tắc chống lạm dụng? | draft §2.4 yêu cầu trường “Tên+SĐT người mời”. | US-E01-02, US-E02-08; Content-Attribution Matching |
 | **Q33** | Màn “Phá băng” (US-E02-01): giữ là bước app tùy chọn, hay bỏ (chỉ verbal off-app), hay gộp vào Card Chân dung KH? | draft To-Be KHÔNG có phá băng; E02 hiện có US-E02-01. | US-E02-01, S-CONS-01 |
 | **Q34** | Objection Handler (US-E02-06): giữ FAB 5 nhánh (D07) hay chỉ nút “Đóng về DS KH” theo draft? | draft chỉ nói “KH chưa đồng ý → Đóng”. | US-E02-06, S-CONS-06 |
