@@ -46,8 +46,25 @@ Flow màn hình thao tác phục vụ tư vấn 15 phút để chuyển đổi K
         - Địa chỉ: là một trường không bắt buộc
         Sau khi bấm nút "Lưu", nếu người dùng nhập đầy đủ các trường bắt buộc, ứng dụng sẽ chuyển sang màn hình "Khảo sát mục tiêu"
     4.2. Card Chân dung Khách hàng: Card này có nhiệm vụ thu thập thông tin về mục tiêu hiện tại, tình hình sức khỏe, hoạt động thường ngày, mối quan tâm về sức khỏe, phong cách sống của KH. Card này được chia thành 2 nhóm thông tin khi khảo sát:
-        - Danh sách các câu hỏi cơ bản (ví dụ: 10 câu hỏi), các câu hỏi này chỉ hiển thị, không cần nút bấm hay tương tác, HLV chỉ cần đọc và hỏi KH.
-        - Trả lời (cho HLV): là một ô nhập liệu cho phép HLV nhập câu trả lời cho từng câu hỏi tương ứng bên cạnh (độ dài không giới hạn). HLV có thể trả lời một cách ngắn gọn và tập trung vào kết quả KH mong muốn (ví dụ: tôi chỉ bị mất ngủ, còn lại Không có gì đáng ngại). 
+        - Danh sách các câu hỏi cơ bản, các câu hỏi này chỉ hiển thị dưới dạng một paragraph lớn, không cần nút bấm hay tương tác, HLV chỉ cần đọc và hỏi KH. Danh sách câu hỏi gồm có:
+            - Mệt mỏi/dễ cảm?
+            - Đau đầu, đau lưng, đau mỏi?
+            - Có tiểu đường, huyết áp, tim mạch, khớp?
+            - Công việc/gia đình có áp lực?
+            - Giấc ngủ tốt không?
+            - Hay đói hoặc thèm ăn?
+            - Thường ăn đồ chế biến sẵn?
+            - Có nghĩ thức ăn ảnh hưởng sức khỏe?
+            - Có thường bỏ bữa sáng?
+            - Mỗi ngày uống khoảng bao nhiêu cốc nước?
+            - Có tập thể dục không?
+            - Bác sĩ có khuyên giảm cân hoặc giảm cholesterol?
+            - Muốn giảm cân hoặc giảm vòng bụng?
+            - Muốn tăng cân?
+            - Có hút thuốc hoặc tiếp xúc khói thuốc?
+            - Có thường uống rượu, bia hoặc cà phê?
+            - Mục tiêu chính khi kiểm tra sức khỏe là gì?
+        - Trả lời (cho HLV): là một ô nhập liệu cho phép HLV nhập câu trả lời cho tất cả các câu hỏi trên (độ dài không giới hạn). HLV có thể trả lời một cách ngắn gọn và tập trung vào kết quả KH mong muốn (ví dụ: tôi chỉ bị mất ngủ, còn lại Không có gì đáng ngại). 
         Sau khi ghi nhận thông tin, hệ thống tự động phân tích câu trả lời và lưu "Chân dung Khách hàng" vào KH đã tạo. Sau khi lưu xong, ứng dụng sẽ chuyển sang màn hình "Khảo sát Tanita".
 5. Màn hình "Khảo sát Tanita": có nhiệm vụ thu thập kết quả cân, đo bằng thiết bị Tanita. Màn hình này bao gồm các thông tin: 
   - Nút thao tác nhanh: cho phép HLV nhập nhanh bằng cách bấm nút "Chụp ảnh" hoặc "Chọn ảnh" để upload ảnh chụp phiếu ghi chỉ số Tanita từ máy ảnh trên điện thoại. Sau khi upload ảnh, hệ thống sẽ tự động trích xuất thông tin từ ảnh và hiển thị lên màn hình. HLV có thể chọn "Sử dụng kết quả này" hoặc "Chỉnh sửa" để chỉnh sửa lại thông tin trước khi lưu. 

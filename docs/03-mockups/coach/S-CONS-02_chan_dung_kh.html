@@ -1,29 +1,29 @@
-<!-- Mockup US-E02-02 Chân dung KH (gộp khảo sát mục tiêu Q35) | Khuôn T1 | HLV -->
+<!-- Mockup US-E02-02 Card Chân dung KH (17 câu hỏi dạng paragraph + 1 ô trả lời chung) | Khuôn T1 | HLV (draft §2.4.2 cập nhật) -->
 <!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Chân dung KH — AnCare</title>
 <link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
-</head><body><div class="screen">
+<style>
+.qpara{font-size:14px;line-height:1.7;color:var(--text);background:var(--bg-subtle);border-radius:var(--radius-md);padding:14px;border-left:3px solid var(--accent)}
+.qpara b{color:var(--accent)}
+.ans{width:100%;min-height:140px;border:1px solid var(--border);border-radius:var(--radius-md);padding:12px;font-size:14px;font-family:inherit;resize:vertical;line-height:1.5}
+.ans:focus{outline:none;border-color:var(--accent)}
+</style></head><body><div class="screen">
   <div class="appbar"><span class="back">‹</span><h1>Chân dung KH</h1><span class="info">ⓘ</span></div>
-  <div class="progress-dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+  <div class="progress-dots"><span class="dot done"></span><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
   <div class="content">
-    <div class="focus-card"><div class="label">Thu thập Chân dung KH</div><div class="title">10 câu hỏi · HLV đọc hỏi</div></div>
+    <div class="focus-card"><div class="label">Thu thập Chân dung KH</div><div class="title">Đọc hỏi KH · ghi câu trả lời chung</div></div>
     <div class="card">
-      <h2>Card Chân dung KH</h2>
-      <div class="hint">2 phần: (a) danh sách câu hỏi cơ bản (hiện thị để HLV đọc, không tương tác); (b) ô trả lời HLV từng câu.</div>
+      <h2>Danh sách câu hỏi (HLV đọc & hỏi KH)</h2>
+      <div class="qpara">
+        <b>1.</b> Mệt mỏi/dễ cảm? &nbsp; <b>2.</b> Đau đầu, đau lưng, đau mỏi? &nbsp; <b>3.</b> Có tiểu đường, huyết áp, tim mạch, khớp? &nbsp; <b>4.</b> Công việc/gia đình có áp lực? &nbsp; <b>5.</b> Giấc ngủ tốt không? &nbsp; <b>6.</b> Hay đói hoặc thèm ăn? &nbsp; <b>7.</b> Thường ăn đồ chế biến sẵn? &nbsp; <b>8.</b> Có nghĩ thức ăn ảnh hưởng sức khỏe? &nbsp; <b>9.</b> Có thường bỏ bữa sáng? &nbsp; <b>10.</b> Mỗi ngày uống khoảng bao nhiêu cốc nước? &nbsp; <b>11.</b> Có tập thể dục không? &nbsp; <b>12.</b> Bác sĩ có khuyên giảm cân hoặc giảm cholesterol? &nbsp; <b>13.</b> Muốn giảm cân hoặc giảm vòng bụng? &nbsp; <b>14.</b> Muốn tăng cân? &nbsp; <b>15.</b> Có hút thuốc hoặc tiếp xúc khói thuốc? &nbsp; <b>16.</b> Có thường uống rượu, bia hoặc cà phê? &nbsp; <b>17.</b> Mục tiêu chính khi kiểm tra sức khỏe là gì?
+      </div>
     </div>
     <div class="card">
-      <div class="wf" style="text-align:left;justify-content:flex-start">Q1. Mục tiêu mong muốn? (giảm cân/tăng cơ/đẹp da/bệnh lý)</div>
-      <div class="search" style="margin-top:8px"><input placeholder="HLV nhập câu trả lời KH, vd: giảm 2kg, tăng cơ, đẹp da"></div>
+      <h2>Trả lời (HLV nhập — gộp tất cả)</h2>
+      <textarea class="ans" placeholder="Nhập câu trả lời ngắn gọn, tập trung kết quả KH mong muốn. Vd: tôi chỉ bị mất ngủ, còn lại không có gì đáng ngại; muốn giảm 2kg và đẹp da…"></textarea>
+      <div class="hint">Độ dài không giới hạn. Hệ thống tự phân tích & lưu “Chân dung KH”.</div>
     </div>
-    <div class="card">
-      <div class="wf" style="text-align:left;justify-content:flex-start">Q2. Tiền sử bệnh lý? (tim mạch/huyết áp/đại tràng/dạ dày)</div>
-      <div class="search" style="margin-top:8px"><input placeholder="vd: bình thường, chỉ mất ngủ"></div>
-    </div>
-    <div class="card">
-      <div class="wf" style="text-align:left;justify-content:flex-start">Q3-10. Giấc ngủ · ăn sáng · uống nước · vận động · sinh hoạt...</div>
-      <div class="search" style="margin-top:8px"><input placeholder="HLV nhập trả lời ngắn gọn"></div>
-    </div>
-    <div class="card subtle"><div class="hint">Hệ thống tự phân tích → ghi `primary_goal`, `pain_points[]`, `lifestyle`. DISC/Stage HLV tự đánh giá ngoài form (D06).</div></div>
+    <div class="card subtle"><div class="hint">DISC/Stage HLV tự đánh giá ngoài form (D06).</div></div>
   </div>
   <div class="cta-bar"><button class="btn secondary">‹</button><button class="btn primary">Lưu → Khảo sát Tanita</button></div>
 </div></body></html>

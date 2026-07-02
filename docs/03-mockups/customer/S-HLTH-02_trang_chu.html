@@ -1,27 +1,67 @@
-<!-- Mockup US-E06-02 Trang chủ KH cá nhân hóa | Khuôn T3 | KH (Thân-Tâm-Trí) -->
+<!-- Mockup KH Trang chủ (avatar+chào+chuông+gói, check-in, đồng hồ sinh học, line-chart, bảng chỉ số) | Khuôn T3 | KH (draft-kh §1) -->
 <!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Trang chủ — AnCare KH</title>
 <link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
-<style>:root{--accent:var(--accent-customer)}</style></head><body><div class="screen">
-  <div class="appbar"><h1>Xin chào, Hạnh 🌿</h1><span class="info">⚙</span></div>
-  <div class="content">
-    <div class="focus-card"><div class="label">Việc nổi bật hôm nay</div><div class="title">Check-in bữa trưa</div><div class="action">Đi check-in →</div></div>
-    <div class="card"><h2>Đánh giá hôm nay</h2>
-      <div style="display:flex;gap:8px;margin-top:8px">
-        <span class="chip" style="background:#e3f4e9;color:var(--pillar-than)">Thân: Tốt</span>
-        <span class="chip" style="background:#efe7fa;color:var(--pillar-tam)">Tâm: Tốt</span>
-        <span class="chip" style="background:#fde7d4;color:var(--pillar-tri)">Trí: Cần lưu ý</span>
+<style>:root{--accent:var(--accent-customer)}
+.kh-head{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg);border-bottom:1px solid var(--border)}
+.kh-head .av{width:44px;height:44px;border-radius:50%;background:var(--bg-subtle);display:flex;align-items:center;justify-content:center;font-size:22px}
+.kh-head .hi{flex:1}
+.kh-head .hi .name{font-weight:700;font-size:15px}
+.kh-head .hi .pkg{font-size:12px;color:var(--accent);margin-top:2px}
+.kh-head .bell{font-size:20px;color:var(--text-muted)}
+.checkin-row{display:flex;gap:8px;overflow-x:auto;padding:12px 16px}
+.checkin-btn{flex:0 0 auto;border:2px solid var(--border);border-radius:var(--radius-md);padding:8px 12px;font-size:12px;font-weight:600;cursor:pointer;background:var(--bg);white-space:nowrap}
+.checkin-btn.done{border-color:var(--state-good);background:#eef9f1;color:var(--state-good)}
+.btable{width:100%;border-collapse:collapse;font-size:12px}
+.btable th{background:var(--bg-subtle);padding:6px 4px;text-align:right;font-weight:600;color:var(--text-muted);font-size:11px}
+.btable th:first-child{text-align:left}
+.btable td{padding:7px 4px;border-bottom:1px solid var(--border);text-align:right}
+.btable td:first-child{text-align:left;font-weight:600}
+.up{color:var(--state-good)} .dn{color:var(--state-alert)}
+.spark{height:60px;background:linear-gradient(180deg,transparent 60%,#e3efe8 60%);border-radius:var(--radius-sm);position:relative;border-left:2px solid var(--accent)}
+.spark::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:80%;background:linear-gradient(180deg,transparent,#cfe8da);clip-path:polygon(0 70%,15% 50%,30% 60%,45% 35%,60% 40%,75% 20%,90% 30%,100% 10%,100% 100%,0 100%)}
+</style></head><body><div class="screen">
+  <div class="kh-head">
+    <div class="av">👤</div>
+    <div class="hi"><div class="name">Xin chào, Hạnh 🌿</div><div class="pkg">Gói Cơ — Nước — Mỡ · Tối ưu · còn 8 ngày</div></div>
+    <div class="bell">🔔</div>
+  </div>
+  <div class="content" style="padding-top:8px">
+    <div class="card">
+      <h2 style="font-size:13px">Check-in nhiệm vụ hôm nay</h2>
+      <div class="checkin-row">
+        <div class="checkin-btn done">✓ Bữa sáng</div>
+        <div class="checkin-btn done">✓ Nước (2L)</div>
+        <div class="checkin-btn">○ Vận động</div>
+        <div class="checkin-btn">○ Bữa trưa</div>
+        <div class="checkin-btn">○ Ngủ sớm</div>
       </div>
     </div>
-    <div class="quick-row">
-      <div class="quick-item"><div class="icon">🕐</div><div class="label">Đồng hồ sinh học</div></div>
-      <div class="quick-item"><div class="icon">🍴</div><div class="label">Bữa ăn</div></div>
-      <div class="quick-item"><div class="icon">💬</div><div class="label">Chat HLV</div></div>
+    <div class="card">
+      <h2 style="font-size:13px">Đồng hồ sinh học 24h</h2>
+      <div class="spark" style="margin:8px 0"></div>
+      <div class="hint">Chấm điểm nhiệm vụ hằng ngày · xem chi tiết →</div>
     </div>
-    <div class="card"><h2>Cần chú ý</h2>
-      <div class="list-item"><div class="avatar" style="color:var(--state-warn)">!</div><div class="meta"><div class="name">Nước hôm nay</div><div class="sub">1.5/2.6 lít — còn thiếu</div></div><span class="chip warn">Cần lưu ý</span></div>
+    <div class="card">
+      <h2 style="font-size:13px">Tiến trình sức khỏe</h2>
+      <div class="spark" style="margin:8px 0;height:70px"></div>
+      <div class="hint">Xu hướng cải thiện (line-chart) · 10 ngày qua</div>
     </div>
-    <div class="card subtle"><div class="hint">Tổng kết cuối ngày: đủ đạm/calo/nước/ngủ + điểm + lưu ý</div></div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <table class="btable">
+        <thead><tr><th>Chỉ số</th><th>Mục tiêu</th><th>Ngày đầu</th><th>Gần nhất</th><th>Thay đổi</th></tr></thead>
+        <tbody>
+          <tr><td>Cân nặng</td><td>54</td><td>58</td><td class="up">55.2</td><td class="up">↓ 2.8</td></tr>
+          <tr><td>Mỡ cơ thể %</td><td>17.5</td><td>18.9</td><td class="up">17.8</td><td class="up">↓ 1.1</td></tr>
+          <tr><td>Mỡ nội tạng</td><td>≤7</td><td>10</td><td class="up">8</td><td class="up">↓ 2</td></tr>
+          <tr><td>Cơ bắp kg</td><td>≥38%</td><td>52</td><td class="up">52.5</td><td class="up">↑ 0.5</td></tr>
+          <tr><td>Xương kg</td><td>2.5-3.5</td><td>2.8</td><td>2.8</td><td>—</td></tr>
+          <tr><td>Nước %</td><td>>50</td><td>57.7</td><td class="up">58.1</td><td class="up">↑ 0.4</td></tr>
+          <tr><td>Tuổi sinh học</td><td>≤42</td><td>37</td><td class="up">36</td><td class="up">↓ 1</td></tr>
+          <tr><td>RMR kcal</td><td>—</td><td>1276</td><td>1280</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-  <div class="bottom-nav"><div class="nav-item active"><div class="icon">🏠</div><div class="label">Trang chủ</div></div><div class="nav-item"><div class="icon">🕐</div><div class="label">Sức khỏe</div></div><div class="nav-item"><div class="icon">💬</div><div class="label">Chat</div></div><div class="nav-item"><div class="icon">👤</div><div class="label">Hồ sơ</div></div></div>
+  <div class="bottom-nav"><div class="nav-item active"><div class="icon">🏠</div><div class="label">Trang chủ</div></div><div class="nav-item"><div class="icon">📊</div><div class="label">Báo cáo</div></div><div class="nav-item"><div class="icon">🎓</div><div class="label">Đào tạo</div></div><div class="nav-item"><div class="icon">👤</div><div class="label">Hồ sơ</div></div></div>
 </div></body></html>

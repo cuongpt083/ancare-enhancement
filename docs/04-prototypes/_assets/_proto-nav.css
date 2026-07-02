@@ -1,0 +1,5 @@
+.proto-nav{position:fixed;top:0;left:0;right:0;height:40px;background:#1f2933;color:#fff;display:flex;align-items:center;gap:8px;padding:0 12px;z-index:1000;font-size:12px;font-family:sans-serif}
+.proto-nav .ttl{flex:1;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.proto-nav a{color:#9bb0c0;text-decoration:none;padding:4px 10px;border-radius:4px;font-size:11px}
+.proto-nav a:hover{background:#2d3a48;color:#fff}
+.proto-frame{margin-top:40px;border:none;width:100%;height:calc(100vh - 40px);display:block}

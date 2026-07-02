@@ -1,0 +1,32 @@
+<!-- Mockup KH Đào tạo (danh sách bài học theo nhóm) | Khuôn T2 | KH (draft-kh §3) -->
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Đào tạo — AnCare KH</title>
+<link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
+<style>:root{--accent:var(--accent-customer)}
+.grp-head{display:flex;align-items:center;gap:8px;margin:12px 0 6px;font-size:13px;font-weight:700;color:var(--accent);text-transform:uppercase}
+.grp-head::before{content:"";width:4px;height:16px;background:var(--accent);border-radius:2px}
+.lesson{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);cursor:pointer}
+.lesson .num{width:28px;height:28px;border-radius:50%;background:var(--bg-subtle);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--text-muted);flex-shrink:0}
+.lesson.done .num{background:#e3efe8;color:var(--accent)}
+.lesson .lt{flex:1}
+.lesson .lt .t{font-size:14px;font-weight:600}
+.lesson .lt .s{font-size:12px;color:var(--text-muted)}
+.lesson .chev{color:var(--text-muted)}
+</style></head><body><div class="screen">
+  <div class="appbar"><span class="back">‹</span><h1>Đào tạo</h1><span class="info">ⓘ</span></div>
+  <div style="padding:12px 16px"><div class="search"><input placeholder="Tìm bài học…"></div></div>
+  <div class="content" style="padding-top:0">
+    <div class="grp-head">Kiến thức dinh dưỡng</div>
+    <div class="lesson done"><div class="num">✓</div><div class="lt"><div class="t">Bài 1 · Nước & trao đổi chất</div><div class="s">3 phút · đã hoàn thành</div></div><span class="chev">›</span></div>
+    <div class="lesson done"><div class="num">✓</div><div class="lt"><div class="t">Bài 2 · Đạm — cơ bắp</div><div class="s">4 phút · đã hoàn thành</div></div><span class="chev">›</span></div>
+    <div class="lesson"><div class="num">3</div><div class="lt"><div class="t">Bài 3 · Bột đường & năng lượng</div><div class="s">3 phút · 3 câu hỏi trước/sau</div></div><span class="chev">›</span></div>
+    <div class="lesson"><div class="num">4</div><div class="lt"><div class="t">Bài 4 · Mỡ nội tạng & nguy cơ</div><div class="s">5 phút</div></div><span class="chev">›</span></div>
+    <div class="grp-head">Thói quen sống khỏe</div>
+    <div class="lesson"><div class="num">5</div><div class="lt"><div class="t">Bài 5 · Đồng hồ sinh học</div><div class="s">4 phút</div></div><span class="chev">›</span></div>
+    <div class="lesson"><div class="num">6</div><div class="lt"><div class="t">Bài 6 · Ăn ngược & nhai kỹ</div><div class="s">3 phút</div></div><span class="chev">›</span></div>
+    <div class="grp-head">Thấu hiểu bản thân</div>
+    <div class="lesson"><div class="num">7</div><div class="lt"><div class="t">Bài 7 · DISC & cách giao tiếp</div><div class="s">5 phút</div></div><span class="chev">›</span></div>
+    <div class="card subtle"><div class="hint">Cấu trúc & nội dung bài học cần làm rõ thêm (draft-kh §3). 3 câu hỏi trước/sau học (US-E05-01).</div></div>
+  </div>
+  <div class="bottom-nav"><div class="nav-item"><div class="icon">🏠</div><div class="label">Trang chủ</div></div><div class="nav-item"><div class="icon">📊</div><div class="label">Báo cáo</div></div><div class="nav-item active"><div class="icon">🎓</div><div class="label">Đào tạo</div></div><div class="nav-item"><div class="icon">👤</div><div class="label">Hồ sơ</div></div></div>
+</div></body></html>
