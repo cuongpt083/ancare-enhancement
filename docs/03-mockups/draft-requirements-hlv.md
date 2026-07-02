@@ -48,7 +48,12 @@ Flow màn hình thao tác phục vụ tư vấn 15 phút để chuyển đổi K
         + Nâng cấp gói sản phẩm, mua bổ sung sản phẩm (nếu cần)
     + Bảng tổng hợp tiến trình (periodic report) theo gói trải nghiệm: hiển thị tiến trình KH đang sử dụng, bao gồm các chỉ số, mục tiêu, ngày đầu, ngày gần nhất và thay đổi.
     + Nội dung Đề xuất: Tab này hiển thị các sản phẩm/gói giải pháp mà KH có thể quan tâm.
-    + Nút tạo Infographic về nhật ký: cho phép KH tạo infographic về các nội dung trong ngày: Nội dung kiến thức (tóm lược từ các nội dung đã học trong ngày), Hành trình trải nghiệm (bữa ăn, thể chất), Ảnh bản thân, ảnh giao lưu trong ngày. Đây là infographic dạng dọc để chia sẻ qua mạng xã hội (Zalo, Facebook, ...).
+    + Nút tạo Infographic về nhật ký: cho phép KH mở màn hình Tạo Infographic (màn 3.5) để HLV tạo báo cáo dạng Infographic chia sẻ cho KH.
+
+    3.5. Màn hình Tạo Infographic (Màn hình 3.5): có nhiệm vụ tạo báo cáo dạng Infographic chia sẻ cho KH.
+
+    Màn này cho phép HLV upload thêm ảnh chân dung hoặc avatar, ảnh các hoạt động của KH trong ngày. Nội dung infographic về các hoạt động và kết quả trong ngày: Nội dung kiến thức (tóm lược từ các nội dung đã học trong ngày), Hành trình trải nghiệm (bữa ăn, thể chất), Ảnh bản thân, ảnh giao lưu trong ngày. Đây là infographic dạng dọc để chia sẻ qua mạng xã hội (Zalo, Facebook, ...).
+    Sau khi HLV upload thêm ảnh, HLV bấm nút "Tạo Infographic", ứng dụng sẽ hiển thị kết quả Infographic. HLV có thể bấm nút "Tải xuống Infographic" để tải về máy, hoặc bấm nút "Chia sẻ" để chia sẻ Infographic cho KH.
 
     
 4. Màn hình "Thêm mới KH" có nhiệm vụ nhận thông tin đầu vào của 1 KH mới hoặc một KH tiềm năng mới. Màn hình này gồm các card thông tin sau:
