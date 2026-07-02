@@ -60,8 +60,7 @@ Màn hình này hiển thị danh sách các nhiệm vụ check-in mà KH cần 
         - Nút "Gửi khảo sát" sẽ sáng đèn khi KH trả lời xong 3 câu hỏi.
     
 ### 3. Màn hình ghi nhận bữa ăn 
-
-Màn hình này dùng để KH chụp ảnh món ăn (có thể chụp ảnh hoặc upload ảnh từ thư viện ảnh có sẵn). Sau khi chụp ảnh xong, ứng dụng hiển thị ảnh và AI sẽ đánh giá cấu trúc bữa ăn (tỷ lệ % của Đạm, Tinh bột, Chất béo) và hiển thị dưới dạng Calo và gam Đạm đối với 3 nhóm: Năng lượng- Đường bột - Đạm - Chất béo tốt. Hiển thị so sánh với thiêu chuẩn được bổ sung thiếu/thừa. Có 1 câu nhận xét. Đây là các giá trị ước tính,KH có thể chỉnh sửa lại để phù hợp với thực tế. Sau khi chỉnh xong KH bấm nút “Lưu” để lưu lại thông tin. Nếu KH có sử dụng các sản phẩm hỗ trợ, ứng dụng sẽ hiển thị thêm mục bổ sung thông tin sử dụng các sản phẩm hỗ trợ này (ví dụ: số viên, số ml...)
+Màn hình này hiển thị sau khi KH bấm nút "chụp ảnh" bữa ăn ở màn hình check-in KH. Màn hình này dùng để KH chụp ảnh món ăn (có thể chụp ảnh hoặc upload ảnh từ thư viện ảnh có sẵn). Sau khi chụp ảnh xong, ứng dụng hiển thị ảnh và AI sẽ đánh giá cấu trúc bữa ăn (tỷ lệ % của Đạm, Tinh bột, Chất béo) và hiển thị dưới dạng Calo và gam Đạm đối với 3 nhóm: Năng lượng- Đường bột - Đạm - Chất béo tốt. Hiển thị so sánh với thiêu chuẩn được bổ sung thiếu/thừa. Có 1 câu nhận xét. Đây là các giá trị ước tính,KH có thể chỉnh sửa lại để phù hợp với thực tế. Sau khi chỉnh xong KH bấm nút “Lưu” để lưu lại thông tin. Nếu KH có sử dụng các sản phẩm hỗ trợ, ứng dụng sẽ hiển thị thêm mục bổ sung thông tin sử dụng các sản phẩm hỗ trợ này (ví dụ: số viên, số ml...)
 
 ### 2. Màn hình báo cáo
 

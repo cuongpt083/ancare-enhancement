@@ -1,70 +1,154 @@
 <!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Bữa ăn — AnCare KH</title>
+<title>Ghi nhận bữa ăn — AnCare KH</title>
 <link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
 <style>:root{--accent:var(--accent-customer);--accent-hover:var(--accent-customer-hover);}</style>
-
 </head><body><div class="screen">
-<div class="appbar"><span class="back"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></span><h1>Bữa ăn hôm nay</h1><span class="info"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="8.01"/><line x1="12" y1="12" x2="12" y2="16"/></svg></span></div>
-<div class="content" style="padding-top:var(--s-12)">
-  <div class="focus-card customer" style="margin-bottom:var(--s-16)">
-    <div class="label">Mục tiêu calo</div>
-    <div class="title" style="font-size:var(--text-xl)">1.359 kcal · 4 bữa</div>
-  </div>
-  <div class="card">
-    <h2>Bữa sáng · 320 kcal</h2>
-    <div class="flex items-center gap-12" style="padding:var(--s-12) 0;border-bottom:1px solid var(--border)">
-      <div style="width:56px;height:56px;border-radius:var(--radius-md);background:var(--bg-subtle);display:flex;align-items:center;justify-content:center;color:var(--accent-customer)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
-      <div class="flex-1">
-        <div style="font-weight:600">F1 + PPP + trái cây</div>
-        <div class="hint">87 + 120 + 40 kcal</div>
+<div class="appbar">
+  <a href="S-HLTH-06_check_in.html" class="back" style="color: inherit; text-decoration: none;">
+    <svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+  </a>
+  <h1>Ghi nhận bữa ăn</h1>
+  <span class="info" style="opacity: 0"></span>
+</div>
+<div class="content" style="padding-top:var(--s-12); padding-bottom: 80px;">
+  <!-- Section 1: Image Capture/Upload -->
+  <div class="card" style="padding: 0; overflow: hidden; position: relative;">
+    <div style="height: 180px; background: #e2e8f0; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+      <div style="text-align: center; color: var(--text-muted)">
+        <svg class="icon-lg" style="margin-bottom: var(--s-8); color: var(--accent-customer)" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+          <circle cx="12" cy="13" r="4"/>
+        </svg>
+        <div style="font-weight: 600; font-size: var(--text-sm); color: var(--text)">bua_sang_lanh_manh.jpg</div>
+        <div class="hint">Ảnh đã tải lên · Nhận diện thành công</div>
       </div>
-      <button class="pill" style="border-color:var(--accent-customer);color:var(--accent-customer)">+ Ảnh</button>
+    </div>
+    <div class="flex justify-between" style="padding: var(--s-12); border-top: 1px solid var(--border); background: var(--bg-subtle)">
+      <button class="btn ghost" style="padding: 4px var(--s-12); font-size: var(--text-xs); height: auto;"><svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> Chụp lại</button>
+      <button class="btn ghost" style="padding: 4px var(--s-12); font-size: var(--text-xs); height: auto;"><svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Thư viện ảnh</button>
     </div>
   </div>
-  <div class="card">
-    <h2>Bữa trưa · 450 kcal</h2>
-    <div class="flex items-center gap-12" style="padding:var(--s-12) 0;border-bottom:1px solid var(--border)">
-      <div style="width:56px;height:56px;border-radius:var(--radius-md);background:var(--bg-subtle);display:flex;align-items:center;justify-content:center;color:var(--accent-customer)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
-      <div class="flex-1">
-        <div style="font-weight:600">Cơm lứt + ức gà + rau</div>
-        <div class="hint">150 + 250 + 50 kcal</div>
+
+  <!-- Section 2: AI evaluation details -->
+  <div class="card" style="border-color: var(--accent-customer)">
+    <div style="font-weight: 700; color: var(--accent-customer); margin-bottom: var(--s-12); display: flex; align-items: center; gap: 8px;">
+      <svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      AI đánh giá cấu trúc dinh dưỡng
+    </div>
+    <div style="display: flex; gap: var(--s-12); align-items: center; margin-bottom: var(--s-12)">
+      <div style="width: 80px; height: 80px; border-radius: var(--radius-full); border: 6px solid var(--accent-customer); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: var(--text-sm); position: relative; background: #f0fdfa;">
+        <span style="font-size: var(--text-xs); text-align: center; line-height: 1.2; color: var(--accent-customer)">Đạt<br><strong style="font-size: var(--text-lg)">85%</strong></span>
       </div>
-      <button class="pill" style="border-color:var(--accent-customer);color:var(--accent-customer)">+ Ảnh</button>
-    </div>
-  </div>
-  <div class="card">
-    <h2>Bữa phụ · 150 kcal</h2>
-    <div class="flex items-center gap-12" style="padding:var(--s-12) 0;border-bottom:1px solid var(--border)">
-      <div style="width:56px;height:56px;border-radius:var(--radius-md);background:var(--bg-subtle);display:flex;align-items:center;justify-content:center;color:var(--accent-customer)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
-      <div class="flex-1">
-        <div style="font-weight:600">Trái cây ít ngọt</div>
-        <div class="hint">150 kcal</div>
+      <div class="flex-1" style="display: flex; flex-direction: column; gap: var(--s-8)">
+        <div>
+          <div class="flex justify-between font-semibold" style="font-size: var(--text-xs)">
+            <span>Đạm (Protein): 22%</span>
+            <span style="color: var(--state-warn)">Mục tiêu: 30%</span>
+          </div>
+          <div style="height: 6px; background: #e2e8f0; border-radius: 3px; overflow: hidden; margin-top: 2px;">
+            <div style="width: 73%; height: 100%; background: var(--state-warn);"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between font-semibold" style="font-size: var(--text-xs)">
+            <span>Đường bột (Carbs): 55%</span>
+            <span style="color: var(--state-good)">Mục tiêu: 45%</span>
+          </div>
+          <div style="height: 6px; background: #e2e8f0; border-radius: 3px; overflow: hidden; margin-top: 2px;">
+            <div style="width: 100%; height: 100%; background: var(--state-good);"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between font-semibold" style="font-size: var(--text-xs)">
+            <span>Chất béo (Fats): 23%</span>
+            <span style="color: var(--state-good)">Mục tiêu: 25%</span>
+          </div>
+          <div style="height: 6px; background: #e2e8f0; border-radius: 3px; overflow: hidden; margin-top: 2px;">
+            <div style="width: 92%; height: 100%; background: var(--state-good);"></div>
+          </div>
+        </div>
       </div>
-      <button class="pill" style="border-color:var(--accent-customer);color:var(--accent-customer)">+ Ảnh</button>
     </div>
   </div>
+
+  <!-- Section 3: Detailed Inputs (Editable) -->
   <div class="card">
-    <h2>Bữa tối · 390 kcal</h2>
-    <div class="flex items-center gap-12" style="padding:var(--s-12) 0">
-      <div style="width:56px;height:56px;border-radius:var(--radius-md);background:var(--bg-subtle);display:flex;align-items:center;justify-content:center;color:var(--accent-customer)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
-      <div class="flex-1">
-        <div style="font-weight:600">Cá hấp + rau luộc</div>
-        <div class="hint">300 + 90 kcal</div>
+    <h2>Thông số bữa ăn (Có thể chỉnh sửa)</h2>
+    <div style="display: flex; flex-direction: column; gap: var(--s-12)">
+      <div>
+        <label class="hint" style="display: block; margin-bottom: var(--s-4); font-weight: 600; color: var(--text)">Năng lượng (Calo)</label>
+        <div class="flex items-center gap-8">
+          <input type="number" class="input" style="flex: 1; padding: var(--s-8); border: 1px solid var(--border); border-radius: var(--radius-md)" value="310">
+          <span style="font-weight: 600; width: 60px; text-align: right;">kcal</span>
+        </div>
+        <div class="hint" style="color: var(--state-good); margin-top: var(--s-2)">Tiêu chuẩn: 320 kcal (Đạt)</div>
       </div>
-      <button class="pill" style="border-color:var(--accent-customer);color:var(--accent-customer)">+ Ảnh</button>
+      <div>
+        <label class="hint" style="display: block; margin-bottom: var(--s-4); font-weight: 600; color: var(--text)">Đường bột (Carbs)</label>
+        <div class="flex items-center gap-8">
+          <input type="number" class="input" style="flex: 1; padding: var(--s-8); border: 1px solid var(--border); border-radius: var(--radius-md)" value="35">
+          <span style="font-weight: 600; width: 60px; text-align: right;">gam</span>
+        </div>
+        <div class="hint" style="color: var(--state-warn); margin-top: var(--s-2)">Tiêu chuẩn: 32 gam (Thừa 3 gam)</div>
+      </div>
+      <div>
+        <label class="hint" style="display: block; margin-bottom: var(--s-4); font-weight: 600; color: var(--text)">Đạm (Protein)</label>
+        <div class="flex items-center gap-8">
+          <input type="number" class="input" style="flex: 1; padding: var(--s-8); border: 1px solid var(--border); border-radius: var(--radius-md)" value="18">
+          <span style="font-weight: 600; width: 60px; text-align: right;">gam</span>
+        </div>
+        <div class="hint" style="color: var(--state-warn); margin-top: var(--s-2)">Tiêu chuẩn: 24 gam (Thiếu 6 gam)</div>
+      </div>
+      <div>
+        <label class="hint" style="display: block; margin-bottom: var(--s-4); font-weight: 600; color: var(--text)">Chất béo tốt</label>
+        <div class="flex items-center gap-8">
+          <input type="number" class="input" style="flex: 1; padding: var(--s-8); border: 1px solid var(--border); border-radius: var(--radius-md)" value="10">
+          <span style="font-weight: 600; width: 60px; text-align: right;">gam</span>
+        </div>
+        <div class="hint" style="color: var(--state-good); margin-top: var(--s-2)">Tiêu chuẩn: 11 gam (Đạt)</div>
+      </div>
+    </div>
+    
+    <div class="card subtle" style="margin-top: var(--s-16); margin-bottom: 0;">
+      <div style="font-weight: 600; font-size: var(--text-sm); margin-bottom: 2px;">Nhận xét từ AI:</div>
+      <div class="hint" style="line-height: 1.5; color: var(--text)">Bữa sáng của bạn có lượng calo phù hợp nhưng hơi thiếu đạm. Hãy cân nhắc thêm một muỗng PPP vào bột dinh dưỡng hoặc ăn kèm một quả trứng luộc để tăng cơ.</div>
     </div>
   </div>
+
+  <!-- Section 4: Supporting Products -->
   <div class="card">
-    <h2>SP bổ sung</h2>
-    <div class="flex items-center gap-12" style="padding:var(--s-12) 0;border-bottom:1px solid var(--border)">
-      <span style="color:var(--accent-customer)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 2a10 10 0 0 1 10 10"/><path d="M12 12L2.5 7.5"/></svg></span>
-      <div class="flex-1"><div style="font-weight:600">PPP</div><div class="hint">1 muỗng · bữa sáng</div></div>
-    </div>
-    <div class="flex items-center gap-12" style="padding:var(--s-12) 0">
-      <span style="color:var(--accent-customer)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
-      <div class="flex-1"><div style="font-weight:600">Omega-3</div><div class="hint">2 viên · bữa tối</div></div>
+    <h2>Sản phẩm hỗ trợ sử dụng kèm</h2>
+    <div style="display: flex; flex-direction: column; gap: var(--s-12)">
+      <div class="flex items-center justify-between" style="padding: var(--s-8) 0; border-bottom: 1px solid var(--border)">
+        <div class="flex items-center gap-8">
+          <input type="checkbox" id="sp-ppp" style="width: 18px; height: 18px; accent-color: var(--accent-customer);" checked>
+          <label for="sp-ppp" style="font-weight: 600;">Bột đạm PPP</label>
+        </div>
+        <div class="flex items-center gap-8">
+          <input type="number" class="input" style="width: 60px; padding: 4px var(--s-8); border: 1px solid var(--border); border-radius: var(--radius-sm); text-align: center;" value="1">
+          <span class="hint">muỗng</span>
+        </div>
+      </div>
+      <div class="flex items-center justify-between" style="padding: var(--s-8) 0">
+        <div class="flex items-center gap-8">
+          <input type="checkbox" id="sp-omega" style="width: 18px; height: 18px; accent-color: var(--accent-customer);">
+          <label for="sp-omega" style="font-weight: 600;">Omega-3 Vy-Tox</label>
+        </div>
+        <div class="flex items-center gap-8">
+          <input type="number" class="input" style="width: 60px; padding: 4px var(--s-8); border: 1px solid var(--border); border-radius: var(--radius-sm); text-align: center;" value="0">
+          <span class="hint">viên</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<div class="bottom-nav"><div class="nav-item active"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><span>Trang chủ</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span><span>Báo cáo</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span>Đào tạo</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 1 0 0 8zM5 20a7 7 0 0 1 14 0"/></svg></span><span>Hồ sơ</span></div></div>
-<div class="bottom-nav"><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><span>Trang chủ</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span><span>Báo cáo</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span>Đào tạo</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 1 0 0 8zM5 20a7 7 0 0 1 14 0"/></svg></span><span>Hồ sơ</span></div></div></div></body></html>
+
+<div class="cta-bar">
+  <a href="S-HLTH-06_check_in.html" style="text-decoration: none; width: 100%;">
+    <button class="btn primary customer block" style="width: 100%;">
+      <svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+      Lưu bữa ăn
+    </button>
+  </a>
+</div>
+</div></body></html>
