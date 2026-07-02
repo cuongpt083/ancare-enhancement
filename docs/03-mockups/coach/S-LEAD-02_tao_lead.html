@@ -1,34 +1,37 @@
-<!-- Mockup US-E01-02 Thêm mới KH (Card Thông tin cơ bản + người mời Q32) | Khuôn T1 | HLV (draft §2.4.1) -->
 <!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Thêm mới KH — AnCare</title>
 <link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
+
 </head><body><div class="screen">
-  <div class="appbar"><span class="back">‹</span><h1>Thêm mới KH</h1><span class="info">ⓘ</span></div>
-  <div class="content">
-    <div class="card">
-      <h2>Card Thông tin cơ bản</h2>
-      <div class="search" style="margin-bottom:8px"><input value="HLV Thủy (mặc định)" placeholder="Tên người mời *"></div>
-      <div class="search" style="margin-bottom:8px"><input placeholder="SĐT người mời"></div>
-      <div class="hint" style="margin-bottom:12px">Người mời = HLV hoặc KH đại sứ/bảo trợ (Q32 — mặc định HLV đăng nhập, có thể đổi)</div>
-      <div class="search" style="margin-bottom:8px"><input placeholder="Họ và tên KH *"></div>
-      <div class="search" style="margin-bottom:8px"><input placeholder="Số điện thoại (chống trùng D15)"></div>
-      <div class="search" style="margin-bottom:8px"><input placeholder="Email"></div>
-      <div class="search" style="margin-bottom:8px"><input placeholder="Ngày sinh (dd/mm/yyyy)"></div>
-      <div style="display:flex;gap:8px;margin-bottom:8px">
-        <div class="search" style="flex:1"><input placeholder="Chiều cao (cm)"></div>
-        <div class="search" style="flex:1"><input placeholder="Cân nặng (kg)"></div>
-      </div>
-      <div style="display:flex;gap:8px;margin-bottom:8px">
-        <div class="search" style="flex:1"><span style="color:var(--text-muted);font-size:13px">Giới tính:</span></div>
-        <div style="flex:1.5;display:flex;gap:4px">
-          <span class="chip accent">Nam (mặc định)</span>
-          <span class="chip">Nữ</span>
-          <span class="chip">Khác</span>
-        </div>
-      </div>
-      <div class="search"><input placeholder="Địa chỉ"></div>
+<div class="appbar"><span class="back"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></span><h1>Thêm mới KH</h1><span class="info"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="8.01"/><line x1="12" y1="12" x2="12" y2="16"/></svg></span></div>
+
+<div class="content" style="padding-top:var(--s-12)">
+  <div class="card">
+    <h2>Thông tin cơ bản</h2>
+    <div class="field"><label>Họ và tên KH <span style="color:var(--state-alert)">*</span></label><input placeholder="Họ và tên"></div>
+    <div class="flex gap-12">
+      <div class="field flex-1"><label>Số điện thoại</label><input placeholder="SĐT"></div>
+      <div class="field flex-1"><label>Email</label><input placeholder="Email"></div>
     </div>
-    <div class="card subtle"><div class="hint">Sau Lưu → chuyển sang "Chân dung KH" (US-E02-02 — gộp khảo sát mục tiêu, Q35)</div></div>
+    <div class="flex gap-12">
+      <div class="field flex-1"><label>Ngày sinh</label><input placeholder="dd/mm/yyyy"></div>
+      <div class="field flex-1"><label>Giới tính</label><input placeholder="Nam"></div>
+    </div>
+    <div class="flex gap-12">
+      <div class="field flex-1"><label>Chiều cao (cm)</label><input placeholder="170"></div>
+      <div class="field flex-1"><label>Cân nặng (kg)</label><input placeholder="64.8"></div>
+    </div>
+    <div class="field"><label>Người mời</label><input placeholder="Thủy (HLV)" value="Thủy (HLV)"></div>
   </div>
-  <div class="cta-bar"><button class="btn secondary">Hủy</button><button class="btn primary">Lưu → Chân dung KH</button></div>
+  <div class="card">
+    <h2>Chân dung Khách hàng</h2>
+    <div class="card subtle" style="margin-bottom:var(--s-12)">
+      <div style="font-size:var(--text-sm);line-height:1.7;color:var(--text-secondary)">
+        <strong>1.</strong> Mệt mỏi/dễ cảm? &nbsp;<strong>2.</strong> Đau đầu, đau lưng, đau mỏi? &nbsp;<strong>3.</strong> Có tiểu đường, huyết áp, tim mạch, khớp? &nbsp;<strong>4.</strong> Công việc/gia đình có áp lực? &nbsp;<strong>5.</strong> Giấc ngủ tốt không? &nbsp;<strong>6.</strong> Hay đói hoặc thèm ăn? &nbsp;<strong>7.</strong> Thường ăn đồ chế biến sẵn? &nbsp;<strong>8.</strong> Có nghĩ thức ăn ảnh hưởng sức khỏe? &nbsp;<strong>9.</strong> Có thường bỏ bữa sáng? &nbsp;<strong>10.</strong> Mỗi ngày uống khoảng bao nhiêu cốc nước? &nbsp;<strong>11.</strong> Có tập thể dục không? &nbsp;<strong>12.</strong> Bác sĩ có khuyên giảm cân hoặc giảm cholesterol? &nbsp;<strong>13.</strong> Muốn giảm cân hoặc giảm vòng bụng? &nbsp;<strong>14.</strong> Muốn tăng cân? &nbsp;<strong>15.</strong> Có hút thuốc hoặc tiếp xúc khói thuốc? &nbsp;<strong>16.</strong> Có thường uống rượu, bia hoặc cà phê? &nbsp;<strong>17.</strong> Mục tiêu chính khi kiểm tra sức khỏe là gì?
+      </div>
+    </div>
+    <div class="field"><label>Trả lời (HLV nhập gộp)</label><textarea placeholder="Tóm tắt câu trả lời của KH, tập trung kết quả mong muốn..."></textarea></div>
+  </div>
+</div>
+<div class="cta-bar"><button class="btn primary"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Lưu KH</button></div>
 </div></body></html>

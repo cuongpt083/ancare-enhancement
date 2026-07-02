@@ -1,24 +1,41 @@
-<!-- Mockup US-E06-01 Check-in đồng hồ sinh học 24h | Khuôn T3 (focus=đồng hồ) | KH (tô màu + gợi ý D28, điểm 3/2/1/0 D27) -->
 <!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Sức khỏe tổng thể — AnCare</title>
 <link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
-<style>:root{--accent:var(--accent-customer)}
-.clock{width:200px;height:200px;border-radius:50%;background:conic-gradient(var(--state-good) 0 25%,var(--state-idle) 25% 45%,var(--state-warn) 45% 60%,var(--bg-subtle) 60% 100%);margin:0 auto;position:relative;display:flex;align-items:center;justify-content:center}
-.clock::after{content:"24h";position:absolute;font-size:20px;font-weight:700;color:var(--text)}
-</style></head><body><div class="screen">
-  <div class="appbar"><span class="back">‹</span><h1>Sức khỏe tổng thể</h1><span class="info">ⓘ</span></div>
-  <div class="content">
-    <div class="clock"></div>
-    <div class="card"><h2>Đã thực hiện</h2>
-      <div class="list-item"><div class="avatar" style="color:var(--state-good)">✓</div><div class="meta"><div class="name">Uống nước (1.5/2.6 lít)</div><div class="sub">đúng giờ · +3</div></div><span class="chip good">Tốt</span></div>
-      <div class="list-item"><div class="avatar" style="color:var(--state-good)">✓</div><div class="meta"><div class="name">Bữa sáng</div><div class="sub">đúng giờ · +3</div></div><span class="chip good">Tốt</span></div>
-    </div>
-    <div class="card"><h2>Chờ thực hiện</h2>
-      <div class="list-item"><div class="avatar" style="color:var(--state-idle)">○</div><div class="meta"><div class="name">Vận động chiều</div><div class="sub">16:00 — sắp đến giờ</div></div><span class="chip idle">Chờ</span></div>
-      <div class="list-item"><div class="avatar" style="color:var(--state-idle)">○</div><div class="meta"><div class="name">Bữa tối</div><div class="sub">19:00</div></div><span class="chip idle">Chờ</span></div>
-    </div>
-    <button class="btn primary" style="width:100%">+ Cốc nước (250ml)</button>
-    <div class="hint" style="text-align:center">Nước ≥ 0.4 lít/10kg · điểm 3/2/1/0 theo độ đúng giờ</div>
+<style>:root{--accent:var(--accent-customer);--accent-hover:var(--accent-customer-hover);}</style>
+
+</head><body><div class="screen">
+<div class="appbar"><span class="back"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></span><h1>Sức khỏe tổng thể</h1><span class="info"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="8.01"/><line x1="12" y1="12" x2="12" y2="16"/></svg></span></div>
+<div class="content" style="padding-top:var(--s-12)">
+  <div class="focus-card customer" style="margin-bottom:var(--s-16)">
+    <div class="label">Thứ Tư, 2/7</div>
+    <div class="title" style="font-size:var(--text-xl)">Hôm nay bạn đang làm tốt!</div>
   </div>
-  <div class="bottom-nav"><div class="nav-item active"><div class="icon">🏠</div><div class="label">Sức khỏe</div></div><div class="nav-item"><div class="icon">🍴</div><div class="label">Bữa ăn</div></div><div class="nav-item"><div class="icon">💬</div><div class="label">Chat</div></div><div class="nav-item"><div class="icon">👤</div><div class="label">Hồ sơ</div></div></div>
-</div></body></html>
+  <div class="card" style="display:flex;align-items:center;justify-content:center;position:relative;height:260px">
+    <svg viewBox="0 0 200 200" width="200" height="200">
+      <circle cx="100" cy="100" r="90" fill="none" stroke="var(--border)" stroke-width="12"/>
+      <circle cx="100" cy="100" r="90" fill="none" stroke="var(--accent-customer)" stroke-width="12" stroke-dasharray="424" stroke-dashoffset="106" stroke-linecap="round" transform="rotate(-90 100 100)"/>
+      <text x="100" y="95" text-anchor="middle" font-size="36" font-weight="700" fill="var(--text)">75%</text>
+      <text x="100" y="120" text-anchor="middle" font-size="12" fill="var(--text-muted)">hoàn thành</text>
+    </svg>
+    <div style="position:absolute;bottom:24px;display:flex;gap:var(--s-16)">
+      <div class="text-center"><div class="chip good">Tốt</div><div class="hint">Thân</div></div>
+      <div class="text-center"><div class="chip good">Tốt</div><div class="hint">Tâm</div></div>
+      <div class="text-center"><div class="chip warn">Cần lưu ý</div><div class="hint">Trí</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Nhiệm vụ sắp tới</h2>
+    <div class="flex items-center gap-12" style="padding:var(--s-12) 0;border-bottom:1px solid var(--border)">
+      <span style="color:var(--accent-customer)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+      <div class="flex-1"><div style="font-weight:600">20:00 — Uống nước</div><div class="hint">Cốc thứ 7</div></div>
+      <button class="pill active" style="border-color:var(--accent-customer);background:var(--accent-customer);color:#fff">Check</button>
+    </div>
+    <div class="flex items-center gap-12" style="padding:var(--s-12) 0">
+      <span style="color:var(--accent-customer)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+      <div class="flex-1"><div style="font-weight:600">22:30 — Chuẩn bị ngủ</div><div class="hint">Đi ngủ trước 23h</div></div>
+      <button class="pill">Check</button>
+    </div>
+  </div>
+</div>
+<div class="bottom-nav"><div class="nav-item active"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><span>Trang chủ</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span><span>Báo cáo</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span>Đào tạo</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 1 0 0 8zM5 20a7 7 0 0 1 14 0"/></svg></span><span>Hồ sơ</span></div></div>
+<div class="bottom-nav"><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><span>Trang chủ</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span><span>Báo cáo</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span>Đào tạo</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 1 0 0 8zM5 20a7 7 0 0 1 14 0"/></svg></span><span>Hồ sơ</span></div></div></div></body></html>

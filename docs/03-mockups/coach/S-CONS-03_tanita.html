@@ -1,33 +1,31 @@
-<!-- Mockup US-E02-03 Khảo sát Tanita (OCR + 9 chỉ số theo thứ tự cân) | Khuôn T1 | HLV (draft §2.5) -->
 <!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Khảo sát Tanita — AnCare</title>
 <link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
-<style>
-.tfield{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:14px}
-.tfield input{width:90px;text-align:right;border:1px solid var(--border);border-radius:var(--radius-sm);padding:6px 8px;font-size:14px}
-.tfield .unit{color:var(--text-muted);font-size:12px;margin-left:4px}
-</style></head><body><div class="screen">
-  <div class="appbar"><span class="back">‹</span><h1>Khảo sát Tanita</h1><span class="info">ⓘ</span></div>
-  <div class="progress-dots"><span class="dot done"></span><span class="dot done"></span><span class="dot active"></span><span class="dot"></span></div>
-  <div class="content">
-    <div class="card">
-      <h2>Nhập nhanh</h2>
-      <button class="btn primary" style="width:100%;margin-bottom:8px">📷 Chụp ảnh phiếu Tanita</button>
-      <button class="btn secondary" style="width:100%">🖼 Chọn ảnh từ thư viện</button>
-      <div class="hint" style="margin-top:8px">OCR tự trích xuất → “Sử dụng kết quả” hoặc “Chỉnh sửa”</div>
+
+</head><body><div class="screen">
+<div class="appbar"><span class="back"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></span><h1>Khảo sát Tanita</h1><span class="info"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="8.01"/><line x1="12" y1="12" x2="12" y2="16"/></svg></span></div>
+<div class="progress-dots"><span class="dot done"></span><span class="dot done"></span><span class="dot active"></span><span class="dot "></span></div>
+<div class="content" style="padding-top:var(--s-12)">
+  <div class="card">
+    <h2>Nhập nhanh từ ảnh</h2>
+    <div class="flex gap-12">
+      <button class="btn secondary flex-1" style="height:48px"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> Chụp ảnh</button>
+      <button class="btn secondary flex-1" style="height:48px"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg> Chọn ảnh</button>
     </div>
-    <div class="card">
-      <h2>Nhập tay (theo thứ tự hiển thị trên cân Tanita)</h2>
-      <div class="tfield"><span>1. Cân nặng</span><span><input placeholder="64.8"><span class="unit">kg</span></span></div>
-      <div class="tfield"><span>2. Tỷ lệ mỡ cơ thể</span><span><input placeholder="18.9"><span class="unit">%</span></span></div>
-      <div class="tfield"><span>3. Khối lượng xương</span><span><input placeholder="2.8"><span class="unit">kg</span></span></div>
-      <div class="tfield"><span>4. Tỷ lệ nước</span><span><input placeholder="57.7"><span class="unit">%</span></span></div>
-      <div class="tfield"><span>5. Khối lượng cơ</span><span><input placeholder="52.0"><span class="unit">kg</span></span></div>
-      <div class="tfield"><span>6. Vóc dáng</span><span><input placeholder="Bình thường"></span></div>
-      <div class="tfield"><span>7. Tuổi sinh học</span><span><input placeholder="37"><span class="unit">tuổi</span></span></div>
-      <div class="tfield"><span>8. Năng lượng nghỉ ngơi</span><span><input placeholder="1276"><span class="unit">kcal</span></span></div>
-      <div class="tfield" style="border:none"><span>9. Tỷ lệ mỡ nội tạng</span><span><input placeholder="10"><span class="unit">(1-50)</span></span></div>
-    </div>
+    <div class="hint" style="margin-top:var(--s-12)">OCR tự nhận chỉ số từ màn hình cân Tanita. HLV kiểm tra & sửa.</div>
   </div>
-  <div class="cta-bar"><button class="btn secondary">‹ Quay lại</button><button class="btn primary">Tạo bản tư vấn →</button></div>
+  <div class="card">
+    <h2>Hoặc nhập tay</h2>
+    <div class="field"><label>Cân nặng (kg)</label><input value="64.8"></div>
+    <div class="field"><label>Tỷ lệ mỡ cơ thể (%)</label><input value="18.9"></div>
+    <div class="field"><label>Khối lượng xương (kg)</label><input value="2.8"></div>
+    <div class="field"><label>Tỷ lệ nước (%)</label><input value="57.7"></div>
+    <div class="field"><label>Khối lượng cơ (kg)</label><input value="52.0"></div>
+    <div class="field"><label>Vóc dáng</label><input value="Bình thường"></div>
+    <div class="field"><label>Tuổi sinh học</label><input value="37"></div>
+    <div class="field"><label>Năng lượng nghỉ ngơi (kcal)</label><input value="1276"></div>
+    <div class="field"><label>Tỷ lệ mỡ nội tạng (1-50)</label><input value="10"></div>
+  </div>
+</div>
+<div class="cta-bar"><button class="btn primary"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/></svg>Tạo bản tư vấn</button></div>
 </div></body></html>

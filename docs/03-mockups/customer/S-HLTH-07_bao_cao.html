@@ -1,45 +1,44 @@
-<!-- Mockup KH Báo cáo (tổng kết ngày 21h + periodic + đề xuất + infographic) | Khuôn T3+T4 | KH (draft-kh §2) -->
 <!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Báo cáo — AnCare KH</title>
 <link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
-<style>:root{--accent:var(--accent-customer)}
-.btable{width:100%;border-collapse:collapse;font-size:12px}
-.btable th{background:var(--bg-subtle);padding:6px 4px;text-align:right;font-weight:600;color:var(--text-muted);font-size:11px}
-.btable th:first-child{text-align:left}
-.btable td{padding:7px 4px;border-bottom:1px solid var(--border);text-align:right}
-.btable td:first-child{text-align:left;font-weight:600}
-.up{color:var(--state-good)} .dn{color:var(--state-alert)}
-.tabs-pill{display:flex;gap:6px;padding:12px 16px 0}
-.tabs-pill .pill{flex:1;text-align:center;padding:8px;border-radius:99px;font-size:13px;font-weight:600;background:var(--bg-subtle);cursor:pointer}
-.tabs-pill .pill.active{background:var(--accent);color:#fff}
-</style></head><body><div class="screen">
-  <div class="appbar"><span class="back">‹</span><h1>Báo cáo</h1><span class="info">ⓘ</span></div>
-  <div class="tabs-pill"><div class="pill active">Tổng kết ngày</div><div class="pill">Tiến trình gói</div><div class="pill">Đề xuất</div></div>
-  <div class="content">
-    <div class="focus-card"><div class="label">Tổng kết ngày (21:00-22:00)</div><div class="title">Hôm nay bạn làm tốt lắm! 👏</div></div>
-    <div class="card">
-      <h2 style="font-size:13px">Phân tích chuyên sâu</h2>
-      <div style="font-size:13px;line-height:1.6">Nước đạt 2L (tốt). Đạm đủ. Mỡ nội tạng giảm dần. Bữa trưa hơi thiếu rau.</div>
-    </div>
-    <div class="card">
-      <h2 style="font-size:13px">Lý do ảnh hưởng chỉ số</h2>
-      <div style="font-size:13px;line-height:1.6">Ngủ trễ hôm qua → mệt mỏi chiều. Uống đủ nước giúp trao đổi chất tốt.</div>
-    </div>
-    <div class="card">
-      <h2 style="font-size:13px">Lời khuyên ngày mai</h2>
-      <div style="font-size:13px;line-height:1.6">• Ngủ trước 23h<br>• Thêm rau bữa trưa<br>• Vận động 30 phút</div>
-    </div>
-    <div class="card" style="border-color:var(--accent)">
-      <h2 style="font-size:13px;color:var(--accent)">Nâng cấp gói / mua bổ sung SP</h2>
-      <div style="font-size:13px">Gói hiện tại: Tối ưu. Gợi ý: thêm Omega-3 (hỗ trợ mỡ nội tạng).</div>
-      <button class="btn ghost" style="width:100%;margin-top:8px">Xem gợi ý →</button>
-    </div>
-    <div class="card subtle">
-      <div class="hint">[Tab Tiến trình gói] Bảng tổng hợp: chỉ số · mục tiêu · ngày đầu · gần nhất · thay đổi</div>
-      <div class="hint">[Tab Đề xuất] Sản phẩm/gói KH quan tâm</div>
-    </div>
-    <button class="btn primary" style="width:100%">✨ Tạo Infographic nhật ký</button>
-    <div class="hint" style="text-align:center">Infographic dọc: kiến thức hôm nay · bữa ăn/thể chất · ảnh bản thân/giao lưu → chia sẻ Zalo/FB</div>
+<style>:root{--accent:var(--accent-customer);--accent-hover:var(--accent-customer-hover);}</style>
+
+</head><body><div class="screen">
+<div class="appbar"><span class="back"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></span><h1>Báo cáo</h1><span class="info"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="8.01"/><line x1="12" y1="12" x2="12" y2="16"/></svg></span></div>
+<div class="content" style="padding-top:var(--s-12)">
+  <div class="segmented">
+    <button class="seg active">Tổng kết ngày</button>
+    <button class="seg">Tiến trình</button>
+    <button class="seg">Đề xuất</button>
   </div>
-  <div class="bottom-nav"><div class="nav-item"><div class="icon">🏠</div><div class="label">Trang chủ</div></div><div class="nav-item active"><div class="icon">📊</div><div class="label">Báo cáo</div></div><div class="nav-item"><div class="icon">🎓</div><div class="label">Đào tạo</div></div><div class="nav-item"><div class="icon">👤</div><div class="label">Hồ sơ</div></div></div>
-</div></body></html>
+  <div class="focus-card customer" style="margin-bottom:var(--s-16)">
+    <div class="label">Tổng kết 21:00</div>
+    <div class="title" style="font-size:var(--text-xl)">Hôm nay bạn làm tốt! 👏</div>
+  </div>
+  <div class="card">
+    <h2>Phân tích chuyên sâu</h2>
+    <div class="card subtle">
+      <div class="hint" style="line-height:1.7">Nước đạt 1.6L (tốt). Đạm đủ. Mỡ nội tạng giảm dần. Bữa trưa hơi thiếu rau.</div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Lý do ảnh hưởng</h2>
+    <div class="card subtle">
+      <div class="hint" style="line-height:1.7">Ngủ trễ hôm qua → mệt mỏi chiều. Uống đủ nước giúp trao đổi chất tốt.</div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Lời khuyên ngày mai</h2>
+    <div class="card subtle">
+      <div class="hint" style="line-height:1.7">• Ngủ trước 23h<br>• Thêm rau bữa trưa<br>• Vận động 30 phút</div>
+    </div>
+  </div>
+  <div class="card" style="border-color:var(--accent-customer)">
+    <h2 style="color:var(--accent-customer)">Đề xuất nâng cấp</h2>
+    <div class="hint" style="margin-bottom:var(--s-12)">Gói Tối ưu hiện tại. Gợi ý thêm Omega-3 để hỗ trợ mỡ nội tạng.</div>
+    <button class="btn ghost customer block">Xem gợi ý</button>
+  </div>
+  <button class="btn primary customer block" style="margin-bottom:var(--s-16)"><svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg> Tạo Infographic nhật ký</button>
+</div>
+<div class="bottom-nav"><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><span>Trang chủ</span></div><div class="nav-item active"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span><span>Báo cáo</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span>Đào tạo</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 1 0 0 8zM5 20a7 7 0 0 1 14 0"/></svg></span><span>Hồ sơ</span></div></div>
+<div class="bottom-nav"><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><span>Trang chủ</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span><span>Báo cáo</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span>Đào tạo</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 1 0 0 8zM5 20a7 7 0 0 1 14 0"/></svg></span><span>Hồ sơ</span></div></div></div></body></html>

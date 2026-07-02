@@ -1,47 +1,98 @@
-<!-- Mockup US-E02-05 Xem lộ trình (lộ trình 3 tháng cố định + mô tả từng tháng) | Khuôn T1 | HLV (draft §7 cập nhật) -->
 <!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Xem lộ trình — AnCare</title>
 <link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
-<style>
-.pkg-item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:14px}
-.benefit{display:flex;gap:8px;align-items:flex-start;padding:6px 0;font-size:14px}
-.benefit::before{content:"✓";color:var(--state-good);font-weight:700}
-.month{border-left:3px solid var(--accent);padding:10px 0 10px 12px;margin:8px 0;background:var(--bg-subtle);border-radius:0 var(--radius-sm) var(--radius-sm) 0}
-.month .mh{font-weight:700;font-size:14px;color:var(--accent)}
-.month .md{font-size:13px;color:var(--text);margin-top:4px;line-height:1.5}
-</style></head><body><div class="screen">
-  <div class="appbar"><span class="back">‹</span><h1>Xem lộ trình</h1><span class="info">ⓘ</span></div>
-  <div class="progress-dots"><span class="dot done"></span><span class="dot done"></span><span class="dot done"></span><span class="dot active"></span></div>
-  <div class="content">
-    <div class="focus-card"><div class="label">Chương trình Cơ — Nước — Mỡ</div><div class="title">Giảm đúng mỡ thừa · giữ cơ + nước</div></div>
-    <div class="card">
-      <h2>Lợi ích chương trình</h2>
-      <div class="benefit">Giảm đúng mỡ thừa, không mất cơ</div>
-      <div class="benefit">Cân bằng nước & điện giải</div>
-      <div class="benefit">Khỏe mạnh từ bên trong</div>
-    </div>
-    <div class="card">
-      <h2>Kết quả đạt được</h2>
-      <div class="wf" style="text-align:left;justify-content:flex-start">[ dự kiến: −3kg mỡ, giữ cơ 52kg, nước >55% ]</div>
-    </div>
-    <div class="card">
-      <h2>Lộ trình 3 tháng <span class="chip accent" style="margin-left:4px">mặc định</span></h2>
-      <div class="month"><div class="mh">Tháng 1</div><div class="md">Điều chỉnh cân nặng, trang bị kiến thức cơ bản để thay đổi tư duy về dinh dưỡng và thể chất.</div></div>
-      <div class="month"><div class="mh">Tháng 2</div><div class="md">Tăng cơ, tăng cường sức khỏe, điều chỉnh các thói quen không lành mạnh.</div></div>
-      <div class="month"><div class="mh">Tháng 3</div><div class="md">Tối ưu hóa vóc dáng, trẻ hóa, duy trì năng lượng và xây dựng thói quen lành mạnh bền vững.</div></div>
-      <div class="hint">Lộ trình cố định 3 tháng (không chọn 1 tháng/trọn đời).</div>
-    </div>
-    <div class="card">
-      <h2>Gói sản phẩm đi kèm</h2>
-      <div class="pkg-item"><span>F1 — Bữa ăn lành mạnh</span><span class="hint">(giá: HLV giải thích)</span></div>
-      <div class="pkg-item"><span>PPP — Bột Protein</span><span class="hint">(giá: HLV giải thích)</span></div>
-      <div class="pkg-item"><span>Omega-3</span><span class="hint">(giá: HLV giải thích)</span></div>
-      <div class="hint" style="margin-top:8px">Không hiển thị giá trong app — HLV giải thích chi tiết bên ngoài.</div>
-    </div>
-    <div class="card subtle">
-      <h2 style="font-size:13px">Cam kết & Disclaimer</h2>
-      <div class="disclaimer" style="border:none;margin:0;padding:0">⚠️ Không có gì là thần dược; để có kết quả cần kiến thức dinh dưỡng, kỷ luật bản thân, hiểu nguyên lý để không phụ thuộc vào HLV hoặc sản phẩm.</div>
+
+</head><body><div class="screen">
+<div class="appbar"><span class="back"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></span><h1>Xem lộ trình</h1><span class="info"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="8.01"/><line x1="12" y1="12" x2="12" y2="16"/></svg></span></div>
+<div class="content" style="padding-top:var(--s-12)">
+  <div class="focus-card" style="margin-bottom:var(--s-16)">
+    <div class="label">Chương trình Cơ — Nước — Mỡ</div>
+    <div class="title" style="font-size:var(--text-xl)">Giảm đúng mỡ thừa · giữ cơ + nước</div>
+  </div>
+  <div class="card">
+    <h2>Lợi ích</h2>
+    <div style="display:flex;flex-direction:column;gap:var(--s-8)">
+      <div class="flex items-center gap-12"><span style="color:var(--state-good)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Giảm đúng mỡ thừa, không mất cơ</span></div>
+      <div class="flex items-center gap-12"><span style="color:var(--state-good)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Cân bằng nước & điện giải</span></div>
+      <div class="flex items-center gap-12"><span style="color:var(--state-good)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Khỏe mạnh từ bên trong</span></div>
     </div>
   </div>
-  <div class="cta-bar"><button class="btn secondary" style="flex:0 0 auto">Đóng</button><button class="btn primary">Tạo tài khoản →</button></div>
+  <div class="card">
+    <h2>Kết quả dự kiến</h2>
+    <div class="flex gap-12">
+      <div class="flex-1" style="text-align:center;padding:var(--s-12);background:var(--bg-subtle);border-radius:var(--radius-md)">
+        <div style="font-size:var(--text-xl);font-weight:700;color:var(--accent)">−3 kg</div>
+        <div class="hint">mỡ</div>
+      </div>
+      <div class="flex-1" style="text-align:center;padding:var(--s-12);background:var(--bg-subtle);border-radius:var(--radius-md)">
+        <div style="font-size:var(--text-xl);font-weight:700;color:var(--accent)">52 kg</div>
+        <div class="hint">giữ cơ</div>
+      </div>
+      <div class="flex-1" style="text-align:center;padding:var(--s-12);background:var(--bg-subtle);border-radius:var(--radius-md)">
+        <div style="font-size:var(--text-xl);font-weight:700;color:var(--accent)">&gt;55%</div>
+        <div class="hint">nước</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Lộ trình 3 tháng <span class="chip accent">mặc định</span></h2>
+    <div style="display:flex;flex-direction:column;gap:var(--s-12)">
+      <div class="flex gap-12">
+        <div style="width:32px;height:32px;border-radius:var(--radius-full);background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0">1</div>
+        <div class="flex-1">
+          <div style="font-weight:700">Tháng 1</div>
+          <div class="hint">Điều chỉnh cân nặng, trang bị kiến thức cơ bản thay đổi tư duy dinh dưỡng & thể chất.</div>
+        </div>
+      </div>
+      <div class="flex gap-12">
+        <div style="width:32px;height:32px;border-radius:var(--radius-full);background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0">2</div>
+        <div class="flex-1">
+          <div style="font-weight:700">Tháng 2</div>
+          <div class="hint">Tăng cơ, tăng cường sức khỏe, điều chỉnh các thói quen không lành mạnh.</div>
+        </div>
+      </div>
+      <div class="flex gap-12">
+        <div style="width:32px;height:32px;border-radius:var(--radius-full);background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0">3</div>
+        <div class="flex-1">
+          <div style="font-weight:700">Tháng 3</div>
+          <div class="hint">Tối ưu hóa vóc dáng, trẻ hóa, duy trì năng lượng, xây dựng thói quen lành mạnh bền vững.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Gói sản phẩm đi kèm</h2>
+    <div class="flex items-center gap-12" style="padding:var(--s-12) 0;border-bottom:1px solid var(--border)">
+      <span style="color:var(--accent)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg></span>
+      <div class="flex-1">
+        <div style="font-weight:600">F1 — Bữa ăn lành mạnh</div>
+        <div class="hint">Thay bữa, kiểm soát cân nặng</div>
+      </div>
+      <svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="flex items-center gap-12" style="padding:var(--s-12) 0;border-bottom:1px solid var(--border)">
+      <span style="color:var(--accent)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/><path d="M12 2a10 10 0 0 1 10 10"/><path d="M12 12L2.5 7.5"/></svg></span>
+      <div class="flex-1">
+        <div style="font-weight:600">PPP — Bột Protein</div>
+        <div class="hint">Bổ sung đạm, hỗ trợ cơ</div>
+      </div>
+      <svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="flex items-center gap-12" style="padding:var(--s-12) 0">
+      <span style="color:var(--accent)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
+      <div class="flex-1">
+        <div style="font-weight:600">Omega-3 Herbalifeline</div>
+        <div class="hint">Hỗ trợ tim mạch</div>
+      </div>
+      <svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+  </div>
+  <div class="card subtle">
+    <div class="flex items-center gap-12">
+      <span style="color:var(--state-warn)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+      <span class="hint" style="margin:0">Giá sản phẩm HLV giải thích bên ngoài app. Không có gì là thần dược.</span>
+    </div>
+  </div>
+</div>
+<div class="cta-bar"><button class="btn secondary">Đóng</button><button class="btn primary"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>Tạo tài khoản</button></div>
 </div></body></html>

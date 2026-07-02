@@ -1,68 +1,69 @@
-<!-- Mockup KH Trang chủ (avatar+chào+chuông+gói, check-in, đồng hồ sinh học, line-chart, bảng chỉ số) | Khuôn T3 | KH (draft-kh §1) -->
 <!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Trang chủ — AnCare KH</title>
 <link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
-<style>:root{--accent:var(--accent-customer)}
-.kh-head{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg);border-bottom:1px solid var(--border)}
-.kh-head .av{width:44px;height:44px;border-radius:50%;background:var(--bg-subtle);display:flex;align-items:center;justify-content:center;font-size:22px}
-.kh-head .hi{flex:1}
-.kh-head .hi .name{font-weight:700;font-size:15px}
-.kh-head .hi .pkg{font-size:12px;color:var(--accent);margin-top:2px}
-.kh-head .bell{font-size:20px;color:var(--text-muted)}
-.checkin-row{display:flex;gap:8px;overflow-x:auto;padding:12px 16px}
-.checkin-btn{flex:0 0 auto;border:2px solid var(--border);border-radius:var(--radius-md);padding:8px 12px;font-size:12px;font-weight:600;cursor:pointer;background:var(--bg);white-space:nowrap}
-.checkin-btn.done{border-color:var(--state-good);background:#eef9f1;color:var(--state-good)}
-.btable{width:100%;border-collapse:collapse;font-size:12px}
-.btable th{background:var(--bg-subtle);padding:6px 4px;text-align:right;font-weight:600;color:var(--text-muted);font-size:11px}
-.btable th:first-child{text-align:left}
-.btable td{padding:7px 4px;border-bottom:1px solid var(--border);text-align:right}
-.btable td:first-child{text-align:left;font-weight:600}
-.up{color:var(--state-good)} .dn{color:var(--state-alert)}
-.spark{height:70px;width:100%}
-.spark svg{width:100%;height:100%}
-.av{background:linear-gradient(135deg,#e3efe8,#cfe8da)!important;border:2px solid var(--accent)}
-</style></head><body><div class="screen">
-  <div class="kh-head">
-    <div class="av">👤</div>
-    <div class="hi"><div class="name">Xin chào, Hạnh 🌿</div><div class="pkg">Gói Cơ — Nước — Mỡ · Tối ưu · còn 8 ngày</div></div>
-    <div class="bell">🔔</div>
-  </div>
-  <div class="content" style="padding-top:8px">
-    <div class="card">
-      <h2 style="font-size:13px">Check-in nhiệm vụ hôm nay <a href="S-HLTH-06_check_in.html" style="font-size:11px;color:var(--accent);float:right">Mở màn Check-in →</a></h2>
-      <div class="checkin-row" onclick="location.href='S-HLTH-06_check_in.html'" style="cursor:pointer">
-        <div class="checkin-btn done">✓ Bữa sáng</div>
-        <div class="checkin-btn done">✓ Nước (2L)</div>
-        <div class="checkin-btn">○ Vận động</div>
-        <div class="checkin-btn">○ Bữa trưa</div>
-        <div class="checkin-btn">○ Ngủ sớm</div>
-      </div>
-    </div>
-    <div class="card">
-      <h2 style="font-size:13px">Đồng hồ sinh học 24h</h2>
-      <div class="spark" style="margin:8px 0"><svg viewBox="0 0 300 70" preserveAspectRatio="none"><polyline points="0,55 30,45 60,50 90,35 120,40 150,28 180,32 210,20 240,25 270,12 300,8" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/><polyline points="0,55 30,45 60,50 90,35 120,40 150,28 180,32 210,20 240,25 270,12 300,8 300,70 0,70" fill="rgba(47,158,110,.12)" stroke="none"/><circle cx="300" cy="8" r="4" fill="var(--accent)"/></svg></div>
-      <div class="hint">Chấm điểm nhiệm vụ hằng ngày · xem chi tiết →</div>
-    </div>
-    <div class="card">
-      <h2 style="font-size:13px">Tiến trình sức khỏe</h2>
-      <div class="spark" style="margin:8px 0"><svg viewBox="0 0 300 70" preserveAspectRatio="none"><polyline points="0,60 30,52 60,48 90,42 120,38 150,33 180,28 210,22 240,18 270,14 300,10" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/><polyline points="0,60 30,52 60,48 90,42 120,38 150,33 180,28 210,22 240,18 270,14 300,10 300,70 0,70" fill="rgba(47,158,110,.12)" stroke="none"/><circle cx="300" cy="10" r="4" fill="var(--accent)"/></svg></div>
-      <div class="hint">Xu hướng cải thiện (line-chart) · 10 ngày qua</div>
-    </div>
-    <div class="card" style="padding:0;overflow:hidden">
-      <table class="btable">
-        <thead><tr><th>Chỉ số</th><th>Mục tiêu</th><th>Ngày đầu</th><th>Gần nhất</th><th>Thay đổi</th></tr></thead>
-        <tbody>
-          <tr><td>Cân nặng</td><td>54</td><td>58</td><td class="up">55.2</td><td class="up">↓ 2.8</td></tr>
-          <tr><td>Mỡ cơ thể %</td><td>17.5</td><td>18.9</td><td class="up">17.8</td><td class="up">↓ 1.1</td></tr>
-          <tr><td>Mỡ nội tạng</td><td>≤7</td><td>10</td><td class="up">8</td><td class="up">↓ 2</td></tr>
-          <tr><td>Cơ bắp kg</td><td>≥38%</td><td>52</td><td class="up">52.5</td><td class="up">↑ 0.5</td></tr>
-          <tr><td>Xương kg</td><td>2.5-3.5</td><td>2.8</td><td>2.8</td><td>—</td></tr>
-          <tr><td>Nước %</td><td>>50</td><td>57.7</td><td class="up">58.1</td><td class="up">↑ 0.4</td></tr>
-          <tr><td>Tuổi sinh học</td><td>≤42</td><td>37</td><td class="up">36</td><td class="up">↓ 1</td></tr>
-          <tr><td>RMR kcal</td><td>—</td><td>1276</td><td>1280</td><td>—</td></tr>
-        </tbody>
-      </table>
+<style>:root{--accent:var(--accent-customer);--accent-hover:var(--accent-customer-hover);}</style>
+
+</head><body><div class="screen">
+<div class="appbar" style="border:none;background:linear-gradient(135deg,var(--accent-customer),var(--accent-customer-hover));color:#fff">
+  <span class="back" style="opacity:0"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></span>
+  <div class="flex-1 flex items-center gap-12">
+    <div style="width:44px;height:44px;border-radius:var(--radius-full);background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,.4)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 1 0 0 8zM5 20a7 7 0 0 1 14 0"/></svg></div>
+    <div>
+      <div style="font-weight:600;font-size:var(--text-lg)">Xin chào, Hạnh</div>
+      <div style="font-size:var(--text-sm);opacity:.9">Gói Cơ-Nước-Mỡ · Tối ưu · còn 8 ngày</div>
     </div>
   </div>
-  <div class="bottom-nav"><div class="nav-item active"><div class="icon">🏠</div><div class="label">Trang chủ</div></div><div class="nav-item"><div class="icon">📊</div><div class="label">Báo cáo</div></div><div class="nav-item"><div class="icon">🎓</div><div class="label">Đào tạo</div></div><div class="nav-item"><div class="icon">👤</div><div class="label">Hồ sơ</div></div></div>
-</div></body></html>
+  <span class="info" style="color:#fff"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5a2 2 0 0 1 4 0 7 7 0 0 1 4 6v3a4 4 0 0 0 1 2H5a4 4 0 0 0 1-2v-3a7 7 0 0 1 4-6M9 17v1a3 3 0 0 0 6 0v-1"/></svg></span>
+</div>
+<div class="content" style="padding-top:var(--s-12)">
+  <div class="card" style="border-color:var(--accent-customer);background:linear-gradient(135deg,#f0fdfa,#e6f7f5)">
+    <div class="flex justify-between items-center" style="margin-bottom:var(--s-12)">
+      <h2 style="margin:0">Check-in hôm nay</h2>
+      <a href="S-HLTH-06_check_in.html" style="font-size:var(--text-sm);color:var(--accent-customer);font-weight:600;text-decoration:none">Mở màn Check-in →</a>
+    </div>
+    <div class="flex" style="gap:var(--s-8);overflow-x:auto;padding-bottom:var(--s-8)">
+      <div class="pill" style="border-color:var(--accent-customer);background:var(--accent-customer);color:#fff;height:36px"><svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Bữa sáng</div>
+      <div class="pill" style="border-color:var(--accent-customer);background:var(--accent-customer);color:#fff;height:36px"><svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Nước</div>
+      <div class="pill" style="height:36px">Vận động</div>
+      <div class="pill" style="height:36px">Bữa trưa</div>
+      <div class="pill" style="height:36px">Ngủ sớm</div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Đồng hồ sinh học 24h</h2>
+    <div style="height:80px;padding:var(--s-12);background:var(--bg-subtle);border-radius:var(--radius-md)">
+      <svg viewBox="0 0 300 60" width="100%" height="60" preserveAspectRatio="none">
+        <polyline points="0,50 30,40 60,45 90,30 120,35 150,20 180,25 210,15 240,18 270,10 300,8" fill="none" stroke="var(--accent-customer)" stroke-width="2.5" stroke-linejoin="round"/>
+        <polyline points="0,50 30,40 60,45 90,30 120,35 150,20 180,25 210,15 240,18 270,10 300,8 300,60 0,60" fill="rgba(20,158,110,.12)" stroke="none"/>
+        <circle cx="300" cy="8" r="4" fill="var(--accent-customer)"/>
+      </svg>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Tiến trình sức khỏe</h2>
+    <div style="height:80px;padding:var(--s-12);background:var(--bg-subtle);border-radius:var(--radius-md)">
+      <svg viewBox="0 0 300 60" width="100%" height="60" preserveAspectRatio="none">
+        <polyline points="0,55 30,48 60,44 90,40 120,36 150,32 180,28 210,24 240,20 270,16 300,12" fill="none" stroke="var(--accent-customer)" stroke-width="2.5" stroke-linejoin="round"/>
+        <polyline points="0,55 30,48 60,44 90,40 120,36 150,32 180,28 210,24 240,20 270,16 300,12 300,60 0,60" fill="rgba(20,158,110,.12)" stroke="none"/>
+        <circle cx="300" cy="12" r="4" fill="var(--accent-customer)"/>
+      </svg>
+    </div>
+  </div>
+  <div class="table-wrap">
+    <table class="table">
+      <thead><tr><th>Chỉ số</th><th>Mục tiêu</th><th>Đầu</th><th>Gần nhất</th><th>Thay đổi</th></tr></thead>
+      <tbody>
+        <tr><td>Cân nặng</td><td>54</td><td>58</td><td style="color:var(--state-good);font-weight:700">55.2</td><td style="color:var(--state-good)"><svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg> 2.8</td></tr>
+        <tr><td>Mỡ cơ thể</td><td>17.5</td><td>18.9</td><td style="color:var(--state-good);font-weight:700">17.8</td><td style="color:var(--state-good)"><svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg> 1.1</td></tr>
+        <tr><td>Mỡ nội tạng</td><td>≤7</td><td>10</td><td style="color:var(--state-good);font-weight:700">8</td><td style="color:var(--state-good)"><svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg> 2</td></tr>
+        <tr><td>Cơ bắp</td><td>≥38%</td><td>52</td><td style="color:var(--state-good);font-weight:700">52.5</td><td style="color:var(--state-good)"><svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> 0.5</td></tr>
+        <tr><td>Xương</td><td>2.5-3.5</td><td>2.8</td><td>2.8</td><td>—</td></tr>
+        <tr><td>Nước</td><td>>50</td><td>57.7</td><td style="color:var(--state-good);font-weight:700">58.1</td><td style="color:var(--state-good)"><svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> 0.4</td></tr>
+        <tr><td>Tuổi SH</td><td>≤42</td><td>37</td><td style="color:var(--state-good);font-weight:700">36</td><td style="color:var(--state-good)"><svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg> 1</td></tr>
+        <tr><td>RMR</td><td>—</td><td>1276</td><td>1280</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="bottom-nav"><div class="nav-item active"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><span>Trang chủ</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span><span>Báo cáo</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span>Đào tạo</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 1 0 0 8zM5 20a7 7 0 0 1 14 0"/></svg></span><span>Hồ sơ</span></div></div>
+<div class="bottom-nav"><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><span>Trang chủ</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span><span>Báo cáo</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span>Đào tạo</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 1 0 0 8zM5 20a7 7 0 0 1 14 0"/></svg></span><span>Hồ sơ</span></div></div></div></body></html>

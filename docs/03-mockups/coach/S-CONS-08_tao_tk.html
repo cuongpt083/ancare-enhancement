@@ -1,32 +1,24 @@
-<!-- Mockup US-E02-08 Pop-up Tạo tài khoản KH (MK random + gửi email) | Khuôn T1 (modal) | HLV (draft §2.8) -->
 <!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Tạo tài khoản KH — AnCare</title>
 <link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
-<style>
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;justify-content:center}
-.modal{background:var(--bg);width:100%;max-width:375px;border-radius:var(--radius-lg) var(--radius-lg) 0 0;padding:20px 16px 16px;max-height:85vh;overflow-y:auto}
-.modal h2{font-size:18px;margin-bottom:16px;text-align:center}
-.modal .field{margin-bottom:12px}
-.modal .field label{font-size:12px;color:var(--text-muted);display:block;margin-bottom:4px}
-</style></head><body><div class="overlay"><div class="modal">
-  <h2>Tạo tài khoản KH</h2>
-  <div class="field">
-    <label>Tài khoản (SĐT hoặc Email)</label>
-    <div class="search"><input value="tes@gmail.com"></div>
-    <div class="hint">lấy từ thông tin KH, HLV có thể chỉnh sửa</div>
+
+</head><body><div class="screen">
+<div class="appbar"><span class="back"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></span><h1>Tạo tài khoản KH</h1><span class="info"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="8.01"/><line x1="12" y1="12" x2="12" y2="16"/></svg></span></div>
+<div class="content" style="padding-top:var(--s-12)">
+  <div class="focus-card" style="margin-bottom:var(--s-16)">
+    <div class="label">Thông tin đăng nhập</div>
+    <div class="title" style="font-size:var(--text-xl)">Phạm Hạnh</div>
   </div>
-  <div class="field">
-    <label>Mật khẩu (tạo ngẫu nhiên)</label>
-    <div class="search"><input value="Ab7xK9#2"></div>
-    <div class="hint">auto random, HLV có thể chỉnh sửa</div>
+  <div class="card">
+    <div class="field"><label>Tài khoản</label><input value="097xxxxxxx"></div>
+    <div class="field"><label>Mật khẩu</label><input value="AnCare@2026" type="text"></div>
+    <div class="field"><label>Xác nhận mật khẩu</label><input value="AnCare@2026" type="text"></div>
+    <div class="hint" style="margin-bottom:var(--s-12)">Mật khẩu ngẫu nhiên, HLV có thể chỉnh sửa.</div>
+    <div class="flex items-center gap-12" style="padding:var(--s-12);background:var(--bg-subtle);border-radius:var(--radius-md)">
+      <span style="color:var(--accent)"><svg viewBox="0 0 24 24" class="icon"/></span>
+      <span class="hint" style="margin:0">Gửi email/SMS chứa tài khoản & mật khẩu cho KH</span>
+    </div>
   </div>
-  <div class="field">
-    <label>Xác nhận mật khẩu</label>
-    <div class="search"><input value="Ab7xK9#2"></div>
-  </div>
-  <div class="card subtle" style="margin:12px 0"><div class="hint">Sau khi tạo, app gửi email chứa thông tin tài khoản (tài khoản + mật khẩu) cho KH.</div></div>
-  <div style="display:flex;gap:8px;margin-top:16px">
-    <button class="btn secondary">Hủy</button>
-    <button class="btn primary">Tạo tài khoản → bữa ăn</button>
-  </div>
-</div></div></body></html>
+</div>
+<div class="cta-bar"><button class="btn primary"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Tạo tài khoản</button></div>
+</div></body></html>

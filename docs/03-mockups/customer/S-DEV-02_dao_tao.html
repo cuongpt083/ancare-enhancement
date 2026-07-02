@@ -1,32 +1,53 @@
-<!-- Mockup KH Đào tạo (danh sách bài học theo nhóm) | Khuôn T2 | KH (draft-kh §3) -->
 <!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Đào tạo — AnCare KH</title>
 <link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
-<style>:root{--accent:var(--accent-customer)}
-.grp-head{display:flex;align-items:center;gap:8px;margin:12px 0 6px;font-size:13px;font-weight:700;color:var(--accent);text-transform:uppercase}
-.grp-head::before{content:"";width:4px;height:16px;background:var(--accent);border-radius:2px}
-.lesson{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);cursor:pointer}
-.lesson .num{width:28px;height:28px;border-radius:50%;background:var(--bg-subtle);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--text-muted);flex-shrink:0}
-.lesson.done .num{background:#e3efe8;color:var(--accent)}
-.lesson .lt{flex:1}
-.lesson .lt .t{font-size:14px;font-weight:600}
-.lesson .lt .s{font-size:12px;color:var(--text-muted)}
-.lesson .chev{color:var(--text-muted)}
-</style></head><body><div class="screen">
-  <div class="appbar"><span class="back">‹</span><h1>Đào tạo</h1><span class="info">ⓘ</span></div>
-  <div style="padding:12px 16px"><div class="search"><input placeholder="Tìm bài học…"></div></div>
-  <div class="content" style="padding-top:0">
-    <div class="grp-head">Kiến thức dinh dưỡng</div>
-    <div class="lesson done"><div class="num">✓</div><div class="lt"><div class="t">Bài 1 · Nước & trao đổi chất</div><div class="s">3 phút · đã hoàn thành</div></div><span class="chev">›</span></div>
-    <div class="lesson done"><div class="num">✓</div><div class="lt"><div class="t">Bài 2 · Đạm — cơ bắp</div><div class="s">4 phút · đã hoàn thành</div></div><span class="chev">›</span></div>
-    <div class="lesson"><div class="num">3</div><div class="lt"><div class="t">Bài 3 · Bột đường & năng lượng</div><div class="s">3 phút · 3 câu hỏi trước/sau</div></div><span class="chev">›</span></div>
-    <div class="lesson"><div class="num">4</div><div class="lt"><div class="t">Bài 4 · Mỡ nội tạng & nguy cơ</div><div class="s">5 phút</div></div><span class="chev">›</span></div>
-    <div class="grp-head">Thói quen sống khỏe</div>
-    <div class="lesson"><div class="num">5</div><div class="lt"><div class="t">Bài 5 · Đồng hồ sinh học</div><div class="s">4 phút</div></div><span class="chev">›</span></div>
-    <div class="lesson"><div class="num">6</div><div class="lt"><div class="t">Bài 6 · Ăn ngược & nhai kỹ</div><div class="s">3 phút</div></div><span class="chev">›</span></div>
-    <div class="grp-head">Thấu hiểu bản thân</div>
-    <div class="lesson"><div class="num">7</div><div class="lt"><div class="t">Bài 7 · DISC & cách giao tiếp</div><div class="s">5 phút</div></div><span class="chev">›</span></div>
-    <div class="card subtle"><div class="hint">Cấu trúc & nội dung bài học cần làm rõ thêm (draft-kh §3). 3 câu hỏi trước/sau học (US-E05-01).</div></div>
+<style>:root{--accent:var(--accent-customer);--accent-hover:var(--accent-customer-hover);}</style>
+
+</head><body><div class="screen">
+<div class="appbar"><span class="back"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></span><h1>Đào tạo</h1><span class="info"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="8.01"/><line x1="12" y1="12" x2="12" y2="16"/></svg></span></div>
+<div class="content" style="padding-top:var(--s-12)">
+  <div class="field" style="margin-bottom:var(--s-16)">
+    <div style="position:relative">
+      <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-muted)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
+      <input type="text" placeholder="Tìm bài học..." style="padding-left:40px">
+    </div>
   </div>
-  <div class="bottom-nav"><div class="nav-item"><div class="icon">🏠</div><div class="label">Trang chủ</div></div><div class="nav-item"><div class="icon">📊</div><div class="label">Báo cáo</div></div><div class="nav-item active"><div class="icon">🎓</div><div class="label">Đào tạo</div></div><div class="nav-item"><div class="icon">👤</div><div class="label">Hồ sơ</div></div></div>
-</div></body></html>
+  <div style="font-size:var(--text-sm);font-weight:700;color:var(--accent-customer);text-transform:uppercase;margin-bottom:var(--s-12)">Kiến thức dinh dưỡng</div>
+  <div class="card" style="padding:var(--s-12)">
+    <div class="flex items-center gap-12" style="padding:var(--s-12) 0;border-bottom:1px solid var(--border)">
+      <div style="width:32px;height:32px;border-radius:var(--radius-full);background:var(--accent-customer);color:#fff;display:flex;align-items:center;justify-content:center;font-size:var(--text-sm);font-weight:700">✓</div>
+      <div class="flex-1"><div style="font-weight:600">Bài 1 · Nước & trao đổi chất</div><div class="hint">3 phút · đã hoàn thành</div></div>
+      <svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="flex items-center gap-12" style="padding:var(--s-12) 0;border-bottom:1px solid var(--border)">
+      <div style="width:32px;height:32px;border-radius:var(--radius-full);background:var(--accent-customer);color:#fff;display:flex;align-items:center;justify-content:center;font-size:var(--text-sm);font-weight:700">✓</div>
+      <div class="flex-1"><div style="font-weight:600">Bài 2 · Đạm — cơ bắp</div><div class="hint">4 phút · đã hoàn thành</div></div>
+      <svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="flex items-center gap-12" style="padding:var(--s-12) 0;border-bottom:1px solid var(--border)">
+      <div style="width:32px;height:32px;border-radius:var(--radius-full);background:var(--bg-subtle);color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-size:var(--text-sm);font-weight:700">3</div>
+      <div class="flex-1"><div style="font-weight:600">Bài 3 · Bột đường & năng lượng</div><div class="hint">3 phút · 3 câu hỏi</div></div>
+      <svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="flex items-center gap-12" style="padding:var(--s-12) 0">
+      <div style="width:32px;height:32px;border-radius:var(--radius-full);background:var(--bg-subtle);color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-size:var(--text-sm);font-weight:700">4</div>
+      <div class="flex-1"><div style="font-weight:600">Bài 4 · Mỡ nội tạng & nguy cơ</div><div class="hint">5 phút</div></div>
+      <svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+  </div>
+  <div style="font-size:var(--text-sm);font-weight:700;color:var(--accent-customer);text-transform:uppercase;margin:var(--s-24) 0 var(--s-12)">Thói quen sống khỏe</div>
+  <div class="card" style="padding:var(--s-12)">
+    <div class="flex items-center gap-12" style="padding:var(--s-12) 0;border-bottom:1px solid var(--border)">
+      <div style="width:32px;height:32px;border-radius:var(--radius-full);background:var(--bg-subtle);color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-size:var(--text-sm);font-weight:700">5</div>
+      <div class="flex-1"><div style="font-weight:600">Bài 5 · Đồng hồ sinh học</div><div class="hint">4 phút</div></div>
+      <svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+    <div class="flex items-center gap-12" style="padding:var(--s-12) 0">
+      <div style="width:32px;height:32px;border-radius:var(--radius-full);background:var(--bg-subtle);color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-size:var(--text-sm);font-weight:700">6</div>
+      <div class="flex-1"><div style="font-weight:600">Bài 6 · Ăn ngược & nhai kỹ</div><div class="hint">3 phút</div></div>
+      <svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    </div>
+  </div>
+</div>
+<div class="bottom-nav"><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><span>Trang chủ</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span><span>Báo cáo</span></div><div class="nav-item active"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span>Đào tạo</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 1 0 0 8zM5 20a7 7 0 0 1 14 0"/></svg></span><span>Hồ sơ</span></div></div>
+<div class="bottom-nav"><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><span>Trang chủ</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span><span>Báo cáo</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span>Đào tạo</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 1 0 0 8zM5 20a7 7 0 0 1 14 0"/></svg></span><span>Hồ sơ</span></div></div></div></body></html>
