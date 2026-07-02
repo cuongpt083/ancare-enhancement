@@ -11,7 +11,7 @@
 | US-E02-02 | Giai đoạn 1 | Chân dung KH (gộp khảo sát mục tiêu) | Must |
 | US-E02-03 | Giai đoạn 2 | Hướng dẫn đo lường Tanita (OCR + tư thế) | Must |
 | US-E02-04 | Giai đoạn 3 | Phân tích chỉ số & Cảnh báo sức khỏe (5 bước) | Must |
-| US-E02-05 | Giai đoạn 4 | Tư vấn giải pháp + Xác định mục tiêu | Must |
+| US-E02-05 | Giai đoạn 4 | Xem lộ trình (giải pháp + lộ trình 3 tháng) | Must |
 | US-E02-06 | Giai đoạn 4 | Chốt gói (đơn giản — Q34) | Must |
 | US-E02-07 | Sau chốt | Gợi ý bữa ăn 10 ngày đầu | Must |
 | US-E02-08 | Sau chốt | Tạo tài khoản KH | Must |

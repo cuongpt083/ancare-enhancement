@@ -1,3 +1,7 @@
+/* AnCare Hi-Fi enhancements — font + icon + visual */
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap');
+@import url('../_assets/tabler-icons.min.css');
+
 /* AnCare Base Layout — primitives cho 4 khuôn màn T1-T4 (mobile-first 375px) */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { -webkit-text-size-adjust: 100%; }
@@ -11,7 +15,7 @@ body {
 /* AppBar */
 .appbar {
   display: flex; align-items: center; gap: var(--s-12); padding: var(--s-12) var(--s-16);
-  background: var(--bg); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10;
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-subtle) 100%); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10;
 }
 .appbar .back { font-size: 22px; color: var(--accent); cursor: pointer; line-height: 1; width: 32px; }
 .appbar h1 { font-size: 16px; font-weight: 600; flex: 1; }
@@ -21,7 +25,7 @@ body {
 /* Card */
 .card {
   background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-md);
-  padding: var(--s-16); box-shadow: var(--shadow-card);
+  padding: var(--s-16); box-shadow: 0 2px 8px rgba(0,0,0,.06);
 }
 .card.subtle { background: var(--bg-subtle); border-color: transparent; box-shadow: none; }
 .card h2 { font-size: 15px; margin-bottom: var(--s-8); }
@@ -53,13 +57,13 @@ body {
   flex: 1; height: 48px; border: none; border-radius: var(--radius-md); font-size: 15px; font-weight: 600;
   cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
 }
-.btn.primary { background: var(--accent); color: #fff; }
+.btn.primary { background: linear-gradient(135deg, var(--accent) 0%, color-mix(in srgb, var(--accent) 85%, #000) 100%); color: #fff; box-shadow: 0 2px 8px rgba(47,111,79,.25); }
 .btn.secondary { background: var(--bg-subtle); color: var(--text); }
 .btn.ghost { background: transparent; color: var(--accent); }
 /* FAB (khuôn T2) */
 .fab {
   position: fixed; right: 16px; bottom: 20px; width: 56px; height: 56px; border-radius: 50%;
-  background: var(--accent); color: #fff; border: none; font-size: 26px; box-shadow: var(--shadow-fab);
+  background: linear-gradient(135deg, var(--accent) 0%, color-mix(in srgb, var(--accent) 85%, #000) 100%); color: #fff; border: none; font-size: 26px; box-shadow: 0 6px 16px rgba(0,0,0,.25);
   cursor: pointer; z-index: 9; display: flex; align-items: center; justify-content: center;
 }
 /* Search input (khuôn T2) */
@@ -84,8 +88,8 @@ body {
 .tabs .tab.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
 /* Focus card (khuôn T3) */
 .focus-card {
-  background: var(--accent); color: #fff; border-radius: var(--radius-md); padding: var(--s-16);
-  box-shadow: var(--shadow-fab);
+  background: linear-gradient(135deg, var(--accent) 0%, color-mix(in srgb, var(--accent) 80%, #000) 100%); color: #fff; border-radius: var(--radius-md); padding: var(--s-16);
+  box-shadow: 0 6px 20px rgba(0,0,0,.15);
 }
 .focus-card .label { font-size: 13px; opacity: .85; }
 .focus-card .title { font-size: 18px; font-weight: 700; margin-top: 4px; }

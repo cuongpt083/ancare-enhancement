@@ -14,7 +14,7 @@
 | `S-CONS-02_chan_dung_kh.html` | US-E02-02 | T1 | progress-dots, search, focus-card | Card Chân dung KH: 10 câu hỏi + ô trả lời (Q35 gộp khảo sát mục tiêu) |
 | `S-CONS-03_tanita.html` | US-E02-03 | T1 | progress-dots, list-item | checklist tư thế + OCR/nhập tay |
 | `S-CONS-04_phan_tich.html` | US-E02-04 | T1 | focus-card, chip warn/alert, disclaimer | 5 bước + cảnh báo mỡ nội tạng (D05) |
-| `S-CONS-05_giai_phap.html` | US-E02-05 | T1 | focus-card, chip good, why | logic 3 chương trình (D08) + khả thi (D09) |
+| `S-CONS-05_giai_phap.html` | US-E02-05 | T1 | focus-card, month, pkg-item | Xem lộ trình: lợi ích + 3 tháng cố định + gói SP + cam kết (draft §7) |
 | `S-CONS-06_chot_goi.html` | US-E02-06 | T1 | focus-card, disclaimer | Chốt gói đơn giản (Q34): Tạo TK / Đóng về DS KH; Objection P1+ |
 | `S-CONS-07_bua_an.html` | US-E02-07 | T1 | tabs, focus-card, chip good | 10 ngày × 3 nhóm, persona-fit |
 | `S-CONS-08_tao_tk.html` | US-E02-08 | T1 | focus-card, search, disclaimer | điền sẵn lead → gửi link (D04 onboarding) |

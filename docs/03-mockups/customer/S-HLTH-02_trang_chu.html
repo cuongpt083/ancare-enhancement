@@ -18,8 +18,9 @@
 .btable td{padding:7px 4px;border-bottom:1px solid var(--border);text-align:right}
 .btable td:first-child{text-align:left;font-weight:600}
 .up{color:var(--state-good)} .dn{color:var(--state-alert)}
-.spark{height:60px;background:linear-gradient(180deg,transparent 60%,#e3efe8 60%);border-radius:var(--radius-sm);position:relative;border-left:2px solid var(--accent)}
-.spark::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:80%;background:linear-gradient(180deg,transparent,#cfe8da);clip-path:polygon(0 70%,15% 50%,30% 60%,45% 35%,60% 40%,75% 20%,90% 30%,100% 10%,100% 100%,0 100%)}
+.spark{height:70px;width:100%}
+.spark svg{width:100%;height:100%}
+.av{background:linear-gradient(135deg,#e3efe8,#cfe8da)!important;border:2px solid var(--accent)}
 </style></head><body><div class="screen">
   <div class="kh-head">
     <div class="av">👤</div>
@@ -39,12 +40,12 @@
     </div>
     <div class="card">
       <h2 style="font-size:13px">Đồng hồ sinh học 24h</h2>
-      <div class="spark" style="margin:8px 0"></div>
+      <div class="spark" style="margin:8px 0"><svg viewBox="0 0 300 70" preserveAspectRatio="none"><polyline points="0,55 30,45 60,50 90,35 120,40 150,28 180,32 210,20 240,25 270,12 300,8" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/><polyline points="0,55 30,45 60,50 90,35 120,40 150,28 180,32 210,20 240,25 270,12 300,8 300,70 0,70" fill="rgba(47,158,110,.12)" stroke="none"/><circle cx="300" cy="8" r="4" fill="var(--accent)"/></svg></div>
       <div class="hint">Chấm điểm nhiệm vụ hằng ngày · xem chi tiết →</div>
     </div>
     <div class="card">
       <h2 style="font-size:13px">Tiến trình sức khỏe</h2>
-      <div class="spark" style="margin:8px 0;height:70px"></div>
+      <div class="spark" style="margin:8px 0"><svg viewBox="0 0 300 70" preserveAspectRatio="none"><polyline points="0,60 30,52 60,48 90,42 120,38 150,33 180,28 210,22 240,18 270,14 300,10" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/><polyline points="0,60 30,52 60,48 90,42 120,38 150,33 180,28 210,22 240,18 270,14 300,10 300,70 0,70" fill="rgba(47,158,110,.12)" stroke="none"/><circle cx="300" cy="10" r="4" fill="var(--accent)"/></svg></div>
       <div class="hint">Xu hướng cải thiện (line-chart) · 10 ngày qua</div>
     </div>
     <div class="card" style="padding:0;overflow:hidden">

@@ -13,7 +13,7 @@
 | US-E02-02 | E02 | Chân dung KH (gộp khảo sát mục tiêu) | HLV | T1 | S-CONS-02 |
 | US-E02-03 | E02 | Hướng dẫn đo lường Tanita (OCR + tư thế) | HLV | T1 | S-CONS-03 |
 | US-E02-04 | E02 | Phân tích chỉ số & Cảnh báo (5 bước) | HLV | T1 | S-CONS-04 |
-| US-E02-05 | E02 | Tư vấn giải pháp + Xác định mục tiêu | HLV | T1 | S-CONS-05 |
+| US-E02-05 | E02 | Xem lộ trình (giải pháp + 3 tháng) | HLV | T1 | S-CONS-05 |
 | US-E02-06 | E02 | Chốt gói (đơn giản — Q34) | HLV | T1 | S-CONS-06 |
 | US-E02-07 | E02 | Gợi ý bữa ăn 10 ngày đầu | HLV | T1 | S-CONS-07 |
 | US-E02-08 | E02 | Tạo tài khoản KH | HLV | T1 | S-CONS-08 |
