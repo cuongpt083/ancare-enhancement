@@ -1,9 +1,9 @@
 # Backlog — Danh sách phẳng (sắp theo ưu tiên)
 
-> Tổng: **43 user stories** · **21 Must · 14 Should · 8 Could** · ~160 Acceptance Criteria.
+> Tổng: **44 user stories** · **22 Must · 14 Should · 8 Could** · ~166 Acceptance Criteria.
 > Chi tiết mỗi story nằm trong file epic tương ứng (`epics/E0X-*.md`).
 
-## Must (P0) — 21 story
+## Must (P0) — 22 story
 | ID | Epic | Tên ngắn | Vai trò | Khuôn | Mockup |
 |---|---|---|---|---|---|
 | US-E00-01 | E00 | Đăng nhập / xác thực | HLV+KH | T1 | S-AUTH-01 |
@@ -26,6 +26,7 @@
 | US-E06-02 | E06 | Trang chủ cá nhân hóa | KH | T3 | S-HLTH-02 |
 | US-E06-04 | E06 | Gợi ý bữa ăn (3 nhóm + chụp ảnh AI) | KH | T1 | S-HLTH-04 |
 | US-E06-05 | E06 | Chat với HLV | KH | T1 | S-HLTH-05 |
+| US-E06-10 | E06 | Màn Check-in hôm nay (4 card) | KH | T3 | S-HLTH-06 |
 
 ## Should (P1) — 14 story
 | ID | Epic | Tên ngắn | Vai trò | Khuôn | Mockup |
@@ -62,8 +63,8 @@
 ## Trạng thái
 | Trạng thái | Ý nghĩa |
 |---|---|
-| 📝 Written | Story đã viết đầy đủ (hiện tại: tất cả 43) |
-| 🎨 Mockup | Đã có mockup tuân khuôn (hiện tại: 19/21 Must — US-E02-09 inline, US-E02-01 xóa Q33) |
+| 📝 Written | Story đã viết đầy đủ (hiện tại: tất cả 44) |
+| 🎨 Mockup | Đã có mockup tuân khuôn (hiện tại: 20/22 Must — US-E02-09 inline, US-E02-01 xóa Q33) |
 | 🎨 Mockup | Đã có mockup tuân khuôn |
 | 🔗 Prototype | Đã có prototype HTML nối điều hướng |
 | ✅ Done | Đạt DoD (mockup + prototype + AC kiểm thử) |

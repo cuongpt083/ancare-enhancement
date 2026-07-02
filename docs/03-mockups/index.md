@@ -1,4 +1,4 @@
-# Mockups Index — 19 màn Must (P0)
+# Mockups Index — 20 màn Must (P0)
 
 > Mỗi mockup là wireframe HTML (mobile-first 375px), tuân khuôn T1-T4, dùng shared assets `_assets/_tokens.css` + `_assets/_base.css`.
 > **Quy ước đặt tên:** `S-<MODULE>-<nn>_<tên>.html` ↔ `docs/04-prototypes/<role>/<MODULE>-<nn>_<tên>.html`.
@@ -23,13 +23,14 @@
 | `S-CARE-09_nhac_72h.html` | US-E03-09 | T1 | focus-card, list-item | tự động nhắc (D19) + 3 hành động |
 | `S-DEV-01_microcourse.html` | US-E05-01 | T1 | accent-customer, progress-dots | 3 câu trước → nội dung → 3 câu sau |
 
-## Customer (KH) — 4 màn
+## Customer (KH) — 5 màn
 | File | Story | Khuôn | Tokens chính | AC chính |
 |---|---|---|---|---|
 | `S-HLTH-01_dong_ho_sinh_hoc.html` | US-E06-01 | T3 | clock (conic-gradient), chips good/warn/idle | đồng hồ 24h + điểm 3/2/1/0 (D27) + tô màu (D28) |
 | `S-HLTH-02_trang_chu.html` | US-E06-02 | T3 | focus-card, chips Thân-Tâm-Trí | % hoàn thành + 3 trụ cột + cần chú ý |
 | `S-HLTH-04_bua_an.html` | US-E06-04 | T1 | focus-card, btn primary | 3 nhóm + chụp ảnh AI + nhập tay |
 | `S-HLTH-05_chat.html` | US-E06-05 | T1 | bubble in/out/ai | AI proactively gợi ý nhẹ (D29) + nhãn AI minh bạch |
+| `S-HLTH-06_check_in.html` | US-E06-10 | T3 | itable, meal-row, stepper, cup | Check-in 4 card: chỉ số/thực đơn/hoạt động/kiến thức (draft-kh §2) |
 
 ## Notes
 - **US-E02-09 (disclaimer)**: component inline, không màn riêng — hiện trong S-CONS-04, S-CONS-06, S-CONS-08 (D11 inline).

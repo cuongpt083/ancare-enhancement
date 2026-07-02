@@ -15,6 +15,7 @@
 | US-E06-06 | Chia sẻ tiến bộ / truyền cảm hứng | Should |
 | US-E06-07 | Xem kết quả cân quét & báo cáo hành trình | Should |
 | US-E06-08 | Nhật ký infographic | Could |
+| US-E06-10 | Màn Check-in hôm nay (4 card) | Must |
 
 ---
 
@@ -30,11 +31,11 @@
   - AC3 — Given nhiệm vụ "uống nước", When KH ghi nhận nhiều lần, Then mỗi cốc ~250ml cộng dồn; hiển thị tiến độ nước/ngày.
   - AC4 — Given danh sách nhiệm vụ, When xem, Then chia 2 vùng "đã thực hiện" / "chờ thực hiện" để tạo động lực.
 - **Truy vết:**
-  - Mockup: `docs/03-mockups/customer/S-HLTH-01_dong_ho_sinh_hoc.png` *(chưa tạo)*
-  - Prototype: `docs/04-prototypes/customer/HLTH-01_dong_ho_sinh_hoc.html` *(chưa tạo)*
+  - Mockup: `docs/03-mockups/customer/S-HLTH-01_dong_ho_sinh_hoc.html` ✅
+  - Prototype: `docs/04-prototypes/customer/HLTH-01_dong_ho_sinh_hoc.html` ✅
   - Khuôn màn: T3 (widget trung tâm)
   - Nghiệp vụ: `docs/00-foundation/business-rules/Calorie-Meal-Business-Rules-v1.1.md` (nước ≥ 0,4 L/10kg).
-- **Open question:** Đồng hồ sinh học tham chiếu case study Huawei Health Clover (archive) — chưng cất quy tắc tô màu/quản gia ảo khi chốt.
+- **Open question:** ✅ D28 chốt — tô màu trạng thái + gợi ý nhiệm vụ (không quản gia ảo phức tạp ở P0).
 
 ---
 
@@ -45,16 +46,18 @@
 - **Ưu tiên:** Must (P0)
 - **INVEST:** Independent ✓ · Negotiable ✓ · Valuable ✓ · Estimable ✓ · Small ✓ · Testable ✓
 - **Acceptance Criteria:**
-  - AC1 — Given KH đăng nhập, When mở trang chủ (T3), Then thấy lời chào + focus card "việc nổi bật hôm nay" + ≤3 lối tắt + danh sách cần chú ý.
-  - AC2 — Given cuối ngày, When KH mở, Then thấy tổng kết: đủ đạm/calo/nước/ngủ, điểm ngày, lưu ý cải thiện.
-  - AC3 — Given đánh giá 3 trụ cột, When xem, Then thấy Thân/Tâm/Trí ở 3 màu trụ cột, mỗi trụ cột 1 nhãn ngôn ngữ (Tốt/Cần lưu ý).
-  - AC4 — Given lịch biểu, When xem, Then thấy sự kiện học tập/quiz/sự kiện sắp tới.
+  - AC1 — Given KH đăng nhập, When mở trang chủ (T3), Then thấy header: **avatar + lời chào + chuông thông báo (bật/tắt) + gói giải pháp đã mua** (tên gói + RFM status + thời gian còn lại).
+  - AC2 — Given các nút check-in nhiệm vụ, When KH bấm, Then mở **màn Check-in** (US-E06-10) để thực hiện nhiệm vụ trong ngày.
+  - AC3 — Given dashboard đồng hồ sinh học, When xem, Then thấy chấm điểm nhiệm vụ hằng ngày (widget 24h).
+  - AC4 — Given báo cáo tiến trình, When xem, Then thấy **line-chart** xu hướng cải thiện sức khỏe/thể chất (10 ngày qua).
+  - AC5 — Given bảng thống kê chỉ số cơ thể, When xem, Then thấy 8 chỉ số (Cân nặng/Mỡ/Mỡ nội tạng/Cơ/Xương/Nước/Tuổi sinh học/RMR) × 5 cột (Tên/Mục tiêu/Ngày đầu/Gần nhất/Thay đổi); chỉ số trong ngưỡng mục tiêu = **xanh**, ngoài ngưỡng = **đỏ**; cột Thay đổi = mũi tên lên (xanh, cải thiện) / xuống (đỏ, xấu đi).
+  - AC6 — Given cuối ngày, When KH mở, Then thấy tổng kết: đủ đạm/calo/nước/ngủ, điểm ngày, lưu ý cải thiện.
 - **Truy vết:**
-  - Mockup: `docs/03-mockups/customer/S-HLTH-02_trang_chu.png` *(chưa tạo)*
-  - Prototype: `docs/04-prototypes/customer/HLTH-02_trang_chu.html` *(chưa tạo)*
+  - Mockup: `docs/03-mockups/customer/S-HLTH-02_trang_chu.html` ✅
+  - Prototype: `docs/04-prototypes/customer/HLTH-02_trang_chu.html` ✅
   - Khuôn màn: T3
-  - Nghiệp vụ: —
-- **Open question:** % hoàn thành tính từ đâu (check-in đồng hồ + bữa ăn + quiz)?
+  - Nghiệp vụ: `docs/00-foundation/business-rules/Customer-RFM-Scoring-v1.0.md` (RFM status); `Body-Composition-Standards-v1.0.md` (ngưỡng mục tiêu).
+- **Open question:** ✅ % hoàn thành = từ check-in (US-E06-10) + bữa ăn (US-E06-04) + quiz (E05).
 
 ---
 
@@ -171,6 +174,28 @@
   - Khuôn màn: T1
   - Nghiệp vụ: Sinh infographic cần PoC (xem Feasibility).
 - **Open question:** Template infographic & engine sinh cần PoC.
+
+---
+
+### US-E06-10 — Màn Check-in hôm nay (4 card)
+- **Epic:** E06 — Personal Health
+- **Vai trò:** KH
+- **Story:** Là KH, tôi muốn một màn Check-in tổng hợp (chỉ số cơ thể + thực đơn hôm nay + hoạt động dinh dưỡng/thể chất + kiến thức) để ghi nhận toàn bộ nhiệm vụ trong ngày tại 1 chỗ.
+- **Ưu tiên:** Must (P0)
+- **INVEST:** Independent ✓ · Negotiable ✓ · Valuable ✓ · Estimable ⚠ (AI bóc tách món) · Small ✓ · Testable ✓
+- **Acceptance Criteria:**
+  - AC1 — Given KH mở Check-in (từ trang chủ US-E06-02), When xem, Then thấy **4 card** theo thứ tự: (1) Chỉ số cơ thể, (2) Thực đơn hôm nay, (3) Hoạt động dinh dưỡng & thể chất, (5) Kiến thức.
+  - AC2 — Card 1: Given chỉ số cơ thể (Cân nặng/Mỡ%/Mỡ nội tạng/Cơ/Xương/Nước/Tuổi sinh học/RMR) đã nhập từ sáng, When KH muốn cập nhật, Then bấm link "Nhập lại chỉ số" → ghi đè dữ liệu đã có (hoặc thêm mới nếu chưa có).
+  - AC3 — Card 2: Given thực đơn theo số bữa đã đăng ký (3/4/5 bữa — vd Bữa sáng/Ăn nhẹ sáng/Bữa trưa/Ăn nhẹ chiều/Bữa tối/Ăn nhẹ tối), When KH chụp ảnh món ăn, Then AI đánh giá cấu trúc bữa (Calo + gam Đạm/Tinh bột/Chất béo) → KH chỉnh sửa → bấm "Lưu"; có SP hỗ trợ thì nhập số viên/ml; icon check sáng xanh khi hoàn thành.
+  - AC4 — Card 3: Given Uống nước, When KH bấm +/-, Then tăng/giảm số cốc (200ml/cốc); Given Giấc ngủ, When nhập giờ đi ngủ + thức dậy, Then tự tính số giờ ngủ; Given Thể thao, When tìm + chọn hoạt động + nhập thời gian, Then tính calo + điểm cho hoạt động.
+  - AC5 — Card 5: Given bài học cần xem (có icon video), When KH bấm "Xem bài học", Then mở video (màn Đào tạo) + lưu ý xem hết để tính điểm; sau xem hết → 3 câu khảo sát (ấn tượng / áp dụng / chia sẻ ai) → bấm "Gửi khảo sát" khi trả lời xong 3 câu.
+  - AC6 — Given hoàn thành check-in, When KH bấm "Hoàn thành", Then quay trang chủ (US-E06-02) + cập nhật % hoàn thành + điểm.
+- **Truy vết:**
+  - Mockup: `docs/03-mockups/customer/S-HLTH-06_check_in.html` ✅
+  - Prototype: `docs/04-prototypes/customer/HLTH-06_check_in.html` ✅
+  - Khuôn màn: T3 (scroll, 4 card)
+  - Nghiệp vụ: `docs/00-foundation/business-rules/Calorie-Meal-Business-Rules-v1.1.md` (calo + 3 nhóm); `Customer-RFM-Scoring-v1.0.md` (R/F điểm); E05 (kiến thức + 3 câu hỏi).
+- **Open question:** AI bóc tách món ăn (Card 2) cần PoC (Feasibility).
 
 ---
 
