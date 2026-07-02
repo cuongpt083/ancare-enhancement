@@ -191,8 +191,8 @@ Trang chủ (avatar+chào+chuông+gói+RFM, check-in row→màn Check-in, đồn
 | R2 | Báo cáo KH | US-E06-07 | 3 tab + Infographic | As-Is trống (chờ HLV) | ✅ đã enrich S-HLTH-07 |
 | R3 | Đào tạo KH | US-E05-01 chung | màn riêng | As-Is không có | ✅ đã tạo S-DEV-02 |
 | R4 | Infographic | US-E06-08 Could | nút trong Báo cáo | As-Is không có | ✅ đã đưa nút vào S-HLTH-07 |
-| R5 | Hồ sơ KH | chưa mockup | draft không chi tiết | As-Is có tab nhưng video không sâu | ⏳ TODO mockup khi cần |
-| R6 | Ảnh vóc dáng (trước/sau) | archive Màn 06 | draft không nhắc | As-Is mới không có (video tập check-in) | ⏳ PO xác nhận: giữ/bỏ? |
+| R5 | Hồ sơ KH | chưa mockup | draft không chi tiết | As-Is có tab nhưng video không sâu | ✅ **PO chốt**: không xử lý thêm task này (giữ As-Is, làm sau khi cần) |
+| R6 | Ảnh vóc dáng (trước/sau) | archive Màn 06 | draft không nhắc | As-Is đã có | ✅ **PO chốt**: GIỮ (KẾ THỪA As-Is). Không xử lý thêm. |
 | R7 | AI phỏng đoán món | US-E06-04 (THÊM) | draft Card 2 | **As-Is ĐÃ CÓ** (Màn 08/09/10) | ✅ Đổi US-E06-04 từ THÊM → KẾ THỪA (đã có)! |
 | R8 | Nước 21 ly | — | +/- cốc 200ml | As-Is 0/21 ly | ✅ SỬA: quy đổi ml/l (21 ly × 200ml = 4.2L) |
 | R9 | Tiến trình "chờ HLV" | — | line-chart tự động | As-Is trống chờ HLV | ✅ SỬA: tự động line-chart |

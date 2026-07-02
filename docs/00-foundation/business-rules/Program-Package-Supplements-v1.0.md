@@ -1,8 +1,12 @@
 # Danh mục Sản phẩm bổ sung — Chương trình × Gói (9 tổ hợp) — v1.0
 
 > **Quyết định:** Q31b (PO chốt 2026-07-02) — quan hệ **phân cấp**: Chương trình (theo mục tiêu) → Gói (Tối ưu/Nâng cao/Cơ bản) → danh mục SP bổ sung.
-> **Nguồn SP:** `docs/00-foundation/products-index.md` (Product Knowledge Index — goals của từng SP). **Đề xuất dựa trên goals, chờ PO xác nhận.**
-> **Mục đích:** lưu danh mục SP bổ sung cho 9 tổ hợp. Dùng cho: Xem lộ trình (US-E02-05), bữa ăn (US-E02-07), Check-in KH (US-E06-10 Card 2), RFM M (Q31b).
+> **Nguồn SP:** `docs/00-foundation/products-index.md` (goals từng SP). **Đề xuất dựa trên goals — CHỜ PO XÁC NHẬN.**
+>
+> **Mục đích & khi nào dùng:**
+> - **Giai đoạn thiết kế (hiện tại):** chỉ cần biết *có* mục "Thực phẩm bổ sung" trong wireframe — wireframe dùng placeholder (F1/PPP/Omega-3), **không phụ thuộc** ma trận SP chính xác.
+> - **Giai đoạn dev/bán hàng (sau):** cần danh mục SP thật để lưu `customer.supplements[]`, hiển thị trong Xem lộ trình (US-E02-05) + bữa ăn (US-E02-07, US-E06-10 Card 2) + tính RFM M (Q31b).
+> - **Trạng thái:** ma trận 3×3 dưới là **đề xuất** (dựa goals). Chưa cần chốt nội dung SP thật cho đến khi dev triển khai hoặc bán hàng thật. PO có thể xác nhận/điều chỉnh bất cứ lúc nào.
 
 ## Cấu trúc phân cấp
 

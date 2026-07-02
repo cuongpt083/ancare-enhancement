@@ -106,8 +106,8 @@
 | Nhóm | File | Trạng thái |
 |---|---|---|
 | E01 + E02 (Quản lý KH + Tư vấn 15p) | `gap-analysis-E01-E02.md` | ✅ xong (chờ PO chốt Q31-Q35 + cập nhật mockup) |
-| E00 Shell/Auth | — | ⏳ chờ As-Is |
-| E03 Customer Care | — | ⏳ chờ As-Is |
-| E04 Team Ops | — | ⏳ chờ As-Is |
+| E00 Shell/Auth | — | ⏳ chờ As-Is (có Màn 01-02 trong as-is-notes) |
+| E03 Customer Care | — | ⛔ As-Is CHƯA CÓ cụm chức năng (PO xác nhận) — To-Be toàn bộ THÊM |
+| E04 Team Ops | `gap-analysis-E04.md` | ✅ xong (As-Is 4 màn 09-12, kế thừa rất cao) |
 | E05 Self-Dev | — | ⏳ chờ As-Is |
 | E06 Personal Health | `gap-analysis-E06.md` | ✅ HOÀN THIỆN (As-Is mới 10 màn từ video screen-record-KH.mp4) |

@@ -1,12 +1,15 @@
 # As-Is Notes — Phân tích Luồng Nghiệp vụ HLV & Khách Hàng (AN-Care)
 
-Tài liệu này ghi chép kết quả phân tích từ hai video screen record quy trình nghiệp vụ trên ứng dụng di động AN-Care:
+Tài liệu này ghi chép kết quả phân tích từ các video screen record quy trình nghiệp vụ trên ứng dụng di động AN-Care:
 1. Quy trình đăng nhập bằng tài khoản Huấn Luyện Viên (HLV) và thực hiện thêm mới thành viên (link nguồn: [YouTube Video](https://www.youtube.com/watch?v=hTXHwBV2toU)).
 2. Quy trình check-in hằng ngày và phỏng đoán dinh dưỡng món ăn bằng AI của vai trò Khách Hàng (KH) (nguồn: file video `screen-record-KH.mp4`).
+3. Quy trình quản lý danh sách đội ngũ (Team), lọc danh sách lead khách hàng tiềm năng và xem chi tiết khách hàng của vai trò HLV (nguồn: file video `screen-record-hlv-teams.mp4`).
 
 ---
 
 ## 1. Sơ đồ luồng tổng quát
+
+### 1.1. Luồng HLV Đăng nhập & Tạo Khách hàng Mới (YouTube)
 
 Quy trình thao tác thực tế của HLV trong video diễn ra theo luồng nghiệp vụ khép kín sau:
 
@@ -19,6 +22,17 @@ graph TD
     E -->|Tiếp tục| F["[Màn 06] Đăng ký lộ trình - Bước 3: Thiết lập thực đơn & Ảnh đại diện"]
     F -->|Tiếp tục| G["[Màn 07] Đăng ký lộ trình - Bước 4: Thông tin tài khoản"]
     G -->|Xác nhận| H["[Màn 08] Chi tiết Khách hàng (Lộ trình đã kích hoạt)"]
+```
+
+### 1.2. Luồng HLV Quản lý Team & Khách hàng Tiềm năng (screen-record-hlv-teams.mp4)
+
+Quy trình quản lý danh sách và kiểm tra chi tiết của HLV trong video diễn ra như sau:
+```mermaid
+graph TD
+    A["[Trang Chủ HLV]"] -->|Chạm Tab Team| B["[Màn 09] Quản lý Team - Khách hàng của tôi"]
+    B -->|Chạm Tab Khách hàng tiềm năng| C["[Màn 10] Khách hàng tiềm năng (Trạng thái trống)"]
+    C -->|Thêm Lead / Lọc danh sách| D["[Màn 11] Khách hàng tiềm năng (Danh sách Lead)"]
+    B -->|Chạm vào 1 Khách hàng| E["[Màn 12] Chi tiết Khách hàng (HLV View)"]
 ```
 
 ---
@@ -175,6 +189,84 @@ Dưới đây là chi tiết giao diện, các trường thông tin (Bắt buộ
 - **AI phân tích As-Is:**
   - **Điểm mạnh:** Tổng hợp đầy đủ tất cả dữ liệu lộ trình vừa thiết lập trên một màn hình dashboard cá nhân hóa của khách hàng. Trực quan hóa tiến trình cân nặng.
   - **Hạn chế:** Các chỉ số Đạm và Nước được tính toán tự động nhưng chưa hiển thị công thức hay lý do đằng sau con số đó (ví dụ: nước tính theo công thức `0.4L/10kg` cộng thêm bù hao vận động).
+
+---
+
+### Màn 09 — Quản lý Team - Khách hàng của tôi (My Clients List)
+- **Path ảnh:** `screenshots-hlv/09_team_kh_cua_toi.png`
+- **Vai trò:** HLV
+- **Luồng:** Từ Trang chủ HLV $\rightarrow$ Chạm tab "Team" trên Bottom Navigation Bar $\rightarrow$ Hiển thị tab "Khách hàng của tôi" mặc định.
+- **Trường thông tin hiển thị:**
+  - **Tab phân hệ**: Gồm hai nút chuyển đổi: `"Khách hàng tiềm năng"` và `"Khách hàng của tôi"`.
+  - **Bộ lọc**: Bộ lọc thả xuống mặc định hiển thị `"Tất cả"` và ô tìm kiếm `"Tìm theo tên..."`.
+  - **KPIs Tóm tắt**: Hiển thị nhanh số lượng khách hàng qua các thẻ:
+    - *Khách hàng*: `5`
+    - *Active*: `0`
+    - *At Risk*: `0` (thẻ nền đỏ nhạt)
+  - **Danh sách khách hàng**: Danh sách các thẻ thành viên hiển thị thông tin:
+    - Tên khách hàng & Ngày chăm sóc: Ví dụ `"Testkhtn02 — Day 0"`, `"Khách hàng 01 — Day 0"`, `"Mipt01 — Day 0"`.
+    - Biểu tượng ngọn lửa biểu thị chuỗi ngày liên tiếp (ví dụ: `0 days`) và số lần Reorder (ví dụ: `Reorder: 0x`).
+    - Thời gian check-in/cập nhật gần nhất (ví dụ: `Check-in — 11 giờ trước` hoặc `Bữa ăn — 1 giờ trước`).
+    - Nhãn trạng thái chăm sóc: Nhãn màu vàng `"? Nurturing"`.
+- **Các nút chức năng:**
+  - **Nút '+' (Floating Action Button - FAB)**: Nút nổi màu xanh lục ở góc dưới bên phải để bắt đầu thêm mới khách hàng.
+  - **Chuyển Tab**: Chạm `"Khách hàng tiềm năng"` để chuyển phân hệ.
+  - **Thẻ khách hàng**: Chạm vào một thẻ khách hàng để xem chi tiết tiến trình chăm sóc.
+- **AI phân tích As-Is:**
+  - **Điểm mạnh:** Cung cấp bộ KPIs tóm tắt trực quan ở trên đầu trang (đặc biệt là mục At Risk để HLV can thiệp kịp thời).
+  - **Hạn chế:** Các thẻ hiển thị nhãn chăm sóc tiếng Anh `"Nurturing"` chưa được Việt hóa đồng bộ với ngôn ngữ chung của ứng dụng.
+
+---
+
+### Màn 10 — Quản lý Team - Khách hàng tiềm năng - Trạng thái trống (Potential Clients - Empty State)
+- **Path ảnh:** `screenshots-hlv/10_team_kh_tiem_nang_empty.png`
+- **Vai trò:** HLV
+- **Luồng:** Từ màn hình Quản lý Team $\rightarrow$ Chạm vào tab `"Khách hàng tiềm năng"`.
+- **Trường thông tin hiển thị:**
+  - **Thông báo trống**: Minh họa bằng hình tròn chứa hai icon hình người kèm dòng chữ `"Chưa có khách hàng"` và mô tả `"Hãy thêm khách hàng đầu tiên để bắt đầu hành trình coaching cùng họ."`
+- **Các nút chức năng:**
+  - **Nút Thêm KH mới**: Nút màu xanh lục đậm nổi bật chính giữa màn hình.
+  - **Nút '+' (FAB)**: Nút nổi ở góc phải dưới vẫn hiển thị để HLV thao tác nhanh.
+- **AI phân tích As-Is:**
+  - **Bố cục:** Thiết kế trống (Empty State) sạch sẽ, hướng dẫn rõ ràng bước tiếp theo cho HLV.
+
+---
+
+### Màn 11 — Quản lý Team - Khách hàng tiềm năng - Danh sách Lead (Potential Clients - Leads List)
+- **Path ảnh:** `screenshots-hlv/11_team_kh_tiem_nang_list.png`
+- **Vai trò:** HLV
+- **Luồng:** Từ tab Khách hàng tiềm năng $\rightarrow$ Khi hệ thống đã có dữ liệu Leads.
+- **Trường thông tin hiển thị:**
+  - **Ô tìm kiếm**: `"Tìm theo tên, số điện thoại..."`.
+  - **Thanh trượt bộ lọc trạng thái (Filter Pills)**: Gồm các nút lọc nhanh: `"Tất cả"` (đang chọn, màu xanh lục), `"Nóng"`, `"Ấm"`, `"Lạnh"`, `"Cần theo dõi"`.
+  - **Danh sách Leads**: Tiêu đề `"TẤT CẢ LEAD"`. Thẻ thông tin Lead hiển thị avatar chữ cái, tên lead (ví dụ: `"Testkhtn01"`), số ngày tích lũy (`lead 0`) và dòng gợi ý hành động màu xanh lục (`"Tiếp tục làm ấm"`).
+- **Các nút chức năng:**
+  - **Các Pills Trạng thái**: Cho phép lọc nhanh danh sách Lead theo nhiệt độ tương tác.
+  - **Thẻ Lead**: Nhấp vào để cập nhật thông tin chăm sóc tương tác hoặc chuyển đổi Lead thành khách hàng chính thức.
+- **AI phân tích As-Is:**
+  - **Điểm mạnh:** Việc phân loại lead theo nhiệt độ (Nóng, Ấm, Lạnh) và đưa ra gợi ý hành động cụ thể ("Tiếp tục làm ấm") giúp HLV quản lý phễu khách hàng tiềm năng một cách khoa học.
+
+---
+
+### Màn 12 — Chi tiết Khách hàng (Client Profile Details - HLV View)
+- **Path ảnh:** `screenshots-hlv/12_team_chi_tiet_kh_hlv.png`
+- **Vai trò:** HLV
+- **Luồng:** Từ danh sách "Khách hàng của tôi" $\rightarrow$ Click chọn một khách hàng (ví dụ: "Mipt01").
+- **Trường thông tin hiển thị:**
+  - **Thông tin cơ bản**: Tên khách hàng (phần đầu bị che bởi notification) kèm ngày hết hạn gói `"HH 02/10/2026"`.
+  - **Chỉ số tổng quan của khách hàng**:
+    - *Chuỗi ngày*: `0`
+    - *Rings*: `0`
+    - *BMI*: `--`
+  - **Mục tiêu lộ trình**: Thẻ `"Giảm cân"` đi kèm mục tiêu năng lượng khuyên dùng `"1.988 kcal/ngày • CSKD"`.
+  - **Bảng chỉ số cơ thể**: Tiêu đề `"Chỉ số cơ thể (02/07/2026)"` kèm nhãn xanh `"Đã cập nhật"`, hiển thị chi tiết 8 chỉ số của khách hàng (C.Nặng 80.0, Mỡ 25.0 %, Cơ 38.0 kg, Nước 55.0 %, Mỡ NT 4.0, Xương 27.0, Tuổi SH 28, BMR 1400).
+  - **Báo cáo gần đây & Báo cáo tiến trình**: Các mục quản lý báo cáo định kỳ của khách hàng (mặc định hiển thị trống).
+- **Các nút chức năng:**
+  - **Nút Tạo báo cáo**: Nút xanh lục nằm trong phần Báo cáo tiến trình để HLV bắt đầu xuất báo cáo định kỳ cho khách hàng.
+  - **Nút Quay lại (<)**: Ở góc trên bên trái.
+- **AI phân tích As-Is:**
+  - **Điểm mạnh:** Tổng hợp chi tiết toàn bộ dữ liệu chỉ số sức khỏe của khách hàng trên cùng một giao diện, giúp HLV dễ dàng đánh giá tiến độ mà không cần chuyển đổi nhiều tab.
+  - **Hạn chế:** Các mục "Báo cáo gần đây" và "Báo cáo tiến trình" khi trống hiển thị nội dung trùng lặp, có thể tối ưu gom nhóm trực quan hơn.
 
 ---
 
