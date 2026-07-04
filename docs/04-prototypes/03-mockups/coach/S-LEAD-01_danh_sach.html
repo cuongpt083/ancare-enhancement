@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Team — AnCare</title>
+<link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
+
+</head><body><div class="screen">
+<div class="appbar"><span class="back" style="opacity:0"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></span><h1>Team</h1><span class="info"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="8.01"/><line x1="12" y1="12" x2="12" y2="16"/></svg></span></div>
+<div class="content" style="padding-top:var(--s-12)">
+  <div class="segmented">
+    <button class="seg">KH tiềm năng</button>
+    <button class="seg active">KH của tôi</button>
+  </div>
+  <div class="card" style="margin-bottom:var(--s-16)">
+    <div class="flex items-center gap-12" style="margin-bottom:var(--s-12)">
+      <div class="flex-1" style="position:relative">
+        <span style="position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-muted)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
+        <input type="text" placeholder="Tìm theo tên, SĐT..." style="padding-left:40px">
+      </div>
+      <button class="pill" style="height:40px"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg> Lọc</button>
+    </div>
+    <div class="flex justify-between" style="margin-bottom:var(--s-12)">
+      <div style="text-align:center;flex:1;padding:var(--s-12);background:var(--state-good-bg);border-radius:var(--radius-md)">
+        <div style="font-size:var(--text-xl);font-weight:700;color:var(--state-good)">3</div>
+        <div style="font-size:var(--text-xs);color:var(--text-muted)">Tích cực</div>
+      </div>
+      <div style="text-align:center;flex:1;padding:var(--s-12);background:var(--state-warn-bg);border-radius:var(--radius-md)">
+        <div style="font-size:var(--text-xl);font-weight:700;color:var(--state-warn)">1</div>
+        <div style="font-size:var(--text-xs);color:var(--text-muted)">Có nguy cơ</div>
+      </div>
+      <div style="text-align:center;flex:1;padding:var(--s-12);background:var(--state-alert-bg);border-radius:var(--radius-md)">
+        <div style="font-size:var(--text-xl);font-weight:700;color:var(--state-alert)">1</div>
+        <div style="font-size:var(--text-xs);color:var(--text-muted)">Kém quan tâm</div>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="padding:var(--s-12)">
+    <a href="S-CONS-09_ket_qua_kh.html" class="flex items-center gap-12" style="padding:var(--s-12) 0;border-bottom:1px solid var(--border); text-decoration: none; color: inherit;">
+      <div style="width:44px;height:44px;border-radius:var(--radius-full);background:var(--accent-subtle);display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:700">H</div>
+      <div class="flex-1">
+        <div style="font-weight:600">Hạnh</div>
+        <div class="hint">Cơ-Nước-Mỡ · 8 ngày còn lại</div>
+      </div>
+      <span class="chip good">Tích cực</span>
+    </a>
+    <div class="flex items-center gap-12" style="padding:var(--s-12) 0;border-bottom:1px solid var(--border)">
+      <div style="width:44px;height:44px;border-radius:var(--radius-full);background:var(--state-warn-bg);display:flex;align-items:center;justify-content:center;color:var(--state-warn);font-weight:700">M</div>
+      <div class="flex-1">
+        <div style="font-weight:600">Mipt01</div>
+        <div class="hint">Bữa ăn lành mạnh · 12 ngày còn lại</div>
+      </div>
+      <span class="chip warn">Có nguy cơ</span>
+    </div>
+    <div class="flex items-center gap-12" style="padding:var(--s-12) 0;border-bottom:1px solid var(--border)">
+      <div style="width:44px;height:44px;border-radius:var(--radius-full);background:var(--state-alert-bg);display:flex;align-items:center;justify-content:center;color:var(--state-alert);font-weight:700">T</div>
+      <div class="flex-1">
+        <div style="font-weight:600">Testkhtn02</div>
+        <div class="hint">Chưa mua gói</div>
+      </div>
+      <span class="chip alert">Kém quan tâm</span>
+    </div>
+    <div class="flex items-center gap-12" style="padding:var(--s-12) 0">
+      <div style="width:44px;height:44px;border-radius:var(--radius-full);background:var(--accent-subtle);display:flex;align-items:center;justify-content:center;color:var(--accent);font-weight:700">C</div>
+      <div class="flex-1">
+        <div style="font-weight:600">Cường</div>
+        <div class="hint">Dinh dưỡng tế bào · 45 ngày còn lại</div>
+      </div>
+      <span class="chip good">Tích cực</span>
+    </div>
+  </div>
+</div>
+<div class="bottom-nav"><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><span>Trang chủ</span></div><div class="nav-item active"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 1 0 0 8zM20 21v-2a4 4 0 0 0-3-3.87"/></svg></span><span>Team</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><span>Chat</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></span><span>HLV</span></div><div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 1 0 0 8zM5 20a7 7 0 0 1 14 0"/></svg></span><span>Hồ sơ</span></div></div>
+<button class="fab"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></button></div></body></html>
