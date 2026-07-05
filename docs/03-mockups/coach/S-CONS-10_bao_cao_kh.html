@@ -1,0 +1,106 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Báo cáo kết quả KH — AnCare HLV</title>
+<link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
+</head><body><div class="screen">
+<div class="appbar">
+  <a href="S-CONS-09_ket_qua_kh.html" class="back" style="color: inherit; text-decoration: none;">
+    <svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+  </a>
+  <h1>Báo cáo kết quả KH</h1>
+  <span class="info" style="opacity: 0"></span>
+</div>
+<div class="content" style="padding-top:var(--s-12); padding-bottom: 80px;">
+  
+  <div style="background: var(--bg-subtle); padding: var(--s-12); border-radius: var(--radius-md); margin-bottom: var(--s-16); border: 1px solid var(--border);">
+    <div class="hint" style="font-weight: 700; color: var(--accent); margin-bottom: 2px;">THÔNG TIN BÁO CÁO BATCH JOBS</div>
+    <div class="hint" style="line-height: 1.4;">Báo cáo tổng hợp tự động định kỳ bởi hệ thống. Cập nhật lần cuối: 21:00 hôm nay.</div>
+  </div>
+
+  <!-- Section 1: Charts Focus -->
+  <div class="card">
+    <h2>Xu hướng Cân nặng (30 ngày gần nhất)</h2>
+    <div style="height:120px; padding: var(--s-12) 0; display: flex; align-items: flex-end; justify-content: space-between; position: relative;">
+      <!-- SVG Weight chart -->
+      <svg viewBox="0 0 320 100" width="100%" height="100" style="overflow: visible;">
+        <line x1="0" y1="80" x2="320" y2="80" stroke="var(--border)" stroke-width="1" stroke-dasharray="4"/>
+        <line x1="0" y1="50" x2="320" y2="50" stroke="var(--border)" stroke-width="1" stroke-dasharray="4"/>
+        <line x1="0" y1="20" x2="320" y2="20" stroke="var(--border)" stroke-width="1" stroke-dasharray="4"/>
+        <polyline points="0,85 40,78 80,72 120,68 160,58 200,48 240,42 280,30 320,24" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linejoin="round"/>
+        <circle cx="320" cy="24" r="5" fill="var(--accent)"/>
+        <text x="5" y="95" font-size="9" fill="var(--text-muted)">02/6</text>
+        <text x="150" y="95" font-size="9" fill="var(--text-muted)">17/6</text>
+        <text x="280" y="95" font-size="9" fill="var(--text-muted)">02/7</text>
+        <text x="280" y="18" font-size="10" font-weight="700" fill="var(--accent)">55.2kg</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Chỉ số nước uống & Hydration tuần</h2>
+    <div style="height:100px; display: flex; align-items: flex-end; justify-content: space-between; padding-top: var(--s-12);">
+      <!-- Column Water chart -->
+      <div style="text-align: center; width: 12%;">
+        <div style="height: 60px; background: rgba(59,130,246,0.3); border-radius: 4px 4px 0 0; width: 100%;"></div>
+        <div class="hint" style="font-size: 8px; margin-top: 4px;">T2</div>
+      </div>
+      <div style="text-align: center; width: 12%;">
+        <div style="height: 75px; background: rgba(59,130,246,0.3); border-radius: 4px 4px 0 0; width: 100%;"></div>
+        <div class="hint" style="font-size: 8px; margin-top: 4px;">T3</div>
+      </div>
+      <div style="text-align: center; width: 12%;">
+        <div style="height: 90px; background: var(--accent); border-radius: 4px 4px 0 0; width: 100%;"></div>
+        <div class="hint" style="font-size: 8px; margin-top: 4px;">T4</div>
+      </div>
+      <div style="text-align: center; width: 12%;">
+        <div style="height: 45px; background: rgba(59,130,246,0.3); border-radius: 4px 4px 0 0; width: 100%;"></div>
+        <div class="hint" style="font-size: 8px; margin-top: 4px;">T5</div>
+      </div>
+      <div style="text-align: center; width: 12%;">
+        <div style="height: 80px; background: rgba(59,130,246,0.3); border-radius: 4px 4px 0 0; width: 100%;"></div>
+        <div class="hint" style="font-size: 8px; margin-top: 4px;">T6</div>
+      </div>
+      <div style="text-align: center; width: 12%;">
+        <div style="height: 70px; background: rgba(59,130,246,0.3); border-radius: 4px 4px 0 0; width: 100%;"></div>
+        <div class="hint" style="font-size: 8px; margin-top: 4px;">T7</div>
+      </div>
+      <div style="text-align: center; width: 12%;">
+        <div style="height: 85px; background: rgba(59,130,246,0.3); border-radius: 4px 4px 0 0; width: 100%;"></div>
+        <div class="hint" style="font-size: 8px; margin-top: 4px;">CN</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: Automated Report Placeholders -->
+  <div class="card">
+    <h2>Chi tiết các báo cáo định kỳ (Placeholders)</h2>
+    <div style="display: flex; flex-direction: column; gap: var(--s-12)">
+      <div style="border: 1px dashed var(--border); border-radius: var(--radius-md); padding: var(--s-12); background: var(--bg-subtle)">
+        <div style="font-weight: 700; font-size: var(--text-sm); color: var(--text)">[Báo cáo Phân tích Tanita tuần - Batch Job #208]</div>
+        <div class="hint" style="margin-top: 4px;">Phân tích sự thay đổi cơ, nước, mỡ và dự đoán chỉ số sinh học định kỳ hàng tuần dựa trên dữ liệu cập nhật.</div>
+      </div>
+      
+      <div style="border: 1px dashed var(--border); border-radius: var(--radius-md); padding: var(--s-12); background: var(--bg-subtle)">
+        <div style="font-weight: 700; font-size: var(--text-sm); color: var(--text)">[Đánh giá hành vi sinh hoạt - Job #105]</div>
+        <div class="hint" style="margin-top: 4px;">Thống kê giấc ngủ trung bình, mức độ hoàn thành nhiệm vụ vận động và đề xuất lời khuyên cải thiện giấc ngủ.</div>
+      </div>
+      
+      <div style="border: 1px dashed var(--border); border-radius: var(--radius-md); padding: var(--s-12); background: var(--bg-subtle)">
+        <div style="font-weight: 700; font-size: var(--text-sm); color: var(--text)">[Phân tích Dinh dưỡng Tế bào - AI Agent Scheduler]</div>
+        <div class="hint" style="margin-top: 4px;">Đối chiếu tổng lượng dinh dưỡng đa lượng nạp vào trong tuần với chỉ số chuẩn hóa tế bào để đưa ra điều chỉnh.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Section 3: Infographic Trigger Button -->
+<div class="cta-bar">
+  <a href="S-CONS-11_infographic.html" style="text-decoration: none; width: 100%; display: block;">
+    <button class="btn primary block" style="width: 100%;">
+      <svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+      Tạo Infographic chia sẻ cho KH
+    </button>
+  </a>
+</div>
+
+</div></body></html>

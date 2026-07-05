@@ -1,0 +1,656 @@
+<h1 id="phân-tích-khoảng-cách-gap-ancare-dxp"><strong>PHÂN TÍCH KHOẢNG
+CÁCH (GAP) — ANCARE DXP</strong></h1>
+<p><strong>Phiên bản:</strong> v2.0 — <em>Đối chiếu theo định hướng DXP.
+Thay thế GAP v1.0.</em> <strong>Cơ sở:</strong> As-Is v1.2
+(<code>docs/as-is/</code>, gồm 2 phụ lục) ↔︎ To-be v2.0
+(<code>docs/to-be/To-be study report_v2.1 (consolidated).md</code>).</p>
+<blockquote>
+<p><strong>Khác biệt cốt lõi với v1.0:</strong> loại bỏ toàn bộ GAP về
+POS/kho/quản trị kinh doanh (chuyển cho VNHUB). Nhiều năng lực phía
+khách hàng đã được app hiện tại đáp ứng, nên khoảng trống thật co lại và
+<strong>dịch trọng tâm sang nội dung, đào tạo, lan tỏa, cá nhân hóa, kết
+nối phễu</strong>.</p>
+</blockquote>
+<hr />
+<h2 id="quy-ước">1. QUY ƯỚC</h2>
+<p>Loại GAP: <strong>[MỚI]</strong> chưa có, xây mới · <strong>[NÂNG
+CẤP]</strong> đã có một phần · <strong>[ĐÃ CÓ]</strong> không còn là gap
+· <strong>[NỀN TẢNG]</strong> hạ tầng dùng chung. Công sức: Thấp (S) ·
+Trung bình (M) · Cao (L).</p>
+<blockquote>
+<p>Hạn chế: chưa có baseline định lượng → ưu tiên/công sức mang tính
+định tính.</p>
+</blockquote>
+<hr />
+<h2 id="bảng-khoảng-cách-theo-module">2. BẢNG KHOẢNG CÁCH THEO
+MODULE</h2>
+<h3 id="module-hành-trình-khách-hàng">2.1. Module Hành trình khách
+hàng</h3>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">#</th>
+<th style="text-align: left;">Hạng mục</th>
+<th style="text-align: left;">As-Is</th>
+<th style="text-align: left;">To-be</th>
+<th style="text-align: left;">Loại</th>
+<th style="text-align: center;">CS</th>
+<th style="text-align: center;">MVP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">CJ1</td>
+<td style="text-align: left;">Tự theo dõi sức khỏe/dinh dưỡng/thói
+quen</td>
+<td style="text-align: left;">Đã có (log, tiến độ, streak)</td>
+<td style="text-align: left;">Giữ &amp; tinh chỉnh</td>
+<td style="text-align: left;">[ĐÃ CÓ]</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CJ2</td>
+<td style="text-align: left;">Chat 1-1 HLV + cộng đồng</td>
+<td style="text-align: left;">Đã có</td>
+<td style="text-align: left;">Giữ</td>
+<td style="text-align: left;">[ĐÃ CÓ]</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CJ3</td>
+<td style="text-align: left;">Nhắc nhở chủ động (push theo khung
+giờ)</td>
+<td style="text-align: left;">Chưa có push chủ động</td>
+<td style="text-align: left;">Nhắc bữa ăn/nước/thói quen</td>
+<td style="text-align: left;">[MỚI]</td>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CJ4</td>
+<td style="text-align: left;">Tạo &amp; chia sẻ câu chuyện thành công ra
+MXH</td>
+<td style="text-align: left;">Có đồ thị nội bộ; chưa chia sẻ</td>
+<td style="text-align: left;">Sinh nội dung giàu cảm xúc, 1 chạm share
+(kênh thu hút của bánh đà CJ6)</td>
+<td style="text-align: left;">[MỚI]</td>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CJ5</td>
+<td style="text-align: left;">Kho nội dung kiến thức cho khách tiềm
+năng</td>
+<td style="text-align: left;">Chưa có</td>
+<td style="text-align: left;">Nội dung sinh động, cô đọng</td>
+<td style="text-align: left;">[MỚI]</td>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CJ6</td>
+<td style="text-align: left;"><strong>Động cơ thu hút bằng nội dung +
+Content-Attribution Matching</strong> (hợp nhất CJ4/CJ7)</td>
+<td style="text-align: left;">Chưa có (HLV tự tạo lead)</td>
+<td style="text-align: left;">HLV sáng tạo/chia sẻ nội dung kèm mã giới
+thiệu → khách tương tác tự gắn về HLV (matching chính); thuật toán chỉ
+fallback cho lead mồ côi</td>
+<td style="text-align: left;">[MỚI]</td>
+<td style="text-align: center;">L</td>
+<td style="text-align: center;">2-3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CJ7</td>
+<td style="text-align: left;">Vòng lặp giới thiệu (referral) — <em>thuộc
+bánh đà CJ6</em></td>
+<td style="text-align: left;">Chưa có</td>
+<td style="text-align: left;">Mã giới thiệu/deep-link, attribution, theo
+dõi nguồn; quyền chọn/đổi HLV; chống poaching &amp; gian lận</td>
+<td style="text-align: left;">[MỚI]</td>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">2-3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CJ8</td>
+<td style="text-align: left;">Buổi sinh hoạt HOM (thông tin &amp; tham
+gia)</td>
+<td style="text-align: left;">Chưa có trong app</td>
+<td style="text-align: left;">Lịch HOM, chủ đề, đăng ký</td>
+<td style="text-align: left;">[MỚI]</td>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CJ9</td>
+<td style="text-align: left;">Gián đoạn khi hết gói (rủi ro bỏ cuộc -
+C4)</td>
+<td style="text-align: left;">Chặn cứng check-in</td>
+<td style="text-align: left;">Trải nghiệm gia hạn mềm hơn</td>
+<td style="text-align: left;">[NÂNG CẤP]</td>
+<td style="text-align: center;">S</td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="nền-tảng-la-bàn-quy-trình-12-bước-process-state-model">2.0. Nền
+tảng — La bàn Quy trình 12 bước (Process State Model)</h3>
+<blockquote>
+<p>Đặc tả:
+<code>docs/to-be/To-be study report_v2.1 (consolidated).md (Phần II)</code>.
+Là xương sống nối 4 module; nên ưu tiên dựng sớm.</p>
+</blockquote>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">#</th>
+<th style="text-align: left;">Hạng mục</th>
+<th style="text-align: left;">As-Is</th>
+<th style="text-align: left;">To-be</th>
+<th style="text-align: left;">Loại</th>
+<th style="text-align: center;">CS</th>
+<th style="text-align: center;">MVP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">PS1</td>
+<td style="text-align: left;">Process State Model (số hóa SĐD, 2 nhánh,
+DoD theo bước)</td>
+<td style="text-align: left;">Chưa có (sổ tay)</td>
+<td style="text-align: left;">Mô hình tiến trình điều khiển 4
+module</td>
+<td style="text-align: left;">[NỀN TẢNG]</td>
+<td style="text-align: center;">L</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PS2</td>
+<td style="text-align: left;">GNV (giấy nhắc việc) số hóa + cadence</td>
+<td style="text-align: left;">Chưa có</td>
+<td style="text-align: left;">Task/nhắc việc hằng ngày gắn bước</td>
+<td style="text-align: left;">[MỚI]</td>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PS3</td>
+<td style="text-align: left;">Definition of Done theo bước (trừ PPV/đơn
+hàng)</td>
+<td style="text-align: left;">Chưa có</td>
+<td style="text-align: left;">Kiểm tra tiêu chí hoàn thành mỗi bước</td>
+<td style="text-align: left;">[MỚI]</td>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">2</td>
+</tr>
+</tbody>
+</table>
+<h3
+id="bis.-tiểu-mô-đun-thu-hút-chuyển-đổi-ai-bước-1-đầu-bước-2">2.1bis.
+Tiểu mô-đun Thu hút &amp; Chuyển đổi (AI) — Bước 1 → đầu Bước 2</h3>
+<blockquote>
+<p>Đặc tả:
+<code>docs/to-be/To-be study report_v2.1 (consolidated).md (Phần III)</code>.
+Toàn bộ nhóm này hiện <strong>chưa có</strong> trong app (As-Is chỉ có
+luồng HLV tự tạo lead thủ công).</p>
+</blockquote>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">#</th>
+<th style="text-align: left;">Hạng mục</th>
+<th style="text-align: left;">As-Is</th>
+<th style="text-align: left;">To-be</th>
+<th style="text-align: left;">Loại</th>
+<th style="text-align: center;">CS</th>
+<th style="text-align: center;">MVP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">AC1</td>
+<td style="text-align: left;">DSKHTN số hóa (phễu 3 bước, trạng thái
+lead)</td>
+<td style="text-align: left;">Thủ công/sổ tay</td>
+<td style="text-align: left;">Danh sách số, import, trạng thái phễu</td>
+<td style="text-align: left;">[MỚI]</td>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AC2</td>
+<td style="text-align: left;">Chấm điểm &amp; ưu tiên lead</td>
+<td style="text-align: left;">Chưa có</td>
+<td style="text-align: left;">Phân khúc + pain point + ưu tiên (P1
+rule-based → P4 uplift)</td>
+<td style="text-align: left;">[MỚI]</td>
+<td style="text-align: center;">L</td>
+<td style="text-align: center;">2→sau MVP-3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AC3</td>
+<td style="text-align: left;">Engine cá nhân hóa làm ấm &amp; mời</td>
+<td style="text-align: left;">Chưa có</td>
+<td style="text-align: left;">Phân tầng P1 thư viện kịch bản → P2 MI
+copilot → P3 chân dung động+RAG → P4 NBA/bandit</td>
+<td style="text-align: left;">[MỚI]</td>
+<td style="text-align: center;">L</td>
+<td style="text-align: center;">2→sau MVP-3</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Engine cá nhân hóa AC2/AC3 bóc tầng theo độ trưởng thành dữ
+liệu (chi tiết ở To-do TD-AC5-P1..P4):</strong> P1 thư viện kịch bản
+(DISC + Stage-of-Change + LLM viết lại, không cần ML) → P2 copilot theo
+Phỏng vấn tạo động lực (MI) → P3 chân dung động + RAG khớp nội dung (cần
+dữ liệu hành vi) → P4 uplift + Next-Best-Action bandit (cần lịch sử
+chuyển đổi). DISC chỉ là thẻ phụ. Bổ sung AC9: AI nhập vai luyện tập cho
+người mới (song song, MVP-2). | AC4 | Phễu thị trường lạnh + chatbot
+sàng lọc | Chưa có | Landing/quiz + chatbot đặt lịch | [MỚI] | L | 3 | |
+AC5 | Đặt lịch &amp; chuẩn bị cuộc gặp 2/1 | Chưa có | Booking + nhắc 3
+bên + hồ sơ lead cho TAB | [MỚI] | M | 1-2 | | AC6 | Matching KHTN ↔︎
+HLV/BMO (kể cả khách ở xa) | Chưa có | Gợi ý HLV/BMO phù hợp, plug-in
+nhà vận hành gần | [MỚI] | L | 3 | | AC7 | Checklist buổi trải nghiệm
+đầu (10 vai trò BMO) | Một phần (CRM HLV) | Số hóa đón tiếp + hồ sơ liền
+mạch lead→trải nghiệm | [NÂNG CẤP] | M | 2 | | AC8 | La bàn quy trình +
+nhắc tần suất + đo phễu | Chưa có | Vị trí trên Bước 1-2, việc tiếp
+theo, cadence, phễu metrics | [MỚI] | M | 1 |</p>
+</blockquote>
+<h3 id="module-hành-trình-kinh-doanh-hlv">2.2. Module Hành trình kinh
+doanh (HLV)</h3>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">#</th>
+<th style="text-align: left;">Hạng mục</th>
+<th style="text-align: left;">As-Is</th>
+<th style="text-align: left;">To-be</th>
+<th style="text-align: left;">Loại</th>
+<th style="text-align: center;">CS</th>
+<th style="text-align: center;">MVP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">BJ1</td>
+<td style="text-align: left;">Quản lý KH, onboarding, journey, báo
+cáo</td>
+<td style="text-align: left;">Đã có đầy đủ</td>
+<td style="text-align: left;">Giữ</td>
+<td style="text-align: left;">[ĐÃ CÓ]</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BJ2</td>
+<td style="text-align: left;">Chăm sóc theo dịp đặc biệt + động
+viên</td>
+<td style="text-align: left;">Chưa có</td>
+<td style="text-align: left;">Nhắc sinh nhật/kỷ niệm/lễ, gợi ý lời động
+viên</td>
+<td style="text-align: left;">[MỚI]</td>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BJ3</td>
+<td style="text-align: left;">Chia sẻ nội dung sản phẩm/giải pháp/cơ hội
+KD (prospecting)</td>
+<td style="text-align: left;">Chưa có</td>
+<td style="text-align: left;">Bộ nội dung &amp; công cụ chia sẻ</td>
+<td style="text-align: left;">[MỚI]</td>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BJ4</td>
+<td style="text-align: left;">Định hướng phát triển kỹ năng &amp; lộ
+trình thăng tiến</td>
+<td style="text-align: left;">Chưa có</td>
+<td style="text-align: left;">Liên kết Module Đào tạo/PT bản thân</td>
+<td style="text-align: left;">[MỚI]</td>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">2-3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BJ5</td>
+<td style="text-align: left;">Công cụ vận hành DMO đa mô hình</td>
+<td style="text-align: left;">Một phần (app HLV cơ bản)</td>
+<td style="text-align: left;">Mở rộng theo mô hình club (không làm
+POS/kho/quản trị)</td>
+<td style="text-align: left;">[NÂNG CẤP]</td>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BJ6</td>
+<td style="text-align: left;">Pipeline 12 bước cấp quản lý (khách +
+tuyến dưới)</td>
+<td style="text-align: left;">Chưa có</td>
+<td style="text-align: left;">Xem vị trí &amp; hành động cần làm theo
+PSM</td>
+<td style="text-align: left;">[MỚI]</td>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">BJ7</td>
+<td style="text-align: left;">Coaching tuyến dưới (Tell-Show-Try-Do,
+theo dõi Bước 6-12)</td>
+<td style="text-align: left;">Chưa có</td>
+<td style="text-align: left;">Khung huấn luyện &amp; theo dõi nhân
+bản</td>
+<td style="text-align: left;">[MỚI]</td>
+<td style="text-align: center;">M</td>
+<td style="text-align: center;">3</td>
+</tr>
+</tbody>
+</table>
+<h3 id="module-đào-tạo">2.3. Module Đào tạo</h3>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">#</th>
+<th style="text-align: left;">Hạng mục</th>
+<th style="text-align: left;">As-Is</th>
+<th style="text-align: left;">To-be</th>
+<th style="text-align: left;">Loại</th>
+<th style="text-align: left;">CS</th>
+<th style="text-align: center;">MVP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">TR1</td>
+<td style="text-align: left;">Hạ tầng micro-course (tạo/quản
+lý/học)</td>
+<td style="text-align: left;">Chưa có</td>
+<td style="text-align: left;">LMS nhẹ: bài học ngắn, theo dõi tiến
+độ</td>
+<td style="text-align: left;">[NỀN TẢNG]</td>
+<td style="text-align: left;">L</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TR2</td>
+<td style="text-align: left;">Nội dung chuyên sâu theo nhóm KH đặc
+thù</td>
+<td style="text-align: left;">Chưa có</td>
+<td style="text-align: left;">Khóa cho béo phì/tiểu đường/thai sản…</td>
+<td style="text-align: left;">[MỚI]</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TR3</td>
+<td style="text-align: left;">Thư viện KH: video tập, công thức, chuyên
+gia, câu chuyện</td>
+<td style="text-align: left;">Chưa có</td>
+<td style="text-align: left;">Thư viện nội dung đa dạng</td>
+<td style="text-align: left;">[MỚI]</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TR4</td>
+<td style="text-align: left;">Gamification học tập (thi đua, bảng xếp
+hạng)</td>
+<td style="text-align: left;">Streak có sẵn ở tracking; chưa có cho học
+tập</td>
+<td style="text-align: left;">Thi đua/tranh tài/điểm/huy hiệu</td>
+<td style="text-align: left;">[MỚI]</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">TR5</td>
+<td style="text-align: left;">Ánh xạ micro-course 1:1 giáo trình quy
+trình + ngưỡng 70/80/90% làm cổng</td>
+<td style="text-align: left;">Chưa có</td>
+<td style="text-align: left;">Khai mở/HLCB1-2/BMO/Cầm tay chỉ việc/21
+talking points; gate theo PSM</td>
+<td style="text-align: left;">[MỚI]</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TR6</td>
+<td style="text-align: left;">Playlist “đọc/xem/nghe” theo bước + hỗ trợ
+Tell-Show-Try-Do</td>
+<td style="text-align: left;">Chưa có</td>
+<td style="text-align: left;">Lộ trình học có ngữ cảnh + video/checklist
+Bước 8-11</td>
+<td style="text-align: left;">[MỚI]</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: center;">2-3</td>
+</tr>
+</tbody>
+</table>
+<h3 id="module-phát-triển-bản-thân">2.4. Module Phát triển bản thân</h3>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">#</th>
+<th style="text-align: left;">Hạng mục</th>
+<th style="text-align: left;">As-Is</th>
+<th style="text-align: left;">To-be</th>
+<th style="text-align: left;">Loại</th>
+<th style="text-align: left;">CS</th>
+<th style="text-align: center;">MVP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">SD1</td>
+<td style="text-align: left;">Gợi ý thông minh cá nhân hóa nội dung/khóa
+học</td>
+<td style="text-align: left;">Chưa có</td>
+<td style="text-align: left;">Recommender theo dữ liệu &amp; hành
+vi</td>
+<td style="text-align: left;">[MỚI]</td>
+<td style="text-align: left;">L</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SD2</td>
+<td style="text-align: left;">Nội dung giới thiệu sản phẩm/cơ hội KD cho
+khách tiềm năng</td>
+<td style="text-align: left;">Chưa có</td>
+<td style="text-align: left;">Trang/luồng phễu cho tiềm năng</td>
+<td style="text-align: left;">[MỚI]</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SD3</td>
+<td style="text-align: left;">Lộ trình đào tạo có điều kiện cho HLV</td>
+<td style="text-align: left;">Chưa có</td>
+<td style="text-align: left;">Learning path + điều kiện + tài liệu</td>
+<td style="text-align: left;">[MỚI]</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SD4</td>
+<td style="text-align: left;">Lộ trình thăng tiến tới Giám sát viên (mở
+khóa theo mốc)</td>
+<td style="text-align: left;">Chưa có</td>
+<td style="text-align: left;">Trực quan hóa kế hoạch trả thưởng, gắn PSM
+Bước 6-12</td>
+<td style="text-align: left;">[MỚI]</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SD5</td>
+<td style="text-align: left;">Khóa kỹ năng lãnh đạo/bảo trợ</td>
+<td style="text-align: left;">Chưa có</td>
+<td style="text-align: left;">Đào tạo dẫn tuyến dưới</td>
+<td style="text-align: left;">[MỚI]</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: center;">3</td>
+</tr>
+</tbody>
+</table>
+<h3 id="nền-tảng-xuyên-suốt">2.5. Nền tảng &amp; xuyên suốt</h3>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">#</th>
+<th style="text-align: left;">Hạng mục</th>
+<th style="text-align: left;">As-Is</th>
+<th style="text-align: left;">To-be</th>
+<th style="text-align: left;">Loại</th>
+<th style="text-align: left;">CS</th>
+<th style="text-align: center;">MVP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">PF1</td>
+<td style="text-align: left;">Hệ thống thông báo đẩy (push)</td>
+<td style="text-align: left;">Có chuông thông báo; chưa rõ push chủ
+động</td>
+<td style="text-align: left;">Hạ tầng push cho nhắc nhở/chăm sóc</td>
+<td style="text-align: left;">[NỀN TẢNG]</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PF3</td>
+<td style="text-align: left;">Đo lường engagement/lan tỏa/học tập</td>
+<td style="text-align: left;">Chưa có</td>
+<td style="text-align: left;">Theo dõi share, hoàn thành khóa, giới
+thiệu</td>
+<td style="text-align: left;">[DỮ LIỆU]</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: center;">1-2</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Không tích hợp Herbalife:</strong> AnCare là ứng dụng độc
+lập, KHÔNG đặt mục tiêu tích hợp kỹ thuật (SSO/đồng bộ dữ liệu) với
+VNHUB/Learning/SHOP/Pro2col. Quan hệ với các app này thuần túy là
+<strong>bổ trợ về phạm vi</strong> (AnCare không làm POS/kho/quản trị
+kinh doanh), không phải kết nối hệ thống.</p>
+</blockquote>
+<hr />
+<h2 id="khoảng-cách-trọng-tâm-nhận-định">3. KHOẢNG CÁCH TRỌNG TÂM (NHẬN
+ĐỊNH)</h2>
+<p>Khoảng cách lớn nhất <strong>không</strong> còn ở vận hành mà ở
+<strong>năm trục trải nghiệm mới</strong>: (1) <strong>thu hút &amp;
+chuyển đổi có AI hỗ trợ</strong> (AC1–AC8 — trọng tâm cho Bước 1–2), (2)
+<strong>lan tỏa/virality</strong> (CJ4, CJ7), (3) <strong>đào tạo/nội
+dung</strong> (TR1–TR4, CJ5), (4) <strong>phễu &amp; kết nối</strong>
+(CJ6, SD2), (5) <strong>cá nhân hóa</strong> (SD1). Các trục này chính
+là phần “lấp khoảng trống” mà tầm nhìn AnCare đặt ra so với app
+Herbalife hiện hữu.</p>
+<p>Hai hạng mục công sức Cao (L) — hạ tầng micro-course (TR1), matching
+(CJ6) và recommender (SD1) — là các “viên gạch nền” cần PoC/đánh giá
+kỹ.</p>
+<p><strong>Xương sống nối tất cả:</strong> <strong>Process State Model
+(PS1)</strong> số hóa Sơ đồ dẫn (SĐD) là nền điều khiển cả 4 module — AC
+(Bước 1-2), Module 2/3/4 (Bước 3-12) đều cắm vào PSM. Cùng GNV (PS2) và
+DSKHTN (AC1) tạo đủ bộ 3 công cụ KD. Nên ưu tiên dựng khung PSM sớm
+(MVP-1).</p>
+<hr />
+<h2 id="phân-bố-theo-mvp">4. PHÂN BỐ THEO MVP</h2>
+<ul>
+<li><strong>MVP-1 (Nền tảng PSM + Lan tỏa &amp; Gắn kết &amp;
+phễu):</strong> <strong>PS1, PS2</strong> + CJ3, CJ4, CJ9, BJ2, PF1, PF3
++ AC1, AC5, AC8 — dựng xương sống PSM/GNV + tận dụng dữ liệu sẵn
+có.</li>
+<li><strong>MVP-2 (Học tập, Nội dung, AI chuyển đổi, quản lý theo
+bước):</strong> <strong>PS3</strong> + TR1–TR6, CJ5, BJ3, BJ6, SD2 +
+AC2, AC3, AC7 — đào tạo ánh xạ quy trình + pipeline 12 bước + AI chân
+dung/copilot.</li>
+<li><strong>MVP-2 (bổ sung):</strong> CJ6/CJ7 lớp attribution (mã giới
+thiệu + phân tích nội dung) — bánh đà thu hút bằng nội dung khởi động
+sớm.</li>
+<li><strong>MVP-3 (Phễu lạnh, Matching fallback, Cá nhân hóa, Nhân bản
+&amp; Sự nghiệp):</strong> CJ8, BJ4, BJ5, BJ7, SD1, SD3, SD4, SD5 + AC4,
+matching fallback lead mồ côi (AC8c) — phức tạp nhất (chatbot,
+recommender, coaching tuyến dưới, lộ trình thăng tiến).</li>
+</ul>
+<hr />
+<h2 id="rủi-ro-phụ-thuộc">5. RỦI RO &amp; PHỤ THUỘC</h2>
+<ul>
+<li><strong>Phụ thuộc nội dung:</strong> Module Đào tạo (TR1–TR4) chỉ có
+giá trị khi có nội dung chất lượng — cần nguồn sản xuất &amp; kiểm duyệt
+(chuyên gia).</li>
+<li><strong>Tuân thủ thương hiệu/quy định:</strong> chia sẻ MXH (CJ4) về
+sức khỏe phải tuân thủ quy định Herbalife &amp; pháp luật quảng
+cáo.</li>
+<li><strong>Cá nhân hóa (SD1):</strong> chất lượng recommender phụ thuộc
+dữ liệu hành vi đủ lớn — rủi ro “cold start” giai đoạn đầu.</li>
+</ul>
+<hr />
+<h2 id="bước-tiếp-theo">6. BƯỚC TIẾP THEO</h2>
+<p>Chuyển GAP v2.0 thành <strong>To-do recommendations v2.0</strong>
+theo module, kèm DoD &amp; phụ thuộc.</p>

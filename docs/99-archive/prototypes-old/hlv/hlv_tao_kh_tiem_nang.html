@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tạo KH tiềm năng — AnCare v1.1</title>
+<link rel="stylesheet" href="../tabler-icons.min.css">
+<style>
+  :root {
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --color-bg: #eef0f3;
+    --color-surface: #ffffff;
+    --color-surface-2: #f6f7f9;
+    --color-text: #1a1d21;
+    --color-text-2: #6b7280;
+    --color-border: #e5e7eb;
+    --color-border-2: #d1d5db;
+    --color-accent: #2f6f4f;
+    --color-accent-soft: #e7f1ec;
+    --color-err: #b42318;
+    --r-md: 10px;
+    --r-lg: 14px;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    font-family: var(--font-sans);
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-size: 15px;
+    overscroll-behavior: contain;
+    -webkit-text-size-adjust: 100%;
+  }
+  .screen { max-width: 460px; margin: 0 auto; padding-bottom: 100px; }
+
+  /* ── App Bar ── */
+  .appbar {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; gap: 10px;
+    background: var(--color-surface);
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .appbar-back {
+    display: flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: 8px;
+    background: var(--color-surface-2);
+    border: none; cursor: pointer;
+    text-decoration: none; color: var(--color-text);
+    flex-shrink: 0;
+  }
+  .appbar-back .ti { font-size: 20px; }
+  .appbar-title { font-size: 16px; font-weight: 600; flex: 1; margin: 0; }
+  .appbar-badge {
+    font-size: 11px; font-weight: 600;
+    background: var(--color-accent); color: #fff;
+    padding: 2px 7px; border-radius: 20px;
+  }
+
+  /* ── Section label ── */
+  .section-gap { height: 12px; }
+  .section-label {
+    font-size: 11px; font-weight: 600; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--color-text-2);
+    padding: 0 16px; margin-bottom: 4px;
+  }
+
+  /* ── Accordion Card ── */
+  .acc-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--r-lg);
+    margin: 0 12px;
+    overflow: hidden;
+  }
+  .acc-card + .acc-card { margin-top: 10px; }
+
+  .acc-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 16px;
+    cursor: pointer;
+    user-select: none;
+    background: var(--color-surface);
+    transition: background .15s;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 52px;
+  }
+  .acc-header:active { background: var(--color-surface-2); }
+  .acc-header-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: var(--color-accent-soft);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .acc-header-icon .ti { font-size: 17px; color: var(--color-accent); }
+  .acc-header-title { font-size: 14px; font-weight: 600; flex: 1; }
+  .acc-header-meta { display: flex; align-items: center; gap: 6px; }
+  .acc-badge-ok {
+    font-size: 10px; font-weight: 700;
+    background: var(--color-accent); color: #fff;
+    border-radius: 20px; padding: 2px 8px;
+  }
+  .acc-chevron { font-size: 18px; color: var(--color-text-2); transition: transform .25s; }
+  .acc-card.open .acc-chevron { transform: rotate(180deg); }
+
+  .acc-body {
+    display: none;
+    padding: 0 16px 16px;
+    border-top: 1px solid var(--color-border);
+  }
+  .acc-card.open .acc-body { display: block; }
+
+  /* ── Fields ── */
+  .field { margin-top: 14px; }
+  .field label {
+    display: block;
+    font-size: 12.5px; font-weight: 500;
+    color: var(--color-text-2);
+    margin-bottom: 6px;
+  }
+  .field label .req { color: var(--color-err); margin-left: 2px; }
+  .field input[type=text],
+  .field input[type=tel],
+  .field input[type=email],
+  .field input[type=date],
+  .field input[type=number] {
+    width: 100%; padding: 11px 13px;
+    font-size: 14px; font-family: var(--font-sans);
+    border: 1px solid var(--color-border-2);
+    border-radius: var(--r-md);
+    background: var(--color-surface);
+    color: var(--color-text);
+    outline: none;
+    transition: border-color .15s;
+    -webkit-appearance: none;
+    min-height: 44px;
+  }
+  .field input:focus { border-color: var(--color-accent); }
+  .field input.error { border-color: var(--color-err); }
+  .field .error-msg { font-size: 12px; color: var(--color-err); margin-top: 5px; display: none; }
+  .field input.error ~ .error-msg { display: block; }
+
+  .inline-fields { display: flex; gap: 10px; }
+  .inline-fields .field { flex: 1; }
+
+  /* ── Chips ── */
+  .chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 4px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 7px 13px; border-radius: 20px;
+    border: 1.5px solid var(--color-border-2);
+    font-size: 13px; font-weight: 500;
+    background: var(--color-surface);
+    color: var(--color-text);
+    cursor: pointer;
+    user-select: none;
+    transition: all .15s;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 36px;
+  }
+  .chip:active { opacity: .75; }
+  .chip.active {
+    background: var(--color-accent-soft);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  /* ── Toggle switch ── */
+  .toggle-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 13px 0 0;
+  }
+  .toggle-label { font-size: 13.5px; font-weight: 500; flex: 1; }
+  .toggle-switch {
+    position: relative; width: 44px; height: 26px; flex-shrink: 0;
+  }
+  .toggle-switch input { opacity: 0; width: 0; height: 0; }
+  .toggle-track {
+    position: absolute; inset: 0;
+    background: #d1d5db; border-radius: 13px;
+    cursor: pointer; transition: background .2s;
+  }
+  .toggle-track::after {
+    content: ''; position: absolute;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: #fff; top: 3px; left: 3px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.2);
+    transition: transform .2s;
+  }
+  .toggle-switch input:checked + .toggle-track { background: var(--color-accent); }
+  .toggle-switch input:checked + .toggle-track::after { transform: translateX(18px); }
+  .toggle-note { font-size: 11.5px; color: var(--color-text-2); margin-top: 5px; line-height: 1.4; }
+
+  /* ── Sub-accordion (persona groups) ── */
+  .sub-acc { border: 1px solid var(--color-border); border-radius: var(--r-md); margin-top: 12px; overflow: hidden; }
+  .sub-acc-header {
+    display: flex; align-items: center; gap: 8px;
+    padding: 11px 13px;
+    cursor: pointer; user-select: none;
+    background: var(--color-surface-2);
+    -webkit-tap-highlight-color: transparent;
+    min-height: 44px;
+  }
+  .sub-acc-header:active { opacity: .8; }
+  .sub-acc-title { font-size: 13px; font-weight: 600; flex: 1; }
+  .sub-acc-chevron { font-size: 16px; color: var(--color-text-2); transition: transform .2s; }
+  .sub-acc.open .sub-acc-chevron { transform: rotate(180deg); }
+  .sub-acc-body { display: none; padding: 12px 13px 14px; border-top: 1px solid var(--color-border); }
+  .sub-acc.open .sub-acc-body { display: block; }
+
+  /* ── Persona card header ── */
+  .card2-head {
+    display: flex; align-items: center; gap: 8px;
+    padding: 14px 16px;
+    background: var(--color-surface-2);
+    border-bottom: 1px solid var(--color-border);
+    cursor: pointer; user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 52px;
+  }
+  .card2-head:active { opacity: .85; }
+  .card2-head-title { font-size: 14px; font-weight: 600; flex: 1; }
+  .tooltip-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--color-border-2);
+    font-size: 12px; cursor: pointer;
+    color: var(--color-text-2);
+    position: relative;
+  }
+  .tooltip-popup {
+    display: none;
+    position: absolute; right: 0; top: 28px;
+    background: var(--color-text); color: #fff;
+    font-size: 12px; border-radius: 8px;
+    padding: 8px 11px; width: 220px;
+    z-index: 100; line-height: 1.5;
+    box-shadow: 0 4px 16px rgba(0,0,0,.2);
+  }
+  .tooltip-btn:hover .tooltip-popup,
+  .tooltip-btn.active .tooltip-popup { display: block; }
+
+  /* ── Textarea ── */
+  .field textarea {
+    width: 100%; padding: 10px 13px;
+    font-size: 13.5px; font-family: var(--font-sans);
+    border: 1px solid var(--color-border-2);
+    border-radius: var(--r-md);
+    resize: vertical; min-height: 70px;
+    color: var(--color-text);
+    outline: none;
+    transition: border-color .15s;
+  }
+  .field textarea:focus { border-color: var(--color-accent); }
+
+  /* ── DISC AI Panel ── */
+  .ai-panel {
+    display: none;
+    background: #f0fdf4;
+    border: 1.5px solid var(--color-accent);
+    border-radius: var(--r-md);
+    padding: 12px 13px;
+    margin-top: 12px;
+  }
+  .ai-panel.show { display: block; }
+  .ai-panel-head {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12.5px; font-weight: 600;
+    color: var(--color-accent); margin-bottom: 7px;
+  }
+  .ai-panel-head .ti { font-size: 15px; }
+  .ai-panel-body { font-size: 12.5px; color: var(--color-text); line-height: 1.55; }
+  .ai-panel-cite { font-size: 11px; color: var(--color-text-2); margin-top: 6px; }
+
+  /* ── Select ── */
+  .field select {
+    width: 100%; padding: 11px 13px;
+    font-size: 14px; font-family: var(--font-sans);
+    border: 1px solid var(--color-border-2);
+    border-radius: var(--r-md);
+    background: var(--color-surface);
+    color: var(--color-text);
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%236b7280' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 36px;
+    cursor: pointer;
+    min-height: 44px;
+  }
+  .field select:focus { border-color: var(--color-accent); }
+
+  /* ── Bottom action bar ── */
+  .action-bar {
+    position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 100%; max-width: 460px;
+    display: flex; gap: 10px;
+    padding: 12px 16px;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    z-index: 50;
+  }
+  .btn {
+    flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
+    padding: 13px 16px; border-radius: var(--r-md);
+    font-size: 14.5px; font-weight: 600;
+    font-family: var(--font-sans);
+    border: none; cursor: pointer;
+    min-height: 48px;
+    transition: opacity .15s, transform .1s;
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+  }
+  .btn:active { opacity: .8; transform: scale(.97); }
+  .btn-secondary {
+    background: var(--color-surface-2);
+    border: 1.5px solid var(--color-border-2);
+    color: var(--color-text);
+  }
+  .btn-primary {
+    background: var(--color-accent);
+    color: #fff;
+  }
+  .btn-primary:disabled,
+  .btn-primary[disabled] {
+    background: #c3d5cc;
+    color: #fff;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* ── DISC optional tag ── */
+  .optional-tag {
+    font-size: 11px; font-weight: 500; font-style: italic;
+    color: var(--color-text-2);
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    border-radius: 20px; padding: 2px 8px; margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  /* ── Sub-field label ── */
+  .sub-label {
+    font-size: 12px; font-weight: 500; color: var(--color-text-2); margin-bottom: 6px;
+  }
+  .sub-section { margin-top: 14px; }
+  .sub-section:first-child { margin-top: 0; }
+
+  /* scrollbar reset */
+  ::-webkit-scrollbar { width: 0; }
+</style>
+</head>
+<body>
+<div class="screen">
+
+  <!-- App Bar -->
+  <header class="appbar">
+    <a href="hlv_danh_sach_kh.html" class="appbar-back" aria-label="Quay lại">
+      <i class="ti ti-arrow-left"></i>
+    </a>
+    <h1 class="appbar-title">Tạo KH tiềm năng</h1>
+    <span class="appbar-badge">v1.1</span>
+  </header>
+
+  <div class="section-gap"></div>
+
+  <!-- ══════════════ CARD 1: Thông tin cơ bản ══════════════ -->
+  <div class="acc-card open" id="card1">
+    <div class="acc-header" onclick="toggleCard('card1')" role="button" aria-expanded="true" tabindex="0">
+      <div class="acc-header-icon"><i class="ti ti-user"></i></div>
+      <span class="acc-header-title">Thông tin cơ bản</span>
+      <div class="acc-header-meta">
+        <i class="ti ti-chevron-down acc-chevron"></i>
+      </div>
+    </div>
+    <div class="acc-body">
+
+      <!-- Họ tên -->
+      <div class="field">
+        <label for="hoten">Họ tên <span class="req">*</span></label>
+        <input type="text" id="hoten" name="hoten" placeholder="Nhập họ và tên" autocomplete="name" oninput="checkRequired()">
+        <div class="error-msg">Vui lòng nhập họ tên</div>
+      </div>
+
+      <!-- SĐT + Email inline -->
+      <div class="inline-fields">
+        <div class="field">
+          <label for="sdt">Số điện thoại</label>
+          <input type="tel" id="sdt" name="sdt" placeholder="0901..." inputmode="tel" autocomplete="tel">
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="email@..." autocomplete="email">
+        </div>
+      </div>
+
+      <!-- Ngày sinh -->
+      <div class="field">
+        <label for="ngaysinh">Ngày sinh</label>
+        <input type="date" id="ngaysinh" name="ngaysinh">
+      </div>
+
+      <!-- Giới tính chips -->
+      <div class="field">
+        <label>Giới tính</label>
+        <div class="chips" role="group" aria-label="Giới tính">
+          <div class="chip" onclick="singleChip(this,'gioitinh')" data-group="gioitinh" tabindex="0" role="radio">Nam</div>
+          <div class="chip" onclick="singleChip(this,'gioitinh')" data-group="gioitinh" tabindex="0" role="radio">Nữ</div>
+          <div class="chip" onclick="singleChip(this,'gioitinh')" data-group="gioitinh" tabindex="0" role="radio">Khác</div>
+        </div>
+      </div>
+
+      <!-- Chiều cao + Mã giới thiệu -->
+      <div class="inline-fields">
+        <div class="field">
+          <label for="chieucao">Chiều cao</label>
+          <input type="number" id="chieucao" name="chieucao" placeholder="161" inputmode="decimal" min="100" max="220">
+        </div>
+        <div class="field">
+          <label for="magioithieu">Mã giới thiệu</label>
+          <input type="text" id="magioithieu" name="magioithieu" placeholder="REF-...">
+        </div>
+      </div>
+
+      <!-- AI Consent Toggle -->
+      <div style="padding-top: 4px; border-top: 1px dashed var(--color-border); margin-top: 14px;">
+        <div class="toggle-row">
+          <span class="toggle-label">Cho phép AI hỗ trợ tư vấn</span>
+          <label class="toggle-switch" aria-label="Cho phép AI hỗ trợ tư vấn">
+            <input type="checkbox" id="ai-consent" onchange="updateAIConsent()">
+            <span class="toggle-track"></span>
+          </label>
+        </div>
+        <div class="toggle-note">Dữ liệu chỉ dùng để cá nhân hóa tư vấn trong ứng dụng.</div>
+      </div>
+
+    </div><!-- /acc-body -->
+  </div><!-- /card1 -->
+
+  <div class="section-gap"></div>
+
+  <!-- ══════════════ CARD 2: Chân dung khách hàng ══════════════ -->
+  <div class="acc-card" id="card2">
+    <div class="acc-header" onclick="toggleCard('card2')" role="button" aria-expanded="false" tabindex="0">
+      <div class="acc-header-icon"><i class="ti ti-id-badge"></i></div>
+      <span class="acc-header-title">Chân dung khách hàng</span>
+      <div class="acc-header-meta">
+        <span class="acc-badge-ok" id="persona-badge" style="display:none">✓</span>
+        <span class="tooltip-btn" onclick="event.stopPropagation(); this.classList.toggle('active');" tabindex="0" aria-label="Giải thích chân dung khách hàng">
+          ?
+          <div class="tooltip-popup">Chân dung giúp bạn hiểu rõ nguồn gốc, mục tiêu, và phong cách giao tiếp của khách — từ đó tư vấn hiệu quả hơn.</div>
+        </span>
+        <i class="ti ti-chevron-down acc-chevron"></i>
+      </div>
+    </div>
+    <div class="acc-body" style="padding-top: 4px;">
+
+      <!-- ── Sub-group 1: Nguồn & kênh ── -->
+      <div class="sub-acc open" id="sub1">
+        <div class="sub-acc-header" onclick="toggleSub('sub1')">
+          <i class="ti ti-share" style="font-size:15px; color:var(--color-accent)"></i>
+          <span class="sub-acc-title">Nguồn &amp; kênh</span>
+          <i class="ti ti-chevron-down sub-acc-chevron"></i>
+        </div>
+        <div class="sub-acc-body">
+          <div class="chips">
+            <div class="chip" onclick="multiChip(this)" tabindex="0">Fanpage</div>
+            <div class="chip" onclick="multiChip(this)" tabindex="0">Zalo</div>
+            <div class="chip" onclick="multiChip(this)" tabindex="0">Giới thiệu</div>
+            <div class="chip" onclick="multiChip(this)" tabindex="0">Offline</div>
+            <div class="chip" onclick="multiChip(this)" tabindex="0">Khác</div>
+          </div>
+          <div class="field" style="margin-top:10px">
+            <label for="kenh-khac">Ghi chú kênh</label>
+            <input type="text" id="kenh-khac" placeholder="VD: qua hội nhóm Facebook..." oninput="markPersonaHasData()">
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Sub-group 2: Mục tiêu & nỗi đau ── -->
+      <div class="sub-acc" id="sub2">
+        <div class="sub-acc-header" onclick="toggleSub('sub2')">
+          <i class="ti ti-target" style="font-size:15px; color:var(--color-accent)"></i>
+          <span class="sub-acc-title">Mục tiêu &amp; nỗi đau <em style="font-size:11px; font-weight:400; color:var(--color-text-2)">(Aim)</em></span>
+          <i class="ti ti-chevron-down sub-acc-chevron"></i>
+        </div>
+        <div class="sub-acc-body">
+          <div class="sub-label">Mục tiêu chính</div>
+          <div class="chips">
+            <div class="chip" onclick="multiChip(this)" tabindex="0">Giảm cân</div>
+            <div class="chip" onclick="multiChip(this)" tabindex="0">Tăng cơ</div>
+            <div class="chip" onclick="multiChip(this)" tabindex="0">Cải thiện sức khỏe</div>
+            <div class="chip" onclick="multiChip(this)" tabindex="0">Tăng năng lượng</div>
+            <div class="chip" onclick="multiChip(this)" tabindex="0">Khác</div>
+          </div>
+          <div class="field">
+            <label for="trigger">Trigger event</label>
+            <textarea id="trigger" rows="2" placeholder="Điều gì khiến bạn muốn thay đổi ngay lúc này?" oninput="markPersonaHasData()"></textarea>
+          </div>
+          <div class="sub-label" style="margin-top:12px">Pain points</div>
+          <div class="chips">
+            <div class="chip" onclick="multiChip(this)" tabindex="0">Hay mệt mỏi</div>
+            <div class="chip" onclick="multiChip(this)" tabindex="0">Áo chật</div>
+            <div class="chip" onclick="multiChip(this)" tabindex="0">Tự ti</div>
+            <div class="chip" onclick="multiChip(this)" tabindex="0">Khó ngủ</div>
+            <div class="chip" onclick="multiChip(this)" tabindex="0">Đau khớp</div>
+            <div class="chip" onclick="multiChip(this)" tabindex="0">Huyết áp cao</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Sub-group 3: Bối cảnh & lối sống ── -->
+      <div class="sub-acc" id="sub3">
+        <div class="sub-acc-header" onclick="toggleSub('sub3')">
+          <i class="ti ti-heart-rate-monitor" style="font-size:15px; color:var(--color-accent)"></i>
+          <span class="sub-acc-title">Bối cảnh &amp; lối sống</span>
+          <i class="ti ti-chevron-down sub-acc-chevron"></i>
+        </div>
+        <div class="sub-acc-body">
+          <div class="sub-section">
+            <div class="sub-label">Công việc</div>
+            <div class="chips">
+              <div class="chip" onclick="singleChip(this,'congviec')" data-group="congviec" tabindex="0">Văn phòng</div>
+              <div class="chip" onclick="singleChip(this,'congviec')" data-group="congviec" tabindex="0">Lao động tay</div>
+              <div class="chip" onclick="singleChip(this,'congviec')" data-group="congviec" tabindex="0">Kinh doanh</div>
+              <div class="chip" onclick="singleChip(this,'congviec')" data-group="congviec" tabindex="0">Nội trợ</div>
+            </div>
+          </div>
+          <div class="sub-section">
+            <div class="sub-label">Vận động</div>
+            <div class="chips">
+              <div class="chip" onclick="multiChip(this)" tabindex="0">Không vận động</div>
+              <div class="chip" onclick="multiChip(this)" tabindex="0">Đi bộ</div>
+              <div class="chip" onclick="multiChip(this)" tabindex="0">Gym</div>
+              <div class="chip" onclick="multiChip(this)" tabindex="0">Yoga/Zumba</div>
+            </div>
+          </div>
+          <div class="sub-section">
+            <div class="sub-label">Ăn uống</div>
+            <div class="chips">
+              <div class="chip" onclick="multiChip(this)" tabindex="0">Ăn ngoài nhiều</div>
+              <div class="chip" onclick="multiChip(this)" tabindex="0">Bỏ bữa</div>
+              <div class="chip" onclick="multiChip(this)" tabindex="0">Hay ăn khuya</div>
+              <div class="chip" onclick="multiChip(this)" tabindex="0">Ăn lành mạnh</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Sub-group 4: Tín hiệu DISC ── -->
+      <div class="sub-acc" id="sub4">
+        <div class="sub-acc-header" onclick="toggleSub('sub4')">
+          <i class="ti ti-chart-pie" style="font-size:15px; color:var(--color-accent)"></i>
+          <span class="sub-acc-title">Tín hiệu DISC <span class="optional-tag">tuỳ chọn</span></span>
+          <i class="ti ti-chevron-down sub-acc-chevron"></i>
+        </div>
+        <div class="sub-acc-body">
+          <div class="sub-label">Phong cách ra quyết định</div>
+          <div class="field" style="margin-top:6px">
+            <select id="disc-phong-cach" onchange="updateDiscAI(); markPersonaHasData();">
+              <option value="">— Chọn phong cách —</option>
+              <option value="D">D · Nhanh &amp; thẳng thắn</option>
+              <option value="I">I · Dựa trên cảm xúc</option>
+              <option value="S">S · Cần an toàn &amp; trấn an</option>
+              <option value="C">C · Cần dữ liệu &amp; phân tích</option>
+            </select>
+          </div>
+
+          <div class="sub-label" style="margin-top:12px">Dấu hiệu quan sát (có thể chọn nhiều)</div>
+          <div class="chips" style="margin-top:6px">
+            <div class="chip" onclick="multiChip(this); updateDiscAI();" tabindex="0">D — Quyết đoán, nhanh</div>
+            <div class="chip" onclick="multiChip(this); updateDiscAI();" tabindex="0">I — Cởi mở, hay kể chuyện</div>
+            <div class="chip" onclick="multiChip(this); updateDiscAI();" tabindex="0">S — Lo lắng, cần trấn an</div>
+            <div class="chip" onclick="multiChip(this); updateDiscAI();" tabindex="0">C — Hỏi nhiều, cần số liệu</div>
+          </div>
+
+          <div class="ai-panel" id="disc-ai-panel">
+            <div class="ai-panel-head"><i class="ti ti-sparkles"></i> Gợi ý AI cách tiếp cận</div>
+            <div class="ai-panel-body" id="disc-ai-text">
+              Nhóm I/S: Mở đầu bằng câu chuyện người thật → trấn an → đưa số liệu nhẹ.
+            </div>
+            <div class="ai-panel-cite">Căn cứ: [qid-001] · AnCare Tư vấn v1.1</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Sub-group 5: Giai đoạn sẵn sàng ── -->
+      <div class="sub-acc" id="sub5">
+        <div class="sub-acc-header" onclick="toggleSub('sub5')">
+          <i class="ti ti-stairs" style="font-size:15px; color:var(--color-accent)"></i>
+          <span class="sub-acc-title">Giai đoạn sẵn sàng <em style="font-size:11px; font-weight:400; color:var(--color-text-2)">(Stage)</em></span>
+          <i class="ti ti-chevron-down sub-acc-chevron"></i>
+        </div>
+        <div class="sub-acc-body">
+          <div class="chips">
+            <div class="chip" onclick="singleChip(this,'stage')" data-group="stage" tabindex="0">Chưa nghĩ tới</div>
+            <div class="chip" onclick="singleChip(this,'stage')" data-group="stage" tabindex="0">Đang cân nhắc</div>
+            <div class="chip" onclick="singleChip(this,'stage')" data-group="stage" tabindex="0">Chuẩn bị</div>
+            <div class="chip" onclick="singleChip(this,'stage')" data-group="stage" tabindex="0">Sẵn sàng</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Sub-group 6: Yếu tố quyết định & rào cản ── -->
+      <div class="sub-acc" id="sub6">
+        <div class="sub-acc-header" onclick="toggleSub('sub6')">
+          <i class="ti ti-barrier-block" style="font-size:15px; color:var(--color-accent)"></i>
+          <span class="sub-acc-title">Yếu tố quyết định &amp; rào cản</span>
+          <i class="ti ti-chevron-down sub-acc-chevron"></i>
+        </div>
+        <div class="sub-acc-body">
+          <div class="sub-label">Mối quan tâm chính</div>
+          <div class="chips">
+            <div class="chip" onclick="multiChip(this)" tabindex="0">Giá</div>
+            <div class="chip" onclick="multiChip(this)" tabindex="0">Thời gian</div>
+            <div class="chip" onclick="multiChip(this)" tabindex="0">Hiệu quả</div>
+            <div class="chip" onclick="multiChip(this)" tabindex="0">Ý kiến người thân</div>
+            <div class="chip" onclick="multiChip(this)" tabindex="0">Độ khó</div>
+          </div>
+          <div class="field">
+            <label for="raocannote" style="margin-top:10px">Ghi chú thêm</label>
+            <textarea id="raocannote" rows="2" placeholder="Rào cản cụ thể, mối lo ngại..." oninput="markPersonaHasData()"></textarea>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /acc-body card2 -->
+  </div><!-- /card2 -->
+
+  <div class="section-gap"></div>
+
+</div><!-- /screen -->
+
+<!-- ── Action Bar ── -->
+<div class="action-bar">
+  <a href="hlv_danh_sach_kh.html" class="btn btn-secondary" style="text-decoration:none">
+    Hoàn tất
+  </a>
+  <a href="hlv_nhap_chi_so_tanita.html" class="btn btn-primary" id="btn-continue" aria-disabled="true"
+     onclick="return checkContinue(event)">
+    Tiếp tục <i class="ti ti-arrow-right"></i>
+  </a>
+</div>
+
+<script>
+  /* ── State ── */
+  let aiConsentOn = false;
+  let personaHasData = false;
+
+  /* ── Card accordion ── */
+  function toggleCard(id) {
+    const card = document.getElementById(id);
+    const isOpen = card.classList.contains('open');
+    card.classList.toggle('open', !isOpen);
+    const header = card.querySelector('.acc-header');
+    header.setAttribute('aria-expanded', String(!isOpen));
+  }
+
+  /* ── Sub accordion ── */
+  function toggleSub(id) {
+    const sub = document.getElementById(id);
+    sub.classList.toggle('open');
+  }
+
+  /* ── Chip helpers ── */
+  function multiChip(el) {
+    el.classList.toggle('active');
+    markPersonaHasData();
+  }
+
+  function singleChip(el, group) {
+    document.querySelectorAll(`[data-group="${group}"]`).forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+    markPersonaHasData();
+  }
+
+  /* ── Persona data badge ── */
+  function markPersonaHasData() {
+    personaHasData = true;
+    document.getElementById('persona-badge').style.display = '';
+  }
+
+  /* ── AI Consent ── */
+  function updateAIConsent() {
+    aiConsentOn = document.getElementById('ai-consent').checked;
+    updateDiscAI();
+  }
+
+  /* ── DISC AI panel ── */
+  const discAdvice = {
+    D: 'Nhóm D: Đi thẳng vào kết quả → đưa số liệu trước → hỏi "Bạn muốn đạt gì trong 90 ngày?"',
+    I: 'Nhóm I: Mở đầu bằng câu chuyện người thật → khen ngợi → tạo cảm xúc tích cực → số liệu nhẹ.',
+    S: 'Nhóm I/S: Mở đầu bằng câu chuyện người thật → trấn an → đưa số liệu nhẹ.',
+    C: 'Nhóm C: Chuẩn bị số liệu khoa học, bằng chứng lâm sàng → trả lời mọi câu hỏi chi tiết.'
+  };
+
+  function updateDiscAI() {
+    const panel = document.getElementById('disc-ai-panel');
+    const text = document.getElementById('disc-ai-text');
+    if (!aiConsentOn) { panel.classList.remove('show'); return; }
+    const sel = document.getElementById('disc-phong-cach').value;
+    const activeChips = [...document.querySelectorAll('#sub4 .chip.active')].map(c => c.textContent.trim()[0]);
+    const key = sel || (activeChips.length ? activeChips[0] : '');
+    if (!key) { panel.classList.remove('show'); return; }
+    text.textContent = discAdvice[key] || 'Chọn DISC để xem gợi ý tư vấn phù hợp.';
+    panel.classList.add('show');
+  }
+
+  /* ── Required field check ── */
+  function checkRequired() {
+    const hoten = document.getElementById('hoten').value.trim();
+    const btn = document.getElementById('btn-continue');
+    if (hoten) {
+      btn.removeAttribute('aria-disabled');
+      btn.style.pointerEvents = '';
+      btn.style.background = '';
+      btn.style.color = '';
+      btn.style.cursor = '';
+    } else {
+      btn.setAttribute('aria-disabled', 'true');
+    }
+  }
+
+  function checkContinue(e) {
+    const hoten = document.getElementById('hoten').value.trim();
+    if (!hoten) {
+      e.preventDefault();
+      const input = document.getElementById('hoten');
+      input.classList.add('error');
+      input.focus();
+      return false;
+    }
+    return true;
+  }
+
+  /* ── Init ── */
+  checkRequired();
+  document.getElementById('btn-continue').style.background = '#c3d5cc';
+  document.getElementById('btn-continue').style.cursor = 'not-allowed';
+  document.getElementById('btn-continue').style.pointerEvents = 'none';
+
+  document.getElementById('hoten').addEventListener('input', function() {
+    const btn = document.getElementById('btn-continue');
+    if (this.value.trim()) {
+      this.classList.remove('error');
+      btn.style.background = '';
+      btn.style.cursor = '';
+      btn.style.pointerEvents = '';
+      btn.style.color = '';
+    } else {
+      btn.style.background = '#c3d5cc';
+      btn.style.cursor = 'not-allowed';
+      btn.style.pointerEvents = 'none';
+    }
+  });
+
+  /* keyboard support for chips */
+  document.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); chip.click(); }
+    });
+  });
+  document.querySelectorAll('.acc-header, .card2-head').forEach(h => {
+    h.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); h.click(); }
+    });
+  });
+</script>
+</body>
+</html>

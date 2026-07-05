@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gợi ý bữa ăn — AnCare</title><link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
+<style>
+.meal-row {
+  display: flex; align-items: center; gap: 12px; padding: var(--s-8) 0; border-bottom: 1px solid var(--border);
+}
+.meal-row:last-child {
+  border-bottom: none;
+}
+.meal-meta {
+  display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--s-8);
+}
+</style>
+</head><body><div class="screen">
+<div class="appbar">
+  <span class="back" onclick="location.href='S-CONS-08_tao_tk.html'"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></span>
+  <h1>Gợi ý bữa ăn</h1>
+  <span class="info"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="8.01"/><line x1="12" y1="12" x2="12" y2="16"/></svg></span>
+</div>
+<div class="content" style="padding-top:var(--s-12);padding-bottom:100px">
+  <div class="card"><h2>Cấu trúc bữa ăn</h2>
+    <div class="flex justify-between" style="margin-bottom:var(--s-12)">
+      <div class="flex-1" style="text-align:center"><div style="font-weight:700;color:var(--accent)">30%</div><div class="hint">Đạm</div></div>
+      <div class="flex-1" style="text-align:center"><div style="font-weight:700;color:var(--accent)">40%</div><div class="hint">Đường bột</div></div>
+      <div class="flex-1" style="text-align:center"><div style="font-weight:700;color:var(--accent)">30%</div><div class="hint">Chất béo tốt</div></div>
+    </div>
+    <div class="flex items-center gap-12" style="padding:var(--s-12);background:var(--bg-subtle);border-radius:var(--radius-md)">
+      <span style="color:var(--accent)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></span>
+      <div>
+        <div style="font-weight:600">Nước khuyến nghị</div>
+        <div class="hint">Tối thiểu: 2.6 Lít/ngày (0.4L x 64.8kg cơ thể)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="border-color:var(--accent)">
+    <h2>Con số kỳ diệu: 1200 kcal/ngày</h2>
+    <div style="display:flex;justify-content:space-between;padding:var(--s-8) var(--s-12);background:var(--bg-subtle);border-radius:var(--radius-sm);font-size:var(--text-xs);font-weight:600;margin-bottom:var(--s-12)">
+      <span>RMR: 1276 kcal</span>
+      <span>AMR: 1530 kcal</span>
+      <span>EX: 300 kcal</span>
+      <span>TMR: 1830 kcal</span>
+    </div>
+
+    <!-- Bữa Sáng -->
+    <div class="card subtle" style="margin-bottom:var(--s-12)">
+      <div class="meal-meta"><strong style="color:var(--accent)">Bữa Sáng · 07:00</strong><span class="chip accent">190 CAL</span></div>
+      <div class="meal-row"><div class="flex-1">Bữa ăn lành mạnh</div><div style="font-weight:600">130 CAL</div></div>
+      <div class="meal-row"><div class="flex-1">3 lòng trắng trứng</div><div style="font-weight:600">60 CAL</div></div>
+    </div>
+
+    <!-- 9h -->
+    <div class="card subtle" style="margin-bottom:var(--s-12)">
+      <div class="meal-meta"><strong style="color:var(--accent)">Ăn Nhẹ · 09:00</strong><span class="chip neutral">100 CAL</span></div>
+      <div class="meal-row"><div class="flex-1">Hoa quả</div><div style="font-weight:600">100 CAL</div></div>
+    </div>
+
+    <!-- Trưa -->
+    <div class="card subtle" style="margin-bottom:var(--s-12)">
+      <div class="meal-meta"><strong style="color:var(--accent)">Bữa Trưa · 11:30</strong><span class="chip accent">500 CAL</span></div>
+      <div class="meal-row"><div class="flex-1">Thức ăn (Đạm)</div><div style="font-weight:600">300 CAL</div></div>
+      <div class="meal-row"><div class="flex-1">1 bát rau</div><div style="font-weight:600">100 CAL</div></div>
+      <div class="meal-row"><div class="flex-1">1/2 bát cơm</div><div style="font-weight:600">100 CAL</div></div>
+    </div>
+
+    <!-- 16h -->
+    <div class="card subtle" style="margin-bottom:var(--s-12)">
+      <div class="meal-meta"><strong style="color:var(--accent)">Bữa Phụ · 16:00</strong><span class="chip accent">90 CAL</span></div>
+      <div class="meal-row"><div class="flex-1">Bữa ăn lành mạnh</div><div style="font-weight:600">90 CAL</div></div>
+    </div>
+
+    <!-- Tối -->
+    <div class="card subtle" style="margin-bottom:var(--s-12)">
+      <div class="meal-meta"><strong style="color:var(--accent)">Bữa Tối · 18:30</strong><span class="chip accent">350 CAL</span></div>
+      <div class="meal-row"><div class="flex-1">Thức ăn (Đạm)</div><div style="font-weight:600">150 CAL</div></div>
+      <div class="meal-row"><div class="flex-1">1 bát rau</div><div style="font-weight:600">100 CAL</div></div>
+      <div class="meal-row"><div class="flex-1">1/2 bát cơm</div><div style="font-weight:600">100 CAL</div></div>
+    </div>
+
+    <!-- Lưu ý -->
+    <div class="card subtle" style="margin-bottom:0;background:#fefce8;border-color:#fef08a">
+      <strong style="font-size:var(--text-sm);color:#854d0e">Lưu ý quan trọng:</strong>
+      <ol style="margin:var(--s-4) 0 0 0;padding-left:var(--s-16);font-size:var(--text-xs);line-height:1.6;color:#713f12">
+        <li>Hạn chế ăn thịt đỏ, đồ chiên, xào, nướng.</li>
+        <li>Uống tối thiểu 0.4 lít nước/10kg trọng lượng/ngày.</li>
+        <li>Chương trình này cho 10 ngày vàng -> Đo lại -> Điều chỉnh.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="card"><h2>Khuyến nghị thời gian & sinh hoạt</h2>
+    <div style="display:flex;flex-direction:column;gap:var(--s-8)">
+      <div class="flex items-center gap-12"><span style="color:var(--accent)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><span>07:00-07:30 Ăn sáng · 11:30-13:00 Ăn trưa · 16:00-17:00 Bữa phụ · 18:00-19:00 Ăn tối</span></div>
+      <div class="flex items-center gap-12"><span style="color:var(--accent)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></span><span>Lượng nước: 2.5L (8 cốc)</span></div>
+      <div class="flex items-center gap-12"><span style="color:var(--accent)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span>Giờ ngủ: 22:30 · Vận động: 30 phút/ngày</span></div>
+    </div>
+  </div>
+</div>
+<div class="cta-bar" style="gap:var(--s-8)">
+  <button class="btn secondary" onclick="alert('Xuất file PDF thành công!')"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> Xuất PDF</button>
+  <button class="btn primary flex-1" onclick="location.href='S-LEAD-01_danh_sach.html'"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Lưu & Về chi tiết KH</button>
+</div>
+</div></body></html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cập nhật chỉ số — AnCare KH</title><link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
+<style>:root{--accent:var(--accent-customer);--accent-hover:var(--accent-customer-hover)}</style></head><body><div class="screen">
+<div class="appbar">
+  <span class="back" onclick="location.href='S-HLTH-02_trang_chu.html'"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></span>
+  <h1>Cập nhật chỉ số</h1>
+  <span class="info" style="opacity: 0"></span>
+</div>
+<div class="content" style="padding-top:var(--s-12);padding-bottom:80px">
+  <div class="card" style="border-color:var(--accent-customer)">
+    <h2>Ghi nhận chỉ số mới</h2>
+    <div class="hint" style="margin-bottom:var(--s-16)">Nhập các chỉ số cân đo mới nhất từ thiết bị đo để HLV của bạn theo dõi và tư vấn tốt nhất.</div>
+    
+    <div style="display:flex;flex-direction:column;gap:var(--s-12)">
+      <div class="field">
+        <label>Cân nặng (kg) <span style="color:var(--state-alert)">*</span></label>
+        <input type="number" step="0.1" value="55.2" placeholder="VD: 55.2">
+      </div>
+      <div class="field">
+        <label>Tỷ lệ nước (%)</label>
+        <input type="number" step="0.1" value="58.1" placeholder="VD: 55.0">
+      </div>
+      <div class="field">
+        <label>Tỷ lệ mỡ cơ thể (%)</label>
+        <input type="number" step="0.1" value="17.8" placeholder="VD: 18.2">
+      </div>
+      <div class="field">
+        <label>Mỡ nội tạng (1-50)</label>
+        <input type="number" value="8" placeholder="VD: 8">
+      </div>
+      <div class="field">
+        <label>Khối lượng cơ (kg)</label>
+        <input type="number" step="0.1" value="52.5" placeholder="VD: 52.5">
+      </div>
+      <div class="field">
+        <label>Năng lượng nghỉ ngơi RMR (kcal)</label>
+        <input type="number" value="1280" placeholder="VD: 1280">
+      </div>
+      <div class="field">
+        <label>Khối lượng xương (kg)</label>
+        <input type="number" step="0.1" value="2.8" placeholder="VD: 2.8">
+      </div>
+      <div class="field">
+        <label>Vóc dáng</label>
+        <input value="BT" placeholder="VD: Bình thường (BT)">
+      </div>
+      <div class="field">
+        <label>Tuổi sinh học (tuổi)</label>
+        <input type="number" value="36" placeholder="VD: 36">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="cta-bar" style="gap:var(--s-8)">
+  <button class="btn secondary flex-1" onclick="location.href='S-HLTH-02_trang_chu.html'">Hủy</button>
+  <button class="btn primary customer flex-1" onclick="alert('Đã lưu chỉ số cơ thể thành công!'); location.href='S-HLTH-02_trang_chu.html'"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Lưu chỉ số</button>
+</div>
+</div></body></html>

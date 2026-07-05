@@ -1,0 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap');
+.proto-nav{position:fixed;top:0;left:0;right:0;height:44px;background:#1f2933;color:#fff;display:flex;align-items:center;gap:8px;padding:0 16px;z-index:1000;font-size:12px;font-family:'Be Vietnam Pro',sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.proto-nav .ttl{flex:1;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#f8fafc}
+.proto-nav a{color:#9bb0c0;text-decoration:none;padding:6px 12px;border-radius:6px;font-size:12px;font-weight:500;transition:background .15s}
+.proto-nav a:hover{background:#334155;color:#fff}
+.proto-frame{margin-top:44px;border:none;width:100%;height:calc(100vh - 44px);display:block;background:#f8fafc}

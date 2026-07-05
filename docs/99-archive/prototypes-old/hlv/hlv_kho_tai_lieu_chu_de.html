@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Kiến thức dinh dưỡng — AnCare v1.1</title>
+<link rel="stylesheet" href="../tabler-icons.min.css">
+<style>
+  :root {
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --color-bg: #eef0f3;
+    --color-surface: #ffffff;
+    --color-surface-2: #f6f7f9;
+    --color-text: #1a1d21;
+    --color-text-2: #6b7280;
+    --color-border: #e5e7eb;
+    --color-border-2: #d1d5db;
+    --color-accent: #2f6f4f;
+    --color-accent-soft: #e7f1ec;
+    --color-accent-2: #3f9e6e;
+    --r-md: 10px;
+    --r-lg: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-bg);
+    color: var(--color-text);
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    overscroll-behavior: contain;
+  }
+  .phone {
+    width: 100%;
+    max-width: 460px;
+    min-height: 100vh;
+    background: var(--color-bg);
+    position: relative;
+    overflow-x: hidden;
+  }
+  .content { padding: 0 16px 76px; }
+
+  /* App Bar */
+  .appbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 16px 12px;
+    background: var(--color-bg);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .back-btn {
+    width: 40px; height: 40px; flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--color-text); font-size: 20px;
+    text-decoration: none;
+  }
+  .appbar-title { font-size: 18px; font-weight: 800; color: var(--color-text); flex: 1; }
+
+  /* Filter row */
+  .filter-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 4px 0 12px;
+  }
+  .chips-row {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    flex: 1;
+    scrollbar-width: none;
+  }
+  .chips-row::-webkit-scrollbar { display: none; }
+  .chip {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text-2);
+    cursor: pointer;
+    white-space: nowrap;
+    min-height: 30px;
+    display: flex; align-items: center;
+    flex-shrink: 0;
+  }
+  .chip.active {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #fff;
+  }
+  .sort-select {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    color: var(--color-text-2);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    border-radius: 8px;
+    padding: 5px 8px;
+    cursor: pointer;
+    outline: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-height: 30px;
+  }
+
+  /* Content List */
+  .content-list { display: flex; flex-direction: column; gap: 10px; }
+  .content-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--r-lg);
+    padding: 12px;
+    cursor: pointer;
+    display: block;
+  }
+  .content-card:active { background: var(--color-surface-2); }
+
+  .card-main { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px; }
+  .card-thumb {
+    width: 64px; height: 64px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; color: #fff;
+  }
+  .card-body { flex: 1; min-width: 0; }
+  .card-title { font-size: 13px; font-weight: 600; color: var(--color-text); line-height: 1.4; margin-bottom: 6px; }
+  .card-meta-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+
+  /* Type badges */
+  .type-badge {
+    font-size: 10px; font-weight: 700;
+    padding: 2px 7px; border-radius: 4px;
+    white-space: nowrap;
+  }
+  .type-video { background: #dbeafe; color: #1d4ed8; }
+  .type-slide { background: #ede9fe; color: #6d28d9; }
+  .type-doc { background: #fef3c7; color: #92600a; }
+  .type-book { background: #ffedd5; color: #c2410c; }
+
+  .card-duration { font-size: 11px; color: var(--color-text-2); }
+  .card-seen {
+    font-size: 10px; font-weight: 700;
+    color: #15803d;
+    display: flex; align-items: center; gap: 2px;
+  }
+
+  /* Action buttons row */
+  .card-actions { display: flex; gap: 8px; }
+  .action-btn {
+    flex: 1;
+    display: flex; align-items: center; justify-content: center; gap: 5px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 12px; font-weight: 600;
+    cursor: pointer;
+    border: none;
+    font-family: var(--font-sans);
+    min-height: 36px;
+  }
+  .action-btn i { font-size: 15px; }
+  .btn-share {
+    background: var(--color-accent-soft);
+    color: var(--color-accent);
+    border: 1px solid #c5ddd1;
+  }
+  .btn-share:active { background: #d4e8dd; }
+  .btn-save {
+    background: var(--color-surface-2);
+    color: var(--color-text-2);
+    border: 1px solid var(--color-border);
+  }
+  .btn-save:active { background: var(--color-border); }
+  .btn-save.saved {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+    background: var(--color-accent-soft);
+  }
+
+  /* Navbar */
+  .navbar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    max-width: 460px;
+    margin: 0 auto;
+    display: flex;
+    background: #fff;
+    border-top: 0.5px solid var(--color-border);
+    z-index: 15;
+  }
+  .navbar a {
+    flex: 1; text-align: center;
+    padding: .5rem 0;
+    color: var(--color-text-2);
+    text-decoration: none;
+    font-size: 10px;
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+  }
+  .navbar a i { font-size: 20px; display: block; }
+  .navbar a.active { color: var(--color-accent); font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="phone">
+  <!-- App Bar -->
+  <div class="appbar">
+    <a href="hlv_kho_tai_lieu.html" class="back-btn"><i class="ti ti-arrow-left"></i></a>
+    <div class="appbar-title">Kiến thức dinh dưỡng</div>
+  </div>
+
+  <div class="content">
+    <!-- Filter row -->
+    <div class="filter-row">
+      <div class="chips-row">
+        <span class="chip active">Tất cả</span>
+        <span class="chip">Video</span>
+        <span class="chip">Slide</span>
+        <span class="chip">Tài liệu</span>
+        <span class="chip">Sách</span>
+      </div>
+      <select class="sort-select">
+        <option>Mới nhất</option>
+        <option>Cũ nhất</option>
+        <option>Phổ biến</option>
+      </select>
+    </div>
+
+    <!-- Content List -->
+    <div class="content-list">
+
+      <!-- 1. Video -->
+      <div class="content-card">
+        <div class="card-main">
+          <div class="card-thumb" style="background:linear-gradient(135deg,#2f6f4f,#3f9e6e);">
+            <i class="ti ti-player-play"></i>
+          </div>
+          <div class="card-body">
+            <div class="card-title">5 nhóm thực phẩm cần biết</div>
+            <div class="card-meta-row">
+              <span class="type-badge type-video">Video</span>
+              <span class="card-duration"><i class="ti ti-clock" style="font-size:11px;"></i> 12 phút</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="action-btn btn-share"><i class="ti ti-share"></i> Chia sẻ cho KH</button>
+          <button class="action-btn btn-save" onclick="toggleSave(this)"><i class="ti ti-bookmark"></i> Lưu</button>
+        </div>
+      </div>
+
+      <!-- 2. Slide -->
+      <div class="content-card">
+        <div class="card-main">
+          <div class="card-thumb" style="background:linear-gradient(135deg,#6d28d9,#8b5cf6);">
+            <i class="ti ti-presentation"></i>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Đọc nhãn dinh dưỡng đúng cách</div>
+            <div class="card-meta-row">
+              <span class="type-badge type-slide">Slide</span>
+              <span class="card-duration">18 trang</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="action-btn btn-share"><i class="ti ti-share"></i> Chia sẻ cho KH</button>
+          <button class="action-btn btn-save" onclick="toggleSave(this)"><i class="ti ti-bookmark"></i> Lưu</button>
+        </div>
+      </div>
+
+      <!-- 3. Tài liệu -->
+      <div class="content-card">
+        <div class="card-main">
+          <div class="card-thumb" style="background:linear-gradient(135deg,#d97706,#f59e0b);">
+            <i class="ti ti-file-text"></i>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Bảng GI thực phẩm phổ biến</div>
+            <div class="card-meta-row">
+              <span class="type-badge type-doc">Tài liệu</span>
+              <span class="card-duration">PDF</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="action-btn btn-share"><i class="ti ti-share"></i> Chia sẻ cho KH</button>
+          <button class="action-btn btn-save" onclick="toggleSave(this)"><i class="ti ti-bookmark"></i> Lưu</button>
+        </div>
+      </div>
+
+      <!-- 4. Video - đã xem -->
+      <div class="content-card">
+        <div class="card-main">
+          <div class="card-thumb" style="background:linear-gradient(135deg,#2563eb,#3b82f6);">
+            <i class="ti ti-player-play"></i>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Protein: đủ hay thiếu?</div>
+            <div class="card-meta-row">
+              <span class="type-badge type-video">Video</span>
+              <span class="card-duration"><i class="ti ti-clock" style="font-size:11px;"></i> 8 phút</span>
+              <span class="card-seen"><i class="ti ti-circle-check" style="font-size:12px;"></i> Đã xem</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="action-btn btn-share"><i class="ti ti-share"></i> Chia sẻ cho KH</button>
+          <button class="action-btn btn-save saved" onclick="toggleSave(this)"><i class="ti ti-bookmark-filled"></i> Đã lưu</button>
+        </div>
+      </div>
+
+      <!-- 5. Slide -->
+      <div class="content-card">
+        <div class="card-main">
+          <div class="card-thumb" style="background:linear-gradient(135deg,#5b21b6,#7c3aed);">
+            <i class="ti ti-presentation"></i>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Đường ẩn trong thực phẩm</div>
+            <div class="card-meta-row">
+              <span class="type-badge type-slide">Slide</span>
+              <span class="card-duration">24 trang</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="action-btn btn-share"><i class="ti ti-share"></i> Chia sẻ cho KH</button>
+          <button class="action-btn btn-save" onclick="toggleSave(this)"><i class="ti ti-bookmark"></i> Lưu</button>
+        </div>
+      </div>
+
+      <!-- 6. Sách -->
+      <div class="content-card">
+        <div class="card-main">
+          <div class="card-thumb" style="background:linear-gradient(135deg,#c2410c,#ea580c);">
+            <i class="ti ti-book"></i>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Ăn để sống – Tóm tắt</div>
+            <div class="card-meta-row">
+              <span class="type-badge type-book">Sách</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="action-btn btn-share"><i class="ti ti-share"></i> Chia sẻ cho KH</button>
+          <button class="action-btn btn-save" onclick="toggleSave(this)"><i class="ti ti-bookmark"></i> Lưu</button>
+        </div>
+      </div>
+
+      <!-- 7. Video -->
+      <div class="content-card">
+        <div class="card-main">
+          <div class="card-thumb" style="background:linear-gradient(135deg,#0d9488,#14b8a6);">
+            <i class="ti ti-player-play"></i>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Omega-3 &amp; sức khỏe tim</div>
+            <div class="card-meta-row">
+              <span class="type-badge type-video">Video</span>
+              <span class="card-duration"><i class="ti ti-clock" style="font-size:11px;"></i> 15 phút</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="action-btn btn-share"><i class="ti ti-share"></i> Chia sẻ cho KH</button>
+          <button class="action-btn btn-save" onclick="toggleSave(this)"><i class="ti ti-bookmark"></i> Lưu</button>
+        </div>
+      </div>
+
+      <!-- 8. Tài liệu -->
+      <div class="content-card">
+        <div class="card-main">
+          <div class="card-thumb" style="background:linear-gradient(135deg,#92600a,#d97706);">
+            <i class="ti ti-file-text"></i>
+          </div>
+          <div class="card-body">
+            <div class="card-title">Thực đơn mẫu 1200 kcal</div>
+            <div class="card-meta-row">
+              <span class="type-badge type-doc">Tài liệu</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="action-btn btn-share"><i class="ti ti-share"></i> Chia sẻ cho KH</button>
+          <button class="action-btn btn-save" onclick="toggleSave(this)"><i class="ti ti-bookmark"></i> Lưu</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="hlv_tong_quan.html" class="active"><i class="ti ti-layout-dashboard"></i>Tổng quan</a>
+    <a href="hlv_danh_sach_kh.html"><i class="ti ti-users"></i>Danh sách KH</a>
+    <a href="#"><i class="ti ti-message-circle"></i>Chat</a>
+    <a href="#"><i class="ti ti-user"></i>Hồ sơ</a>
+  </nav>
+</div>
+
+<script>
+  // Chip toggle
+  document.querySelectorAll('.chip').forEach(function(chip) {
+    chip.addEventListener('click', function() {
+      chip.closest('.chips-row').querySelectorAll('.chip').forEach(function(c) { c.classList.remove('active'); });
+      chip.classList.add('active');
+    });
+  });
+
+  // Save toggle
+  function toggleSave(btn) {
+    var saved = btn.classList.toggle('saved');
+    if (saved) {
+      btn.innerHTML = '<i class="ti ti-bookmark-filled"></i> Đã lưu';
+    } else {
+      btn.innerHTML = '<i class="ti ti-bookmark"></i> Lưu';
+    }
+  }
+</script>
+</body>
+</html>

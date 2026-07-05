@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nhóm khách hàng – AnCare</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Design tokens ── */
+    :root {
+      --brand:       #1C4232;
+      --brand-mid:   #2D6A4F;
+      --brand-light: #4CAF88;
+      --accent:      #52B788;
+      --bg:          #F5F8F6;
+      --surface:     #FFFFFF;
+      --border:      #DCE8DF;
+      --text:        #111827;
+      --text-2:      #5A7061;
+      --text-muted:  #9CA3AF;
+      --error:       #DC2626;
+      --success:     #16A34A;
+      --warning:     #D97706;
+      --info:        #0891B2;
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #1A1A2E;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px;
+    }
+
+    /* ── Phone shell ── */
+    .phone {
+      position: relative;
+      width: 390px;
+      min-height: 844px;
+      border-radius: 44px;
+      overflow: hidden;
+      box-shadow:
+        0 30px 80px rgba(0,0,0,0.25),
+        0 0 0 11px #1C1C1E;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+    }
+
+    /* ── Status bar ── */
+    .status-bar {
+      height: 44px;
+      background: linear-gradient(135deg, var(--brand) 0%, var(--brand-mid) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      flex-shrink: 0;
+    }
+    .status-bar .time {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.3px;
+    }
+    .status-bar .icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #fff;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: linear-gradient(135deg, var(--brand) 0%, var(--brand-mid) 100%);
+      padding: 16px 20px 24px;
+      flex-shrink: 0;
+    }
+    .header-title {
+      font-family: 'Lora', serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.3;
+    }
+    .header-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: rgba(255,255,255,0.8);
+      margin-top: 4px;
+    }
+
+    /* ── Scrollable content ── */
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-bottom: 110px; /* nav height + safe area */
+      background: var(--bg);
+      -webkit-overflow-scrolling: touch;
+    }
+    .content::-webkit-scrollbar { display: none; }
+
+    /* ── Search section ── */
+    .search-section {
+      background: var(--surface);
+      padding: 14px 16px 0;
+    }
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 10px 16px;
+    }
+    .search-bar svg {
+      flex-shrink: 0;
+      color: var(--text-muted);
+    }
+    .search-bar input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      background: transparent;
+    }
+    .search-bar input::placeholder { color: var(--text-muted); }
+
+    /* ── Filter pills ── */
+    .filter-row {
+      background: var(--surface);
+      display: flex;
+      gap: 8px;
+      padding: 12px 16px 14px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .filter-row::-webkit-scrollbar { display: none; }
+    .filter-pill {
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+    .filter-pill.active {
+      background: var(--brand);
+      color: #fff;
+      border: 1.5px solid var(--brand);
+    }
+    .filter-pill.outline {
+      background: transparent;
+      color: var(--text-2);
+      border: 1.5px solid var(--border);
+    }
+
+    /* ── Section label ── */
+    .section-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      padding: 16px 20px 8px;
+    }
+
+    /* ── Client cards ── */
+    .client-card {
+      background: var(--surface);
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      margin: 0 16px 12px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+      text-decoration: none;
+    }
+    .client-card:active {
+      transform: scale(0.98);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    /* Avatar */
+    .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    /* Middle info */
+    .client-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .client-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .client-date {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .client-package {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: var(--text-2);
+      margin-top: 2px;
+    }
+
+    /* Right: badge + chevron */
+    .card-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 100px;
+      padding: 4px 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .chevron { color: var(--text-muted); }
+
+    /* ── FAB ── */
+    .fab {
+      position: absolute;
+      bottom: 100px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--brand);
+      color: #fff;
+      border-radius: 100px;
+      padding: 12px 18px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 4px 16px rgba(28,66,50,0.35);
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      z-index: 10;
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+    .fab:active {
+      transform: scale(0.96);
+      box-shadow: 0 2px 8px rgba(28,66,50,0.28);
+    }
+
+    /* ── Bottom nav ── */
+    .bottom-nav {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: calc(70px + 20px);
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-around;
+      padding-top: 10px;
+      padding-bottom: 20px;
+      z-index: 20;
+    }
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      text-decoration: none;
+      color: var(--text-muted);
+      flex: 1;
+      cursor: pointer;
+      transition: color 0.15s ease;
+    }
+    .nav-item.active { color: var(--brand); }
+    .nav-item span {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="phone">
+
+  <!-- ① Status bar -->
+  <div class="status-bar">
+    <span class="time">9:41</span>
+    <div class="icons">
+      <!-- Signal bars -->
+      <svg width="17" height="12" viewBox="0 0 17 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="0"  y="8"  width="3" height="4" rx="0.5" fill="currentColor" stroke="none"/>
+        <rect x="4.5" y="5.5" width="3" height="6.5" rx="0.5" fill="currentColor" stroke="none"/>
+        <rect x="9"  y="3"  width="3" height="9" rx="0.5" fill="currentColor" stroke="none"/>
+        <rect x="13.5" y="0" width="3" height="12" rx="0.5" fill="currentColor" stroke="none"/>
+      </svg>
+      <!-- WiFi -->
+      <svg width="16" height="12" viewBox="0 0 24 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 5C5.33 1.93 10.5 0 16 0s10.67 1.93 15 5" opacity="0.3"/>
+        <path d="M4.5 9.5C7.67 7.17 11.67 6 16 6s8.33 1.17 11.5 3.5" opacity="0.6"/>
+        <path d="M8.5 13.5C10.5 12 13.08 11 16 11s5.5 1 7.5 2.5"/>
+        <circle cx="16" cy="17" r="1.5" fill="currentColor" stroke="none"/>
+      </svg>
+      <!-- Battery -->
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="none">
+        <rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="currentColor" stroke-width="1.2"/>
+        <rect x="2" y="2" width="16" height="8" rx="2" fill="currentColor"/>
+        <path d="M23 4v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ② Header -->
+  <div class="header">
+    <div class="header-title">Nhóm khách hàng</div>
+    <div class="header-subtitle">12 khách hàng đang theo dõi</div>
+  </div>
+
+  <!-- ③ Scrollable content -->
+  <div class="content">
+
+    <!-- Search section -->
+    <div class="search-section">
+      <div class="search-bar">
+        <!-- Magnifying glass -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="text" placeholder="Tìm khách hàng..." />
+      </div>
+    </div>
+
+    <!-- Filter pills -->
+    <div class="filter-row">
+      <span class="filter-pill active">Tất cả (12)</span>
+      <span class="filter-pill outline">Đang theo dõi (8)</span>
+      <span class="filter-pill outline">Cần đo chỉ số (3)</span>
+      <span class="filter-pill outline">Chưa tư vấn (4)</span>
+    </div>
+
+    <!-- Section label -->
+    <div class="section-label">Khách hàng</div>
+
+    <!-- Client A: Trần Thị Minh Châu -->
+    <a href="#" class="client-card">
+      <div class="avatar" style="background: #0D9488;">MC</div>
+      <div class="client-info">
+        <div class="client-name">Trần Thị Minh Châu</div>
+        <div class="client-date">Đo: Hôm nay 09:00</div>
+        <div class="client-package">Gói 3 tháng</div>
+      </div>
+      <div class="card-right">
+        <span class="status-badge" style="background:#DCFCE7; color:#16A34A;">Tốt ↓0.8kg</span>
+        <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- Client B: Nguyễn Thu Hà -->
+    <a href="#" class="client-card">
+      <div class="avatar" style="background: #7C3AED;">TH</div>
+      <div class="client-info">
+        <div class="client-name">Nguyễn Thu Hà</div>
+        <div class="client-date">Đo: 5 ngày trước</div>
+        <div class="client-package">Gói 6 tháng</div>
+      </div>
+      <div class="card-right">
+        <span class="status-badge" style="background:#FEF3C7; color:#D97706;">Cần tư vấn</span>
+        <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- Client C: Phạm Bảo Long -->
+    <a href="#" class="client-card">
+      <div class="avatar" style="background: #EA580C;">BL</div>
+      <div class="client-info">
+        <div class="client-name">Phạm Bảo Long</div>
+        <div class="client-date">Đo: 12 ngày trước</div>
+        <div class="client-package">Gói 1 tháng</div>
+      </div>
+      <div class="card-right">
+        <span class="status-badge" style="background:#FEE2E2; color:#DC2626;">Quá hạn đo</span>
+        <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- Client D: Vũ Ngọc Linh -->
+    <a href="#" class="client-card">
+      <div class="avatar" style="background: #2563EB;">NL</div>
+      <div class="client-info">
+        <div class="client-name">Vũ Ngọc Linh</div>
+        <div class="client-date">Đo: 3 ngày trước</div>
+        <div class="client-package">Gói 3 tháng</div>
+      </div>
+      <div class="card-right">
+        <span class="status-badge" style="background:#E0F2FE; color:#0891B2;">Đang ổn định</span>
+        <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </div>
+    </a>
+
+  </div><!-- /content -->
+
+  <!-- ⑥ FAB -->
+  <a href="#" class="fab">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="12" y1="5" x2="12" y2="19"/>
+      <line x1="5" y1="12" x2="19" y2="12"/>
+    </svg>
+    Mời KH mới
+  </a>
+
+  <!-- ⑦ Bottom nav -->
+  <nav class="bottom-nav">
+
+    <!-- Trang Chủ -->
+    <a href="03_dashboard.html" class="nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/>
+        <polyline points="9 21 9 12 15 12 15 21"/>
+      </svg>
+      <span>Trang Chủ</span>
+    </a>
+
+    <!-- Team (ACTIVE) -->
+    <a href="05_team.html" class="nav-item active">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+        <path d="M16 3.13a4 4 0 010 7.75"/>
+      </svg>
+      <span>Team</span>
+    </a>
+
+    <!-- Chat -->
+    <a href="07_chat.html" class="nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="14" rx="2"/>
+        <polyline points="3 17 9 11 13 15 17 11 21 17"/>
+        <!-- message-square style -->
+      </svg>
+      <span>Chat</span>
+    </a>
+
+    <!-- HLV -->
+    <a href="10_hlv.html" class="nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+        <path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/>
+        <line x1="9" y1="11" x2="15" y2="11"/>
+        <line x1="9" y1="15" x2="13" y2="15"/>
+      </svg>
+      <span>HLV</span>
+    </a>
+
+    <!-- Hồ Sơ -->
+    <a href="12_profile.html" class="nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <circle cx="12" cy="9" r="3"/>
+        <path d="M6.5 19.5a6 6 0 0111 0"/>
+      </svg>
+      <span>Hồ Sơ</span>
+    </a>
+
+  </nav>
+
+</div><!-- /phone -->
+
+</body>
+</html>

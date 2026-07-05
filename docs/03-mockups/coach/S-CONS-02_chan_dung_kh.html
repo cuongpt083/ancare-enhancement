@@ -1,0 +1,85 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chân dung KH — AnCare</title><link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css"></head><body><div class="screen">
+<div class="appbar"><span class="back" onclick="location.href='S-LEAD-01_danh_sach.html'"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></span><h1>Chân dung KH</h1><span class="info"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="8.01"/><line x1="12" y1="12" x2="12" y2="16"/></svg></span></div>
+<div class="progress-dots"><span class="dot done"></span><span class="dot active"></span><span class="dot "></span><span class="dot "></span></div>
+
+<div class="content" style="padding-top:var(--s-12);padding-bottom:100px">
+  <div class="card"><h2>Thông tin cơ bản</h2>
+    <div class="field"><label>Họ tên <span style="color:var(--state-alert)">*</span></label><input placeholder="Nhập họ và tên"></div>
+    <div class="flex gap-12">
+      <div class="field flex-1"><label>Số điện thoại</label><input placeholder="SĐT"></div>
+      <div class="field flex-1"><label>Ngày sinh (YYYY-MM-DD)</label><input placeholder="1990-01-31"></div>
+    </div>
+    <div class="flex gap-12">
+      <div class="field flex-1"><label>Chiều cao (cm)</label><input placeholder="170"></div>
+      <div class="field flex-1"><label>Email</label><input placeholder="Email"></div>
+    </div>
+    <div class="flex gap-12">
+      <div class="field flex-1"><label>Mã giới thiệu</label><input placeholder="Nhập mã giới thiệu"></div>
+      <div class="field flex-1">
+        <label>Giới tính</label>
+        <select style="width:100%;padding:var(--s-8) var(--s-12);border:1px solid var(--border);border-radius:var(--radius-md);background:var(--bg-card);color:var(--text-primary);font-family:inherit;font-size:inherit">
+          <option>Nam</option>
+          <option>Nữ</option>
+          <option>Khác</option>
+        </select>
+      </div>
+    </div>
+    <div class="field"><label>Địa chỉ</label><input placeholder="Địa chỉ"></div>
+  </div>
+
+  <div class="card"><h2>Khảo sát khách hàng</h2>
+    <div class="card subtle" style="margin-bottom:var(--s-12)">
+      <div style="font-size:var(--text-xs);line-height:1.6;color:var(--text-secondary);max-height:150px;overflow-y:auto;padding-right:var(--s-4)">
+        <ul style="margin:0;padding-left:var(--s-16)">
+          <li>1. Mệt mỏi/dễ cảm?</li>
+          <li>2. Đau đầu, đau lưng, đau mỏi?</li>
+          <li>3. Có tiểu đường, huyết áp, tim mạch, khớp?</li>
+          <li>4. Công việc/gia đình có áp lực?</li>
+          <li>5. Giấc ngủ tốt không?</li>
+          <li>6. Hay đói hoặc thèm ăn?</li>
+          <li>7. Thường ăn đồ chế biến sẵn?</li>
+          <li>8. Có nghĩ thức ăn ảnh hưởng sức khỏe?</li>
+          <li>9. Có thường bỏ bữa sáng?</li>
+          <li>10. Mỗi ngày uống khoảng bao nhiêu cốc nước?</li>
+          <li>11. Có tập thể dục không?</li>
+          <li>12. Bác sĩ có khuyên giảm cân hoặc giảm cholesterol?</li>
+          <li>13. Muốn giảm cân hoặc giảm vòng bụng?</li>
+          <li>14. Muốn tăng cân?</li>
+          <li>15. Có hút thuốc hoặc tiếp xúc khói thuốc?</li>
+          <li>16. Có thường uống rượu, bia hoặc cà phê?</li>
+          <li>17. Mục tiêu chính khi kiểm tra sức khỏe là gì?</li>
+          <li>18. Gần đây bạn có đi khám bác sĩ không?</li>
+          <li>19. Trong vấn đề sức khỏe của bạn thì bạn quan tâm điều gì nhất?</li>
+        </ul>
+      </div>
+    </div>
+    <div class="field">
+      <label>Trả lời (HLV ghi chép - không nhất thiết trả lời hết)</label>
+      <textarea style="height:80px" placeholder="Bình thường / Ngoại trừ / Mong muốn của khách hàng..."></textarea>
+    </div>
+  </div>
+
+  <div class="card"><h2>Chân dung khách hàng</h2>
+    <div class="card subtle" style="margin-bottom:var(--s-12);font-size:var(--text-xs);line-height:1.5;color:var(--text-secondary)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div><strong>Đặc điểm:</strong> Tuổi, DISC, độ ưu tiên (Tiền, quyền, nhu cầu SK, kinh doanh).</div>
+        <div><strong>Mong muốn:</strong> Sức khỏe (vấn đề gặp, mong muốn cải thiện), Thu nhập, Phát triển...</div>
+        <div><strong>Việc cần làm:</strong> Mời ra NDD, chăm kỹ 10 ngày đầu, zoom, sp đang dùng...</div>
+        <div><strong>Kết quả:</strong> Trải nghiệm 3K, 4Y, 1T. Sách 15 phút, zoom, chia sẻ tư duy.</div>
+        <div><strong>Tiếp theo:</strong> Nâng cấp sản phẩm, làm thẻ HV, sự kiện cần đến.</div>
+        <div><strong>Đào sâu:</strong> Bạn bè, anh em, bố mẹ.</div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Ghi chép chân dung (HLV nhập)</label>
+      <textarea style="height:80px" placeholder="Thông tin đặc điểm, mong muốn, việc cần làm, đào sâu..."></textarea>
+    </div>
+  </div>
+</div>
+
+<div class="cta-bar" style="gap:var(--s-8)">
+  <button class="btn secondary flex-1" onclick="location.href='S-LEAD-01_danh_sach.html'">Hoàn tất tạo bản ghi</button>
+  <button class="btn primary flex-1" onclick="location.href='S-CONS-03_tanita.html'">Tiếp tục (Tanita)</button>
+</div>
+</div></body></html>

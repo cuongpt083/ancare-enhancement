@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trang chủ — Prototype</title>
+<link rel="stylesheet" href="../tabler-icons.min.css">
+<style>
+  :root{
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    --bg-primary:#fff;--bg-secondary:#f4f6f8;--bg-app:#eaeef2;
+    --text:#1a1d21;--text2:#6b7280;--border:#e5e7eb;--border2:#d1d5db;
+    --accent:#2f9e6e;--good:#22c55e;--warn:#f59e0b;--bad:#fb923c;
+    --than:#16a34a;--tam:#8b5cf6;--tri:#f97316;--r:14px;
+  }
+  *{box-sizing:border-box;}
+  body,html{margin:0;padding:0;font-family:var(--font-sans);background:var(--bg-app);color:var(--text);}
+  .container{width:100%;max-width:460px;margin:0 auto;padding:0 0 36px;}
+
+  .appbar{display:flex;align-items:center;gap:10px;background:var(--bg-primary);padding:.9rem 1rem;border-bottom:.5px solid var(--border);}
+  .ava{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#34d27b,#16a34a);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;}
+  .appbar .hi{flex:1;} .appbar .hi .s{font-size:11px;color:var(--text2);} .appbar .hi .n{font-size:15px;font-weight:700;}
+  .appbar .bell{font-size:22px;color:var(--text2);}
+
+  .card{background:var(--bg-primary);border:.5px solid var(--border);border-radius:var(--r);margin:1rem;}
+  .pad{padding:1rem;}
+
+  /* Hero: % ngày/tuần + đánh giá */
+  .hero{display:flex;align-items:center;gap:14px;}
+  .ring{--p:62;width:84px;height:84px;border-radius:50%;flex:none;background:conic-gradient(var(--accent) calc(var(--p)*1%),#e4e8ec 0);display:flex;align-items:center;justify-content:center;}
+  .ring span{width:64px;height:64px;border-radius:50%;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .ring b{font-size:19px;color:var(--accent);line-height:1;} .ring small{font-size:9px;color:var(--text2);}
+  .hero .info{flex:1;}
+  .hero .assess{font-size:15px;font-weight:700;} .hero .assess .tag{font-size:11px;font-weight:700;color:#fff;background:var(--good);border-radius:10px;padding:1px 8px;margin-left:4px;}
+  .hero .week{font-size:12px;color:var(--text2);margin-top:4px;}
+  .pillars{display:flex;gap:6px;margin-top:.6rem;}
+  .pillars .pc{flex:1;text-align:center;background:var(--bg-secondary);border-radius:9px;padding:.4rem;}
+  .pillars .pc .d{font-size:13px;font-weight:700;} .pillars .pc .k{font-size:9px;color:var(--text2);}
+
+  .sec{font-size:13px;font-weight:700;padding:.4rem 1rem .1rem;}
+
+  /* Function tiles */
+  .tiles{display:flex;gap:10px;margin:.5rem 1rem;}
+  .tile{flex:1;border:none;border-radius:var(--r);padding:1rem .8rem;cursor:pointer;text-align:left;color:#fff;}
+  .tile .ti{font-size:26px;} .tile .t{font-size:14px;font-weight:700;margin-top:.4rem;} .tile .d{font-size:10.5px;opacity:.92;margin-top:2px;}
+  .tile.big{background:linear-gradient(135deg,#34d27b,#16a34a);}
+  .tile.small{background:linear-gradient(135deg,#8b5cf6,#6d3fd1);flex:.85;}
+
+  .row2{display:flex;gap:10px;margin:.4rem 1rem;}
+  .mini{flex:1;background:var(--bg-primary);border:.5px solid var(--border);border-radius:var(--r);padding:.7rem;display:flex;align-items:center;gap:8px;cursor:pointer;}
+  .mini .ic{width:32px;height:32px;border-radius:9px;background:var(--bg-secondary);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:17px;}
+  .mini .t{font-size:12.5px;font-weight:600;}
+
+  /* Lịch hôm nay */
+  .sch{display:flex;align-items:center;gap:10px;padding:.65rem 0;border-top:.5px solid var(--border);}
+  .sch:first-child{border-top:none;}
+  .sch .ic{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:none;font-size:17px;}
+  .sch .m{flex:1;} .sch .m .t{font-size:13px;font-weight:600;} .sch .m .s{font-size:11px;color:var(--text2);}
+  .sch .go{font-size:18px;color:var(--text2);}
+
+  /* Tổng kết cuối ngày */
+  .eod{background:linear-gradient(135deg,#fff7ed,#fef3e6);border:1px solid #f6dcc0;}
+  .eod h3{font-size:13px;margin:0 0 .2rem;display:flex;align-items:center;gap:7px;}
+  .eod .time{font-size:11px;color:#9a6312;}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin:.6rem 0;}
+  .chip{font-size:11.5px;border-radius:20px;padding:.3rem .65rem;font-weight:600;display:flex;align-items:center;gap:4px;}
+  .chip.ok{background:#dcfce7;color:#15803d;} .chip.no{background:#fee2e2;color:#b42318;}
+  .eod .note{font-size:11.5px;color:var(--text2);line-height:1.5;}
+  .eod .score{font-size:12.5px;font-weight:700;color:var(--accent);margin-top:.3rem;}
+
+  .navbar{position:sticky;bottom:0;display:flex;background:var(--bg-primary);border-top:.5px solid var(--border);max-width:460px;margin:0 auto;}
+  .navbar a{flex:1;text-align:center;padding:.5rem 0;color:var(--text2);text-decoration:none;font-size:10px;}
+  .navbar a .ti{font-size:20px;display:block;} .navbar a.active{color:var(--accent);font-weight:700;}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="appbar">
+    <div class="ava">L</div>
+    <div class="hi"><div class="s">Chào buổi chiều 👋</div><div class="n">Chị Lan</div></div>
+    <i class="ti ti-bell bell"></i>
+  </div>
+
+  <!-- Hero -->
+  <div class="card pad">
+    <div class="hero">
+      <div class="ring" style="--p:62"><span><b>62%</b><small>hôm nay</small></span></div>
+      <div class="info">
+        <div class="assess">Sức khỏe toàn diện <span class="tag">Khá</span></div>
+        <div class="week">Tuần này: <b>78%</b> hoàn thành · streak 5 ngày 🔥</div>
+        <div class="pillars">
+          <div class="pc"><div class="d" style="color:var(--than)">Tốt</div><div class="k">Thân</div></div>
+          <div class="pc"><div class="d" style="color:var(--tam)">Khá</div><div class="k">Tâm</div></div>
+          <div class="pc"><div class="d" style="color:var(--tri)">Cần cố</div><div class="k">Trí</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chức năng chính -->
+  <div class="sec">Hôm nay bạn muốn làm gì?</div>
+  <div class="tiles">
+    <button class="tile big" onclick="location.href='suc_khoe_tong_the.html'">
+      <i class="ti ti-heart-handshake"></i>
+      <div class="t">Chăm sóc bản thân</div>
+      <div class="d">Check-in nhiệm vụ hằng ngày</div>
+    </button>
+    <button class="tile small" onclick="location.href='ca_nhan_hoa_thoi_gian_bieu.html'">
+      <i class="ti ti-calendar-cog"></i>
+      <div class="t">Cá nhân hóa<br>thời gian biểu</div>
+    </button>
+  </div>
+  <div class="row2">
+    <div class="mini" onclick="location.href='goi_y_bua_an.html'"><div class="ic"><i class="ti ti-salad"></i></div><div class="t">Gợi ý bữa ăn</div></div>
+    <div class="mini"><div class="ic"><i class="ti ti-users"></i></div><div class="t">Cộng đồng</div></div>
+    <div class="mini" onclick="location.href='chat.html'"><div class="ic"><i class="ti ti-message-heart"></i></div><div class="t">Chat HLV</div></div>
+  </div>
+
+  <!-- Lịch hôm nay -->
+  <div class="sec">Lịch hôm nay</div>
+  <div class="card pad" style="padding-top:.4rem;padding-bottom:.4rem">
+    <div class="sch"><div class="ic" style="background:#eef0ff;color:var(--tri)"><i class="ti ti-book-2"></i></div>
+      <div class="m"><div class="t">Học: Quản trị tài chính cá nhân</div><div class="s">20:00 · Zoom · 60 phút</div></div><i class="ti ti-chevron-right go"></i></div>
+    <div class="sch"><div class="ic" style="background:#fef3e6;color:var(--warn)"><i class="ti ti-clipboard-check"></i></div>
+      <div class="m"><div class="t">Làm quiz: Dinh dưỡng tuần 2</div><div class="s">Hạn 21:00 · 5 phút</div></div><i class="ti ti-chevron-right go"></i></div>
+    <div class="sch"><div class="ic" style="background:#eafaef;color:var(--than)"><i class="ti ti-calendar-event"></i></div>
+      <div class="m"><div class="t">Sự kiện: Workshop sống khỏe</div><div class="s">CN này · 9:00</div></div><i class="ti ti-chevron-right go"></i></div>
+  </div>
+
+  <!-- Tổng kết cuối ngày (22:00) -->
+  <div class="sec">Tổng kết cuối ngày</div>
+  <div class="card pad eod">
+    <h3><i class="ti ti-moon-stars" style="color:#9a6312"></i> Tổng kết ngày <span class="time">· hiển thị lúc 22:00</span></h3>
+    <div class="chips">
+      <span class="chip ok"><i class="ti ti-check"></i> Đủ đạm</span>
+      <span class="chip ok"><i class="ti ti-check"></i> Calo đạt</span>
+      <span class="chip no"><i class="ti ti-x"></i> Thiếu nước</span>
+      <span class="chip ok"><i class="ti ti-check"></i> Ngủ đủ</span>
+    </div>
+    <div class="score">Điểm hôm nay: 17đ · Hoàn thành 62%</div>
+    <div class="note">Lưu ý cải thiện: uống thêm ~2 cốc nước; hoàn thành buổi thể dục chiều để đạt mục tiêu Thân.</div>
+  </div>
+</div>
+
+<!-- Bottom nav -->
+<div class="navbar">
+  <a href="trang_chu.html" class="active"><i class="ti ti-home"></i>Trang chủ</a>
+  <a href="suc_khoe_tong_the.html"><i class="ti ti-heart-handshake"></i>Chăm sóc</a>
+  <a href="chat.html"><i class="ti ti-message-circle"></i>Chat</a>
+  <a href="#"><i class="ti ti-user"></i>Hồ sơ</a>
+</div>
+</body>
+</html>

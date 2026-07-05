@@ -1,0 +1,98 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tạo tài khoản KH — AnCare</title><link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
+<style>
+.metric-table input {
+  width: 64px; height: 28px; text-align: center; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg-card); color: var(--text-primary); font-family: inherit; font-size: var(--text-xs);
+}
+.image-upload-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+}
+.upload-box {
+  border: 2px dashed var(--border); border-radius: var(--radius-md); padding: var(--s-12) var(--s-8);
+  text-align: center; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.upload-box:hover {
+  border-color: var(--accent); background: var(--bg-subtle);
+}
+</style>
+</head><body><div class="screen">
+<div class="appbar"><span class="back" onclick="location.href='S-CONS-05_giai_phap.html'"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></span><h1>Tạo tài khoản KH</h1><span class="info"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="8.01"/><line x1="12" y1="12" x2="12" y2="16"/></svg></span></div>
+<div class="content" style="padding-top:var(--s-12);padding-bottom:80px">
+  <div class="focus-card" style="margin-bottom:var(--s-16)"><div class="label">Thông tin đăng nhập</div><div class="title" style="font-size:var(--text-xl)">Phạm Hạnh</div></div>
+  
+  <div class="card"><h2>Thông tin tài khoản</h2>
+    <div class="field"><label>Tài khoản (SĐT hoặc Email)</label><input value="0978888888"></div>
+    <div class="field"><label>Mật khẩu</label><input value="1"></div>
+    <div class="hint" style="margin-bottom:var(--s-12)">Mật khẩu mặc định = 1, HLV có thể chỉnh sửa.</div>
+    <div class="flex items-center gap-12" style="padding:var(--s-12);background:var(--bg-subtle);border-radius:var(--radius-md)"><span style="color:var(--accent)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span><span class="hint" style="margin:0">Gửi email chứa tài khoản & mật khẩu cho KH và HLV</span></div>
+  </div>
+  
+  <div class="card"><h2>Mục tiêu cải thiện</h2>
+    <div class="table-wrap" style="margin-bottom:var(--s-12)"><table class="table metric-table">
+      <thead><tr><th>Chỉ số</th><th>Hiện tại</th><th>Tiêu chuẩn</th><th>Đánh giá</th><th>Mục tiêu</th></tr></thead><tbody>
+        <tr class="good"><td>Cân nặng</td><td>64.8</td><td>62</td><td><span class="chip good">Tốt</span></td><td><input value="62.0"></td></tr>
+        <tr class="good"><td>Khối lượng cơ</td><td>52.0</td><td>≥38%</td><td><span class="chip good">Tốt</span></td><td><input value="52.0"></td></tr>
+        <tr class="good"><td>Khối lượng xương</td><td>2.8</td><td>2.5-3.5</td><td><span class="chip good">Tốt</span></td><td><input value="2.8"></td></tr>
+        <tr class="good"><td>Tỷ lệ nước</td><td>57.7%</td><td>&gt;50%</td><td><span class="chip good">Tốt</span></td><td><input value="57.7%"></td></tr>
+        <tr class="warn"><td>Tỷ lệ mỡ</td><td>18.9%</td><td>17.5%</td><td><span class="chip warn">Thừa 1.4%</span></td><td><input value="17.5"></td></tr>
+        <tr class="alert"><td>Mỡ nội tạng</td><td>10</td><td>1-7</td><td><span class="chip alert">Nguy hiểm</span></td><td><input value="7"></td></tr>
+        <tr class="good"><td>Vóc dáng</td><td>BT</td><td>—</td><td><span class="chip good">Tốt</span></td><td><input value="BT"></td></tr>
+        <tr class="good"><td>Tuổi sinh học</td><td>37</td><td>≤42</td><td><span class="chip good">Trẻ 5t</span></td><td><input value="37"></td></tr>
+        <tr class="good"><td>RMR</td><td>1276</td><td>—</td><td><span class="chip good">Tốt</span></td><td><input value="1276"></td></tr>
+      </tbody>
+    </table></div>
+    <div class="hint">Mục tiêu mặc định = tiêu chuẩn, HLV có thể sửa.</div>
+  </div>
+  
+  <div class="card"><h2>Cấu hình năng lượng & Bữa ăn</h2>
+    <div class="field" style="margin-bottom:var(--s-12)">
+      <label>Số bữa ăn/ngày</label>
+      <div class="pills"><span class="pill">3 bữa</span><span class="pill">4 bữa</span><span class="pill active">5 bữa</span></div>
+    </div>
+    <div class="field" style="margin-bottom:var(--s-12)">
+      <label>Tự động tính cắt giảm Calo dựa theo mục tiêu</label>
+      <div class="flex gap-12 items-center">
+        <select style="flex:1;padding:var(--s-8) var(--s-12);border:1px solid var(--border);border-radius:var(--radius-md);background:var(--bg-card);color:var(--text-primary)">
+          <option selected>Cắt giảm -300 kcal (Tốt nhất)</option>
+          <option>Cắt giảm -400 kcal</option>
+          <option>Cắt giảm -500 kcal</option>
+          <option>Tăng thêm +300 kcal</option>
+          <option>Tăng thêm +500 kcal</option>
+        </select>
+        <span class="hint" style="margin:0;font-weight:600;color:var(--accent)">-300 đến -500</span>
+      </div>
+    </div>
+    <div class="field" style="margin-bottom:var(--s-12)">
+      <label>Con số Calo kỳ diệu đề xuất (1100 - 1800 kcal)</label>
+      <select style="width:100%;padding:var(--s-8) var(--s-12);border:1px solid var(--border);border-radius:var(--radius-md);background:var(--bg-card);color:var(--text-primary)">
+        <option>1100 kcal</option>
+        <option selected>1200 kcal</option>
+        <option>1300 kcal</option>
+        <option>1400 kcal</option>
+        <option>1500 kcal</option>
+        <option>1600 kcal</option>
+        <option>1700 kcal</option>
+        <option>1800 kcal</option>
+      </select>
+    </div>
+    <div class="field" style="margin-bottom:var(--s-12)">
+      <label>Mục tiêu vận động (tùy chọn)</label>
+      <input placeholder="VD: Đi bộ 5000 bước, đạp xe 30p..." value="Đi bộ 5000 bước mỗi ngày">
+    </div>
+    <div class="field">
+      <label>Thời gian đạt mục tiêu (tùy chọn)</label>
+      <input placeholder="VD: 3 tháng, 90 ngày..." value="3 tháng">
+    </div>
+  </div>
+  
+  <div class="card"><h2>Ảnh check-in ban đầu</h2>
+    <div class="hint" style="margin-bottom:var(--s-12)">Kích vào để chọn ảnh từ điện thoại (Ảnh chân dung, toàn thân, vòng eo...).</div>
+    <div class="image-upload-grid">
+      <div class="upload-box"><div style="color:var(--accent)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="hint" style="margin-top:var(--s-4);font-size:10px">Ảnh 1 (Chân dung)</div></div>
+      <div class="upload-box"><div style="color:var(--accent)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div><div class="hint" style="margin-top:var(--s-4);font-size:10px">Ảnh 2 (Toàn thân)</div></div>
+      <div class="upload-box"><div style="color:var(--accent)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v6M9 12h6"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg></div><div class="hint" style="margin-top:var(--s-4);font-size:10px">Thêm ảnh</div></div>
+    </div>
+  </div>
+</div>
+<div class="cta-bar"><button class="btn primary" onclick="location.href='S-CONS-07_bua_an.html'"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Tạo tài khoản</button></div></div></body></html>

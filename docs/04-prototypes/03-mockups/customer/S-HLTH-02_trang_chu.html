@@ -1,0 +1,452 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trang chủ — AnCare KH</title><link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
+<style>
+  :root{--accent:var(--accent-customer);--accent-hover:var(--accent-customer-hover)}
+  .modal-overlay {
+    display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,.6);
+    z-index:9999; align-items:center; justify-content:center; padding:16px;
+  }
+  .modal-content {
+    background:var(--bg-card); border-radius:var(--radius-lg); width:100%; max-width:400px;
+    padding:var(--s-16); box-shadow:0 10px 25px rgba(0,0,0,.2);
+  }
+  .torch-badge {
+    display:inline-flex; align-items:center; gap:4px; font-weight:600; color:#f97316;
+  }
+  .photo-gallery {
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:8px; margin-top:12px;
+  }
+  .photo-gallery img {
+    width:100%; height:80px; object-fit:cover; border-radius:var(--radius-sm);
+  }
+</style>
+<script>
+  function openModal(id) {
+    document.getElementById(id).style.display = 'flex';
+  }
+  function closeModal(id) {
+    document.getElementById(id).style.display = 'none';
+  }
+  
+  // Water logic
+  var waterCount = 8;
+  function updateWater(change) {
+    waterCount = Math.max(0, waterCount + change);
+    document.getElementById('water-count-val').innerText = waterCount;
+    document.getElementById('water-display').innerText = waterCount + ' cốc × 200ml = ' + (waterCount * 0.2).toFixed(1) + 'L';
+  }
+
+  // Sleep logic
+  function calculateSleep() {
+    var sleepTime = document.getElementById('sleep-time').value;
+    var wakeTime = document.getElementById('wake-time').value;
+    if (sleepTime && wakeTime) {
+      var s = sleepTime.split(':');
+      var w = wakeTime.split(':');
+      var sMin = parseInt(s[0]) * 60 + parseInt(s[1]);
+      var wMin = parseInt(w[0]) * 60 + parseInt(w[1]);
+      var diff = wMin - sMin;
+      if (diff < 0) { diff += 24 * 60; }
+      var hours = (diff / 60).toFixed(1);
+      document.getElementById('sleep-result').innerText = hours + ' giờ · ' + sleepTime + ' → ' + wakeTime;
+    }
+  }
+
+  // Sports logic
+  var sports = [
+    { name: 'Đi bộ', cal: 150 },
+    { name: 'Chạy bộ', cal: 300 },
+    { name: 'Đạp xe', cal: 200 },
+    { name: 'Pickleball', cal: 360 },
+    { name: 'Bơi lội', cal: 280 }
+  ];
+  function addSport() {
+    var select = document.getElementById('sport-select');
+    var minInput = document.getElementById('sport-min');
+    var sportName = select.value;
+    var mins = parseInt(minInput.value) || 30;
+    var rate = sports.find(s => s.name === sportName).cal;
+    var calculatedCal = Math.round((mins / 30) * rate);
+    
+    document.getElementById('sport-display').innerText = sportName + ' ' + mins + ' phút · ~' + calculatedCal + ' kcal';
+    closeModal('modal-sport');
+  }
+
+  // Survey logic
+  function checkSurvey() {
+    var q1 = document.getElementById('sq1').value.trim();
+    var q2 = document.getElementById('sq2').value.trim();
+    var q3 = document.getElementById('sq3').value.trim();
+    var btn = document.getElementById('btn-submit-survey');
+    if (q1 && q2 && q3) {
+      btn.removeAttribute('disabled');
+      btn.classList.add('primary');
+      btn.classList.remove('secondary');
+    } else {
+      btn.setAttribute('disabled', 'true');
+      btn.classList.remove('primary');
+      btn.classList.add('secondary');
+    }
+  }
+  function submitSurvey() {
+    alert('Cảm ơn bạn đã gửi khảo sát bài học!');
+    closeModal('modal-lesson');
+    document.getElementById('lesson-check').style.color = 'var(--state-good)';
+  }
+</script>
+</head><body><div class="screen">
+<div class="appbar" style="border:none;background:linear-gradient(135deg,var(--accent-customer),var(--accent-customer-hover));color:#fff">
+  <span class="back" style="opacity:0"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></span>
+  <div class="flex-1 flex items-center gap-12">
+    <div style="width:44px;height:44px;border-radius:var(--radius-full);background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,.4)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 1 0 0 8zM5 20a7 7 0 0 1 14 0"/></svg></div>
+    <div class="flex-1"><div style="font-weight:700;font-size:var(--text-lg)">Xin chào, Hạnh</div><div style="font-size:var(--text-sm);opacity:.9">Cơ-Nước-Mỡ · Tối ưu · còn 8 ngày</div></div>
+    <!-- Kho ảnh Bữa ăn -->
+    <div style="text-align:center;cursor:pointer;margin-right:var(--s-12)" onclick="openModal('modal-photos')">
+      <div style="width:36px;height:36px;border-radius:var(--radius-sm);background:rgba(255,255,255,.25);border:1px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center">
+        <svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      </div>
+      <span style="font-size:9px;display:block;margin-top:2px;font-weight:600">Kho ảnh</span>
+    </div>
+  </div>
+  <span class="info" style="color:#fff"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5a2 2 0 0 1 4 0 7 7 0 0 1 4 6v3a4 4 0 0 0 1 2H5a4 4 0 0 0 1-2v-3a7 7 0 0 1 4-6M9 17v1a3 3 0 0 0 6 0v-1"/></svg></span>
+</div>
+
+<div class="content" style="padding-top:var(--s-12);padding-bottom:100px">
+  
+  <!-- CARD 1: TỔNG QUAN -->
+  <div class="card" style="border-color:var(--accent-customer)">
+    <h2>Tổng quan tiến trình</h2>
+    
+    <!-- Dashboard tóm tắt sinh học + Đuốc -->
+    <div style="display:flex;justify-content:space-around;align-items:center;padding:var(--s-12) 0;border-bottom:1px solid var(--border)">
+      <div style="text-align:center">
+        <div style="width:56px;height:56px;border-radius:var(--radius-full);background:var(--state-good-bg);display:flex;align-items:center;justify-content:center;margin:0 auto var(--s-4)">
+          <span style="color:var(--state-good);font-weight:700;font-size:var(--text-lg)">7</span>
+        </div>
+        <div class="hint">Dinh dưỡng</div>
+      </div>
+      <div style="text-align:center">
+        <div style="width:56px;height:56px;border-radius:var(--radius-full);background:var(--state-warn-bg);display:flex;align-items:center;justify-content:center;margin:0 auto var(--s-4)">
+          <span style="color:var(--state-warn);font-weight:700;font-size:var(--text-lg)">5</span>
+        </div>
+        <div class="hint">Vận động</div>
+      </div>
+      <div style="text-align:center">
+        <div style="width:56px;height:56px;border-radius:var(--radius-full);background:var(--state-alert-bg);display:flex;align-items:center;justify-content:center;margin:0 auto var(--s-4)">
+          <span style="color:var(--state-alert);font-weight:700;font-size:var(--text-lg)">3</span>
+        </div>
+        <div class="hint">TKP</div>
+      </div>
+      <div style="text-align:center;border-left:1px solid var(--border);padding-left:var(--s-12)">
+        <div class="torch-badge" style="font-size:var(--text-lg)"><span style="font-size:24px">🔥</span> 15đ</div>
+        <div class="hint" style="font-weight:600">Đuốc hôm nay</div>
+      </div>
+    </div>
+
+    <!-- Mục tiêu của bạn -->
+    <div style="padding:var(--s-12) 0;border-bottom:1px solid var(--border)">
+      <div style="font-weight:700;font-size:var(--text-sm);margin-bottom:var(--s-4)">Mục tiêu trải nghiệm:</div>
+      <div class="flex justify-between" style="font-size:var(--text-xs)">
+        <span>Mục tiêu: <strong>Giảm mỡ & Giảm cân (62kg)</strong></span>
+        <span>Vận động: <strong>5000 bước/ngày</strong></span>
+      </div>
+      <div class="hint" style="margin-top:var(--s-4)">Thời gian: 3 tháng (Còn lại: 3/90 buổi trải nghiệm)</div>
+    </div>
+
+    <!-- Biểu đồ tiến trình (Line-chart 2 ngày gần nhất) -->
+    <div style="padding:var(--s-12) 0;border-bottom:1px solid var(--border)">
+      <div style="font-weight:700;font-size:var(--text-sm);margin-bottom:var(--s-8)">Tiến trình 2 ngày gần nhất (Chỉ số thay đổi nhiều nhất):</div>
+      <div style="height:60px;background:var(--bg-subtle);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center">
+        <svg viewBox="0 0 300 50" width="100%" height="50" preserveAspectRatio="none">
+          <polyline points="0,40 150,25 300,10" fill="none" stroke="var(--accent-customer)" stroke-width="2.5" stroke-linejoin="round"/>
+          <text x="10" y="45" font-size="9" fill="var(--text-muted)">03/07: Cân nặng 64.8kg · Mỡ 18.9%</text>
+          <text x="160" y="45" font-size="9" fill="var(--accent-customer)" font-weight="bold">Hôm nay: Cân nặng 64.2kg (-0.6) · Mỡ 18.5% (-0.4%)</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Phân tích chuyên sâu & lời khuyên -->
+    <div style="padding-top:var(--s-12)">
+      <div style="font-weight:700;font-size:var(--text-sm);margin-bottom:var(--s-8)">Lời khuyên chuyên sâu từ hệ thống:</div>
+      <div class="card subtle" style="margin:0 0 var(--s-8) 0;background:#fefce8;border-color:#fef08a">
+        <div style="font-weight:700;font-size:var(--text-xs);color:#854d0e">Đánh giá tiến trình chuyển hóa</div>
+        <div class="hint" style="color:#713f12;line-height:1.5">Giảm cân tốt (-0.6kg). Mỡ nội tạng vẫn cao (10). Bữa trưa ăn lệch giờ dẫn tới thèm ăn vặt lúc chiều. Giấc ngủ chưa sâu.</div>
+      </div>
+      <div class="card subtle" style="margin:0;background:#f0fdf4;border-color:#bbf7d0">
+        <div style="font-weight:700;font-size:var(--text-xs);color:#166534">Giải pháp đề xuất</div>
+        <div class="hint" style="color:#14532d;line-height:1.5">Các chỉ số mỡ nội tạng chưa cải thiện. Vui lòng <strong>liên hệ trực tiếp với HLV Thủy</strong> để nhận tư vấn và điều chỉnh gói giải pháp dinh dưỡng.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 2: NHIỆM VỤ 1 NGÀY -->
+  <div class="card">
+    <div class="flex justify-between items-center" style="margin-bottom:var(--s-12)">
+      <h2 style="margin:0">Nhiệm vụ 1 ngày</h2>
+      <a href="S-HLTH-06_check_in.html" style="font-weight:700;color:var(--accent-customer);text-decoration:none;font-size:var(--text-xs)">Chạm để cập nhật chỉ số →</a>
+    </div>
+
+    <!-- Con số kỳ diệu -->
+    <div class="card subtle" style="background:var(--accent-customer-subtle);border-color:var(--accent-customer);margin-bottom:var(--s-12)">
+      <div class="flex justify-between items-center">
+        <div>
+          <span class="hint" style="margin:0;font-weight:600">Con số kỳ diệu của bạn:</span>
+          <div style="font-size:var(--text-xl);font-weight:700;color:var(--accent-customer)">1200 kcal/ngày</div>
+        </div>
+        <span style="font-size:24px">🎯</span>
+      </div>
+    </div>
+
+    <!-- Chỉ số cơ thể dạng bảng -->
+    <div class="table-wrap" style="margin-bottom:var(--s-16)"><table class="table">
+      <thead><tr><th>Chỉ số</th><th>Mục tiêu</th><th>Hiện tại</th><th>Đánh giá</th></tr></thead><tbody>
+        <tr class="good"><td>Cân nặng</td><td>62.0</td><td>64.2</td><td><span class="chip warn">Thừa 2.2kg</span></td></tr>
+        <tr class="good"><td>Tỷ lệ nước</td><td>&gt;50%</td><td>57.7%</td><td><span class="chip good">Tốt</span></td></tr>
+        <tr class="warn"><td>Tỷ lệ mỡ</td><td>17.5%</td><td>18.5%</td><td><span class="chip warn">Thừa 1.0%</span></td></tr>
+        <tr class="alert"><td>Mỡ nội tạng</td><td>1-7</td><td>10</td><td><span class="chip alert">Nguy hiểm</span></td></tr>
+        <tr class="good"><td>Khối lượng cơ</td><td>52.0</td><td>52.0</td><td><span class="chip good">Tốt</span></td></tr>
+        <tr class="good"><td>Năng lượng nghỉ ngơi (RMR)</td><td>—</td><td>1276</td><td><span class="chip good">Tốt</span></td></tr>
+        <tr class="good"><td>Khối lượng xương</td><td>2.8</td><td>2.8</td><td><span class="chip good">Tốt</span></td></tr>
+        <tr class="good"><td>Vóc dáng</td><td>BT</td><td>BT</td><td><span class="chip good">Tốt</span></td></tr>
+        <tr class="good"><td>Tuổi sinh học</td><td>37</td><td>37</td><td><span class="chip good">Tốt</span></td></tr>
+      </tbody>
+    </table></div>
+
+    <!-- Gợi ý bữa ăn & Check-in chụp ảnh -->
+    <div style="border-top:1px solid var(--border);padding-top:var(--s-16)">
+      <div class="flex justify-between items-center" style="margin-bottom:var(--s-12)">
+        <h3 style="margin:0;font-size:var(--text-sm);font-weight:700">Thực đơn gợi ý & Chụp ảnh bữa ăn</h3>
+        <button class="btn secondary" style="padding:4px var(--s-8);font-size:var(--text-xs);height:auto" onclick="alert('Đã xuất PDF gợi ý bữa ăn thành công!')">Xuất PDF</button>
+      </div>
+
+      <div class="card subtle" style="margin-bottom:var(--s-12);font-size:var(--text-xs);line-height:1.5">
+        <div>Cấu trúc: Đạm 30% · Đường bột 40% · Chất béo tốt 30%</div>
+        <div style="font-weight:600;margin-top:2px">Nước uống khuyến nghị: tối thiểu 2.6L (0.4L x 64.2kg cơ thể)</div>
+      </div>
+
+      <!-- Meal rows with Camera and checkbox -->
+      <div style="display:flex;flex-direction:column;gap:var(--s-8)">
+        <!-- Sáng -->
+        <div class="card subtle flex items-center justify-between" style="margin:0;padding:var(--s-8) var(--s-12)">
+          <div>
+            <div style="font-weight:700">Sáng · 07:00 (190 kcal)</div>
+            <div class="hint" style="font-size:10px">Bữa ăn lành mạnh (130 CAL) + 3 lòng trắng trứng (60 CAL)</div>
+          </div>
+          <div class="flex items-center gap-8">
+            <a href="S-HLTH-04_bua_an.html" style="color:var(--accent-customer)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></a>
+            <span style="color:var(--state-good)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          </div>
+        </div>
+
+        <!-- 9h -->
+        <div class="card subtle flex items-center justify-between" style="margin:0;padding:var(--s-8) var(--s-12)">
+          <div>
+            <div style="font-weight:700">Ăn Nhẹ · 09:00 (100 kcal)</div>
+            <div class="hint" style="font-size:10px">Hoa quả (100 CAL)</div>
+          </div>
+          <div class="flex items-center gap-8">
+            <a href="S-HLTH-04_bua_an.html" style="color:var(--accent-customer)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></a>
+            <span style="color:var(--text-muted)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          </div>
+        </div>
+
+        <!-- Trưa -->
+        <div class="card subtle flex items-center justify-between" style="margin:0;padding:var(--s-8) var(--s-12)">
+          <div>
+            <div style="font-weight:700">Trưa · 11:30 (500 kcal)</div>
+            <div class="hint" style="font-size:10px">Thức ăn 300 CAL + 1 bát rau 100 CAL + 1/2 bát cơm 100 CAL</div>
+          </div>
+          <div class="flex items-center gap-8">
+            <a href="S-HLTH-04_bua_an.html" style="color:var(--accent-customer)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></a>
+            <span style="color:var(--text-muted)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          </div>
+        </div>
+
+        <!-- 16h -->
+        <div class="card subtle flex items-center justify-between" style="margin:0;padding:var(--s-8) var(--s-12)">
+          <div>
+            <div style="font-weight:700">Bữa Phụ · 16:00 (90 kcal)</div>
+            <div class="hint" style="font-size:10px">Bữa ăn lành mạnh (90 CAL)</div>
+          </div>
+          <div class="flex items-center gap-8">
+            <a href="S-HLTH-04_bua_an.html" style="color:var(--accent-customer)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></a>
+            <span style="color:var(--text-muted)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          </div>
+        </div>
+
+        <!-- Tối -->
+        <div class="card subtle flex items-center justify-between" style="margin:0;padding:var(--s-8) var(--s-12)">
+          <div>
+            <div style="font-weight:700">Tối · 18:30 (350 kcal)</div>
+            <div class="hint" style="font-size:10px">Thức ăn 150 CAL + 1 bát rau 100 CAL + 1/2 bát cơm 100 CAL</div>
+          </div>
+          <div class="flex items-center gap-8">
+            <a href="S-HLTH-04_bua_an.html" style="color:var(--accent-customer)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></a>
+            <span style="color:var(--text-muted)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card subtle" style="margin-top:var(--s-8);margin-bottom:0;background:#fefce8;border-color:#fef08a;font-size:var(--text-xs)">
+        <strong>Lưu ý ăn uống:</strong>
+        <ul style="margin:0;padding-left:var(--s-12);color:#713f12">
+          <li>1. Hạn chế ăn thịt đỏ, đồ chiên, xào, nướng.</li>
+          <li>2. Uống tối thiểu 0.4L nước/10kg cân nặng/ngày.</li>
+          <li>3. Thực đơn vàng trong 10 ngày đầu.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Hoạt động thể chất khác (Uống nước, giấc ngủ, thể thao) -->
+    <div style="border-top:1px solid var(--border);margin-top:var(--s-16);padding-top:var(--s-16)">
+      <h3 style="margin:0 0 var(--s-12) 0;font-size:var(--text-sm);font-weight:700">Ghi nhận hoạt động khác</h3>
+      
+      <!-- Nước -->
+      <div class="flex items-center gap-12" style="padding:var(--s-8) 0;border-bottom:1px solid var(--border)">
+        <span style="color:var(--accent-customer)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></span>
+        <div class="flex-1">
+          <div style="font-weight:600">Nước uống hôm nay</div>
+          <div class="hint" id="water-display">8 cốc × 200ml = 1.6L</div>
+        </div>
+        <div class="flex items-center gap-8">
+          <button class="btn secondary" style="height:32px;width:32px;padding:0" onclick="updateWater(-1)"><svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg></button>
+          <span id="water-count-val" style="font-weight:700;width:16px;text-align:center">8</span>
+          <button class="btn secondary" style="height:32px;width:32px;padding:0" onclick="updateWater(1)"><svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></button>
+        </div>
+      </div>
+
+      <!-- Giấc ngủ -->
+      <div class="flex items-center gap-12" style="padding:var(--s-8) 0;border-bottom:1px solid var(--border)">
+        <span style="color:var(--accent-customer)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></span>
+        <div class="flex-1">
+          <div style="font-weight:600">Giấc ngủ</div>
+          <div class="hint" id="sleep-result">7.5 giờ · 23:00 → 06:30</div>
+        </div>
+        <div class="flex gap-4">
+          <input type="time" id="sleep-time" value="23:00" style="padding:2px;border:1px solid var(--border);border-radius:4px" onchange="calculateSleep()">
+          <input type="time" id="wake-time" value="06:30" style="padding:2px;border:1px solid var(--border);border-radius:4px" onchange="calculateSleep()">
+        </div>
+      </div>
+
+      <!-- Thể thao / Vận động -->
+      <div class="flex items-center gap-12" style="padding:var(--s-8) 0">
+        <span style="color:var(--accent-customer)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15l3-3 2 2 2.5-3L14 12l2-2 3 4-3 2-1-1-2 3-4-2z"/><circle cx="17" cy="4" r="2"/></svg></span>
+        <div class="flex-1">
+          <div style="font-weight:600">Thể thao & vận động</div>
+          <div class="hint" id="sport-display">Pickleball 60 phút · ~360 kcal</div>
+        </div>
+        <button class="pill" style="border-color:var(--accent-customer);color:var(--accent-customer);cursor:pointer" onclick="openModal('modal-sport')">+ Thêm</button>
+      </div>
+    </div>
+
+    <!-- Kiến thức TKP -->
+    <div style="border-top:1px solid var(--border);margin-top:var(--s-16);padding-top:var(--s-16)">
+      <h3 style="margin:0 0 var(--s-12) 0;font-size:var(--text-sm);font-weight:700">Kiến thức TKP hôm nay</h3>
+      <div class="flex items-center justify-between" style="padding:var(--s-8) 0;border-bottom:1px solid var(--border)">
+        <div class="flex items-center gap-12">
+          <span style="color:var(--accent-customer)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+          <div class="flex-1">
+            <div style="font-weight:600">Bài 3 · Bột đường & năng lượng</div>
+            <div class="hint">Video 3 phút · 3 câu khảo sát</div>
+          </div>
+        </div>
+        <span id="lesson-check" style="color:var(--text-muted)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+      </div>
+      <button class="btn primary customer block" style="margin-top:var(--s-12)" onclick="openModal('modal-lesson')">
+        <svg class="icon-sm" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        Xem bài học
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <div class="nav-item active"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><span>Trang chủ</span></div>
+  <a class="nav-item" href="S-DEV-02_dao_tao.html" style="text-decoration:none;color:inherit"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span>Đào tạo</span></a>
+  <div class="nav-item"><span class="icon"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 1 0 0 8zM5 20a7 7 0 0 1 14 0"/></svg></span><span>Hồ sơ</span></div>
+</div>
+
+<!-- MODAL: KHO ẢNH BỮA ĂN -->
+<div id="modal-photos" class="modal-overlay">
+  <div class="modal-content">
+    <div class="flex justify-between items-center" style="margin-bottom:var(--s-12)">
+      <h3 style="margin:0">Kho ảnh bữa ăn của bạn</h3>
+      <span style="cursor:pointer;font-weight:700" onclick="closeModal('modal-photos')">✕</span>
+    </div>
+    <div class="hint">Lưu trữ ảnh các bữa ăn bạn đã chụp hôm nay và các ngày trước.</div>
+    <div class="photo-gallery">
+      <div style="background:#ddd;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-sm)"><span style="font-size:var(--text-xs)">Sáng</span></div>
+      <div style="background:#ddd;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-sm)"><span style="font-size:var(--text-xs)">Trưa</span></div>
+      <div style="background:#eee;border:1px dashed #bbb;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-sm);cursor:pointer"><span style="font-size:var(--text-xs)">+ Thêm</span></div>
+    </div>
+    <button class="btn secondary block" style="margin-top:var(--s-16)" onclick="closeModal('modal-photos')">Đóng</button>
+  </div>
+</div>
+
+<!-- MODAL: THÊM THỂ THAO -->
+<div id="modal-sport" class="modal-overlay">
+  <div class="modal-content">
+    <div class="flex justify-between items-center" style="margin-bottom:var(--s-12)">
+      <h3 style="margin:0">Ghi nhận Thể thao & Vận động</h3>
+      <span style="cursor:pointer;font-weight:700" onclick="closeModal('modal-sport')">✕</span>
+    </div>
+    <div class="field" style="margin-bottom:var(--s-12)">
+      <label>Tìm kiếm & chọn hoạt động</label>
+      <select id="sport-select" style="width:100%;padding:var(--s-8);border:1px solid var(--border);border-radius:var(--radius-md)">
+        <option>Pickleball</option>
+        <option>Chạy bộ</option>
+        <option>Đi bộ</option>
+        <option>Đạp xe</option>
+        <option>Bơi lội</option>
+      </select>
+    </div>
+    <div class="field" style="margin-bottom:var(--s-16)">
+      <label>Thời gian vận động (phút)</label>
+      <input type="number" id="sport-min" value="60" style="width:100%;padding:var(--s-8);border:1px solid var(--border);border-radius:var(--radius-md)">
+    </div>
+    <div class="flex gap-12">
+      <button class="btn secondary flex-1" onclick="closeModal('modal-sport')">Hủy</button>
+      <button class="btn primary customer flex-1" onclick="addSport()">Ghi nhận</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: XEM BÀI HỌC & KHẢO SÁT -->
+<div id="modal-lesson" class="modal-overlay">
+  <div class="modal-content" style="max-height:85vh;overflow-y:auto">
+    <div class="flex justify-between items-center" style="margin-bottom:var(--s-12)">
+      <h3 style="margin:0">Bài học: Bột đường & Năng lượng</h3>
+      <span style="cursor:pointer;font-weight:700" onclick="closeModal('modal-lesson')">✕</span>
+    </div>
+    
+    <!-- Video Player Placeholder -->
+    <div style="height:160px;background:#000;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;margin-bottom:var(--s-12)">
+      <span>[▶] Video Bài học (3:00)</span>
+    </div>
+    
+    <div class="card subtle" style="margin-bottom:var(--s-12);background:#eff6ff;border-color:#bfdbfe">
+      <span class="hint" style="color:#1e3a8a;margin:0">Lưu ý: Hãy xem hết video để trả lời 3 câu hỏi khảo sát và nhận điểm thưởng check-in.</span>
+    </div>
+
+    <!-- Khảo sát bài học -->
+    <div style="display:flex;flex-direction:column;gap:var(--s-12)">
+      <div class="field">
+        <label style="font-weight:600;font-size:var(--text-xs)">1. Bạn ấn tượng gì về bài học hôm nay?</label>
+        <input id="sq1" placeholder="Nhập câu trả lời..." oninput="checkSurvey()">
+      </div>
+      <div class="field">
+        <label style="font-weight:600;font-size:var(--text-xs)">2. Bạn sẽ áp dụng kiến thức này như thế nào vào cuộc sống?</label>
+        <input id="sq2" placeholder="Nhập câu trả lời..." oninput="checkSurvey()">
+      </div>
+      <div class="field">
+        <label style="font-weight:600;font-size:var(--text-xs)">3. Bạn sẽ giới thiệu, chia sẻ bài học này với ai không?</label>
+        <input id="sq3" placeholder="Nhập câu trả lời..." oninput="checkSurvey()">
+      </div>
+    </div>
+
+    <button id="btn-submit-survey" class="btn secondary block" style="margin-top:var(--s-16)" disabled onclick="submitSurvey()">Gửi khảo sát</button>
+  </div>
+</div>
+
+</div></body></html>

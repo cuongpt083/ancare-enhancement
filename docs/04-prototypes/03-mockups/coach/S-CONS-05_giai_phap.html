@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Xem lộ trình — AnCare</title><link rel="stylesheet" href="../_assets/_tokens.css"><link rel="stylesheet" href="../_assets/_base.css">
+<style>
+.step-num {
+  width:32px;height:32px;border-radius:var(--radius-full);background:var(--accent);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;
+}
+</style>
+<script>
+function selectDuration(pill, months, sessions) {
+  document.querySelectorAll('.pills .pill').forEach(p => p.classList.remove('active'));
+  pill.classList.add('active');
+  
+  // Update info in package table
+  document.getElementById('service-duration').innerText = months + ' tháng';
+  document.getElementById('service-sessions').innerText = sessions + ' buổi';
+  
+  // Update end date based on July 4, 2026
+  var start = new Date(2026, 6, 4); // 04/07/2026
+  start.setMonth(start.getMonth() + months);
+  var day = String(start.getDate()).padStart(2, '0');
+  var month = String(start.getMonth() + 1).padStart(2, '0');
+  var year = start.getFullYear();
+  document.getElementById('service-end-date').innerText = day + '/' + month + '/' + year;
+
+  // Update roadmap steps visibility
+  var stepsHtml = '';
+  if (months >= 1) {
+    stepsHtml += `<div class="flex gap-12"><div class="step-num">1</div><div class="flex-1"><div style="font-weight:700">Tháng 1</div><div class="hint">Điều chỉnh cân nặng, trang bị kiến thức cơ bản thay đổi tư duy dinh dưỡng & thể chất.</div></div></div>`;
+  }
+  if (months >= 2) {
+    stepsHtml += `<div class="flex gap-12" style="margin-top:var(--s-12)"><div class="step-num">2</div><div class="flex-1"><div style="font-weight:700">Tháng 2</div><div class="hint">Tăng cơ, tăng cường sức khỏe, điều chỉnh các thói quen không lành mạnh.</div></div></div>`;
+  }
+  if (months >= 3) {
+    stepsHtml += `<div class="flex gap-12" style="margin-top:var(--s-12)"><div class="step-num">3</div><div class="flex-1"><div style="font-weight:700">Tháng 3</div><div class="hint">Tối ưu hóa vóc dáng, trẻ hóa, duy trì năng lượng, xây dựng thói quen lành mạnh bền vững.</div></div></div>`;
+  }
+  if (months >= 6) {
+    stepsHtml += `<div class="flex gap-12" style="margin-top:var(--s-12)"><div class="step-num">4-6</div><div class="flex-1"><div style="font-weight:700">Tháng 4 — 6</div><div class="hint">Duy trì vóc dáng lý tưởng, thiết lập lối sống khỏe mạnh và dinh dưỡng tự nhiên trọn đời.</div></div></div>`;
+  }
+  document.getElementById('roadmap-steps').innerHTML = stepsHtml;
+}
+</script>
+</head><body><div class="screen">
+<div class="appbar"><span class="back" onclick="location.href='S-CONS-04_phan_tich.html'"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></span><h1>Xem lộ trình</h1><span class="info"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="8.01"/><line x1="12" y1="12" x2="12" y2="16"/></svg></span></div>
+<div class="content" style="padding-top:var(--s-12);padding-bottom:80px">
+  <div class="focus-card" style="margin-bottom:var(--s-16)"><div class="label">Chương trình đề xuất</div><div class="title" style="font-size:var(--text-xl)">Chương trình Cơ Nước Mỡ</div></div>
+  
+  <div class="card"><h2>Lợi ích chương trình</h2><div style="display:flex;flex-direction:column;gap:var(--s-8)">
+    <div class="flex items-center gap-12"><span style="color:var(--state-good)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>1. Làm sạch hệ tiêu hoá; giảm mỡ xấu, tăng cơ</span></div>
+    <div class="flex items-center gap-12"><span style="color:var(--state-good)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>2. Được chuyển giao 21 chủ đề DD & chuyên đề chuyên sâu</span></div>
+    <div class="flex items-center gap-12"><span style="color:var(--state-good)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>3. HLV chăm sóc 1-1 và được giao lưu với các hội viên</span></div>
+    <div class="flex items-center gap-12"><span style="color:var(--state-good)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>4. Biết cách chăm sóc da đúng cách</span></div>
+    <div class="flex items-center gap-12"><span style="color:var(--state-good)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>5. Được sử dụng App chăm sóc sức khoẻ chuyên nghiệp, đồng hành cùng bạn hàng ngày hàng giờ</span></div>
+  </div></div>
+  
+  <div class="card"><h2>Kết quả đạt được</h2><div style="display:flex;flex-direction:column;gap:var(--s-8)">
+    <div class="flex items-center gap-12"><span style="color:var(--accent)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Thay đổi thói quen</span></div>
+    <div class="flex items-center gap-12"><span style="color:var(--accent)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Tăng cường sức khoẻ</span></div>
+    <div class="flex items-center gap-12"><span style="color:var(--accent)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Tăng cơ, giảm mỡ xấu</span></div>
+    <div class="flex items-center gap-12"><span style="color:var(--accent)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Làn da tươi trẻ</span></div>
+    <div class="flex items-center gap-12"><span style="color:var(--accent)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>Có kiến thức chăm sóc sức khoẻ trọn đời</span></div>
+  </div></div>
+  
+  <div class="card"><h2>Lộ trình</h2>
+    <div class="pills" style="margin-bottom:var(--s-12)">
+      <span class="pill" onclick="selectDuration(this, 1, 30)">1 tháng</span>
+      <span class="pill" onclick="selectDuration(this, 2, 60)">2 tháng</span>
+      <span class="pill active" onclick="selectDuration(this, 3, 90)">3 tháng</span>
+      <span class="pill" onclick="selectDuration(this, 6, 180)">6 tháng</span>
+    </div>
+    <div id="roadmap-steps" style="display:flex;flex-direction:column;gap:var(--s-12)">
+      <div class="flex gap-12"><div class="step-num">1</div><div class="flex-1"><div style="font-weight:700">Tháng 1</div><div class="hint">Điều chỉnh cân nặng, trang bị kiến thức cơ bản thay đổi tư duy dinh dưỡng & thể chất.</div></div></div>
+      <div class="flex gap-12"><div class="step-num">2</div><div class="flex-1"><div style="font-weight:700">Tháng 2</div><div class="hint">Tăng cơ, tăng cường sức khỏe, điều chỉnh các thói quen không lành mạnh.</div></div></div>
+      <div class="flex gap-12"><div class="step-num">3</div><div class="flex-1"><div style="font-weight:700">Tháng 3</div><div class="hint">Tối ưu hóa vóc dáng, trẻ hóa, duy trì năng lượng, xây dựng thói quen lành mạnh bền vững.</div></div></div>
+    </div>
+  </div>
+  
+  <div class="card"><h2>Gói dịch vụ sử dụng</h2>
+    <div class="flex justify-between" style="padding:var(--s-8) 0;border-bottom:1px solid var(--border)"><span class="hint">Gói</span><span style="font-weight:600">Cơ-Nước-Mỡ · Tối ưu</span></div>
+    <div class="flex justify-between" style="padding:var(--s-8) 0;border-bottom:1px solid var(--border)"><span class="hint">Thời gian</span><span id="service-duration" style="font-weight:600">3 tháng</span></div>
+    <div class="flex justify-between" style="padding:var(--s-8) 0;border-bottom:1px solid var(--border)"><span class="hint">Ngày bắt đầu</span><span style="font-weight:600">04/07/2026</span></div>
+    <div class="flex justify-between" style="padding:var(--s-8) 0;border-bottom:1px solid var(--border)"><span class="hint">Ngày kết thúc</span><span id="service-end-date" style="font-weight:600">04/10/2026</span></div>
+    <div class="flex justify-between" style="padding:var(--s-8) 0"><span class="hint">Số buổi</span><span id="service-sessions" style="font-weight:600">90 buổi</span></div>
+  </div>
+  
+  <div class="card subtle"><div class="flex items-center gap-12"><span style="color:var(--state-warn)"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span><span class="hint" style="margin:0">Giá sản phẩm HLV giải thích bên ngoài app. Không có gì là thần dược.</span></div></div>
+</div>
+<div class="cta-bar"><button class="btn secondary" onclick="location.href='S-CONS-04_phan_tich.html'">Đóng</button><button class="btn primary" onclick="location.href='S-CONS-08_tao_tk.html'"><svg class="icon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>Tạo tài khoản</button></div></div></body></html>

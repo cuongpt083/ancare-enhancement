@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cá nhân hóa thời gian biểu — Prototype</title>
+<link rel="stylesheet" href="../tabler-icons.min.css">
+<style>
+  :root{
+    --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    --bg-primary:#fff;--bg-secondary:#f4f6f8;--bg-app:#eaeef2;
+    --text:#1a1d21;--text2:#6b7280;--border:#e5e7eb;--border2:#d1d5db;
+    --accent:#2f9e6e;--good:#22c55e;--warn:#f59e0b;--bad:#fb923c;
+    --than:#16a34a;--tam:#8b5cf6;--tri:#f97316;--r:12px;
+  }
+  *{box-sizing:border-box;}
+  body,html{margin:0;padding:0;font-family:var(--font-sans);background:var(--bg-app);color:var(--text);}
+  .container{width:100%;max-width:460px;margin:0 auto;padding:0 0 148px;}
+  .navbar{position:fixed;bottom:0;left:0;right:0;max-width:460px;margin:0 auto;display:flex;background:var(--bg-primary);border-top:.5px solid var(--border);z-index:41;}
+  .navbar a{flex:1;text-align:center;padding:.5rem 0;color:var(--text2);text-decoration:none;font-size:10px;}
+  .navbar a .ti{font-size:20px;display:block;} .navbar a.active{color:var(--accent);font-weight:700;}
+  .appbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:8px;background:var(--bg-primary);padding:.9rem 1rem;border-bottom:.5px solid var(--border);}
+  .appbar .ti{font-size:22px;} .appbar h1{font-size:16px;font-weight:700;margin:0;flex:1;}
+
+  .intro{font-size:12.5px;color:var(--text2);padding:.9rem 1rem .2rem;line-height:1.5;}
+
+  /* Optimization banner */
+  .optbar{margin:.8rem 1rem;padding:.8rem .9rem;background:linear-gradient(135deg,#eafaf0,#e7f1ec);border:1px solid #bfe3cf;border-radius:var(--r);}
+  .optbar .top{display:flex;align-items:center;gap:8px;}
+  .optbar .pct{font-size:24px;font-weight:800;color:var(--accent);}
+  .optbar .lbl{font-size:12px;color:var(--text2);flex:1;}
+  .optbar .maxpt{font-size:12px;font-weight:700;color:var(--accent);}
+  .bar{height:8px;border-radius:5px;background:#d6e9dd;overflow:hidden;margin-top:.55rem;}
+  .bar i{display:block;height:100%;background:linear-gradient(90deg,#34d27b,#16a34a);transition:width .25s;}
+
+  /* Meal count */
+  .block{background:var(--bg-primary);margin:.7rem 1rem;border:.5px solid var(--border);border-radius:var(--r);padding:.8rem .9rem;}
+  .block h3{font-size:13px;margin:0 0 .6rem;display:flex;align-items:center;gap:7px;}
+  .block h3 .ti{color:var(--accent);}
+  .seg{display:flex;gap:8px;}
+  .seg .opt{flex:1;text-align:center;padding:.6rem;border:1px solid var(--border2);border-radius:var(--r);font-size:13px;font-weight:600;cursor:pointer;background:#fff;}
+  .seg .opt.sel{border-color:var(--accent);background:#e7f4ee;color:var(--accent);}
+
+  /* Activity rows */
+  .sec-title{font-size:13px;font-weight:700;padding:.5rem 1rem .2rem;color:var(--text2);}
+  .row{display:flex;align-items:center;gap:10px;background:var(--bg-primary);margin:6px 1rem;padding:.7rem .8rem;border:.5px solid var(--border);border-left-width:4px;border-radius:var(--r);}
+  .row .ic{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:none;font-size:18px;}
+  .row .mid{flex:1;min-width:0;}
+  .row .ttl{font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+  .row .pill{font-size:9px;font-weight:700;color:#fff;border-radius:4px;padding:1px 5px;}
+  .row .hint{font-size:10.5px;color:var(--text2);margin-top:3px;}
+  .row .times{display:flex;align-items:center;gap:5px;margin-top:5px;}
+  .row .times input{font-size:12px;padding:.3rem .35rem;border:1px solid var(--border2);border-radius:7px;font-family:inherit;}
+  .row .times span{font-size:11px;color:var(--text2);}
+  .badge{font-size:9.5px;font-weight:800;border-radius:10px;padding:2px 7px;white-space:nowrap;}
+  .badge.b3{background:#dcfce7;color:#15803d;} .badge.b2{background:#fef3c7;color:#92600a;} .badge.b1{background:#ffedd5;color:#9a3412;}
+
+  .actions{position:fixed;bottom:53px;left:0;right:0;max-width:460px;margin:0 auto;display:flex;gap:10px;padding:.8rem 1rem;background:var(--bg-primary);border-top:.5px solid var(--border);}
+  .btn{flex:1;padding:.9rem;font-size:14.5px;font-weight:700;border-radius:var(--r);cursor:pointer;}
+  .btn-secondary{background:var(--bg-secondary);color:var(--text);border:.5px solid var(--border2);}
+  .btn-primary{background:var(--accent);color:#fff;border:none;}
+  .btn .ti{vertical-align:-2px;}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="appbar"><i class="ti ti-arrow-left" style="cursor:pointer" onclick="location.href='trang_chu.html'"></i><h1>Cá nhân hóa thời gian biểu</h1></div>
+  <div class="intro">Tùy chỉnh <b>số bữa ăn</b> và <b>giờ</b> cho từng hoạt động sao cho bạn thực hiện được trọn vẹn. Lưu ý: giờ càng <b>lệch khung tối ưu</b> của đồng hồ sinh học thì <b>điểm tối đa</b> của hoạt động đó càng giảm.</div>
+
+  <!-- Mức tối ưu -->
+  <div class="optbar">
+    <div class="top"><span class="pct" id="optPct">100%</span><span class="lbl">Mức tối ưu đồng hồ sinh học</span><span class="maxpt" id="maxPt">tối đa 0đ/ngày</span></div>
+    <div class="bar"><i id="optFill" style="width:100%"></i></div>
+  </div>
+
+  <!-- Số bữa ăn -->
+  <div class="block">
+    <h3><i class="ti ti-tools-kitchen-2"></i> Số bữa ăn mỗi ngày</h3>
+    <div class="seg" id="mealSeg">
+      <div class="opt" data-n="3">3 bữa</div>
+      <div class="opt sel" data-n="4">4 bữa</div>
+      <div class="opt" data-n="5">5 bữa</div>
+    </div>
+  </div>
+
+  <div class="sec-title">Thời gian biểu các hoạt động</div>
+  <div id="rows"></div>
+</div>
+
+<div class="actions">
+  <button class="btn btn-secondary"><i class="ti ti-refresh"></i> Đặt lại tối ưu</button>
+  <button class="btn btn-primary" onclick="location.href='suc_khoe_tong_the.html'">Lưu & bắt đầu <i class="ti ti-arrow-right"></i></button>
+</div>
+
+<div class="navbar">
+  <a href="trang_chu.html"><i class="ti ti-home"></i>Trang chủ</a>
+  <a href="suc_khoe_tong_the.html"><i class="ti ti-heart-handshake"></i>Chăm sóc</a>
+  <a href="chat.html"><i class="ti ti-message-circle"></i>Chat</a>
+  <a href="#"><i class="ti ti-user"></i>Hồ sơ</a>
+</div>
+
+<script>
+  function css(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim();}
+  var PCOL={than:css('--than'),tam:css('--tam'),tri:css('--tri')};
+  function pn(p){return p==='than'?'Thân':p==='tam'?'Tâm':'Trí';}
+
+  // Hoạt động cố định (không phải bữa ăn) — optimal (phút), tolerance
+  var FIXED=[
+    {key:'wake', label:'Thức dậy',  pillar:'than',icon:'sunrise', opt:'05:00', dur:60, tol:60},
+    {key:'detox',label:'Thải độc',  pillar:'than',icon:'leaf',    opt:'06:00', dur:30, tol:60},
+    {key:'nap',  label:'Ngủ trưa',  pillar:'than',icon:'bed',     opt:'13:00', dur:30, tol:60},
+    {key:'exer', label:'Thể dục',   pillar:'than',icon:'run',     opt:'17:00', dur:60, tol:90},
+    {key:'relax',label:'Thư giãn / Thiền',pillar:'tam',icon:'yoga',opt:'20:00',dur:30, tol:90},
+    {key:'ptbt', label:'PTBT — Phát triển bản thân',pillar:'tri',icon:'book-2',opt:'20:30',dur:60,tol:90},
+    {key:'sleep',label:'Ngủ tối',   pillar:'than',icon:'moon-stars',opt:'22:00',dur:0, tol:60}
+  ];
+  // Bữa ăn theo số lượng
+  var MEALSETS={
+    3:[{label:'Ăn sáng',opt:'07:00'},{label:'Ăn trưa',opt:'12:00'},{label:'Ăn tối',opt:'18:30'}],
+    4:[{label:'Ăn sáng',opt:'07:00'},{label:'Ăn trưa',opt:'12:00'},{label:'Bữa phụ chiều',opt:'15:30'},{label:'Ăn tối',opt:'18:30'}],
+    5:[{label:'Ăn sáng',opt:'07:00'},{label:'Bữa phụ sáng',opt:'09:30'},{label:'Ăn trưa',opt:'12:00'},{label:'Bữa phụ chiều',opt:'15:30'},{label:'Ăn tối',opt:'18:30'}]
+  };
+  var mealCount=4;
+  var state={}; // key -> {start}
+
+  function buildList(){
+    var list=[];
+    // chèn bữa ăn vào đúng trật tự thời gian cùng hoạt động cố định
+    MEALSETS[mealCount].forEach((m,i)=>list.push({key:'meal'+i,label:m.label,pillar:'than',icon:'soup',opt:m.opt,dur:30,tol:45,meal:true}));
+    FIXED.forEach(f=>list.push(f));
+    list.sort((a,b)=>toMin(a.opt)-toMin(b.opt));
+    return list;
+  }
+  function toMin(t){var p=t.split(':');return +p[0]*60+ +p[1];}
+  function toHHMM(m){m=((m%1440)+1440)%1440;var h=Math.floor(m/60),mm=m%60;return (h<10?'0':'')+h+':'+(mm<10?'0':'')+mm;}
+
+  function maxPtsFor(act){
+    var chosen=state[act.key]!==undefined?state[act.key]:toMin(act.opt);
+    var dev=Math.abs(chosen-toMin(act.opt));
+    if(dev<=act.tol) return 3;
+    if(dev<=act.tol*2) return 2;
+    return 1;
+  }
+
+  function render(){
+    var list=buildList();
+    var html='';
+    var sumMax=0;
+    list.forEach(function(a){
+      if(state[a.key]===undefined) state[a.key]=toMin(a.opt);
+      var mp=maxPtsFor(a); sumMax+=mp;
+      var startStr=toHHMM(state[a.key]), endStr=toHHMM(state[a.key]+a.dur);
+      html+='<div class="row" style="border-left-color:'+PCOL[a.pillar]+'">'+
+        '<div class="ic" style="background:#f0f3f6;color:'+PCOL[a.pillar]+'"><i class="ti ti-'+a.icon+'"></i></div>'+
+        '<div class="mid"><div class="ttl">'+a.label+' <span class="pill" style="background:'+PCOL[a.pillar]+'">'+pn(a.pillar)+'</span>'+
+          ' <span class="badge b'+mp+'">tối đa '+mp+'đ</span></div>'+
+          '<div class="hint">Khung tối ưu: quanh '+a.opt+(mp<3?' · đang lệch khung':'')+'</div>'+
+          '<div class="times"><input type="time" value="'+startStr+'" onchange="setStart(\''+a.key+'\',this.value)">'+
+            (a.dur>0?'<span>→ '+endStr+'</span>':'')+'</div>'+
+        '</div></div>';
+    });
+    document.getElementById('rows').innerHTML=html;
+    var pct=Math.round(sumMax/(list.length*3)*100);
+    document.getElementById('optPct').textContent=pct+'%';
+    document.getElementById('optFill').style.width=pct+'%';
+    document.getElementById('maxPt').textContent='tối đa '+sumMax+'đ/ngày';
+  }
+  function setStart(key,val){ state[key]=toMin(val); render(); }
+
+  document.querySelectorAll('#mealSeg .opt').forEach(function(o){
+    o.addEventListener('click',function(){
+      document.querySelectorAll('#mealSeg .opt').forEach(x=>x.classList.remove('sel'));
+      o.classList.add('sel'); mealCount=+o.dataset.n;
+      // xóa state bữa cũ để build lại theo opt
+      Object.keys(state).forEach(k=>{ if(k.indexOf('meal')===0) delete state[k]; });
+      render();
+    });
+  });
+
+  render();
+</script>
+</body>
+</html>

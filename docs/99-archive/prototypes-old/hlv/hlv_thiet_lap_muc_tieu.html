@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thiết lập mục tiêu — AnCare v1.1</title>
+<link rel="stylesheet" href="tabler-icons.min.css">
+<style>
+:root {
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --color-bg: #eef0f3;
+  --color-surface: #ffffff;
+  --color-surface-2: #f6f7f9;
+  --color-text: #1a1d21;
+  --color-text-2: #6b7280;
+  --color-border: #e5e7eb;
+  --color-border-2: #d1d5db;
+  --color-accent: #2f6f4f;
+  --color-accent-soft: #e7f1ec;
+  --r-md: 10px;
+  --r-lg: 14px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; font-family: var(--font-sans); background: var(--color-bg); color: var(--color-text); overscroll-behavior: contain; }
+body { overflow-x: hidden; }
+
+.wrap { max-width: 460px; margin: 0 auto; padding-bottom: 96px; }
+
+/* Appbar */
+.appbar { position: sticky; top: 0; z-index: 10; background: var(--color-surface); border-bottom: 1px solid var(--color-border); display: flex; align-items: center; gap: 10px; padding: 0.85rem 1rem; }
+.appbar-back { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 8px; border: none; background: none; cursor: pointer; color: var(--color-text); font-size: 22px; flex-shrink: 0; }
+.appbar h1 { font-size: 15.5px; font-weight: 700; flex: 1; }
+.appbar .version-tag { font-size: 11px; color: var(--color-accent); background: var(--color-accent-soft); padding: 2px 8px; border-radius: 20px; font-weight: 600; }
+
+/* Cards */
+.card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--r-lg); margin: 0.75rem 1rem; overflow: hidden; }
+.card-title { font-size: 13.5px; font-weight: 700; padding: 0.85rem 1rem 0.5rem; display: flex; align-items: center; gap: 8px; }
+.card-title .ti { color: var(--color-accent); font-size: 17px; }
+.card-title .badge-new { font-size: 10px; font-weight: 700; background: var(--color-accent); color: #fff; padding: 1px 6px; border-radius: 10px; margin-left: 2px; }
+.card-body { padding: 0 1rem 1rem; }
+.card-subnote { font-size: 11.5px; color: var(--color-text-2); padding: 0 1rem 0.6rem; line-height: 1.5; }
+
+/* Accent header card */
+.card-accent-head { background: var(--color-accent-soft); border-bottom: 1px solid #cde5d9; }
+
+/* Goal rows */
+.goal { border-top: 1px solid var(--color-border); padding: 0.75rem 0; }
+.goal:first-child { border-top: none; }
+.goal-head { display: flex; align-items: center; gap: 8px; margin-bottom: 0.5rem; }
+.star-btn { width: 30px; height: 30px; border-radius: 8px; border: 1px solid var(--color-border-2); background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--color-text-2); font-size: 14px; flex-shrink: 0; transition: all 0.15s; }
+.star-btn.on { background: var(--color-accent); border-color: var(--color-accent); color: #fff; }
+.goal-name { flex: 1; font-size: 13.5px; font-weight: 600; }
+.goal-target { font-size: 12px; color: var(--color-accent); font-weight: 600; }
+.qlabel { font-size: 11.5px; color: var(--color-text-2); margin-bottom: 0.4rem; }
+
+/* Chips */
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-size: 12.5px; padding: 0.4rem 0.75rem; border: 1px solid var(--color-border-2); border-radius: 20px; background: #fff; cursor: pointer; transition: all 0.15s; min-height: 32px; display: inline-flex; align-items: center; }
+.chip.active { background: var(--color-accent-soft); border-color: var(--color-accent); color: var(--color-accent); font-weight: 600; }
+
+/* Tag input */
+.tag-input-wrap { border: 1px solid var(--color-border-2); border-radius: var(--r-md); padding: 0.4rem 0.5rem; background: #fff; display: flex; flex-wrap: wrap; gap: 5px; align-items: center; min-height: 40px; }
+.tag-input-wrap:focus-within { border-color: var(--color-accent); }
+.tag { font-size: 12px; background: var(--color-accent-soft); color: var(--color-accent); border-radius: 20px; padding: 2px 8px; display: flex; align-items: center; gap: 4px; }
+.tag .tag-x { cursor: pointer; font-size: 12px; opacity: 0.7; }
+.tag-input { border: none; outline: none; font-size: 13px; font-family: inherit; flex: 1; min-width: 80px; background: transparent; }
+
+/* Chip group */
+.chip-group { margin-bottom: 0.8rem; }
+.chip-group:last-child { margin-bottom: 0; }
+.chip-group label { display: block; font-size: 12px; font-weight: 600; color: var(--color-text-2); margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.02em; }
+
+/* Calc button */
+.calc-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: calc(100% - 2rem); margin: 0.5rem 1rem 0.25rem; padding: 0.9rem; font-size: 14.5px; font-weight: 700; border: none; border-radius: var(--r-md); background: var(--color-accent); color: #fff; cursor: pointer; transition: opacity 0.15s; }
+.calc-btn:active { opacity: 0.85; }
+
+/* Result section */
+.result { display: none; }
+.result.show { display: block; }
+.res-card { background: var(--color-surface); border: 1.5px solid var(--color-accent); border-radius: var(--r-lg); margin: 0.75rem 1rem; overflow: hidden; }
+.res-head { background: var(--color-accent); color: #fff; padding: 0.9rem 1rem; font-size: 15px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.res-body { padding: 1rem; }
+.res-section { margin-bottom: 1.1rem; padding-bottom: 1.1rem; border-bottom: 1px solid var(--color-border); }
+.res-section:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+.res-section-title { font-size: 12.5px; font-weight: 700; color: var(--color-accent); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 6px; }
+
+/* Package radio */
+.pkg-options { display: flex; flex-direction: column; gap: 7px; }
+.pkg-option { display: flex; align-items: center; gap: 10px; padding: 0.6rem 0.75rem; border: 1px solid var(--color-border); border-radius: var(--r-md); cursor: pointer; transition: border-color 0.15s; }
+.pkg-option.selected { border-color: var(--color-accent); background: var(--color-accent-soft); }
+.pkg-option input[type=radio] { accent-color: var(--color-accent); width: 16px; height: 16px; flex-shrink: 0; cursor: pointer; }
+.pkg-option-label { flex: 1; font-size: 13px; font-weight: 600; }
+.pkg-option-sub { font-size: 11px; color: var(--color-text-2); }
+.pkg-badge { font-size: 10px; font-weight: 700; background: var(--color-accent); color: #fff; padding: 2px 7px; border-radius: 10px; }
+
+/* Duration pills */
+.dur-pills { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 0.5rem; }
+.dur-pill { font-size: 12.5px; padding: 0.4rem 0.85rem; border: 1px solid var(--color-border-2); border-radius: 20px; cursor: pointer; background: #fff; transition: all 0.15s; }
+.dur-pill.active { background: var(--color-accent); color: #fff; border-color: var(--color-accent); font-weight: 600; }
+.dur-pill .best { font-size: 9.5px; margin-left: 3px; opacity: 0.9; }
+
+/* Why affordance */
+.why-link { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--color-accent); font-weight: 600; cursor: pointer; margin-top: 0.5rem; text-decoration: none; }
+.why-panel { display: none; background: var(--color-accent-soft); border: 1px solid #cde5d9; border-radius: var(--r-md); padding: 0.65rem 0.75rem; margin-top: 0.45rem; font-size: 12.5px; line-height: 1.6; color: var(--color-text); }
+.why-panel.show { display: block; }
+.why-panel .why-qid { font-size: 10px; color: var(--color-text-2); margin-top: 0.35rem; display: block; }
+
+/* Goal progress */
+.goal-res { margin-bottom: 0.85rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--color-border); }
+.goal-res:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+.goal-res-name { font-size: 13px; font-weight: 600; margin-bottom: 0.4rem; display: flex; align-items: center; justify-content: space-between; }
+.pbar-wrap { background: var(--color-border); border-radius: 20px; height: 8px; margin: 0.35rem 0; overflow: hidden; }
+.pbar { height: 100%; background: var(--color-accent); border-radius: 20px; transition: width 0.4s; }
+.pbar-pct { font-size: 11.5px; color: var(--color-accent); font-weight: 700; text-align: right; }
+
+/* Stepper */
+.stepper { display: flex; align-items: center; gap: 12px; margin: 0.5rem 0 0.3rem; }
+.step-btn { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--color-accent); background: #fff; color: var(--color-accent); font-size: 22px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.15s; }
+.step-btn:active { background: var(--color-accent-soft); }
+.step-val { flex: 1; text-align: center; font-size: 20px; font-weight: 800; color: var(--color-accent); }
+.step-val small { font-size: 12px; font-weight: 500; color: var(--color-text-2); }
+.snap-btn { display: flex; align-items: center; justify-content: center; gap: 5px; width: 100%; padding: 0.45rem; font-size: 12px; font-weight: 600; border: 1px solid var(--color-accent); background: #fff; color: var(--color-accent); border-radius: var(--r-md); cursor: pointer; margin-top: 0.35rem; }
+
+/* Meal note banner */
+.meal-banner { background: var(--color-accent-soft); border: 1px solid #cde5d9; border-radius: var(--r-md); padding: 0.65rem 0.75rem; font-size: 12.5px; line-height: 1.6; color: var(--color-text); margin-bottom: 0.85rem; }
+
+/* Benefits */
+.benefit-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.benefit-list li { display: flex; align-items: flex-start; gap: 7px; font-size: 13px; line-height: 1.5; }
+.benefit-list li .ti { color: var(--color-accent); font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+
+/* FAB */
+.fab-bankhoan { position: fixed; bottom: 88px; right: calc(50% - 230px + 16px); background: #7c3aed; border-radius: 20px; padding: 0.5rem 1rem 0.5rem 0.7rem; color: #fff; font-size: 12.5px; font-weight: 600; border: none; cursor: pointer; z-index: 20; display: flex; align-items: center; gap: 5px; box-shadow: 0 4px 16px rgba(124,58,237,0.35); transition: opacity 0.15s; }
+.fab-bankhoan:active { opacity: 0.85; }
+.fab-bankhoan .ti { font-size: 16px; }
+
+/* Bottom sheet */
+.bs-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 30; align-items: flex-end; justify-content: center; }
+.bs-overlay.show { display: flex; }
+.bs { background: var(--color-surface); border-radius: 18px 18px 0 0; padding: 1.1rem 1rem 1.5rem; width: 100%; max-width: 460px; }
+.bs-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.85rem; }
+.bs-header h3 { font-size: 14px; font-weight: 700; }
+.bs-close { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--color-border); background: var(--color-surface-2); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.bs-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 0.9rem; }
+.bs-chip { font-size: 13px; padding: 0.5rem 0.9rem; border: 1.5px solid var(--color-border-2); border-radius: 20px; background: #fff; cursor: pointer; transition: all 0.15s; min-height: 44px; display: inline-flex; align-items: center; }
+.bs-chip.active { background: #f3e8ff; border-color: #7c3aed; color: #7c3aed; font-weight: 600; }
+.bs-action { display: none; }
+.bs-action.show { display: block; }
+.bs-action-btn { display: flex; align-items: center; justify-content: center; gap: 7px; width: 100%; padding: 0.75rem; font-size: 13.5px; font-weight: 600; border: 1.5px solid var(--color-accent); background: var(--color-accent-soft); color: var(--color-accent); border-radius: var(--r-md); cursor: pointer; margin-top: 0.5rem; }
+
+/* Action bar */
+.action-bar { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 460px; background: var(--color-surface); border-top: 1px solid var(--color-border); padding: 0.65rem 1rem 0.85rem; display: flex; gap: 10px; z-index: 15; }
+.btn-secondary { flex: 1; padding: 0.8rem; font-size: 13.5px; font-weight: 600; border: 1.5px solid var(--color-border-2); background: var(--color-surface); color: var(--color-text); border-radius: var(--r-md); cursor: pointer; }
+.btn-primary { flex: 2; padding: 0.8rem; font-size: 13.5px; font-weight: 700; border: none; background: var(--color-accent); color: #fff; border-radius: var(--r-md); cursor: pointer; transition: opacity 0.15s; }
+.btn-primary:disabled { background: var(--color-border-2); color: var(--color-text-2); cursor: not-allowed; }
+.btn-primary:not(:disabled):active { opacity: 0.85; }
+
+/* Divider line inside card */
+.div-line { height: 1px; background: var(--color-border); margin: 0.5rem 0; }
+
+@media (max-width: 460px) {
+  .fab-bankhoan { right: 16px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Appbar -->
+  <div class="appbar">
+    <button class="appbar-back" onclick="location.href='hlv_ban_tu_van.html'"><i class="ti ti-arrow-left"></i></button>
+    <h1>Thiết lập mục tiêu</h1>
+    <span class="version-tag">v1.1</span>
+  </div>
+
+  <!-- Card A: Mục tiêu cần cải thiện -->
+  <div class="card">
+    <div class="card-title"><i class="ti ti-target"></i> Mục tiêu cần cải thiện</div>
+    <div class="card-body">
+
+      <!-- Goal 1 -->
+      <div class="goal">
+        <div class="goal-head">
+          <button class="star-btn on" onclick="toggleStar(this)" title="Ưu tiên"><i class="ti ti-star"></i></button>
+          <span class="goal-name">Giảm cân</span>
+          <span class="goal-target">60 → 55 kg</span>
+        </div>
+        <div class="qlabel">Bao giờ muốn có kết quả?</div>
+        <div class="chips tf" data-group="time-1">
+          <span class="chip" onclick="selectChip(this)">10 ngày</span>
+          <span class="chip" onclick="selectChip(this)">30 ngày</span>
+          <span class="chip active" onclick="selectChip(this)">60 ngày</span>
+          <span class="chip" onclick="selectChip(this)">90 ngày</span>
+        </div>
+      </div>
+
+      <!-- Goal 2 -->
+      <div class="goal">
+        <div class="goal-head">
+          <button class="star-btn on" onclick="toggleStar(this)" title="Ưu tiên"><i class="ti ti-star"></i></button>
+          <span class="goal-name">Giảm mỡ nội tạng</span>
+          <span class="goal-target">8 → 4 điểm</span>
+        </div>
+        <div class="qlabel">Bao giờ muốn có kết quả?</div>
+        <div class="chips tf" data-group="time-2">
+          <span class="chip" onclick="selectChip(this)">10 ngày</span>
+          <span class="chip" onclick="selectChip(this)">30 ngày</span>
+          <span class="chip" onclick="selectChip(this)">60 ngày</span>
+          <span class="chip active" onclick="selectChip(this)">90 ngày</span>
+        </div>
+      </div>
+
+      <!-- Goal 3 -->
+      <div class="goal">
+        <div class="goal-head">
+          <button class="star-btn" onclick="toggleStar(this)" title="Ưu tiên"><i class="ti ti-star"></i></button>
+          <span class="goal-name">Cải thiện tuổi sinh học</span>
+          <span class="goal-target">50 → 38 tuổi</span>
+        </div>
+        <div class="qlabel">Bao giờ muốn có kết quả?</div>
+        <div class="chips tf" data-group="time-3">
+          <span class="chip" onclick="selectChip(this)">10 ngày</span>
+          <span class="chip" onclick="selectChip(this)">30 ngày</span>
+          <span class="chip" onclick="selectChip(this)">60 ngày</span>
+          <span class="chip active" onclick="selectChip(this)">90 ngày</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Card B: Thói quen hiện tại -->
+  <div class="card">
+    <div class="card-title"><i class="ti ti-heart-rate-monitor"></i> Thói quen hiện tại</div>
+    <div class="card-body">
+      <div class="chips">
+        <span class="chip active" onclick="toggleChip(this)">Ăn uống</span>
+        <span class="chip active" onclick="toggleChip(this)">Vận động</span>
+        <span class="chip" onclick="toggleChip(this)">Giấc ngủ</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card C: Vấn đề / bệnh lý -->
+  <div class="card">
+    <div class="card-title"><i class="ti ti-stethoscope"></i> Vấn đề / bệnh lý</div>
+    <div class="card-body">
+      <div class="chips" style="margin-bottom: 0.75rem;">
+        <span class="chip" onclick="toggleChip(this)">Tiểu đường</span>
+        <span class="chip" onclick="toggleChip(this)">Huyết áp cao</span>
+        <span class="chip active" onclick="toggleChip(this)">Mỡ máu</span>
+        <span class="chip" onclick="toggleChip(this)">Gan nhiễm mỡ</span>
+        <span class="chip" onclick="toggleChip(this)">Khác</span>
+      </div>
+      <textarea placeholder="Ghi chú thêm về vấn đề sức khoẻ..." rows="2"></textarea>
+    </div>
+  </div>
+
+  <!-- Card D: Khả thi bữa ăn (NEW v1.1) -->
+  <div class="card">
+    <div class="card-title card-accent-head">
+      <i class="ti ti-tools-kitchen-2"></i>
+      Khả thi bữa ăn
+      <span class="badge-new">mới</span>
+    </div>
+    <div class="card-subnote">Dùng để gợi ý thực đơn phù hợp với đời sống thực của khách</div>
+    <div class="card-body">
+
+      <!-- 1. Chế độ ăn -->
+      <div class="chip-group">
+        <label>Chế độ ăn</label>
+        <div class="chips" data-single="true">
+          <span class="chip active" onclick="selectSingleChip(this)">Mặn (mặc định)</span>
+          <span class="chip" onclick="selectSingleChip(this)">Bán chay</span>
+          <span class="chip" onclick="selectSingleChip(this)">Chay trứng-sữa</span>
+          <span class="chip" onclick="selectSingleChip(this)">Thuần chay</span>
+        </div>
+      </div>
+
+      <!-- 2. Ngân sách -->
+      <div class="chip-group">
+        <label>Ngân sách / ngày</label>
+        <div class="chips" data-single="true">
+          <span class="chip" onclick="selectSingleChip(this)">Tiết kiệm (&lt;80k)</span>
+          <span class="chip active" onclick="selectSingleChip(this)">Trung bình (80–150k)</span>
+          <span class="chip" onclick="selectSingleChip(this)">Thoải mái (&gt;150k)</span>
+        </div>
+      </div>
+
+      <!-- 3. Món thích / không thích -->
+      <div class="chip-group">
+        <label>Món thích / không thích</label>
+        <div style="margin-bottom: 0.5rem;">
+          <div style="font-size: 12px; color: var(--color-text-2); margin-bottom: 0.35rem;">Thích:</div>
+          <div class="tag-input-wrap" id="like-wrap">
+            <span class="tag">Phở <span class="tag-x" onclick="removeTag(this)">×</span></span>
+            <span class="tag">Cơm gà <span class="tag-x" onclick="removeTag(this)">×</span></span>
+            <span class="tag">Rau luộc <span class="tag-x" onclick="removeTag(this)">×</span></span>
+            <input class="tag-input" type="text" placeholder="Nhập và Enter…" onkeydown="addTag(event, 'like-wrap')">
+          </div>
+        </div>
+        <div>
+          <div style="font-size: 12px; color: var(--color-text-2); margin-bottom: 0.35rem;">Không thích / dị ứng:</div>
+          <div class="tag-input-wrap" id="dislike-wrap">
+            <span class="tag" style="background:#fee2e2; color:#b42318;">Hải sản <span class="tag-x" onclick="removeTag(this)">×</span></span>
+            <span class="tag" style="background:#fee2e2; color:#b42318;">Đậu phụ <span class="tag-x" onclick="removeTag(this)">×</span></span>
+            <input class="tag-input" type="text" placeholder="Nhập và Enter…" onkeydown="addTag(event, 'dislike-wrap', true)">
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Quyền chủ động bữa ăn -->
+      <div class="chip-group" style="margin-bottom: 0;">
+        <label>Quyền chủ động bữa ăn</label>
+        <div class="chips" data-single="true">
+          <span class="chip active" onclick="selectSingleChip(this)">Tự nấu</span>
+          <span class="chip" onclick="selectSingleChip(this)">Phụ thuộc người nấu</span>
+          <span class="chip" onclick="selectSingleChip(this)">Ăn ngoài</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Tính lộ trình button -->
+  <button class="calc-btn" onclick="showResult()">
+    <i class="ti ti-calculator"></i> Tính lộ trình
+  </button>
+
+  <!-- RESULT SECTION -->
+  <div class="result" id="result-section">
+
+    <div class="res-card">
+      <div class="res-head"><i class="ti ti-route"></i> Lộ trình trải nghiệm đề xuất</div>
+      <div class="res-body">
+
+        <!-- Package selection -->
+        <div class="res-section">
+          <div class="res-section-title"><i class="ti ti-package"></i> Gói giải pháp đề xuất</div>
+          <div class="pkg-options">
+            <label class="pkg-option" onclick="selectPkg(this)">
+              <input type="radio" name="pkg" value="start">
+              <div>
+                <div class="pkg-option-label">Gói Khởi đầu</div>
+                <div class="pkg-option-sub">Phù hợp mục tiêu nhỏ / thử nghiệm</div>
+              </div>
+            </label>
+            <label class="pkg-option selected" onclick="selectPkg(this)">
+              <input type="radio" name="pkg" value="boost" checked>
+              <div>
+                <div class="pkg-option-label">Gói Tăng cường <span class="pkg-badge">Đề xuất</span></div>
+                <div class="pkg-option-sub">Tối ưu cho giảm 5kg + mỡ nội tạng</div>
+              </div>
+            </label>
+            <label class="pkg-option" onclick="selectPkg(this)">
+              <input type="radio" name="pkg" value="full">
+              <div>
+                <div class="pkg-option-label">Gói Toàn diện</div>
+                <div class="pkg-option-sub">Thay đổi toàn diện sức khoẻ & thói quen</div>
+              </div>
+            </label>
+          </div>
+
+          <!-- Why package -->
+          <span class="why-link" onclick="toggleWhy('why-pkg')"><i class="ti ti-info-circle"></i> Vì sao gói này được đề xuất? ›</span>
+          <div class="why-panel" id="why-pkg">
+            <strong>Căn cứ:</strong> Mục tiêu giảm 5kg · Mỡ nội tạng cần thời gian · Tốc độ an toàn 0.5–1 kg/tuần (WHO)
+            <span class="why-qid">Lập luận [qid-pkg-001]</span>
+          </div>
+
+          <!-- Duration -->
+          <div style="margin-top: 0.75rem;">
+            <div class="res-section-title" style="margin-bottom: 0.45rem;"><i class="ti ti-calendar"></i> Thời gian</div>
+            <div class="dur-pills">
+              <span class="dur-pill" onclick="selectDur(this)">1 tháng</span>
+              <span class="dur-pill" onclick="selectDur(this)">2 tháng</span>
+              <span class="dur-pill active" onclick="selectDur(this)">3 tháng <span class="best">★ Tốt nhất</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Goals % achieved -->
+        <div class="res-section">
+          <div class="res-section-title"><i class="ti ti-chart-bar"></i> Mức độ đạt được mục tiêu</div>
+
+          <!-- Goal 1: Giảm cân -->
+          <div class="goal-res">
+            <div class="goal-res-name">
+              <span>Giảm cân (60 → 55 kg)</span>
+            </div>
+            <div class="pbar-wrap"><div class="pbar" id="bar-1" style="width: 100%"></div></div>
+            <div class="pbar-pct" id="pct-1">100% (khả thi tối đa)</div>
+            <div class="stepper">
+              <button class="step-btn" onclick="adjustGoal(1,-10)">−</button>
+              <div class="step-val" id="sv-1">100 <small>%</small></div>
+              <button class="step-btn" onclick="adjustGoal(1,10)">+</button>
+            </div>
+            <button class="snap-btn" onclick="snapGoal(1)"><i class="ti ti-refresh"></i> Đặt về khả thi</button>
+            <span class="why-link" onclick="toggleWhy('why-g1')"><i class="ti ti-info-circle"></i> Vì sao % này? ›</span>
+            <div class="why-panel" id="why-g1">
+              <strong>Căn cứ:</strong> Tốc độ an toàn 0.5–1 kg/tuần · Thời gian gói 3 tháng · Điểm khởi đầu 60 kg
+            </div>
+          </div>
+
+          <!-- Goal 2: Mỡ nội tạng -->
+          <div class="goal-res">
+            <div class="goal-res-name">
+              <span>Giảm mỡ nội tạng (8 → 4)</span>
+            </div>
+            <div class="pbar-wrap"><div class="pbar" id="bar-2" style="width: 100%"></div></div>
+            <div class="pbar-pct" id="pct-2">100% (khả thi tối đa)</div>
+            <div class="stepper">
+              <button class="step-btn" onclick="adjustGoal(2,-10)">−</button>
+              <div class="step-val" id="sv-2">100 <small>%</small></div>
+              <button class="step-btn" onclick="adjustGoal(2,10)">+</button>
+            </div>
+            <button class="snap-btn" onclick="snapGoal(2)"><i class="ti ti-refresh"></i> Đặt về khả thi</button>
+            <span class="why-link" onclick="toggleWhy('why-g2')"><i class="ti ti-info-circle"></i> Vì sao % này? ›</span>
+            <div class="why-panel" id="why-g2">
+              <strong>Căn cứ:</strong> Mỡ nội tạng giảm chậm hơn cân nặng · Cần ≥ 10 tuần tập trung · Điểm khởi đầu 8/15
+            </div>
+          </div>
+
+          <!-- Goal 3: Tuổi sinh học -->
+          <div class="goal-res">
+            <div class="goal-res-name">
+              <span>Tuổi sinh học (50 → 38 tuổi)</span>
+            </div>
+            <div class="pbar-wrap"><div class="pbar" id="bar-3" style="width: 100%"></div></div>
+            <div class="pbar-pct" id="pct-3">100% (khả thi tối đa)</div>
+            <div class="stepper">
+              <button class="step-btn" onclick="adjustGoal(3,-10)">−</button>
+              <div class="step-val" id="sv-3">100 <small>%</small></div>
+              <button class="step-btn" onclick="adjustGoal(3,10)">+</button>
+            </div>
+            <button class="snap-btn" onclick="snapGoal(3)"><i class="ti ti-refresh"></i> Đặt về khả thi</button>
+            <span class="why-link" onclick="toggleWhy('why-g3')"><i class="ti ti-info-circle"></i> Vì sao % này? ›</span>
+            <div class="why-panel" id="why-g3">
+              <strong>Căn cứ:</strong> Tuổi sinh học phụ thuộc nhiều yếu tố · Cải thiện 12 tuổi trong 90 ngày · Cần tổng hợp dinh dưỡng + vận động
+            </div>
+          </div>
+        </div>
+
+        <!-- Meal note banner -->
+        <div class="res-section">
+          <div class="meal-banner">
+            <strong><i class="ti ti-tools-kitchen-2" style="color: var(--color-accent);"></i> Mục tiêu sau điều chỉnh:</strong><br>
+            Giảm 5 kg trong 3 tháng → đầu vào gợi ý bữa ăn · Ngân sách ~80–150k/ngày · Chế độ: Mặn · Tự nấu
+          </div>
+        </div>
+
+        <!-- Benefits -->
+        <div class="res-section">
+          <div class="res-section-title"><i class="ti ti-sparkles"></i> Lợi ích khi đăng ký</div>
+          <ul class="benefit-list">
+            <li><i class="ti ti-check"></i><span>Lộ trình cá nhân hoá theo chỉ số Tanita thực tế</span></li>
+            <li><i class="ti ti-check"></i><span>Gợi ý bữa ăn khả thi với đời sống thực — không bỏ cuộc</span></li>
+            <li><i class="ti ti-check"></i><span>HLV theo dõi & điều chỉnh mỗi 10 ngày</span></li>
+            <li><i class="ti ti-check"></i><span>Cải thiện cả cân nặng, mỡ nội tạng & tuổi sinh học</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /result -->
+
+</div><!-- /wrap -->
+
+<!-- FAB: Khách đang băn khoăn -->
+<button class="fab-bankhoan" onclick="openBS()">
+  <i class="ti ti-message-question"></i> Khách đang băn khoăn
+</button>
+
+<!-- Bottom Sheet -->
+<div class="bs-overlay" id="bs-overlay" onclick="closeBS(event)">
+  <div class="bs">
+    <div class="bs-header">
+      <h3><i class="ti ti-message-question" style="color:#7c3aed;"></i> Khách đang băn khoăn về…</h3>
+      <button class="bs-close" onclick="closeBS()"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="bs-chips">
+      <span class="bs-chip" onclick="selectBS(this, 'budget')">💸 Giá / Ngân sách</span>
+      <span class="bs-chip" onclick="selectBS(this, 'family')">👨‍👩‍👧 Hỏi người thân</span>
+      <span class="bs-chip" onclick="selectBS(this, 'time')">⏰ Thời gian</span>
+      <span class="bs-chip" onclick="selectBS(this, 'think')">🤔 Để suy nghĩ</span>
+    </div>
+    <div class="bs-action" id="bs-action-family">
+      <div style="font-size: 12.5px; color: var(--color-text-2); margin-bottom: 0.5rem;">Khách muốn chia sẻ với gia đình trước khi quyết định</div>
+      <button class="bs-action-btn" onclick="alert('Đang xuất PDF...')">
+        <i class="ti ti-file-export"></i> Xuất bản tư vấn chia sẻ được (PDF)
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Action Bar -->
+<div class="action-bar">
+  <button class="btn-secondary" onclick="location.href='hlv_danh_sach_kh.html'">Hoàn tất</button>
+  <button class="btn-primary" id="btn-create-kh" disabled onclick="location.href='hlv_tao_tai_khoan_kh.html'">
+    <i class="ti ti-user-plus"></i> Tạo tài khoản KH
+  </button>
+</div>
+
+<script>
+// Single chip select (within same parent .chips[data-single])
+function selectSingleChip(el) {
+  const parent = el.closest('.chips');
+  parent.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+}
+// Single chip within tf group (time chips)
+function selectChip(el) {
+  const parent = el.closest('.tf');
+  parent.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+}
+// Toggle chip (multi)
+function toggleChip(el) {
+  el.classList.toggle('active');
+}
+// Toggle star priority
+function toggleStar(btn) {
+  btn.classList.toggle('on');
+}
+
+// Package select
+function selectPkg(label) {
+  document.querySelectorAll('.pkg-option').forEach(l => l.classList.remove('selected'));
+  label.classList.add('selected');
+}
+// Duration select
+function selectDur(el) {
+  document.querySelectorAll('.dur-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// Tag inputs
+function addTag(e, wrapId, isDislike) {
+  if (e.key !== 'Enter') return;
+  const val = e.target.value.trim();
+  if (!val) return;
+  const wrap = document.getElementById(wrapId);
+  const tag = document.createElement('span');
+  tag.className = 'tag';
+  if (isDislike) { tag.style.background = '#fee2e2'; tag.style.color = '#b42318'; }
+  tag.innerHTML = val + ' <span class="tag-x" onclick="removeTag(this)">×</span>';
+  wrap.insertBefore(tag, e.target);
+  e.target.value = '';
+  e.preventDefault();
+}
+function removeTag(x) {
+  x.parentElement.remove();
+}
+
+// Show result
+function showResult() {
+  document.getElementById('result-section').classList.add('show');
+  document.getElementById('btn-create-kh').disabled = false;
+  setTimeout(() => {
+    document.getElementById('result-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+}
+
+// Goal steppers
+const goalVals = { 1: 100, 2: 100, 3: 100 };
+function adjustGoal(id, delta) {
+  goalVals[id] = Math.max(10, Math.min(120, goalVals[id] + delta));
+  updateGoalUI(id);
+}
+function snapGoal(id) {
+  goalVals[id] = 100;
+  updateGoalUI(id);
+}
+function updateGoalUI(id) {
+  const v = goalVals[id];
+  document.getElementById('sv-' + id).innerHTML = v + ' <small>%</small>';
+  document.getElementById('bar-' + id).style.width = Math.min(v, 100) + '%';
+  const isOver = v > 100;
+  const pctEl = document.getElementById('pct-' + id);
+  pctEl.textContent = v + '% ' + (isOver ? '⚠ vượt ngưỡng khả thi' : '(khả thi tối đa)');
+  pctEl.style.color = isOver ? '#b42318' : 'var(--color-accent)';
+}
+
+// Why toggle
+function toggleWhy(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('show');
+}
+
+// FAB / Bottom Sheet
+function openBS() {
+  document.getElementById('bs-overlay').classList.add('show');
+}
+function closeBS(e) {
+  if (!e || e.target === document.getElementById('bs-overlay')) {
+    document.getElementById('bs-overlay').classList.remove('show');
+    document.querySelectorAll('.bs-chip').forEach(c => c.classList.remove('active'));
+    document.getElementById('bs-action-family').classList.remove('show');
+  }
+}
+function selectBS(el, type) {
+  document.querySelectorAll('.bs-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('bs-action-family').classList.remove('show');
+  if (type === 'family') {
+    document.getElementById('bs-action-family').classList.add('show');
+  }
+}
+</script>
+</body>
+</html>
