@@ -28,16 +28,14 @@
 - **Ưu tiên:** Must (P0)
 - **INVEST:** Independent ✓ · Negotiable ✓ · Valuable ✓ · Estimable ✓ · Small ✓ · Testable ✓
 - **Acceptance Criteria:**
-  - AC1 — Given KH vào buổi tư vấn (sau Thêm mới KH), When HLV mở "Chân dung KH", Then hiện Card gồm 2 phần: (a) danh sách câu hỏi cơ bản (vd 10 câu — hiện thị để HLV đọc hỏi, không cần tương tác), (b) ô trả lời cho HLV từng câu (nhập text, độ dài không giới hạn, tập trung kết quả KH mong muốn vd "tôi chỉ bị mất ngủ, còn lại bình thường").
-  - AC2 — Given câu hỏi mục tiêu mong muốn (giảm cân/tăng cơ/đẹp da/kiểm soát bệnh lý), When HLV nhập trả lời, Then ghi `primary_goal` (thay thế "Khảo sát mục tiêu" riêng — Q35 gộp).
-  - AC3 — Given câu hỏi tiền sử/thói quen, When HLV nhập, Then hệ thống tự phân tích & ghi vào `pain_points[]`, `lifestyle` (sleep, diet, water, exercise, habits) → lưu "Chân dung KH" vào hồ sơ KH.
-  - AC4 — Given hoàn thành Chân dung, When HLV bấm "Lưu → Khảo sát Tanita", Then chuyển sang US-E02-03.
+  - AC1 — Given KH vào buổi tư vấn (sau Thêm mới KH), When HLV mở "Chân dung KH", Then hiện Card gồm 2 phần: (a) danh sách câu hỏi cơ bản (vd 10 câu — hiện thị để HLV đọc hỏi, không cần tương tác), (b) ô trả lời cho HLV (nhập text, độ dài tối đa 500 ký tự, tập trung kết quả KH mong muốn vd "Tất cả bình thường/ngoại trừ bệnh tiểu đường/mong muốn tăng cơ giảm mỡ"), HLV điền câu trả lời theo mẫu trên để hệ thống dễ dàng tổng hợp và phân tích & ghi vào `pain_points[]`, `lifestyle` (sleep, diet, water, exercise, habits).
+  - AC2 — Given hoàn thành Chân dung, When HLV bấm "Lưu → Khảo sát Tanita", Then chuyển sang US-E02-03.
 - **Truy vết:**
   - Mockup: `docs/03-mockups/coach/S-CONS-02_chan_dung_kh.png` *(đổi tên từ S-CONS-02_khao_sat)*
   - Prototype: `docs/04-prototypes/coach/CONS-02_chan_dung_kh.html` *(chưa tạo)*
   - Khuôn màn: T1
   - Nghiệp vụ: `docs/00-foundation/business-rules/Consultation-15min-Process-v1.0.md` §3; Persona framework — `docs/00-foundation/personas.md` (DISC/Stage HLV tự đánh giá ngoài form — D06).
-- **Open question:** Bộ 10 câu hỏi Chân dung cụ thể cần chốt (pain points + lifestyle) — đặc tả business-rule.
+- **Reference:** [Bộ câu hỏi Chân dung KH](./../00-foundation/survey-questions.md)
 
 ---
 
@@ -95,19 +93,20 @@
 ### US-E02-05 — Xem lộ trình (giải pháp + lộ trình 3 tháng)
 - **Epic:** E02 — Consultation
 - **Vai trò:** HLV
-- **Story:** Là HLV, tôi muốn xem lộ trình đầy đủ (lợi ích + kết quả + lộ trình 3 tháng + gói sản phẩm + cam kết) để giải thích cho KH & chốt tham gia.
+- **Story:** Là HLV, tôi muốn xem lộ trình đầy đủ (lợi ích + kết quả + lộ trình 3 tháng + gói dịch vụ + cam kết) để giải thích cho KH & chốt tham gia.
 - **Ưu tiên:** Must (P0)
 - **INVEST:** Independent ✓ · Negotiable ✓ · Valuable ✓ · Estimable ✓ · Small ✓ · Testable ✓
 - **Acceptance Criteria:**
-  - AC1 — Given bản phân tích + tick mục tiêu (US-E02-04), When vào "Xem lộ trình" (T1), Then hiện tên chương trình đề xuất theo logic: giảm cân→"Cơ — Nước — Mỡ", tăng cân→"Dinh dưỡng tế bào", giữ cân→"Bữa ăn lành mạnh".
-  - AC2 — Given chương trình, When xem, Then hiện **lợi ích** (gạch đầu dòng) + **kết quả đạt được** (dự kiến).
+  - AC1 — Given bản phân tích + tick mục tiêu (US-E02-04), When vào "Xem lộ trình" (T1), Then hiện tên chương trình đề xuất theo các lựa chọn: Cơ bản, Nâng cao, Tối ưu.
+  - AC2 — Given chương trình, When xem, Then hiện **lợi ích** (gạch đầu dòng) + **kết quả đạt được** (dự kiến). Nội dung lợi ích như sau:
+    - Tăng cơ, tăng sức khỏe, điều chỉnh các thói quen
+    - Tối ưu vóc dáng, trẻ hóa, xây thói quen bền vững
   - AC3 — Given lộ trình, When xem, Then hiện **lộ trình 3 tháng cố định** (không cho chọn 1 tháng/trọn đời), mô tả từng tháng:
     - **Tháng 1:** điều chỉnh cân nặng, trang bị kiến thức cơ bản thay đổi tư duy dinh dưỡng & thể chất.
     - **Tháng 2:** tăng cơ, tăng cường sức khỏe, điều chỉnh thói quen không lành mạnh.
     - **Tháng 3:** tối ưu vóc dáng, trẻ hóa, duy trì năng lượng, xây dựng thói quen lành mạnh bền vững.
-  - AC4 — Given gói sản phẩm, When xem, Then hiện danh sách SP đi kèm chương trình (**không hiện giá** — HLV giải thích ngoài app).
-  - AC5 — Given cam kết, When xem, Then hiện disclaimer inline (US-E02-09).
-  - AC6 — Given KH đồng ý + thanh toán xong (ngoài app), When HLV bấm "Tạo tài khoản", Then mở pop-up Tạo TK (US-E02-08); Given KH chưa đồng ý, When bấm "Đóng", Then về DS KH.
+  - AC4 — Given cam kết, When xem, Then hiện disclaimer inline (US-E02-09).
+  - AC5 — Given KH đồng ý + thanh toán xong (ngoài app), When HLV bấm "Tạo tài khoản", Then mở pop-up Tạo TK (US-E02-08); Given KH chưa đồng ý, When bấm "Đóng", Then về DS KH.
 - **Truy vết:**
   - Mockup: `docs/03-mockups/coach/S-CONS-05_giai_phap.html` ✅
   - Prototype: `docs/04-prototypes/coach/CONS-05_giai_phap.html` ✅
@@ -143,16 +142,13 @@
 - **Ưu tiên:** Must (P0)
 - **INVEST:** Independent ✓ · Negotiable ✓ · Valuable ✓ · Estimable ⚠ (catalog món) · Small ✓ · Testable ✓
 - **Acceptance Criteria:**
-  - AC1 — Given đã chốt gói + mục tiêu, When vào "Gợi ý bữa ăn" (T1), Then hệ thống sinh thực đơn 10 ngày theo cấu trúc 3 nhóm (Đạm/Xơ/Đường-bột) + persona-fit (diet_type, budget, liked/disliked).
-  - AC2 — Given thực đơn, When xem, Then hiện nhãn khả thi ("Dễ áp dụng" / "Hơi khó" / "Khó") — L4, không hiện Feasibility Score số.
-  - AC3 — Given muốn chỉnh, When HLV bấm "Chỉnh", Then đổi món trong ngày; hệ thống gợi ý món thay thế cùng nhóm.
-  - AC4 — Given "Vì sao?" tại khả thi, When bấm, Then giải thích (ngân sách, khẩu vị, độ phức tạp nấu) — L7.
+  - AC1 — Given đã chốt gói + mục tiêu, When vào "Gợi ý bữa ăn" (T1), Then hệ thống sinh thực đơn 10 ngày theo cấu trúc 3 nhóm (Đạm/Béo/Đường-bột) + persona-fit (diet_type, budget, liked/disliked).
+  - AC2 — Given thực đơn, When xem, Then hiện gợi ý bữa ăn theo 5 bữa/ngày (Sáng/Phụ sáng/Trưa/Phụ chiều/Tối).
 - **Truy vết:**
   - Mockup: `docs/03-mockups/coach/S-CONS-07_bua_an.png` *(chưa tạo)*
   - Prototype: `docs/04-prototypes/coach/CONS-07_bua_an.html` *(chưa tạo)*
   - Khuôn màn: T1
   - Nghiệp vụ: `docs/00-foundation/business-rules/Calorie-Meal-Business-Rules-v1.1.md` (calo + 3 nhóm + Persona-fit + Feasibility).
-- **Open question:** Catalog món ăn & hệ số đơn vị (tham khảo anh Hoàng — `[TBD]`).
 
 ---
 
