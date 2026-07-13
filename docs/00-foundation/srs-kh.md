@@ -58,7 +58,7 @@ flowchart TD
   1. KH đăng nhập → hiển thị màn hình trang chủ (`S-KH-DASH`).
   2. **Thông tin cơ bản:** Hiển thị Avatar (bấm vào mở kho ảnh bữa ăn cá nhân), tên gói chăm sóc, chuông thông báo (bật/tắt).
   3. **Card 1: Tổng quan:**
-     - **Đồng hồ sinh học:** Biểu đồ hình tròn chia theo múi giờ, hiển thị trực quan trạng thái 3 nhóm nhiệm vụ: Dinh dưỡng, Vận động, Kiến thức (TKP). Mỗi nhiệm vụ hoàn thành được cộng điểm, hiển thị kèm biểu tượng bó đuốc.
+      - **Đồng hồ sinh học:** Biểu đồ hình tròn chia theo múi giờ, hiển thị trực quan trạng thái 3 nhóm nhiệm vụ: Dinh dưỡng, Vận động, Kiến thức (TKP). Điểm số tích lũy được tính theo thang điểm 10, hiển thị kèm biểu tượng bó đuốc.
      - **Mục tiêu của bạn:** Số buổi đã tham gia / tổng số buổi của gói, mục tiêu vận động, cân nặng và thời hạn hoàn thành.
      - **Biểu đồ tiến trình:** Biểu đồ line-chart thể hiện sự thay đổi các chỉ số trong 2 ngày gần nhất. Tự động tìm và hiển thị tối đa 4 chỉ số có sự biến động nhiều nhất.
      - **Phân tích chuyên sâu & Lời khuyên:** Đánh giá tiến trình chuyển hóa trong ngày (phân tích chỉ số ăn uống, giấc ngủ, vận động kèm nguyên nhân). Nếu có chỉ số xấu/đứng yên, hệ thống sẽ đề xuất liên hệ HLV kèm nút bấm mở nhanh chat.
@@ -91,7 +91,7 @@ flowchart TD
   1. KH bấm nút thêm hoạt động vận động → Mở màn hình `S-KH-SPORT`.
   2. Nhập từ khóa tìm kiếm tên môn thể thao → hiển thị danh sách kết quả phù hợp từ cơ sở dữ liệu kèm lượng calo tiêu hao ước tính cho 30 phút hoạt động.
   3. KH chọn môn thể thao, nhập số phút tập luyện thực tế.
-  4. Bấm "Thêm" → hệ thống tự động tính calo tiêu hao, cộng điểm vận động và cập nhật trạng thái Đồng hồ sinh học.
+  4. Bấm "Thêm" → hệ thống tự động tính calo tiêu hao, cộng điểm vận động (tối đa 2.0 điểm) và cập nhật trạng thái Đồng hồ sinh học.
 
 ### 3.5 Luồng học tập kiến thức TKP (`S-KH-TRAIN` & `S-KH-SURVEY-TRAIN`)
 - **Luồng chính (Happy Path):**
@@ -104,7 +104,22 @@ flowchart TD
        - *2. Bạn sẽ áp dụng kiến thức này như thế nào vào cuộc sống?*
        - *3. Bạn sẽ giới thiệu, chia sẻ bài học này với ai không?*
   5. Khi KH trả lời đủ cả 3 câu khảo sát → Nút "Gửi khảo sát" sẽ sáng đèn và cho phép nhấn.
-  6. Bấm "Gửi khảo sát" → Hệ thống ghi nhận hoàn thành nhiệm vụ học tập, cộng điểm và cập nhật widget Đồng hồ sinh học.
+  6. Bấm "Gửi khảo sát" → Hệ thống ghi nhận hoàn thành nhiệm vụ học tập, kích hoạt hệ số học tập K = 1.0 và cập nhật Đồng hồ sinh học.
+
+### 3.6 Cơ chế tính điểm nhiệm vụ hàng ngày (Thang điểm 10)
+Hệ thống sử dụng mô hình **Hệ số xúc tác** để tính tổng điểm tích lũy trong ngày (hiển thị tại Đồng hồ sinh học) nhằm phản ánh đúng nguyên lý: hiệu quả sức khỏe gồm 80% Dinh dưỡng, 20% Vận động, và Kiến thức đóng vai trò định hướng/xúc tác hành vi.
+
+* **Công thức tổng quát:**
+  $$\text{Điểm cuối ngày} = (\text{Điểm Dinh dưỡng} + \text{Điểm Vận động}) \times K$$
+  Trong đó:
+  * **Điểm Dinh dưỡng (Tối đa 8.0 điểm):**
+    * **Ghi nhận bữa ăn:** Tối đa 6.0 điểm (gồm 3 bữa chính Sáng/Trưa/Tối; mỗi bữa hoàn thành đúng gợi ý của HLV được cộng **2.0 điểm**).
+    * **Uống nước:** Tối đa 2.0 điểm (mỗi cốc nước 200ml được cộng **0.2 điểm**, tối đa 10 cốc ~ 2 lít nước).
+  * **Điểm Vận động (Tối đa 2.0 điểm):**
+    * Hoàn thành mục tiêu vận động thể thao tối thiểu 30 phút trong ngày được cộng **2.0 điểm** (nếu tập ít hơn, tính tỷ lệ tuyến tính: `số phút tập * (2.0 / 30)`).
+  * **Hệ số Kiến thức ($K$):**
+    * Mặc định ban đầu trong ngày: $K = 0.8$.
+    * Sau khi KH xem hết video bài học TKP và hoàn thành 3 câu hỏi khảo sát thu hoạch: Hệ số $K$ tăng lên **1.0** (mở khóa tối đa hiệu quả sức khỏe của các hoạt động trong ngày).
 
 ---
 
@@ -118,7 +133,7 @@ flowchart TD
 ├───────────────────────────────────────────┤
 │ ĐỒNG HỒ SINH HỌC & ĐIỂM                    │
 │      _.._                                 │
-│    .'    '.    Bó đuốc: [ 85/100 Điểm ]    │ ← Thể hiện trực quan 3 nhóm:
+│    .'    '.    Bó đuốc: [ 8.5/10 Điểm ]    │ ← Thể hiện trực quan 3 nhóm:
 │   /  Dinh  \                               │   Dinh dưỡng, Vận động, Kiến thức
 │  |  dưỡng   |                              │
 │   \  TKP   /   Mục tiêu: Giảm 3kg          │
@@ -196,7 +211,7 @@ flowchart TD
 | Thành phần UI | Nguồn dữ liệu (Database) | Ghi chú nghiệp vụ |
 |---|---|---|
 | Đồng hồ sinh học | `daily_tasks.status`, `task_categories` | Tính toán tỷ lệ hoàn thành theo 3 nhóm hoạt động trong ngày. |
-| Điểm tích lũy (Bó đuốc) | `user_points.score` | Cộng điểm khi hoàn thành check-in, uống nước, thể dục, học bài. |
+| Điểm tích lũy (Bó đuốc) | `user_points.score` | Lưu điểm số cuối ngày theo công thức: (Dinh dưỡng + Vận động) * K (Thang điểm 10). |
 | Chỉ số thay đổi (Biểu đồ) | `tanita_metrics` / `customer_metrics` | Lấy dữ liệu 2 ngày gần nhất, thực hiện phép trừ để tìm 4 chỉ số đổi nhiều nhất. |
 | AI đánh giá món ăn | `ai_meal_logs.parsed_macro_json` | Nhận kết quả JSON gồm calo, protein, carb, fat từ API phân tích ảnh món ăn. |
 | Hoạt động thể thao | `sports_catalog` | Gợi ý môn thể thao kèm chỉ số calo tiêu hao định mức mỗi 30 phút. |
@@ -254,10 +269,10 @@ flowchart TD
 ```json
 {
   "status": "success",
-  "message": "Đã gửi khảo sát thành công. Bạn được cộng 10 điểm tích lũy nhiệm vụ học tập.",
+  "message": "Đã gửi khảo sát thành công. Hệ số học tập TKP đạt 1.0 (Xúc tác 100% hiệu quả thói quen).",
   "data": {
-    "pointsEarned": 10,
-    "currentTotalPoints": 85
+    "knowledgeFactor": 1.0,
+    "currentTotalPoints": 8.5
   }
 }
 ```
@@ -272,3 +287,4 @@ flowchart TD
 - **AC-KH-SLEEP-01:** Khi người dùng nhập giờ đi ngủ (ví dụ: 22:00) và giờ thức dậy (ví dụ: 06:00 ngày hôm sau), hệ thống phải tính toán chính xác tổng thời gian ngủ là 8 tiếng 0 phút.
 - **AC-KH-SPORT-01:** Khi người dùng chọn môn chạy bộ (ví dụ: định mức 300 kcal/30 phút) và nhập thời gian vận động là 15 phút, hệ thống phải tự động tính toán chính xác calo tiêu hao là 150 kcal.
 - **AC-KH-TRAIN-01:** Hệ thống không được phép cho bấm nút "Gửi khảo sát" thu hoạch bài học video nếu một trong ba ô trả lời khảo sát bị để trống hoặc có độ dài nhỏ hơn 5 ký tự.
+- **AC-KH-POINTS-01:** Điểm số hiển thị trên Đồng hồ sinh học (Bó đuốc) phải được tính tự động theo công thức Hệ số xúc tác: `(Dinh dưỡng + Vận động) * K` (thang điểm 10), hiển thị tối đa 1 chữ số sau dấu phẩy (ví dụ: 8.5).
